@@ -15,6 +15,9 @@ class IntervieweeTypesController extends Controller
      */
     public function index()
     {
+        $interviewees = interviewee_types::orderBy('id', 'desc')->get();
+
+        return view('create-project')->with('interviewees', $interviewees);
         //
     }
 
@@ -24,8 +27,9 @@ class IntervieweeTypesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    
+        {
+            return view();
     }
 
     /**
@@ -36,8 +40,11 @@ class IntervieweeTypesController extends Controller
      */
     public function store(Storeinterviewee_typesRequest $request)
     {
-        //
-    }
+        interviewee_types::create([
+            'name' => $data['name'],
+        ]);
+        return  redirect()->route('pages.index');
+    }   
 
     /**
      * Display the specified resource.
@@ -47,7 +54,10 @@ class IntervieweeTypesController extends Controller
      */
     public function show(interviewee_types $interviewee_types)
     {
-        //
+        
+            $interviewee = interviewee_types::find($id);
+            return view('admin.userposts.show', compact('interviewee'));
+        
     }
 
     /**
@@ -58,7 +68,9 @@ class IntervieweeTypesController extends Controller
      */
     public function edit(interviewee_types $interviewee_types)
     {
-        //
+        $interviewee = interviewee_types::findOrFail($id);
+
+        return view('interviewee-edit')->with(['interviewee' => $interviewee]);
     }
 
     /**
@@ -70,7 +82,15 @@ class IntervieweeTypesController extends Controller
      */
     public function update(Updateinterviewee_typesRequest $request, interviewee_types $interviewee_types)
     {
-        //
+        $interviewee = interviewee_types::findOrFail($id);
+
+        $interviewee->name = $request->name;
+       
+        
+
+        $interviewee->save();
+
+        return redirect('admin/users')->with("statusE", "User updated successfully!");;
     }
 
     /**
@@ -81,6 +101,9 @@ class IntervieweeTypesController extends Controller
      */
     public function destroy(interviewee_types $interviewee_types)
     {
-        //
+        $interviewee = interviewee_types::findOrFail($id);
+       
+        $interviewee->delete();
+        return  back();
     }
 }
