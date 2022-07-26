@@ -13,9 +13,7 @@
         <!-- Scripts -->
         
      
-        {{-- <link rel="stylesheet" href="{{ asset('build/assets/app.ac31adfe.css') }}"> --}}
-        {{-- @vite('resources/js/app.js') --}}
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <link rel="stylesheet" href="{{ asset('build/assets/app.ac31adfe.css') }}">
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
@@ -34,5 +32,5 @@
             </main>
         </div>
     </body>
-    {{-- <script src="{{ asset('build/assets/app.d225c007.js') }}"></script> --}}
+        <script src="{{ asset('build/assets/app.d225c007.js') }}"></script>
 </html>
