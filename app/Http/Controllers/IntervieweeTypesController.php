@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 use App\Models\interviewee_types;
 use App\Http\Requests\Storeinterviewee_typesRequest;
 use App\Http\Requests\Updateinterviewee_typesRequest;
@@ -15,10 +17,8 @@ class IntervieweeTypesController extends Controller
      */
     public function index()
     {
-        $interviewees = interviewee_types::orderBy('id', 'desc')->get();
-
-        return view('intervieweeComponents/intervieweeTable')->with('interviewees', $interviewees);
-        //
+        $interviewees = interviewee_types::orderBy('id', 'asc')->paginate(5);
+        return view('intervieweeComponents/table')->with('interviewees', $interviewees);
     }
 
     /**
@@ -27,9 +27,9 @@ class IntervieweeTypesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    
-        {
-            return view();
+
+    {
+        return view('intervieweeComponents/create');
     }
 
     /**
@@ -38,13 +38,13 @@ class IntervieweeTypesController extends Controller
      * @param  \App\Http\Requests\Storeinterviewee_typesRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Storeinterviewee_typesRequest $request)
+    public function store(Request $request)
     {
         interviewee_types::create([
-            'name' => $data['name'],
+            'name' => $request['name'],
         ]);
-        return  redirect()->route('pages.index');
-    }   
+        return  redirect()->route('interviewee.index');
+    }
 
     /**
      * Display the specified resource.
@@ -52,12 +52,11 @@ class IntervieweeTypesController extends Controller
      * @param  \App\Models\interviewee_types  $interviewee_types
      * @return \Illuminate\Http\Response
      */
-    public function show(interviewee_types $interviewee_types)
+    public function show($id)
     {
-        
-            $interviewee = interviewee_types::find($id);
-            return view('admin.userposts.show', compact('interviewee'));
-        
+
+        $interviewee = interviewee_types::find($id);
+        return view('admin.userposts.show', compact('interviewee'));
     }
 
     /**
@@ -66,11 +65,11 @@ class IntervieweeTypesController extends Controller
      * @param  \App\Models\interviewee_types  $interviewee_types
      * @return \Illuminate\Http\Response
      */
-    public function edit(interviewee_types $interviewee_types)
+    public function edit($id)
     {
         $interviewee = interviewee_types::findOrFail($id);
 
-        return view('interviewee-edit')->with(['interviewee' => $interviewee]);
+        return view('intervieweeComponents/edit')->with(['interviewee' => $interviewee]);
     }
 
     /**
@@ -80,17 +79,17 @@ class IntervieweeTypesController extends Controller
      * @param  \App\Models\interviewee_types  $interviewee_types
      * @return \Illuminate\Http\Response
      */
-    public function update(Updateinterviewee_typesRequest $request, interviewee_types $interviewee_types)
+    public function update(Request $request, $id)
     {
         $interviewee = interviewee_types::findOrFail($id);
 
         $interviewee->name = $request->name;
-       
-        
+
+
 
         $interviewee->save();
 
-        return redirect('admin/users')->with("statusE", "User updated successfully!");;
+        return redirect('interviewee');
     }
 
     /**
@@ -99,10 +98,10 @@ class IntervieweeTypesController extends Controller
      * @param  \App\Models\interviewee_types  $interviewee_types
      * @return \Illuminate\Http\Response
      */
-    public function destroy(interviewee_types $interviewee_types)
+    public function destroy($id)
     {
         $interviewee = interviewee_types::findOrFail($id);
-       
+
         $interviewee->delete();
         return  back();
     }

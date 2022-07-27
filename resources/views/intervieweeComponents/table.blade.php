@@ -13,7 +13,7 @@
 
 
   <body>
-
+<a href="{{route('interviewee.create')}}">Create</a>
     <table style="border: 1px solid black">
   <tr>
     <th>id</th>
@@ -24,14 +24,15 @@
 
   <tr>
     <td> {{ $i -> id }} </td> <!-- Qet ID te Userit -->
-    <td> {{ $i -> Name }} </td> <!-- Qet Emrin e Userit -->
+    <td> {{ $i -> name }} </td> <!-- Qet Emrin e Userit -->
     
-    <td> <a href="#"></a> </td> <!-- Delete Button Here -->
-    <td> <a href="#"></a> </td> <!-- Edit Button Here -->
+    <td> <a href="{{route('interviewee.edit',$i->id)}}">Edit</a> </td> <!-- Edit Button Here -->
+    <td> <a href="{{ route('interviewee.destroy', $i -> id) }}">Delete</a> </td> <!-- Delete Button Here -->
   </tr>
   
   @endforeach
 </table>
+{{ $interviewees->links() }}
 
   </body>
 </html>
