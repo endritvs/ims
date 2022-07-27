@@ -17,7 +17,7 @@ class IntervieweeTypesController extends Controller
     {
         $interviewees = interviewee_types::orderBy('id', 'desc')->get();
 
-        return view('create-project')->with('interviewees', $interviewees);
+        return view('intervieweeComponents/intervieweeTable')->with('interviewees', $interviewees);
         //
     }
 
