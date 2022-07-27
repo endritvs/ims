@@ -36,10 +36,9 @@ Route::prefix('interviewee')->group(function () {
     Route::post('/update-interviewee/{id}', [IntervieweeTypesController::class, 'update'])->name('interviewee.update');
     Route::get('/destroy/{id}', [IntervieweeTypesController::class, 'destroy'])->name('interviewee.destroy');
     Route::get('/show', [IntervieweeTypesController::class, 'show'])->name('interviewee.show');
-    Route::get('/create-interviewee', [IntervieweeTypesController::class, 'create'])->name('interviewee.create');
+    Route::get('/create', [IntervieweeTypesController::class, 'create'])->name('interviewee.create');
     Route::post('/store-interviewee', [IntervieweeTypesController::class, 'store'])->name('interviewee.store');
-
 });
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
