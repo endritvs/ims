@@ -18,7 +18,9 @@ use App\Http\Controllers\IntervieweeTypesController;
 Route::get('/', function () {
     return view('/auth/login');
 });
-
+Route::get('/sidebar', function () {
+    return view('/components/sidebar');
+});
 Route::get('/interviewee', function () {
     return view('intervieweeComponents/intervieweeTable');
 });
