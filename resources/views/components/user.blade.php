@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>User</title>
-	<link rel="stylesheet" href="/css/User-interface.css">
+	<link rel="stylesheet" href="/css/user-interface.css">
 	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </head>
 <body>

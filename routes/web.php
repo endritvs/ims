@@ -16,17 +16,21 @@ use App\Http\Controllers\IntervieweeTypesController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('/auth/login');
 });
 
 Route::get('/interviewee', function () {
     return view('intervieweeComponents/intervieweeTable');
 });
 
+Route::get('/user', function () {
+    return view('/components/user');
+});
 
-Route::get('/dashboard', function () {
+
+/*Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth'])->name('dashboard'); */
 
 
 Route::prefix('interviewee')->group(function () {
