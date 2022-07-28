@@ -52,6 +52,6 @@
                 </div>
             </div>
        </div>
-       <script src="/js/script.js"></script>
+       <script src="/js/loginscript.js"></script>
     </body>
 </html>
