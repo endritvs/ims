@@ -28,9 +28,9 @@ Route::get('/user', function () {
 });
 
 
-/*Route::get('/dashboard', function () {
+Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard'); */
+})->middleware(['auth'])->name('dashboard'); 
 
 
 Route::prefix('interviewee')->group(function () {
@@ -44,5 +44,15 @@ Route::prefix('interviewee')->group(function () {
     Route::post('/store-interviewee', [IntervieweeTypesController::class, 'store'])->name('interviewee.store');
 });
 
+Route::prefix('interviewee-attributes')->group(
+    function () {
+        Route::get('/', [Interviewee_AttributesController::class, 'index'])->name('intervieweeAttributes.index');
+        Route::get('/edit-interviewee/{id}', [Interviewee_AttributesController::class, 'edit'])->name('intervieweeAttributes.edit');
+        Route::post('/update-interviewee/{id}', [Interviewee_AttributesController::class, 'update'])->name('intervieweeAttributes.update');
+        Route::get('/destroy/{id}', [Interviewee_AttributesController::class, 'destroy'])->name('intervieweeAttributes.destroy');
+        Route::get('/create', [Interviewee_AttributesController::class, 'create'])->name('intervieweeAttributes.create');
+        Route::post('/store-interviewee', [Interviewee_AttributesController::class, 'store'])->name('intervieweeAttributes.store');
+    }
+);
 
 require __DIR__ . '/auth.php';

@@ -2,14 +2,15 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Faker\Factory as Faker;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class IntervieweeTypesSeeder extends Seeder
+
+class IntervieweeAttributeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,18 +19,12 @@ class IntervieweeTypesSeeder extends Seeder
      */
     public function run()
     {
-        //factory 
-        // for ($i = 0; $i < 100; $i++) {
-        //     DB::table('interviewee_types')->insert([
-        //         'name' => Str::random(10),
-
-        //     ]);
-        // }
 
         $faker = Faker::create();
         foreach (range(1, 100) as $index) {
-            DB::table('interviewee_types')->insert([
+            DB::table('interviewee_attributes')->insert([
                 'name' => $faker->name,
+                'interviewee_types_id' => $index
             ]);
         }
     }

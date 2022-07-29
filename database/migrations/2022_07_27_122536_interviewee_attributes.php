@@ -13,9 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('interviewee_types', function (Blueprint $table) {
+        Schema::create('interviewee_attributes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->String('name');
+            $table->foreignId('interviewee_types_id')
+                ->references('id')->on('interviewee_types')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -27,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('interviewee_types');
+        Schema::dropIfExists('interviewee_attributes');
     }
 };
