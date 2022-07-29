@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\interviewee_types;
+
 use App\Http\Requests\Storeinterviewee_typesRequest;
 use App\Http\Requests\Updateinterviewee_typesRequest;
+
+use App\Models\Interviewee_Type;
+
+
+
+
 
 class IntervieweeTypesController extends Controller
 {
@@ -17,7 +23,7 @@ class IntervieweeTypesController extends Controller
      */
     public function index()
     {
-        $interviewees = interviewee_types::orderBy('id', 'asc')->paginate(5);
+        $interviewees = Interviewee_Type::orderBy('id', 'asc')->paginate(5);
         return view('intervieweeComponents/table')->with('interviewees', $interviewees);
     }
 
@@ -40,7 +46,7 @@ class IntervieweeTypesController extends Controller
      */
     public function store(Request $request)
     {
-        interviewee_types::create([
+        Interviewee_Type::create([
             'name' => $request['name'],
         ]);
         return  redirect()->route('interviewee.index');
@@ -55,7 +61,7 @@ class IntervieweeTypesController extends Controller
     public function show($id)
     {
 
-        $interviewee = interviewee_types::find($id);
+        $interviewee = Interviewee_Type::find($id);
         return view('admin.userposts.show', compact('interviewee'));
     }
 
@@ -67,7 +73,7 @@ class IntervieweeTypesController extends Controller
      */
     public function edit($id)
     {
-        $interviewee = interviewee_types::findOrFail($id);
+        $interviewee = Interviewee_Type::findOrFail($id);
 
         return view('intervieweeComponents/edit')->with(['interviewee' => $interviewee]);
     }
@@ -81,7 +87,7 @@ class IntervieweeTypesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $interviewee = interviewee_types::findOrFail($id);
+        $interviewee = Interviewee_Type::findOrFail($id);
 
         $interviewee->name = $request->name;
 
@@ -100,7 +106,7 @@ class IntervieweeTypesController extends Controller
      */
     public function destroy($id)
     {
-        $interviewee = interviewee_types::findOrFail($id);
+        $interviewee = Interviewee_Type::findOrFail($id);
 
         $interviewee->delete();
         return  back();
