@@ -29,6 +29,15 @@ Route::get('/user', function () {
     return view('/components/user');
 });
 
+Route::get('/oltitest', function () {
+    return view('pages.example');
+});
+
+Route::get('/oltitest1', function () {
+    return view('pages.example2');
+});
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

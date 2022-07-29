@@ -30,6 +30,7 @@
     <td> <a href="{{ route('interviewee.destroy', $i -> id) }}">Delete</a> </td> <!-- Delete Button Here -->
   </tr>
   
+  
   @endforeach
 </table>
 {{ $interviewees->links() }}
