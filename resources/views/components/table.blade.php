@@ -74,7 +74,7 @@
                     <div class="pl-3">
                         <div class="text-base font-semibold">Neil Sims</div>
                         <div class="font-normal text-gray-500">neil.sims@flowbite.com</div>
-                    </div>  
+                    </div>
                 </th>
                 <td class="py-4 px-6">
                     React Developer

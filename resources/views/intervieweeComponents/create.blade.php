@@ -1,20 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Create Interviewee</title>
-</head>
-<body>
-    <form method="POST" action="{{ route('interviewee.store') }}">
-        @csrf
-        <label for="fname">Name:</label><br>
-        <input type="text" id="name" name="name"><br>
+@extends("layouts.layout")
 
-        <button type="submit" class="btn btn-primary mt-2">Create</button>
-      </form> 
-      
-    
-</body>
-</html>
+@section('content')
+    <form class="shadow rounded-md w-[500px]" method="POST" action="{{ route('interviewee.store') }}">
+        @csrf
+        <div class="p-4 bg-gray-800">
+            <label for="first-name" class="block mb-2 text-sm font-medium text-white">Interviewee Type:</label>
+            <input type="text" name="name" id="name" autocomplete="given-name" placeholder="Interviewee Type Name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+        </div>
+        <div class="px-4 py-3 bg-gray-400 text-right sm:px-6">
+            <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Create</button>
+        </div>
+    </form>
+@endsection
+
