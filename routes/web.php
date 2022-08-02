@@ -66,4 +66,15 @@ Route::prefix('interviewee-attributes')->group(
     }
 );
 
+Route::prefix('interviewees')->group(
+    function () {
+        Route::get('/', [IntervieweeController::class, 'index'])->name('interviewees.index');
+        Route::get('/edit-interviewees/{id}', [IntervieweeController::class, 'edit'])->name('interviewees.edit');
+        Route::post('/update-interviewees/{id}', [IntervieweeController::class, 'update'])->name('interviewees.update');
+        Route::get('/destroy/{id}', [IntervieweeController::class, 'destroy'])->name('interviewees.destroy');
+        Route::get('/create', [IntervieweeController::class, 'create'])->name('interviewees.create');
+        Route::post('/store-interviewees', [IntervieweeController::class, 'store'])->name('interviewees.store');
+    }
+);
+
 require __DIR__ . '/auth.php';
