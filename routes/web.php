@@ -41,7 +41,7 @@ Route::get('/oltitest1', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard'); 
+})->middleware(['auth'])->name('dashboard');
 
 
 Route::prefix('interviewee')->group(function () {
