@@ -8,17 +8,39 @@
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
     </head>
+    <style>
+        .error-login{
+            color:red;
+            font-size:11px;
+        }
+        form{
+            gap:0px!important;
+        }
+    </style>
     <body>
        <div class="container" id="container">
             <div class="form-container sign-up-container">
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
                     <h1>Create Account</h1>
+                    
                     <span>or use your email for registration</span>
-                    <input type="text" name="name" placeholder="Name">
-                    <input type="email" name="email" placeholder="Email">
-                    <input type="password" name="password" placeholder="Password">
-                    <input type="password" name="password_confirmation" placeholder="Confirm Password">
+                    <input type="text" class="@error('name') is-invalid @enderror " name="name" placeholder="Name">
+                    @error('name')
+                        <div class="alert alert-danger error-login">{{ $message }}</div>
+                    @enderror
+                    <input type="email" class="@error('email') is-invalid @enderror" name="email" placeholder="Email">
+                    @error('email')
+                        <div class="alert alert-danger error-login">{{ $message }}</div>
+                    @enderror
+                    <input type="password"  class="@error('password') is-invalid @enderror" name="password" placeholder="Password">
+                    @error('password')
+                    <div class="alert alert-danger error-login">{{ $message }}</div>
+                @enderror
+                    <input type="password"  class="@error('password_confirmation') is-invalid @enderror" name="password_confirmation" placeholder="Confirm Password">
+                    @error('password_confirmation')
+                    <div class="alert alert-danger error-login">{{ $message }}</div>
+                @enderror
                     <button>Sign Up</button>
                 </form>
             </div>
@@ -27,8 +49,14 @@
                     @csrf
                     <h1>Sign In</h1>
                     <span>or use your account</span>
-                    <input type="email" name="email" placeholder="Email">
-                    <input type="password"  name="password" placeholder="Password">
+                    <input type="email" class="@error('email') is-invalid @enderror" name="email" placeholder="Email">
+                    @error('email')
+                    <div class="alert alert-danger error-login">{{ $message }}</div>
+                @enderror
+                    <input type="password" class="@error('password') is-invalid @enderror"  name="password" placeholder="Password">
+                    @error('password')
+                    <div  class="alert error-login alert-danger">{{ $message }}</div>
+                @enderror
                     <button>Sign In</button>
                 </form>
             </div>

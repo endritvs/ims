@@ -23,7 +23,16 @@
                         <a href="{{ route('interviewee.index') }}" class="flex items-center p-2 pl-11 w-full text-base font-normal rounded-lg transition duration-75 group hover:bg-gray-100 text-white hover:bg-gray-700">View</a>
                     </li>
                 </ul>
-            </li>
+            </li> 
+          
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+
+            <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900">
+                {{ __('Log Out') }}
+            </button>
+        </form>
         </ul>
+     
     </div>
 </aside>
