@@ -20,7 +20,7 @@
     <body>
        <div class="container" id="container">
             <div class="form-container sign-up-container">
-                <form method="POST" action="{{ route('register') }}">
+                <form method="POST" action ="{{ route('register') }}">
                     @csrf
                     <h1>Create Account</h1>
                     
