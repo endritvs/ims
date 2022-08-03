@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\interviewee_types;
 use App\Models\interviewee_attributes;
+use App\Http\Controllers\IntervieweeController;
 use App\Http\Controllers\IntervieweeTypesController;
 use App\Http\Controllers\Interviewee_AttributesController;
 
