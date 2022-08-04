@@ -1,4 +1,16 @@
- <body class="bg-white-200">
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/css/app.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css"
+    />
+    <title>Responsive Sidebar Using TailwindCSS</title>
+  </head>
+  <body class="bg-white-200">
     <span
       class="absolute text-white text-4xl top-5 left-4 cursor-pointer"
       onclick="openSidebar()"
@@ -10,7 +22,7 @@
     >
       <div class="text-gray-100 text-xl">
         <div class="p-2.5 mt-1 flex items-center">
-          <i class="bi bi-app-indicator px-2 py-1 rounded-md bg-blue-600"></i>
+          <i class="bi bi-app-indicator px-2 py-1 rounded-md bg-gray-900"></i>
           <h1 class="font-bold text-gray-200 text-[15px] ml-3">IMS</h1>
           <i
             class="bi bi-x cursor-pointer ml-28 lg:hidden"
@@ -20,13 +32,13 @@
         <div class="my-2 bg-gray-200 h-[1px]"></div>
       </div>
       <div
-        class="p-2.5 flex items-center rounded-md px-4 duration-300 cursor-pointer bg-blue-600 text-white"
+        class="p-1.8 flex items-center rounded-md px-4 duration-300 cursor-pointer  bg-gray-700 text-white"
       >
         <i class="bi bi-search text-sm"></i>
         <input
           type="text"
           placeholder="Search"
-          class="text-[15px] ml-4 w-full bg-gray-200 focus:outline-none"
+          class="text-[15px] ml-4 w-full bg-transparent focus:outline-none border-none"
         />
       </div>
       <div
@@ -120,3 +132,4 @@
       }
     </script>
   </body>
+</html>
