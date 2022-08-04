@@ -34,7 +34,7 @@ class Interviewee_AttributesController extends Controller
         $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
 
         $request->validate([
-            'name' => ['required', 'string', 'max:25'],
+            'name' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
             'interviewee_types_id' => ['required'],
         ]);
         Interviewee_Attribute::create([
@@ -60,7 +60,7 @@ class Interviewee_AttributesController extends Controller
     {
         $interviewee = Interviewee_Attribute::findOrFail($id);
         $request->validate([
-            'name' => ['required', 'string', 'max:25'],
+            'name' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
             'interviewee_types_id' => ['required'],
         ]);
         $interviewee->name = $request->name;

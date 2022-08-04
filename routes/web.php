@@ -6,7 +6,7 @@ use App\Models\interviewee_attributes;
 use App\Http\Controllers\IntervieweeController;
 use App\Http\Controllers\IntervieweeTypesController;
 use App\Http\Controllers\Interviewee_AttributesController;
-
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,7 +19,11 @@ use App\Http\Controllers\Interviewee_AttributesController;
 */
 
 Route::get('/', function () {
-    return view('/auth/login');
+    if (Auth::check()) {
+        return view('dashboard');
+    } else {
+        return view('/auth/login');
+    }
 });
 
 Route::get('/interviewee', function () {
@@ -45,22 +49,6 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 
-// Route::group(['middleware' => 'auth'], function () {
-//     Route::prefix('interviewee')->name('dashboard')->group(function () {
-
-//         Route::get('/', [IntervieweeTypesController::class, 'index'])->name('interviewee.index');
-//         Route::get('/edit-interviewee/{id}', [IntervieweeTypesController::class, 'edit'])->name('interviewee.edit');
-//         Route::post('/update-interviewee/{id}', [IntervieweeTypesController::class, 'update'])->name('interviewee.update');
-//         Route::get('/destroy/{id}', [IntervieweeTypesController::class, 'destroy'])->name('interviewee.destroy');
-//         Route::get('/show', [IntervieweeTypesController::class, 'show'])->name('interviewee.show');
-//         Route::get('/create', [IntervieweeTypesController::class, 'create'])->name('interviewee.create');
-//         Route::post('/store-interviewee', [IntervieweeTypesController::class, 'store'])->name('interviewee.store');
-//     });
-// });
-// Route::group(['middleware' => 'auth'], function () {
-//     Route::resource('interviewee-types', IntervieweeTypesController::class);
-//     Route::resource('interviewee-attributes', Interviewee_AttributesController::class);
-// });
 Route::prefix('interviewee')->group(function () {
 
     Route::get('/', [IntervieweeTypesController::class, 'index'])->name('interviewee.index');
