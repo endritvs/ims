@@ -33,7 +33,7 @@
         <div class="my-2 bg-gray-200 h-[1px]"></div>
       </div>
       <div
-        class="p-1.8 flex items-center rounded-md px-4 duration-300 cursor-pointer bg-gray-700 text-white"
+        class="p-1.8 flex items-center rounded-md px-4 duration-300 cursor-pointer  bg-gray-700 text-white"
       >
         <i class="bi bi-search text-sm"></i>
         <input
