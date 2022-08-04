@@ -10,16 +10,34 @@
     
 <form method="POST" action="{{ route('interviewees.store') }}" enctype="multipart/form-data">
     @csrf
-<input type="text" name="name" id="name" placeholder="Emri"><br>
-<input type="text" name="surname" id="surname" placeholder="mbiemri"><br>
-<input type="file" name="cv_path" id="cv_path" placeholder="cv_path" ><br>
-<input type="text" name="external_cv_path" id="external_cv_path" placeholder="external_cv_path"><br>
-<select name="interviewee_types_id" id="interviewee_types_id">
+<input type="text" name="name" class="@error('name') is-invalid @enderror" id="name" placeholder="Emri"><br>
+@error('name')
+<div class="alert alert-danger error-login">{{ $message }}</div>
+@enderror
+<input type="text" class="@error('surname') is-invalid @enderror" name="surname" id="surname" placeholder="mbiemri"><br>
+@error('surname')
+<div class="alert alert-danger error-login">{{ $message }}</div>
+@enderror
+<input type="file" class="@error('cv_path') is-invalid @enderror" name="cv_path" id="cv_path" placeholder="cv_path" ><br>
+@error('cv_path')
+<div class="alert alert-danger error-login">{{ $message }}</div>
+@enderror
+<input type="text" class="@error('cv_path') is-invalid @enderror"  name="external_cv_path" id="external_cv_path" placeholder="external_cv_path"><br>
+@error('external_cv_path')
+<div class="alert alert-danger error-login">{{ $message }}</div>
+@enderror
+<select class="@error('interviewee_types_id') is-invalid @enderror" name="interviewee_types_id" id="interviewee_types_id">
             @foreach ($intervieweesT as $i)   
             <option value="{{$i->id}}">{{$i->name}}</option>
            @endforeach
         </select><br>
-        <input type="file" name="img" id="img" placeholder="img" ><br>
+        @error('interviewee_types_id')
+<div class="alert alert-danger error-login">{{ $message }}</div>
+@enderror
+        <input type="file" class="@error('img') is-invalid @enderror" name="img" id="img" placeholder="img" ><br>
+        @error('img')
+        <div class="alert alert-danger error-login">{{ $message }}</div>
+        @enderror
 <button type="submit">Create</button>
 </form>
 
