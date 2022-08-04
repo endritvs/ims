@@ -16,48 +16,36 @@ use App\Models\Interviewee_Type;
 
 class IntervieweeTypesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $interviewees = Interviewee_Type::orderBy('id', 'asc')->paginate(5);
         return view('intervieweeComponents/table')->with('interviewees', $interviewees);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
 
     {
         return view('intervieweeComponents/create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\Storeinterviewee_typesRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => ['required', 'string', 'max:25'],
+        ]);
         Interviewee_Type::create([
             'name' => $request['name'],
         ]);
         return  redirect()->route('interviewee.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\interviewee_types  $interviewee_types
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
 
@@ -65,12 +53,7 @@ class IntervieweeTypesController extends Controller
         return view('admin.userposts.show', compact('interviewee'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\interviewee_types  $interviewee_types
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         $interviewee = Interviewee_Type::findOrFail($id);
@@ -78,17 +61,13 @@ class IntervieweeTypesController extends Controller
         return view('intervieweeComponents/edit')->with(['interviewee' => $interviewee]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\Updateinterviewee_typesRequest  $request
-     * @param  \App\Models\interviewee_types  $interviewee_types
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
         $interviewee = Interviewee_Type::findOrFail($id);
-
+        $request->validate([
+            'name' => ['required', 'string', 'max:25'],
+        ]);
         $interviewee->name = $request->name;
 
 
@@ -98,12 +77,7 @@ class IntervieweeTypesController extends Controller
         return redirect('interviewee');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\interviewee_types  $interviewee_types
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         $interviewee = Interviewee_Type::findOrFail($id);

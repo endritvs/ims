@@ -9,6 +9,10 @@ use App\Models\Interviewee_Type;
 
 class Interviewee_AttributesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $intervieweesA = Interviewee_Attribute::with('interviewee_type')->orderBy('id', 'asc')->paginate(5);
@@ -26,7 +30,13 @@ class Interviewee_AttributesController extends Controller
 
     public function store(Request $request)
     {
+
         $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
+
+        $request->validate([
+            'name' => ['required', 'string', 'max:25'],
+            'interviewee_types_id' => ['required'],
+        ]);
         Interviewee_Attribute::create([
             'name' => $request['name'],
             'interviewee_types_id' => $request['interviewee_types_id']
@@ -49,7 +59,10 @@ class Interviewee_AttributesController extends Controller
     public function update(Request $request, $id)
     {
         $interviewee = Interviewee_Attribute::findOrFail($id);
-
+        $request->validate([
+            'name' => ['required', 'string', 'max:25'],
+            'interviewee_types_id' => ['required'],
+        ]);
         $interviewee->name = $request->name;
         $interviewee->interviewee_types_id = $request->interviewee_types_id;
         $interviewee->save();

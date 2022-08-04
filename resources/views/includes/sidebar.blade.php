@@ -1,5 +1,6 @@
 <aside class="w-64" aria-label="Sidebar">
     <div class="overflow-y-auto py-4 px-3 bg-gray-50 h-full bg-gray-800">
+        <h1 style="color:wheat">{{Auth::user()->name}}</h1>
         <ul class="space-y-2">
             <li>
                 <a href="{{ route('dashboard') }}" class="flex items-center p-2 text-base font-normal rounded-lg text-white hover:bg-gray-100 hover:bg-gray-700">
@@ -24,6 +25,7 @@
                     </li>
                 </ul>
             </li> 
+      
           
         <form method="POST" action="{{ route('logout') }}">
             @csrf

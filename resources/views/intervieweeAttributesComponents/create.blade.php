@@ -10,17 +10,24 @@
     <form method="POST" action="{{ route('intervieweeAttributes.store') }}">
         @csrf
         <label for="fname">Choose a attribute::</label><br>
-        <input type="text" id="name" name="name"><br>
+        <input type="text" class="@error('name') is-invalid @enderror " id="name" name="name"><br>
+        @error('name')
+        <div class="alert alert-danger error-login">{{ $message }}</div>
+    @enderror
+
 
         <label for="interviewee_types_id">Name:</label>
    
             
        
-        <select name="interviewee_types_id" id="interviewee_types_id">
+        <select name="interviewee_types_id"  class="@error('interviewee_types_id') is-invalid @enderror " id="interviewee_types_id">
             @foreach ($intervieweesT as $i)   
             <option value="{{$i->id}}">{{$i->name}}</option>
            @endforeach
         </select>
+        @error('name')
+        <div class="alert alert-danger error-login">{{ $message }}</div>
+    @enderror
         <br>
         <button type="submit" >Create</button>
       </form> 

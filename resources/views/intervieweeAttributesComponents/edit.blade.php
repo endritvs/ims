@@ -10,8 +10,11 @@
     <form method="POST" action="{{ route('intervieweeAttributes.update',$interviewee->id) }}">
         @csrf
         <label for="fname">Name:</label><br>
-        <input type="text" id="name" name="name" value="{{$interviewee->name}}"><br>
-        <select name="interviewee_types_id" id="interviewee_types_id">
+        <input type="text" id="name" class="@error('interviewee_types_id') is-invalid @enderror " name="name" value="{{$interviewee->name}}"><br>
+        @error('name')
+        <div class="alert alert-danger error-login">{{ $message }}</div>
+    @enderror
+        <select name="interviewee_types_id" class="@error('interviewee_types_id') is-invalid @enderror " id="interviewee_types_id">
             @foreach ($intervieweesT as $i)   
                  @if($i->id===$interviewee->interviewee_types_id)
             <option value="{{$interviewee->id}}">{{$i->name}}</option>
@@ -23,6 +26,9 @@
         @endforeach
         
         </select>
+        @error('interviewee_types_id')
+        <div class="alert alert-danger error-login">{{ $message }}</div>
+    @enderror
         <button type="submit" class="btn btn-primary mt-2">Edit</button>
       </form> 
       

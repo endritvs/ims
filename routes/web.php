@@ -45,6 +45,22 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 
+// Route::group(['middleware' => 'auth'], function () {
+//     Route::prefix('interviewee')->name('dashboard')->group(function () {
+
+//         Route::get('/', [IntervieweeTypesController::class, 'index'])->name('interviewee.index');
+//         Route::get('/edit-interviewee/{id}', [IntervieweeTypesController::class, 'edit'])->name('interviewee.edit');
+//         Route::post('/update-interviewee/{id}', [IntervieweeTypesController::class, 'update'])->name('interviewee.update');
+//         Route::get('/destroy/{id}', [IntervieweeTypesController::class, 'destroy'])->name('interviewee.destroy');
+//         Route::get('/show', [IntervieweeTypesController::class, 'show'])->name('interviewee.show');
+//         Route::get('/create', [IntervieweeTypesController::class, 'create'])->name('interviewee.create');
+//         Route::post('/store-interviewee', [IntervieweeTypesController::class, 'store'])->name('interviewee.store');
+//     });
+// });
+// Route::group(['middleware' => 'auth'], function () {
+//     Route::resource('interviewee-types', IntervieweeTypesController::class);
+//     Route::resource('interviewee-attributes', Interviewee_AttributesController::class);
+// });
 Route::prefix('interviewee')->group(function () {
 
     Route::get('/', [IntervieweeTypesController::class, 'index'])->name('interviewee.index');
@@ -56,7 +72,7 @@ Route::prefix('interviewee')->group(function () {
     Route::post('/store-interviewee', [IntervieweeTypesController::class, 'store'])->name('interviewee.store');
 });
 
-Route::prefix('interviewee-attributes')->group(
+Route::prefix('interviewee-attributes')->middleware(['auth'])->group(
     function () {
         Route::get('/', [Interviewee_AttributesController::class, 'index'])->name('intervieweeAttributes.index');
         Route::get('/edit-interviewee/{id}', [Interviewee_AttributesController::class, 'edit'])->name('intervieweeAttributes.edit');
