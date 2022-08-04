@@ -1,4 +1,17 @@
-<body class="bg-white-200">
+<!-- component -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/css/app.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css"
+    />
+    <title>Responsive Sidebar Using TailwindCSS</title>
+  </head>
+  <body class="bg-white-200">
     <span
       class="absolute text-white text-4xl top-5 left-4 cursor-pointer"
       onclick="openSidebar()"
@@ -120,3 +133,4 @@
       }
     </script>
   </body>
+</html>
