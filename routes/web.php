@@ -33,8 +33,8 @@ Route::get('/interviewee', function () {
 Route::get('/user', function () {
     return view('/components/user');
 });
-Route::get('/sidebar', function () {
-    return view('/includes/sidebar');
+Route::get('/sidebari', function () {
+    return view('/components/sidebari');
 });
 
 Route::get('/oltitest', function () {
