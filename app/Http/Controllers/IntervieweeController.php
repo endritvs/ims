@@ -6,6 +6,7 @@ use App\Models\interviewee;
 use App\Http\Requests\Store;
 use Illuminate\Http\Request;
 use App\Models\Interviewee_Type;
+use App\Models\Interviewee_Attribute;
 use Illuminate\Support\Facades\Storage;
 
 class IntervieweeController extends Controller
@@ -19,7 +20,8 @@ class IntervieweeController extends Controller
     public function index()
     {
 
-        $intervieweesA = interviewee::with('interviewee_type')->orderBy('id', 'asc')->paginate(5);
+        $intervieweesA = interviewee::with('interviewee_type', 'interviewee_attribute')->orderBy('id', 'asc')->paginate(5);
+        // dd($intervieweesA);
         return view('intervieweesMainComponents/table')->with(['intervieweesA' => $intervieweesA]);
     }
 
@@ -27,7 +29,8 @@ class IntervieweeController extends Controller
     public function create()
     {
         $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
-        return view('intervieweesMainComponents/create')->with(['intervieweesT' => $intervieweesT]);
+        $intervieweesA = Interviewee_Attribute::orderBy('id', 'desc')->get();
+        return view('intervieweesMainComponents/create')->with(['intervieweesT' => $intervieweesT, 'intervieweesA' => $intervieweesA]);
     }
 
 
@@ -45,9 +48,10 @@ class IntervieweeController extends Controller
             $newImg = $request->file('img');
             $img_path = $newImg->store('/public/images');
             $request->validate([
-                'name' => ['required', 'string', 'max:25'],
-                'surname' => ['required', 'string', 'max:25'],
+                'name' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
+                'surname' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
                 'interviewee_types_id' => ['required'],
+                'interviewee_attributes_id' => ['required'],
                 'cv_path' => ['required', 'mimes:pdf,docx,jpeg,png,jpg,jpj', 'max:2048'],
                 'img' => ['required', 'mimes:jpeg,png,jpg,jpj', 'max:2048'],
             ]);
@@ -58,6 +62,7 @@ class IntervieweeController extends Controller
                 'external_cv_path' => $request['external_cv_path'],
                 'img' => $img_path,
                 'interviewee_types_id' => $request['interviewee_types_id'],
+                'interviewee_attributes_id' => $request['interviewee_attributes_id'],
             ]);
         }
         return  redirect()->route('interviewees.index');
@@ -74,9 +79,10 @@ class IntervieweeController extends Controller
     {
 
         $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
+        $intervieweesA = Interviewee_Attribute::orderBy('id', 'desc')->get();
         $interviewees = interviewee::findOrFail($id);
 
-        return view('intervieweesMainComponents/edit')->with(['interviewees' => $interviewees, 'intervieweesT' => $intervieweesT]);
+        return view('intervieweesMainComponents/edit')->with(['interviewees' => $interviewees, 'intervieweesT' => $intervieweesT, 'intervieweesA' => $intervieweesA]);
     }
 
 
@@ -95,9 +101,10 @@ class IntervieweeController extends Controller
             $newImg = $request->file('img');
             $img_path = $newImg->store('/public/images');
             $request->validate([
-                'name' => ['required', 'string', 'max:25'],
-                'surname' => ['required', 'string', 'max:25'],
+                'name' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
+                'surname' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
                 'interviewee_types_id' => ['required'],
+                'interviewee_attributes_id' => ['required'],
                 'cv_path' => ['required', 'mimes:pdf,docx,jpeg,png,jpg,jpj', 'max:2048'],
                 'img' => ['required', 'mimes:jpeg,png,jpg,jpj', 'max:2048'],
             ]);
@@ -107,11 +114,28 @@ class IntervieweeController extends Controller
             $interviewee->cv_path = $file_path;
             $interviewee->external_cv_path = $request->external_cv_path;
             $interviewee->interviewee_types_id = $request->interviewee_types_id;
+            $interviewee->interviewee_attributes_id = $request->interviewee_attributes_id;
             $interviewee->img = $img_path;
 
             $interviewee->save();
-        }
+        } else {
+            $request->validate([
+                'name' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
+                'surname' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
+                'interviewee_types_id' => ['required'],
+                'interviewee_attributes_id' => ['required'],
 
+            ]);
+            $interviewee->name = $request->name;
+            $interviewee->surname = $request->surname;
+            $interviewee->cv_path =  $interviewee->cv_path;
+            $interviewee->external_cv_path = $request->external_cv_path;
+            $interviewee->interviewee_types_id = $request->interviewee_types_id;
+            $interviewee->interviewee_attributes_id = $request->interviewee_attributes_id;
+            $interviewee->img = $interviewee->img;
+
+            $interviewee->save();
+        }
 
         return redirect('interviewees');
     }

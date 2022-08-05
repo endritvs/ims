@@ -17,12 +17,16 @@
         <select name="interviewee_types_id" class="@error('interviewee_types_id') is-invalid @enderror " id="interviewee_types_id">
             @foreach ($intervieweesT as $i)   
                  @if($i->id===$interviewee->interviewee_types_id)
-            <option value="{{$interviewee->id}}">{{$i->name}}</option>
+            <option value="{{$i->id}}">{{$i->name}}</option>
              @break
                  @endif
            @endforeach
         @foreach ($intervieweesT as $i) 
-            <option value="{{$i->id}}">{{$i->name}}</option>
+        @if($i->id!==$interviewee->interviewee_types_id)
+        <option value="{{$i->id}}">{{$i->name}}</option>
+
+             @endif
+    
         @endforeach
         
         </select>

@@ -26,6 +26,8 @@
 @error('external_cv_path')
 <div class="alert alert-danger error-login">{{ $message }}</div>
 @enderror
+
+
 <select class="@error('interviewee_types_id') is-invalid @enderror" name="interviewee_types_id" id="interviewee_types_id">
             @foreach ($intervieweesT as $i)   
             <option value="{{$i->id}}">{{$i->name}}</option>
@@ -34,7 +36,18 @@
         @error('interviewee_types_id')
 <div class="alert alert-danger error-login">{{ $message }}</div>
 @enderror
-        <input type="file" class="@error('img') is-invalid @enderror" name="img" id="img" placeholder="img" ><br>
+
+
+<select class="@error('interviewee_attributes_id') is-invalid @enderror" name="interviewee_attributes_id" id="interviewee_attributes_id">
+    @foreach ($intervieweesA as $i)   
+    <option value="{{$i->id}}">{{$i->name}}</option>
+   @endforeach
+</select><br>
+@error('interviewee_attributes_id')
+<div class="alert alert-danger error-login">{{ $message }}</div>
+@enderror
+
+<input type="file" class="@error('img') is-invalid @enderror" name="img" id="img" placeholder="img" ><br>
         @error('img')
         <div class="alert alert-danger error-login">{{ $message }}</div>
         @enderror

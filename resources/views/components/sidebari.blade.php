@@ -1,3 +1,4 @@
+<!-- component -->
 <!DOCTYPE html>
 <html>
   <head>
