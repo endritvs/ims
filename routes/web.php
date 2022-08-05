@@ -34,6 +34,9 @@ Route::get('/interviewee', function () {
 Route::get('/user', function () {
     return view('/components/user');
 });
+Route::get('/sidebari', function () {
+    return view('/components/sidebari');
+});
 
 Route::get('/oltitest', function () {
     return view('pages.example');
@@ -83,6 +86,7 @@ Route::prefix('interviewees')->group(
     }
 );
 
+
 Route::prefix('interviewer')->group(
     function () {
         Route::get('/', [interviewer::class, 'index'])->name('interviewer.index');
@@ -95,3 +99,4 @@ Route::prefix('interviewer')->group(
 );
 
 require __DIR__ . '/auth.php';
+
