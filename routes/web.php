@@ -6,6 +6,7 @@ use App\Models\interviewee_attributes;
 use App\Http\Controllers\IntervieweeController;
 use App\Http\Controllers\IntervieweeTypesController;
 use App\Http\Controllers\Interviewee_AttributesController;
+use App\Http\Controllers\interviewer;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -63,7 +64,7 @@ Route::prefix('interviewee')->group(function () {
     Route::post('/store-interviewee', [IntervieweeTypesController::class, 'store'])->name('interviewee.store');
 });
 
-Route::prefix('interviewee-attributes')->middleware(['auth'])->group(
+Route::prefix('interviewee-attributes')->group(
     function () {
         Route::get('/', [Interviewee_AttributesController::class, 'index'])->name('intervieweeAttributes.index');
         Route::get('/edit-interviewee/{id}', [Interviewee_AttributesController::class, 'edit'])->name('intervieweeAttributes.edit');
@@ -85,4 +86,17 @@ Route::prefix('interviewees')->group(
     }
 );
 
+
+Route::prefix('interviewer')->group(
+    function () {
+        Route::get('/', [interviewer::class, 'index'])->name('interviewer.index');
+        Route::get('/edit-interviewer/{id}', [interviewer::class, 'edit'])->name('interviewer.edit');
+        Route::post('/update-interviewer/{id}', [interviewer::class, 'update'])->name('interviewer.update');
+        Route::get('/destroy/{id}', [interviewer::class, 'destroy'])->name('interviewer.destroy');
+        Route::get('/create', [interviewer::class, 'create'])->name('interviewer.create');
+        Route::post('/store-interviewers', [interviewer::class, 'store'])->name('interviewer.store');
+    }
+);
+
 require __DIR__ . '/auth.php';
+

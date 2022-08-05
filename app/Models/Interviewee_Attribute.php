@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Interviewee_Type;
+use App\Models\interviewee;
 
 class Interviewee_Attribute extends Model
 {
@@ -18,7 +19,9 @@ class Interviewee_Attribute extends Model
     {
         return $this->belongsTo(Interviewee_Type::class, "interviewee_types_id");
     }
-    // public function interviewee_typess(){
-    //     return $this->hasOne();
-    // }
+
+    public function interviewee()
+    {
+        return $this->hasMany(interviewee::class);
+    }
 }

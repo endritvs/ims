@@ -23,6 +23,9 @@ return new class extends Migration
             $table->foreignId('interviewee_types_id')
                 ->references('id')->on('interviewee_types')
                 ->onDelete('cascade');
+            $table->foreignId('interviewee_attributes_id')
+                ->references('id')->on('interviewee_attributes')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -26,10 +26,15 @@
         <div class="alert alert-danger error-login">{{ $message }}</div>
         @enderror
 
+        @php
 
+        $link = explode("/", $interviewees -> img);
+        $cv = explode("/", $interviewees -> cv_path);
+      @endphp
         <label for="fname">CV:</label><br>
+        <a href="/storage/cv_path/{{$cv[2]}}" download>Download the Current CV</a><br>
         <input type="file" class="@error('cv_path') is-invalid @enderror" id="cv_path" name="cv_path" value=""><br>
-        <a href="" download></a>
+        
         @error('cv_path')
         <div class="alert alert-danger error-login">{{ $message }}</div>
         @enderror
@@ -47,22 +52,44 @@
         @error('img')
         <div class="alert alert-danger error-login">{{ $message }}</div>
         @enderror
+        <img src="/storage/images/{{ $link[2] }}" width="50px" height="50px"><br>
         
         
         <label for="interviewee_types_id">Interviewee Type:</label><br>
         <select class="@error('interviewee_types_id') is-invalid @enderror" name="interviewee_types_id" id="interviewee_types_id">
             @foreach ($intervieweesT as $i)   
                  @if($i->id===$interviewees->interviewee_types_id)
-            <option value="{{$interviewees->id}}">{{$i->name}}</option>
+            <option value="{{$i->id}}">{{$i->name}}</option>
              @break
                  @endif
            @endforeach
         @foreach ($intervieweesT as $i) 
-            <option value="{{$i->id}}">{{$i->name}}</option>
+        @if($i->id!==$interviewees->interviewee_types_id)
+        <option value="{{$i->id}}">{{$i->name}}</option>
+             @endif
         @endforeach
         
         </select><br>
         @error('interviewee_types_id')
+        <div class="alert alert-danger error-login">{{ $message }}</div>
+        @enderror
+
+        <label for="interviewee_attributes_id">Interviewee Attribute:</label><br>
+        <select class="@error('interviewee_attributes_id') is-invalid @enderror" name="interviewee_attributes_id" id="interviewee_attributes_id">
+            @foreach ($intervieweesA as $i)   
+                 @if($i->id===$interviewees->interviewee_types_id)
+            <option value="{{$i->id}}">{{$i->name}}</option>
+             @break
+                 @endif
+           @endforeach
+        @foreach ($intervieweesT as $i) 
+        @if($i->id!==$interviewees->interviewee_types_id)
+        <option value="{{$i->id}}">{{$i->name}}</option>
+             @endif
+        @endforeach
+        
+        </select><br>
+        @error('interviewee_attributes_id')
         <div class="alert alert-danger error-login">{{ $message }}</div>
         @enderror
         <button type="submit" class="btn btn-primary mt-2">Edit</button>
