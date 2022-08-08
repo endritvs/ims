@@ -38,15 +38,9 @@ Route::get('/sidebari', function () {
     return view('/components/sidebari');
 });
 
-Route::get('/oltitest', function () {
-    return view('pages.example');
+Route::get('/register', function () {
+    return view('/auth/register');
 });
-
-Route::get('/oltitest1', function () {
-    return view('pages.example2');
-});
-
-
 
 Route::get('/dashboard', function () {
     return view('dashboard');
