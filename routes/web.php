@@ -7,6 +7,8 @@ use App\Http\Controllers\IntervieweeController;
 use App\Http\Controllers\IntervieweeTypesController;
 use App\Http\Controllers\Interviewee_AttributesController;
 use App\Http\Controllers\interviewer;
+use App\Http\Controllers\interviewController;
+
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -89,6 +91,17 @@ Route::prefix('interviewer')->group(
         Route::get('/destroy/{id}', [interviewer::class, 'destroy'])->name('interviewer.destroy');
         Route::get('/create', [interviewer::class, 'create'])->name('interviewer.create');
         Route::post('/store-interviewers', [interviewer::class, 'store'])->name('interviewer.store');
+    }
+);
+
+Route::prefix('interview')->group(
+    function () {
+        Route::get('/', [interviewController::class, 'index'])->name('interview.index');
+        Route::get('/edit-interview/{id}', [interviewController::class, 'edit'])->name('interview.edit');
+        Route::post('/update-interview/{id}', [interviewController::class, 'update'])->name('interview.update');
+        Route::get('/destroy/{id}', [interviewController::class, 'destroy'])->name('interview.destroy');
+        Route::get('/create', [interviewController::class, 'create'])->name('interview.create');
+        Route::post('/store-interview', [interviewController::class, 'store'])->name('interview.store');
     }
 );
 
