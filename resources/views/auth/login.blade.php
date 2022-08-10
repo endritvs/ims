@@ -23,7 +23,7 @@
                     <h2 class="title">Sign in</h2>
                     <div class="input-field @error('email') error_border @enderror">
                         <i class="fas fa-user"></i>
-                        <input type="email" class="@error('email') is-invalid @enderror" placeholder="Email">
+                        <input type="email" class="@error('email') is-invalid @enderror" name="email" placeholder="Email">
                     </div>
                     
                     <!-- <div>
@@ -37,7 +37,7 @@
                     
                     <div class="input-field @error('password') error_border @enderror">
                         <i class="fas fa-lock"></i>
-                        <input type="password" placeholder="Password">
+                        <input type="password" class="@error('password') is-invalid @enderror"  name="password" placeholder="Password">
                     </div>
                     <div style="margin-top: 15px;">
                        @error('email')
@@ -66,22 +66,23 @@
                     </div>
                 </form>
                 <form method="POST" action ="{{ route('register') }}" class="sign-up-form">
+                    @csrf
                     <h2 class="title">Sign up</h2>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
-                        <input type="text" placeholder="Username">
+                        <input type="text" name="name" placeholder="Name">
                     </div>
                     <div class="input-field">
                         <i class="fas fa-envelope"></i>
-                        <input type="text" placeholder="Email">
+                        <input type="email" name="email" placeholder="Email">
                     </div>
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
-                        <input type="password" placeholder="Password">
+                        <input type="password" name="password" placeholder="Password">
                     </div>
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
-                        <input type="password" placeholder="Confirm Password">
+                        <input type="password" name="password_confirmation" placeholder="Confirm Password">
                     </div>
                     <input type="submit" value="Sign up" class="btn solid">
 
