@@ -86,7 +86,7 @@ form {
 
 input {
     background-color: #eee;
-    border: none;
+    border-radius: 20px;
     padding: 12px 15px;
     margin: 8px 0;
     width: 100%;
@@ -227,3 +227,28 @@ input {
     height: 40px;
     width: 40px;
 }
+.alert {
+    color: red;
+    margin-bottom: 10px;
+  }
+
+.closebtn {
+    margin-left: 15px;
+    color: red;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  /* When moving the mouse over the close button */
+  .closebtn:hover {
+    color: black;
+  }
+/* .alert.alert-danger {
+    background-color: rgba(248, 215, 218, 1);
+    border-color: rgba(220, 53, 69, 1);
+    color: rgba(114, 28, 36,1);
+  } */

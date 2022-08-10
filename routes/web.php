@@ -36,12 +36,17 @@ Route::get('/interviewee', function () {
 Route::get('/user', function () {
     return view('/components/user');
 });
+
 Route::get('/sidebari', function () {
     return view('/components/sidebari');
 });
 
 Route::get('/register', function () {
     return view('/auth/register');
+});
+
+Route::get('/logintest', function () {
+    return view('/auth/logintest');
 });
 
 Route::get('/dashboard', function () {
