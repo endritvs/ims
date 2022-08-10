@@ -45,10 +45,6 @@ Route::get('/register', function () {
     return view('/auth/register');
 });
 
-Route::get('/logintest', function () {
-    return view('/auth/logintest');
-});
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
