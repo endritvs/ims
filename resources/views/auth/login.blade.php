@@ -25,6 +25,7 @@
                         <i class="fas fa-user"></i>
                         <input type="email" class="@error('email') is-invalid @enderror" name="email" placeholder="Email">
                     </div>
+
                     
                     <!-- <div>
                         @error('email')
@@ -35,6 +36,18 @@
                         @enderror
                     </div> -->
                     
+
+                    
+                    <!-- <div>
+                        @error('email')
+                        <span class="alert">
+                            {{ $message }}
+                            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                        </span>
+                        @enderror
+                    </div> -->
+                    
+
                     <div class="input-field @error('password') error_border @enderror">
                         <i class="fas fa-lock"></i>
                         <input type="password" class="@error('password') is-invalid @enderror"  name="password" placeholder="Password">
@@ -70,6 +83,21 @@
                     <h2 class="title">Sign up</h2>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
+
+                        <input type="text" name="name" placeholder="Name">
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" name="email" placeholder="Email">
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" name="password" placeholder="Password">
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" name="password_confirmation" placeholder="Confirm Password">
+
                         <input type="text" class="@error('name') is-invalid @enderror " name="name" placeholder="Name">
                     </div>
 
@@ -80,6 +108,24 @@
                             <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                         </span>
                         @enderror
+                        </div>
+                    <input type="submit" value="Sign up" class="btn solid">
+
+
+                    <p class="social-text">Or Sign up with social platforms</p>
+                    <div class="social-media">
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-google"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
                     </div>
 
                     <div class="input-field">
@@ -141,6 +187,7 @@
                             <i class="fab fa-linkedin-in"></i>
                         </a>
                     </div>
+
                 </form>
             </div>
         </div>
