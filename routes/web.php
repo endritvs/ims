@@ -36,6 +36,7 @@ Route::get('/interviewee', function () {
 Route::get('/user', function () {
     return view('/components/user');
 });
+
 Route::get('/sidebari', function () {
     return view('/components/sidebari');
 });

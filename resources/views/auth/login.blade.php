@@ -6,89 +6,149 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Sign In & Sign Up Form</title>
-        <link rel="stylesheet" href="/css/main.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+        <link rel="stylesheet" href="/css/login-signup.css">
+        <script
+            src="https://kit.fontawesome.com/64d58efce2.js"
+            crossorigin="anonymous">
+        </script>
+        <title>Sign In & Sign Up</title>
     </head>
-    <style>
-        .error-login{
-            color:red;
-            font-size:11px;
-        }
-        form{
-            gap:0px!important;
-        }
-    </style>
-    <body>
-        
-       <div class="container" id="container">
-            <div class="form-container sign-up-container">
-                <form method="POST" action ="{{ route('register') }}">
-                    @csrf
-                    <h1>Create Account</h1>
-                    
-                    <span>or use your email for registration</span>
-                    <input type="text" class="@error('name') is-invalid @enderror " name="name" placeholder="Name">
-                    @error('name')
-                        <div class="alert alert-danger error-login">{{ $message }}</div>
-                    @enderror
-                    <input type="email" class="@error('email') is-invalid @enderror" name="email" placeholder="Email">
-                    @error('email')
-                        <div class="alert alert-danger error-login">{{ $message }}</div>
-                    @enderror
-                    <input type="password"  class="@error('password') is-invalid @enderror" name="password" placeholder="Password">
-                    @error('password')
-                    <div class="alert alert-danger error-login">{{ $message }}</div>
-                @enderror
-                    <input type="password"  class="@error('password_confirmation') is-invalid @enderror" name="password_confirmation" placeholder="Confirm Password">
-                    @error('password_confirmation')
-                    <div class="alert alert-danger error-login">{{ $message }}</div>
-                @enderror
-                    <button>Sign Up</button>
-                </form>
-            </div>
-            <div class="form-container sign-in-container">
-                <form method="POST" action="{{ route('login') }}">
-                    @csrf
-                    <h1>Sign In</h1>
-                    <span>or use your account</span>
-                    <input type="email" class="@error('email') is-invalid @enderror" name="email" placeholder="Email">
-                    @error('email')
-                    <div class="flex p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
-                        <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                        <span class="sr-only">{{ $message }}</span>
-                        <div>
-                            <span class="font-medium">Danger alert!</span> Change a few things up and try submitting again.
-                        </div>
-                    </div>
-                    <!-- <div class="alert alert-danger error-login">{{ $message }}</div> -->
-                @enderror
-                    <input type="password" class="@error('password') is-invalid @enderror"  name="password" placeholder="Password">
-                    @error('password')
-                    <div  class="alert error-login alert-danger">{{ $message }}</div>
-                @enderror
-                    <button>Sign In</button>
-                </form>
-            </div>
-            <div class="overlay-container">
-                <div class="overlay">
-                    <div class="overlay-panel overlay-left">
-                        <h1>Welcome Back!</h1>
-                        <p>
-                            Please login to your account with your personal info.
-                        </p>
-                        <button class="ghost" id="signIn">Sign In</button>
-                    </div>
 
-                    <div class="overlay-panel overlay-right">
-                        <h1>Hello, Friend!</h1>
-                        <p>
-                            Enter your personal details to create an account
-                        </p>
-                        <button class="ghost" id="signUp">Sign Up</button>
+    <body>
+       <div class="container">
+        <div class="forms-container">
+            <div class="signin-signup">
+                <form method="POST" action="{{ route('login') }}" class="sign-in-form">
+                    @csrf
+                    <h2 class="title">Sign in</h2>
+                    <div class="input-field @error('email') error_border @enderror">
+                        <i class="fas fa-user"></i>
+                        <input type="email" class="@error('email') is-invalid @enderror" name="email" placeholder="Email">
                     </div>
-                </div>
+                    
+                    <!-- <div>
+                        @error('email')
+                        <span class="alert">
+                            {{ $message }}
+                            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                        </span>
+                        @enderror
+                    </div> -->
+                    
+                    <div class="input-field @error('password') error_border @enderror">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" class="@error('password') is-invalid @enderror"  name="password" placeholder="Password">
+                    </div>
+                    <div style="margin-top: 15px;">
+                       @error('email')
+                        <span class="alert">
+                            {{ $message }}
+                            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                        </span>
+                        @enderror
+                    </div> 
+                    <input type="submit" value="Login" class="btn solid">
+
+                    <p class="social-text">Or Sign in with social platforms</p>
+                    <div class="social-media">
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-google"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </form>
+                <form method="POST" action ="{{ route('register') }}" class="sign-up-form">
+                    @csrf
+                    <h2 class="title">Sign up</h2>
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        <input type="text" name="name" placeholder="Name">
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" name="email" placeholder="Email">
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" name="password" placeholder="Password">
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" name="password_confirmation" placeholder="Confirm Password">
+                    </div>
+                    <input type="submit" value="Sign up" class="btn solid">
+
+                    <p class="social-text">Or Sign up with social platforms</p>
+                    <div class="social-media">
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-google"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </form>
             </div>
+        </div>
+
+        <div class="panels-container">
+            <div class="panel left-panel">
+                <div class="content">
+                    <h3>New here ?</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit voluptate assumenda facere.</p>
+                    <button class="btn transparent" id="sign-up-btn">Sign up</button>
+                </div>
+
+                <img src="img/log.svg" class="image" alt="">
+            </div>
+
+            <div class="panel right-panel">
+                <div class="content">
+                    <h3>One of us ?</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit voluptate assumenda facere.</p>
+                    <button class="btn transparent" id="sign-in-btn">Sign in</button>
+                </div>
+
+                <img src="img/register.svg" class="image" alt="">
+            </div>    
+        </div>
        </div>
-       <script src="/js/loginscript.js"></script>
+       <script>
+        var close = document.getElementsByClassName("closebtn");
+            var i;
+
+            // Loop through all close buttons
+            for (i = 0; i < close.length; i++) {
+            // When someone clicks on a close button
+            close[i].onclick = function(){
+
+                // Get the parent of <span class="closebtn"> (<div class="alert">)
+                var div = this.parentElement;
+
+                // Set the opacity of div to 0 (transparent)
+                div.style.opacity = "0";
+
+                // Hide the div after 600ms (the same amount of milliseconds it takes to fade out)
+                setTimeout(function(){ div.style.display = "none"; }, 600);
+            }
+        }
+       </script>
+       <script
+            src="/js/loginscript1.js">
+        </script>
     </body>
 </html>
