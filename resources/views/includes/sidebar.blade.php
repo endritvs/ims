@@ -8,7 +8,6 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css"
     />
-    <title>Responsive Sidebar Using TailwindCSS</title>
   </head>
   <body class="bg-white-200">
     <span
@@ -60,7 +59,7 @@
         </div>
       </div>
       <div
-        class="text-left text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold"
+        class="text-left hidden text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold"
         id="submenu-two"
       >
         <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
@@ -93,7 +92,7 @@
         </div>
       </div>
       <div
-        class="text-left text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold"
+        class="text-left hidden text-sm mt-2 w-4/5 mx-auto text-gray-200 font-bold"
         id="submenu"
       >
         <h1 class="cursor-pointer p-2 hover:bg-blue-600 rounded-md mt-1">
