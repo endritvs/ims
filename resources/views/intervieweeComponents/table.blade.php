@@ -29,6 +29,7 @@
                 </th>
             </tr>
         </thead>
+        {{--  --}}
         <tbody>
             @foreach( $interviewees as $i )
             <!-- Qet secilin prej userave ne tabele -->
