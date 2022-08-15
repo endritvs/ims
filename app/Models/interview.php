@@ -11,7 +11,7 @@ class interview extends Model
 
     use HasFactory;
     protected $fillable = [
-        'interviewer', 'interviewee', 'interview_date'
+        'interview_name', 'interviewer', 'interviewee', 'interview_date'
     ];
     protected $table = 'interviews';
 
@@ -24,7 +24,7 @@ class interview extends Model
     {
         return $this->belongsTo(User::class, "interviewee");
     }
-   
+
 
     // public function users()
     // {

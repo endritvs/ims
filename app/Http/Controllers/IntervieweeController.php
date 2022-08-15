@@ -21,8 +21,9 @@ class IntervieweeController extends Controller
     {
 
         $intervieweesA = interviewee::with('interviewee_type', 'interviewee_attribute')->orderBy('id', 'asc')->paginate(5);
-        // dd($intervieweesA);
-        return view('intervieweesMainComponents/table')->with(['intervieweesA' => $intervieweesA]);
+        $intervieweesAt = Interviewee_Attribute::orderBy('id', 'desc')->get();
+        $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
+        return view('intervieweesMainComponents/table')->with(['intervieweesA' => $intervieweesA, 'intervieweesAt' => $intervieweesAt, 'intervieweesT' => $intervieweesT]);
     }
 
 

@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
+
     if (Auth::check()) {
         return view('dashboard');
     } else {
@@ -103,8 +104,9 @@ Route::prefix('interview')->group(
         Route::get('/destroy/{id}', [interviewController::class, 'destroy'])->name('interview.destroy');
         Route::get('/create', [interviewController::class, 'create'])->name('interview.create');
         Route::post('/store-interview', [interviewController::class, 'store'])->name('interview.store');
+        Route::get('/public', [interviewController::class, 'public_index'])->name('public.index');
+        Route::get('/my/interviews', [interviewController::class, 'getAllMyInterviews'])->name('public.getAllMyInterviews');
     }
 );
 
 require __DIR__ . '/auth.php';
-
