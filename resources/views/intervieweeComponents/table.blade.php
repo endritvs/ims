@@ -1,7 +1,7 @@
 @extends("layouts.layout")
 
 @section('content')
-<div class="overflow-x-auto relative shadow-md sm:rounded-lg container mx-auto">
+<div class="mx-6 overflow-x-auto relative shadow-md sm:rounded-lg container mx-auto">
     <table class="w-full text-sm text-left  text-gray-400">
         <caption class="p-5 relative text-lg font-semibold text-left  bg-white text-white bg-gray-800">
             Your Interviewee Types
@@ -49,7 +49,7 @@
                 </td>
             </tr>
             <!-- Delete Modal -->
-<div id="deleteUserModal{{$i->id}}" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full">
+    <div id="deleteUserModal{{$i->id}}" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full">
     <div class="relative p-4 w-full max-w-md h-full md:h-auto">
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="deleteUserModal{{$i->id}}">
@@ -72,12 +72,13 @@
             </div>
         </div>
     </div>
-</div>
+    </div>
             @endforeach
         </tbody>
     </table>
     {{ $interviewees->links() }}
 </div>
+
 
 <!-- Add New-->
 <div id="addUserModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">

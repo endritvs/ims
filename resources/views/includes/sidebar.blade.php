@@ -1,15 +1,5 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="/css/app.css" rel="stylesheet" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css"
-    />
-  </head>
-  <body class="bg-white-200">
+
+
     <span
       class="absolute text-white text-4xl top-5 left-4 cursor-pointer"
       onclick="openSidebar()"
@@ -17,7 +7,7 @@
       <i class="bi bi-filter-left px-2 bg-gray-200 rounded-md"></i>
     </span>
     <div
-      class="sidebar fixed top-0 bottom-0 lg:left-0 p-2 w-[300px] overflow-y-auto text-center bg-gray-900"
+      class="sidebar lg:left-0 p-2 w-[300px] overflow-y-auto text-center bg-gray-900"
     >
       <div class="text-gray-100 text-xl">
         <div class="p-2.5 mt-1 flex items-center">
@@ -131,5 +121,4 @@
         document.querySelector(".sidebar").classList.toggle("hidden");
       }
     </script>
-  </body>
-</html>
+

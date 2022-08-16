@@ -5,8 +5,8 @@
     }
 </style>
 @section('content')
-<div class="overflow-x-auto relative shadow-md sm:rounded-lg container mx-auto">
-    <table class="w-full text-sm text-left  text-gray-400">
+<div class="mx-6 overflow-x-auto relative shadow-md sm:rounded-lg container mx-auto">
+    <table class=" w-full text-sm text-left  text-gray-400">
         <caption class="p-5 relative text-lg font-semibold text-left  bg-white text-white bg-gray-800">
             Your Interviewee Types
             <p class="mt-1 text-sm font-normal text-gray-400">Browse a list of Interviewee Types products designed to help you work, grow your business, and more. (Fix this text)</p>
