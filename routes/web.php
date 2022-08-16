@@ -38,8 +38,8 @@ Route::get('/user', function () {
     return view('/components/user');
 });
 
-Route::get('/sidebari', function () {
-    return view('/components/sidebari');
+Route::get('/sidebar', function () {
+    return view('/pages/test');
 });
 
 Route::get('/register', function () {
