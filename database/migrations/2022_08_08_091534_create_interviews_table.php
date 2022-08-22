@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('interviews', function (Blueprint $table) {
             $table->id();
-            $table->String('interview_name');
+            $table->bigInteger('interview_id');
             $table->foreignId('interviewer')
                 ->references('id')->on('users')
                 ->onDelete('cascade');
-            $table->foreignId('interviewee')
-                ->references('id')->on('users')
+            $table->foreignId('interviewees_id')
+                ->references('id')->on('interviewees')
                 ->onDelete('cascade');
             $table->date('interview_date')->format('d/m/Y');
             $table->timestamps();

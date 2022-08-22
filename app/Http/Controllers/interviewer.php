@@ -29,8 +29,8 @@ class interviewer extends Controller
     {
         $request->validate([
             'name' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
-            'email' => ['required', 'string', 'max:25'],
-            'password' => ['required', 'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/ ', 'string', 'max:25'],
+            'email' => ['required', 'string', 'max:40'],
+            'password' => ['required', 'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$.%^&*-]).{8,}$/ ', 'string', 'max:25'],
             'role' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
 
         ]);
@@ -66,7 +66,7 @@ class interviewer extends Controller
         $interviewer = User::findOrFail($id);
         $request->validate([
             'name' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
-            'email' => ['required', 'string', 'max:25'],
+            'email' => ['required', 'string', 'max:40'],
             // 'password' => ['required', 'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/ ', 'string', 'max:25'],
             'role' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
 
@@ -81,7 +81,7 @@ class interviewer extends Controller
         $interviewer->save();
 
         return redirect()->route('interviewer.index');
-    }   
+    }
 
 
     public function destroy($id)
