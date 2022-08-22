@@ -3,14 +3,14 @@
 @section('content')
 
 
-<div class="overflow-x-auto relative shadow-md sm:rounded-lg container mx-auto">
+<div class="mx-6 overflow-x-auto relative shadow-md sm:rounded-lg container mx-auto">
   <table class="w-full text-sm text-left  text-gray-400">
       <caption class="p-5 relative text-lg font-semibold text-left  bg-white text-white bg-gray-800">
           Your Interviewee Types
           <p class="mt-1 text-sm font-normal text-gray-400">Browse a list of Interviewee Types products designed to help you work, grow your business, and more. (Fix this text)</p>
-          <!--<a class="absolute top-4 right-6" href="{{route('interviewee.create')}}">
+          <a class="absolute top-4 right-6" href="{{route('interviewee.create')}}">
               <button class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Create</button>
-          </a>-->
+          </a>
           <a class="absolute top-4 right-6" href="#">
               <button type="button" data-modal-toggle="addUserModal" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Create</button>
           </a>
@@ -24,16 +24,24 @@
                   Name
               </th>
               <th scope="col" class="py-3 px-6">
+                CV
+            </th>
+              <th scope="col" class="py-3 px-6">
                 Interviewer
             </th>
             <th scope="col" class="py-3 px-6">
               Interviewee
-          </th>
-          <th scope="col" class="py-3 px-6">
+          </th>  
+            <th scope="col" class="py-3 px-6">
             Date
         </th>
-
-                <th scope="col" class="py-3 px-6">
+           <th scope="col" class="py-3 px-6">
+            Interviewee Types
+        </th>
+        <th scope="col" class="py-3 px-6">
+            Interviewee Attribute
+        </th>
+        <th scope="col" class="py-3 px-6">
                   Edit
               </th>
               <th scope="col" class="py-3 px-6">
@@ -44,23 +52,51 @@
       {{--  --}}
       <tbody>
         @foreach( $interview as $i )
+        @php
+
+        $link = explode("/", $i -> interviewees->img);
+        $cv = explode("/", $i ->interviewees-> cv_path);
+      @endphp
         <!-- Qet secilin prej userave ne tabele -->
         <tr class="bg-white border-b bg-gray-800 border-gray-700">
             <td class="py-4 px-6 text-white">
                 {{ $i -> id }} <!-- Qet ID te Userit -->
             </td>
+          
             <th scope="row" class="py-4 px-6 font-medium whitespace-nowrap text-white">
-              {{ $i -> interview_name }} <!-- Qet Emrin e Userit -->
+                {{ $i -> interview_id}} <!-- Qet Emrin e Userit -->
+              </th>
+            <th scope="row" class="py-4 px-6 font-medium whitespace-nowrap text-white">
+            <!-- Qet Emrin e Userit -->
+              <a class="underline" href="/storage/cv_path/{{$cv[2]}}" download>Download CV</a>
             </th>
             <th scope="row" class="py-4 px-6 font-medium whitespace-nowrap text-white">
-              {{ $i -> user -> name }}<!-- Qet Emrin e Userit -->
+              {{ $i -> user -> name }} <!-- Qet Emrin e Userit -->
             </th>
             <th scope="row" class="py-4 px-6 font-medium whitespace-nowrap text-white">
-              {{ $i -> users -> name }} <!-- Qet Emrin e Userit -->
-            </th>
+                <!-- Qet Emrin e Userit -->
+                {{ $i ->interviewees->name ." ".$i ->interviewees->surname}}
+              </th>
             <th scope="row" class="py-4 px-6 font-medium whitespace-nowrap text-white">
               {{ $i -> interview_date }} <!-- Qet Emrin e Userit -->
             </th>
+            <th scope="row" class="py-4 px-6 font-medium whitespace-nowrap text-white">
+                {{ $i ->interviewees-> interviewee_type->name }} <!-- Qet Emrin e Userit -->
+              </th>
+       
+              {{-- <th scope="row" class="py-4 px-6 font-medium whitespace-nowrap text-white">
+                {{ $i ->interviewees-> interviewee_attribute->name }} <!-- Qet Emrin e Userit -->
+              </th> --}}
+              <th scope="row" class="py-4 px-6 font-medium whitespace-nowrap text-white">
+                @foreach ($exec as $a)
+            @if ($i ->interviewees-> interviewee_type->name===$a->name)
+              {{$a->Attributes}}
+            @endif
+              
+            @endforeach
+            </th>
+             
+    
             <td class="py-4 px-6 text-blue-600">
                 <a href="{{ route('interview.edit',$i->id)}}">Edit</a> <!-- Edit Button Here -->
             </td>
@@ -124,12 +160,21 @@
           <div class="p-6 space-y-6">
               <div class="space-y-6">
                   <div>
-                      <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Name</label>
-                      <input type="text" name="interview_name" id="interview_name" autocomplete="given-name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Interview Name" required>
-                     
-                  </div>
+                    
+                 
+
+                 
+                   
+                   
+                
+ 
+                
+                  
+                     <input   type="number"  name="interview_id" id="interview_name" value="{{empty($interview->last()->interview_id) ? "1" : ++$interview->last()->interview_id}}"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"  required>
+                
+                    </div>
                   <div>
-                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Name</label>
+                    <label  class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Name</label>
 
                     <select name="interviewer[]"  class="@error('interviewer') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" id="interviewer" multiple="multiple">
                       @foreach ($admin as $a)   
@@ -141,24 +186,32 @@
              @enderror
                 </div>
               </div>
-              <label for="interviewee">Choose the interviewee:</label>
 
-              <select name="interviewee"  class="@error('interviewee') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" id="interviewee">
-                      @foreach ($default_user as $a)   
-                      <option value="{{$a->id}}">{{$a->name}}</option>
-                     @endforeach
-                  </select>
-                  @error('interviewee')
-                  <div class="alert alert-danger error-login">{{ $message }}</div>
-              @enderror
+              <div>
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Name</label>
 
-              <label for="interviewee_types_id">Choose date:</label>
+                <select name="interviewees_id"  class="@error('interviewees_id') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" id="interviewees_id" >
+                  @foreach ($interviewee as $a)   
+                 <option value="{{$a->id}}">{{$a->name}}</option>
+                @endforeach
+             </select>
+             @error('interviewees_id')
+             <div class="alert alert-danger error-login">{{ $message }}</div>
+         @enderror
+            </div>
+             
+
+              <label >Choose date:</label>
         <input type="date" name="interview_date" min=<?php echo date('Y-m-d'); ?> id="dateId" class="@error('interview_date') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white " >
 
         @error('interview_date')
         <div class="alert alert-danger error-login">{{ $message }}</div>
          @enderror
+
+       
           </div>
+
+
           <!-- Modal footer -->
           <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
               <button type="submit" data-modal-toggle="addUserModal" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create</button>

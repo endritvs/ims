@@ -22,8 +22,10 @@ class IntervieweeTypesController extends Controller
     }
 
     public function index()
-    {
+    {  
+        // dd("ardit");
         $interviewees = Interviewee_Type::orderBy('id', 'asc')->paginate(5);
+      
         return view('intervieweeComponents/table')->with('interviewees', $interviewees);
     }
 
