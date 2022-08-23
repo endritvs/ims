@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use App\Models\interviewee;
 
 class interview extends Model
 {
 
     use HasFactory;
     protected $fillable = [
-        'interview_name', 'interviewer', 'interviewee', 'interview_date'
+        'interview_id', 'interviewer', 'interview_date', 'interviewees_id'
     ];
     protected $table = 'interviews';
 
@@ -20,14 +21,12 @@ class interview extends Model
         return $this->belongsTo(User::class, "interviewer");
     }
 
-    public function users()
+ 
+
+    public function interviewees()
     {
-        return $this->belongsTo(User::class, "interviewee");
+        return $this->belongsTo(interviewee::class, "interviewees_id");
     }
 
 
-    // public function users()
-    // {
-    //     return $this->hasOne(users::class);
-    // }
 }

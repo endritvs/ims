@@ -6,7 +6,7 @@
 </style>
 @section('content')
 <div class="mx-6 overflow-x-auto relative shadow-md sm:rounded-lg container mx-auto">
-    <table class=" w-full text-sm text-left  text-gray-400">
+    <table class="w-full text-sm text-left  text-gray-400">
         <caption class="p-5 relative text-lg font-semibold text-left  bg-white text-white bg-gray-800">
             Your Interviewee Types
             <p class="mt-1 text-sm font-normal text-gray-400">Browse a list of Interviewee Types products designed to help you work, grow your business, and more. (Fix this text)</p>
@@ -60,7 +60,7 @@
                 </td>
              
                 <td class="py-4 px-6 text-red-600">
-                    <!--<a href="{{ route('interviewer.destroy', $i -> id) }}">Delete</a>  Delete Button Here -->
+               
     
                     <button  type="button" data-modal-toggle="deleteUserModal{{$i->id}}" class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</button>
                 </td>
@@ -137,13 +137,13 @@
                         <div class="alert alert-danger error-login">{{ $message }}</div>
                     @enderror
                     </div>
-                    <!-- <div>
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Role</label>
-                        <input type="text" name="role" id="role" autocomplete="given-name" class="@error('role') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Role" required>
+                     <div>
+                        {{-- <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Role</label> --}}
+                        <input type="hidden" name="role" id="role" autocomplete="given-name" class="@error('role') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Role" value="admin" required>
                         @error('role')
                         <div class="alert alert-danger error-login">{{ $message }}</div>
                     @enderror
-                    </div> -->
+                    </div> 
                 </div>
             </div>
             <!-- Modal footer -->
