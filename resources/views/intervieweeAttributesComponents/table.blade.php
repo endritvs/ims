@@ -52,7 +52,6 @@
                   <a href="{{route('intervieweeAttributes.edit',$i->id)}}">Edit</a> <!-- Edit Button Here -->
               </td>
               <td class="py-4 px-6 text-red-600">
-                  {{-- <a href="{{ route('intervieweeAttributes.destroy', $i -> id) }}">Delete</a>   --}}
                   <button  type="button" data-modal-toggle="deleteUserModal{{$i->id}}" class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</button>
               </td>
           </tr>

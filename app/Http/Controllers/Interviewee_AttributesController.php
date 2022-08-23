@@ -19,11 +19,9 @@ class Interviewee_AttributesController extends Controller
     public function index()
     {
         $intervieweesA = Interviewee_Attribute::with('interviewee_type')->orderBy('id', 'asc')->paginate(5);
-        // $intervieweesT = interviewee_type::with('interviewee_type')->orderBy('id', 'asc')->get();
         $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
         $sql="SELECT t.name, GROUP_CONCAT( i.name ) as 'Attributes' FROM interviewee_attributes i inner join interviewee_types t on i.interviewee_type_id=t.id group by i.interviewee_type_id";
         $exec=DB::select(DB::raw($sql));
-        // dd($exec);
 
         $data = $this->paginate($exec);
 
@@ -37,12 +35,7 @@ class Interviewee_AttributesController extends Controller
         $items = $items instanceof Collection ? $items : Collection::make($items);
         return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
-    public function create()
 
-    {
-        $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
-        return view('intervieweeAttributesComponents/create')->with(['intervieweesT' => $intervieweesT]);
-    }
 
     public function store(Request $request)
     {
@@ -61,26 +54,21 @@ class Interviewee_AttributesController extends Controller
       
         return  redirect()->route('intervieweeAttributes.index')->with(['intervieweesT' => $intervieweesT]);
     }
-    public function show($id)
-    {
-
-        $interviewee = Interviewee_Attribute::find($id);
-        return view('admin.userposts.show', compact('interviewee'));
-    }
+ 
     public function edit($id)
     {
+        $interviewee=Interviewee_Attribute::with('interviewee_type')->orderBy('id', 'asc')->get();
         $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
         $interviewee = Interviewee_Attribute::findOrFail($id);
-
-        return view('intervieweeAttributesComponents/edit')->with(['interviewee' => $interviewee, 'intervieweesT' => $intervieweesT]);
+        return view('intervieweeAttributesComponents/edit')->with(['interviewee' => $interviewee,'intervieweesT' => $intervieweesT]);
     }
     public function update(Request $request, $id)
     {
         $interviewee = Interviewee_Attribute::findOrFail($id);
-        // $request->validate([
-        //     'name' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
-        //     'interviewee_type_id' => ['required'],
-        // ]);
+        $request->validate([
+            'name' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:35'],
+            'interviewee_type_id' => ['required'],
+        ]);
         $interviewee->name = $request->name;
         $interviewee->interviewee_type_id = $request->interviewee_type_id;
         $interviewee->save();
@@ -90,7 +78,6 @@ class Interviewee_AttributesController extends Controller
     public function destroy($id)
     {
         $interviewee = Interviewee_Attribute::findOrFail($id);
-
         $interviewee->delete();
         return back();
     }

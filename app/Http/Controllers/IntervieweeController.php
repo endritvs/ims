@@ -23,22 +23,12 @@ class IntervieweeController extends Controller
     {
 
         $intervieweesA = interviewee::with('interviewee_type')->orderBy('id', 'asc')->paginate(5);
-        $intervieweesAt = Interviewee_Attribute::orderBy('id', 'desc')->get();
         $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
         $sql="SELECT t.name, GROUP_CONCAT( i.name ) as 'Attributes' FROM interviewee_attributes i inner join interviewee_types t on i.interviewee_type_id=t.id group by i.interviewee_type_id";
         $exec=DB::select(DB::raw($sql));
-        // dd($exec);
-        return view('intervieweesMainComponents/table')->with(['exec'=>$exec,'intervieweesA' => $intervieweesA, 'intervieweesAt' => $intervieweesAt, 'intervieweesT' => $intervieweesT]);
+    
+        return view('intervieweesMainComponents/table')->with(['exec'=>$exec,'intervieweesA' => $intervieweesA, 'intervieweesT' => $intervieweesT]);
     }
-
-
-    public function create()
-    {
-        $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
-        $intervieweesA = Interviewee_Attribute::orderBy('id', 'desc')->get();
-        return view('intervieweesMainComponents/create')->with(['intervieweesT' => $intervieweesT, 'intervieweesA' => $intervieweesA]);
-    }
-
 
 
     public function store(Request $request)
@@ -76,20 +66,15 @@ class IntervieweeController extends Controller
     }
 
 
-    public function show(interviewee $id)
-    {
-        $interviewee = interviewee::find($id);
-        return view('admin.userposts.show', compact('interviewee'));
-    }
-
     public function edit($id)
     {
 
         $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
-        $intervieweesA = Interviewee_Attribute::orderBy('id', 'desc')->get();
+        $interviewees=interviewee::with('interviewee_type')->orderBy('id', 'asc')->get();
         $interviewees = interviewee::findOrFail($id);
+        
 
-        return view('intervieweesMainComponents/edit')->with(['interviewees' => $interviewees, 'intervieweesT' => $intervieweesT, 'intervieweesA' => $intervieweesA]);
+        return view('intervieweesMainComponents/edit')->with(['interviewees' => $interviewees, 'intervieweesT' => $intervieweesT]);
     }
 
 

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Interviewee_Attribute;
 use App\Models\interviewee;
-use App\Models\interview;
+
 
 class Interviewee_Type extends Model
 {
@@ -28,8 +28,5 @@ class Interviewee_Type extends Model
         return $this->hasMany(Interviewee::class);
     }
 
-    // public function interview()
-    // {
-    //     return $this->hasMany(interview::class);
-    // }
+    
 }
