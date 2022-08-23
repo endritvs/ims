@@ -50,7 +50,7 @@ class InterviewController extends Controller
     {
         $admin = User::orderBy('id', 'desc')->where('role', 'interviewer')->get();
         $interviewee = interviewee::orderBy('id', 'desc')->get();
-        $sql = "SELECT t.name, GROUP_CONCAT( i.name ) as 'Attributes' FROM interviewee_attributes i inner join interviewee_types t on i.interviewee_type_id=t.id group by i.interviewee_type_id";
+        $sql = "SELECT t.name, GROUP_CONCAT( i.name ) as 'Attributes' FROM interviewee_attributes i inner join interviewee_types t on i.interviewee_type_id=t.id group by i.interviewee_type_id, ims_database.t.name";
         $exec = DB::select(DB::raw($sql));
 
         $interviewss = interview::with('user', 'interviewees')->orderBy('interview_id', 'asc')->get();
