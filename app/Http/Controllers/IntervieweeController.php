@@ -26,7 +26,7 @@ class IntervieweeController extends Controller
         $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
         $sql="SELECT t.name, GROUP_CONCAT( i.name ) as 'Attributes' FROM interviewee_attributes i inner join interviewee_types t on i.interviewee_type_id=t.id group by i.interviewee_type_id";
         $exec=DB::select(DB::raw($sql));
-        // dd($exec);
+    
         return view('intervieweesMainComponents/table')->with(['exec'=>$exec,'intervieweesA' => $intervieweesA, 'intervieweesT' => $intervieweesT]);
     }
 

@@ -28,17 +28,15 @@
         <th scope="col" class="py-3 px-6">
           Interviewee Attributes
       </th>
-      {{-- <th scope="col" class="py-3 px-6">
-      CV
-    </th> --}}
+   
 
     
    
       </thead>  
-  {{-- {{dd($interview)}} --}}
+  
       @foreach ($interview as $d)
         
-     {{-- {{dd($d)}} --}}
+   
       <tr class="bg-white border-b bg-gray-800 border-gray-700">
       <td scope="row" class="py-4 px-6 font-medium whitespace-nowrap text-white">
         {{$d['interview_id']}}
