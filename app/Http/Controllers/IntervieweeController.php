@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\interviewee;
 use App\Http\Requests\Store;
+use App\Models\interview;
 use Illuminate\Http\Request;
 use App\Models\Interviewee_Type;
 use App\Models\Interviewee_Attribute;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class IntervieweeController extends Controller
 {
@@ -20,20 +22,13 @@ class IntervieweeController extends Controller
     public function index()
     {
 
-        $intervieweesA = interviewee::with('interviewee_type', 'interviewee_attribute')->orderBy('id', 'asc')->paginate(5);
-        $intervieweesAt = Interviewee_Attribute::orderBy('id', 'desc')->get();
+        $intervieweesA = interviewee::with('interviewee_type')->orderBy('id', 'asc')->paginate(5);
         $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
-        return view('intervieweesMainComponents/table')->with(['intervieweesA' => $intervieweesA, 'intervieweesAt' => $intervieweesAt, 'intervieweesT' => $intervieweesT]);
+        $sql="SELECT t.name, GROUP_CONCAT( i.name ) as 'Attributes' FROM interviewee_attributes i inner join interviewee_types t on i.interviewee_type_id=t.id group by i.interviewee_type_id, ims_database.t.name";
+        $exec=DB::select(DB::raw($sql));
+    
+        return view('intervieweesMainComponents/table')->with(['exec'=>$exec,'intervieweesA' => $intervieweesA, 'intervieweesT' => $intervieweesT]);
     }
-
-
-    public function create()
-    {
-        $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
-        $intervieweesA = Interviewee_Attribute::orderBy('id', 'desc')->get();
-        return view('intervieweesMainComponents/create')->with(['intervieweesT' => $intervieweesT, 'intervieweesA' => $intervieweesA]);
-    }
-
 
 
     public function store(Request $request)
@@ -41,6 +36,7 @@ class IntervieweeController extends Controller
 
         $file = $request->hasFile('cv_path');
         $img =  $request->hasFile('img');
+   
         if ($file && $img) {
 
             $newFile = $request->file('cv_path');
@@ -52,7 +48,6 @@ class IntervieweeController extends Controller
                 'name' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
                 'surname' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
                 'interviewee_types_id' => ['required'],
-                'interviewee_attributes_id' => ['required'],
                 'cv_path' => ['required', 'mimes:pdf,docx,jpeg,png,jpg,jpj', 'max:2048'],
                 'img' => ['required', 'mimes:jpeg,png,jpg,jpj', 'max:2048'],
             ]);
@@ -63,27 +58,23 @@ class IntervieweeController extends Controller
                 'external_cv_path' => $request['external_cv_path'],
                 'img' => $img_path,
                 'interviewee_types_id' => $request['interviewee_types_id'],
-                'interviewee_attributes_id' => $request['interviewee_attributes_id'],
+          
             ]);
+       
         }
         return  redirect()->route('interviewees.index');
     }
 
 
-    public function show(interviewee $id)
-    {
-        $interviewee = interviewee::find($id);
-        return view('admin.userposts.show', compact('interviewee'));
-    }
-
     public function edit($id)
     {
 
         $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
-        $intervieweesA = Interviewee_Attribute::orderBy('id', 'desc')->get();
+        $interviewees=interviewee::with('interviewee_type')->orderBy('id', 'asc')->get();
         $interviewees = interviewee::findOrFail($id);
+        
 
-        return view('intervieweesMainComponents/edit')->with(['interviewees' => $interviewees, 'intervieweesT' => $intervieweesT, 'intervieweesA' => $intervieweesA]);
+        return view('intervieweesMainComponents/edit')->with(['interviewees' => $interviewees, 'intervieweesT' => $intervieweesT]);
     }
 
 
@@ -105,7 +96,6 @@ class IntervieweeController extends Controller
                 'name' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
                 'surname' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
                 'interviewee_types_id' => ['required'],
-                'interviewee_attributes_id' => ['required'],
                 'cv_path' => ['required', 'mimes:pdf,docx,jpeg,png,jpg,jpj', 'max:2048'],
                 'img' => ['required', 'mimes:jpeg,png,jpg,jpj', 'max:2048'],
             ]);
@@ -115,7 +105,6 @@ class IntervieweeController extends Controller
             $interviewee->cv_path = $file_path;
             $interviewee->external_cv_path = $request->external_cv_path;
             $interviewee->interviewee_types_id = $request->interviewee_types_id;
-            $interviewee->interviewee_attributes_id = $request->interviewee_attributes_id;
             $interviewee->img = $img_path;
 
             $interviewee->save();
@@ -124,7 +113,7 @@ class IntervieweeController extends Controller
                 'name' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
                 'surname' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
                 'interviewee_types_id' => ['required'],
-                'interviewee_attributes_id' => ['required'],
+             
 
             ]);
             $interviewee->name = $request->name;
@@ -132,7 +121,6 @@ class IntervieweeController extends Controller
             $interviewee->cv_path =  $interviewee->cv_path;
             $interviewee->external_cv_path = $request->external_cv_path;
             $interviewee->interviewee_types_id = $request->interviewee_types_id;
-            $interviewee->interviewee_attributes_id = $request->interviewee_attributes_id;
             $interviewee->img = $interviewee->img;
 
             $interviewee->save();
@@ -147,7 +135,14 @@ class IntervieweeController extends Controller
         $interviewee = interviewee::findOrFail($id);
         Storage::delete($interviewee->cv_path);
         Storage::delete($interviewee->img);
+        Storage::delete("storage/app/".$interviewee->cv_path);
+        Storage::delete("storage/app/".$interviewee->img);
         $interviewee->delete();
         return back();
     }
 }
+
+
+
+
+

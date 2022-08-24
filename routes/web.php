@@ -109,8 +109,9 @@ Route::prefix('interview')->group(
         Route::get('/create', [interviewController::class, 'create'])->name('interview.create');
         Route::post('/store-interview', [interviewController::class, 'store'])->name('interview.store');
         Route::get('/public', [interviewController::class, 'public_index'])->name('public.index');
-        Route::get('/my/interviews', [interviewController::class, 'getAllMyInterviews'])->name('public.getAllMyInterviews');
     }
 );
+
+Route::get('/dashboard', [interviewController::class, 'index1'])->name('dashboard.index');
 
 require __DIR__ . '/auth.php';
