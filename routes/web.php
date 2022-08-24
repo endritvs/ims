@@ -34,6 +34,10 @@ Route::get('/interviewee', function () {
     return view('intervieweeComponents/intervieweeTable');
 });
 
+Route::get('/usercard', function () {
+    return view('components/user-card');
+});
+
 Route::get('/user', function () {
     return view('/components/user');
 });
