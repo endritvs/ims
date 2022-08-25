@@ -8,6 +8,7 @@ use App\Http\Controllers\IntervieweeTypesController;
 use App\Http\Controllers\Interviewee_AttributesController;
 use App\Http\Controllers\interviewer;
 use App\Http\Controllers\interviewController;
+use App\Http\Controllers\ContactController;
 
 use Illuminate\Support\Facades\Auth;
 /*
