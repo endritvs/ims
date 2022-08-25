@@ -12,9 +12,9 @@ use App\Models\interviewee;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-
-class InterviewController extends Controller
+class InterviewController extends Controller 
 {
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -73,12 +73,17 @@ class InterviewController extends Controller
     public function store(Request $request)
     {
 
-        $admin = User::orderBy('id', 'desc')->where('role', 'admin')->get();
-
-
+        $admin = User::orderBy('id', 'desc')->where('role', 'interviewer')->get();
         $interviewer = $request['interviewer'];
+        $interviewee = interviewee::orderBy('id', 'desc')->where('id', $request['interviewees_id'])->get();
+        $index = 0;
+        
+        // dd($interview[1]->interviewees->name." ".$interview[1]->interviewees->surname);        Interviewee Name
+        // dd($interview[1]->user->name);                                                         Interviewer Name
+        // dd($interview[1]->interviewees->interviewee_type->name);                               Interviewee Type
 
         for ($i = 0; $i < count($interviewer); $i++) {
+
 
             $request->validate([
                 'interview_id' => ['required'],
@@ -91,10 +96,44 @@ class InterviewController extends Controller
                 'interviewer' => $interviewer[$i],
                 'interview_date' => $request['interview_date'],
                 'interviewees_id' => $request['interviewees_id']
+
             ]);
+
         }
 
-        return  redirect()->route('interview.index')->with(['admin' => $admin]);
+        $interview = interview::with('user', 'interviewees')->where('interview_id', $request['interview_id'])->get();
+
+        foreach ($interview as $a) {
+            $interviewerNames[$index++] = $a->user->name;
+        }
+
+        foreach ($interviewer as $i) {
+            foreach ($interview as $a) {
+
+             if ($i == $a->user->id) {
+                $mail_data = [
+
+                        'recipient' => $a->user->email,
+                        'link' => 'link is here',
+                        'interviewType' => $a->interviewees->interviewee_type->name,
+                        'interviewer' => implode(", ", $interviewerNames),
+                        'intervieweeName' => $a->interviewees->name." ".$a->interviewees->surname,
+
+                        'fromEmail' => 'dionkelmendi@gmail.com',
+                        'fromName' => 'IMS Company'
+                    ];
+
+                \Mail::send('/interviewComponents/emailTemplate', $mail_data, function($message) use ($mail_data){
+                
+                $message->to($mail_data['recipient'])
+                        ->from($mail_data['fromEmail'], $mail_data['fromName'])
+                        ->subject("prova");
+
+                }); 
+            }
+        }}
+
+        return redirect()->route('interview.index')->with(['admin' => $admin]);
     }
 
     public function edit($id)
