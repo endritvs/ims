@@ -4,7 +4,7 @@
 
 <body class="flex flex-row">
   
-<div class="relative max-w-1/2 mx-auto w-1/4 mt-6 min-w-0 break-words bg-gray-900 w-full mb-6 shadow-lg  rounded-xl mt-16 h-fit pb-8 hover:scale-110">
+<div class="relative max-w-1/2 mx-auto w-1/4 mt-6 min-w-0 break-words bg-gray-900 w-full mb-6 shadow-lg  rounded-xl mt-16 h-fit pb-8 hover:scale-105 hover:drop-shadow-[0_30px_30px_rgba(0,0,0,0.25)] hover:ease-in-out duration-300">
     <div class="px-6">
         <div class="w-full flex justify-center pb-10 relative">
              <img src="/img/arditi.jpg" alt="" class="rounded-full w-20 h-20 absolute mt-[-35px] object-cover">
@@ -43,13 +43,7 @@
                     <span class="flex flex-wrap pl-2 pr-2 py-2 m-1 items-center text-sm font-medium rounded-xl cursor-pointer border-white-600 border-2 text-gray-200 hover:bg-blue-600 hover:text-gray-100 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-800 dark:hover:text-gray-100 text-center max-w-fit flex-row text-center justify-center min-w-[60px]">Python</span>
 
                     <span class="flex flex-wrap pl-2 pr-2 py-2 m-1 items-center text-sm font-medium rounded-xl cursor-pointer border-white-600 border-2 text-gray-200 hover:bg-blue-600 hover:text-gray-100 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-800 dark:hover:text-gray-100 text-center max-w-fit flex-row text-center justify-center min-w-[60px]">Java</span>
-                </div> 
-                    <!-- <div class="grid grid-rows-2 grid-flow-col gap-4">
-                    <div>Web Design</div>
-                    <div>Laravel</div>
-                    <div>Python</div>
-                    <div>Java</div> -->
-                </div>
+              
                 </div>             
                     <div class=" mb-[-60px]">
                        <button href="javascript:;"class="rounded-full bg-blue-600 px-5 py-2 font-bold text-slate-100 hover:text-slate-100 text-sm">Download CV</button>
@@ -93,7 +87,7 @@
                     <!-- <a href="javascript:;"class="font-normal text-slate-100 hover:text-slate-100">Follow Account</a> -->
                     
                     
-                    <h4 class="flex ml-2 flex-wrap justify-left text-slate-100 font-semibold">Attributes:</h4>
+                    <h4 class="flex ml-2 flex-wrap justify-left text-slate-100          font-semibold">Attributes:</h4>
                   <div class="flex flex-row flex-wrap pb-16">
                     <span class="flex flex-wrap pl-2 pr-2 py-2 m-1 items-center text-sm font-medium rounded-xl cursor-pointer border-white-600 border-2 text-gray-200 hover:bg-blue-600 hover:text-gray-100 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-800 dark:hover:text-gray-100 text-center max-w-fit  text-center justify-center  min-w-[60px]">Web Developer</span>
 
