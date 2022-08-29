@@ -24,29 +24,23 @@
                     <div class="input-field @error('email') error_border @enderror">
                         <i class="fas fa-user"></i>
                         <input type="email" class="@error('email') is-invalid @enderror" name="email" placeholder="Email">
+                     
+                       
                     </div>
-                    
-                    <!-- <div>
-                        @error('email')
-                        <span class="alert">
-                            {{ $message }}
-                            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                        </span>
+                     @error('email')
+                        <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
                         @enderror
-                    </div> -->
+                 
                     
                     <div class="input-field @error('password') error_border @enderror">
                         <i class="fas fa-lock"></i>
                         <input type="password" class="@error('password') is-invalid @enderror"  name="password" placeholder="Password">
+                   
+                     
                     </div>
-                    <div style="margin-top: 15px;">
-                       @error('email')
-                        <span class="alert">
-                            {{ $message }}
-                            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                        </span>
+                    @error('password')
+                        <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
                         @enderror
-                    </div> 
                     <input type="submit" value="Login" class="btn solid">
 
                     <p class="social-text">Or Sign in with social platforms</p>
@@ -65,25 +59,52 @@
                         </a>
                     </div>
                 </form>
-                <form method="POST" action ="{{ route('register') }}" class="sign-up-form">
+                <form method="POST" action ="{{ route('register') }}" class="sign-up-form" enctype='multipart/form-data'>
                     @csrf
                     <h2 class="title">Sign up</h2>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
-                        <input type="text" name="name" placeholder="Name">
-                    </div>
+                        <input  class="@error('name') is-invalid @enderror" type="text" name="name" placeholder="Name">
+                      
+                    </div> 
+                     @error('name')
+                        <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
+                        @enderror
                     <div class="input-field">
                         <i class="fas fa-envelope"></i>
-                        <input type="email" name="email" placeholder="Email">
-                    </div>
+                        <input class="@error('email') is-invalid @enderror" type="email" name="email" placeholder="Email">
+                        
+                  
+                    </div> 
+                         @error('email')
+                        <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
+                        @enderror
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
-                        <input type="password" name="password" placeholder="Password">
+                        <input class="@error('password') is-invalid @enderror" type="password" name="password" placeholder="Password">
+                        
                     </div>
+                    @error('password')
+                        <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
+                        @enderror
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
-                        <input type="password" name="password_confirmation" placeholder="Confirm Password">
+                        <input class="@error('password_confirmation') is-invalid @enderror" type="password" name="password_confirmation" placeholder="Confirm Password">
+                      
                     </div>
+                 @error('password_confirmation')
+                        <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
+                        @enderror
+                          <label>Optional</label>
+                    <div class="input-field">
+                    
+                        <i class="fas fa-image"></i>
+                        <input class="@error('img') is-invalid @enderror" style="line-height:3 !important;"  type="file" name="img" >
+                       
+                    </div>
+                   @error('img')
+                        <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
+                        @enderror
                     <input type="submit" value="Sign up" class="btn solid">
 
                     <p class="social-text">Or Sign up with social platforms</p>
