@@ -15,6 +15,7 @@ return new class extends Migration
             $table->String('surname');
             $table->String('cv_path');
             $table->String('external_cv_path');
+            $table->string('email')->unique();
             $table->String('img');
             $table->foreignId('interviewee_types_id')
                 ->references('id')->on('interviewee_types')
