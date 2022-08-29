@@ -6,9 +6,9 @@
      The Interviewee: {{ $intervieweeName }}  <br>
 
      Your meeting link: </h3>
-     <a href="https://www.youtube.com/"> {{$link}} </a> <br>
+     <a href="{{$link}}"> Click Here to Join </a> <br>
 
-<a href="https://www.youtube.com/"> <button type="button"> Join Meeting </button> </a>
+<a href="{{$link}}"> <button type="button"> Join Meeting </button> </a>
 
 <h1> Thank you,<br>
      IMS Team.</h1>

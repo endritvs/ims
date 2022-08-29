@@ -222,13 +222,11 @@
 
 
                     <label>Choose date:</label>
-                    <input type="date" name="interview_date" min=<?php echo date('Y-m-d'); ?> id="dateId"
+                    <input type="datetime-local" name="interview_date" min=<?php echo date('Y-m-d').'T00:00'; ?> id="dateId"
                         class="@error('interview_date') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white ">
-
                     @error('interview_date')
                         <div class="alert alert-danger error-login">{{ $message }}</div>
                     @enderror
-
 
                 </div>
 

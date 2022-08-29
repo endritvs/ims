@@ -59,9 +59,10 @@
                         </div>
                         <div>
                             <label for="name"
-                                class="block  text-sm font-medium text-gray-900 dark:text-gray-300">Interviewee
-                                Types</label>
-                             <input type="text" name="interviewee_types_id" id="name" autocomplete="given-name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Interviewee Types" required> 
+                                class="block  text-sm font-medium text-gray-900 dark:text-gray-300">Email
+                            </label>
+                             <input type="text" name="email" id="email" autocomplete="given-email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Email" required> 
+
                             <select class="@error('interviewee_types_id') is-invalid @enderror"
                                 name="interviewee_types_id" id="interviewee_types_id">
                                 @foreach ($intervieweesT as $i)

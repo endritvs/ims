@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\interviewee_types;
 use App\Models\interviewee_attributes;
 use App\Http\Controllers\IntervieweeController;
+use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\IntervieweeTypesController;
 use App\Http\Controllers\Interviewee_AttributesController;
 use App\Http\Controllers\interviewer;
@@ -114,5 +115,8 @@ Route::prefix('interview')->group(
 );
 
 Route::get('/dashboard', [interviewController::class, 'index1'])->name('dashboard.index');
+
+Route::get('/meeting', [MeetingController::class, 'index'])->name('meeting.index');
+    
 
 require __DIR__ . '/auth.php';

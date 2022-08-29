@@ -8,16 +8,33 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Models\User;
+use App\Traits\ZoomMeetingTrait;
 use App\Models\interviewee;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use GuzzleHttp\Client;
+use Log;
 
 class InterviewController extends Controller 
 {
+    use ZoomMeetingTrait;
+
+    const MEETING_TYPE_INSTANT = 0;
+    const MEETING_TYPE_SCHEDULE = 2;
+    const MEETING_TYPE_RECURRING = 3;
+    const MEETING_TYPE_FIXED_RECURRING_FIXED = 8;
 
     public function __construct()
     {
         $this->middleware('auth');
+        $this->client = new Client();
+        $this->jwt = $this->generateZoomToken();
+        $this->headers = [
+            'Authorization' => 'Bearer '.$this->jwt,
+            'Content-Type'  => 'application/json',
+            'Accept'        => 'application/json',
+        ];        
     }
 
     public function index1()
@@ -48,6 +65,7 @@ class InterviewController extends Controller
     }
     public function index()
     {
+
         $admin = User::orderBy('id', 'desc')->where('role', 'interviewer')->get();
         $interviewee = interviewee::orderBy('id', 'desc')->get();
         $sql = "SELECT t.name, GROUP_CONCAT( i.name ) as 'Attributes' FROM interviewee_attributes i inner join interviewee_types t on i.interviewee_type_id=t.id group by i.interviewee_type_id, ims_database.t.name";
@@ -69,6 +87,7 @@ class InterviewController extends Controller
         return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 
+    
 
     public function store(Request $request)
     {
@@ -77,7 +96,7 @@ class InterviewController extends Controller
         $interviewer = $request['interviewer'];
         $interviewee = interviewee::orderBy('id', 'desc')->where('id', $request['interviewees_id'])->get();
         $index = 0;
-        
+
         // dd($interview[1]->interviewees->name." ".$interview[1]->interviewees->surname);        Interviewee Name
         // dd($interview[1]->user->name);                                                         Interviewer Name
         // dd($interview[1]->interviewees->interviewee_type->name);                               Interviewee Type
@@ -99,9 +118,29 @@ class InterviewController extends Controller
 
             ]);
 
-        }
+        } 
+
 
         $interview = interview::with('user', 'interviewees')->where('interview_id', $request['interview_id'])->get();
+
+        $id = 6944987743;
+        $meeting = $this->get($id);
+
+        $data = [
+
+           'topic'              => $interview[1]->interviewees->interviewee_type->name,                        // Interview Type
+           'start_time'         => $request['interview_date'],                                          // Interview Date
+           'duration'           => 60,
+           'host_video'         => 0,
+           'participant_video'  => 0
+        ];
+
+        $info = $this -> create($data);
+
+        // dd($info['data']);                                // Meeting Data
+        $startLink = $info['data']['start_url'];             // Interviewer Link (Multiple hosts)
+        $joinLink  = $info['data']['join_url'];              // Interviewee Link 
+
 
         foreach ($interview as $a) {
             $interviewerNames[$index++] = $a->user->name;
@@ -114,7 +153,7 @@ class InterviewController extends Controller
                 $mail_data = [
 
                         'recipient' => $a->user->email,
-                        'link' => 'link is here',
+                        'link' => $startLink,
                         'interviewType' => $a->interviewees->interviewee_type->name,
                         'interviewer' => implode(", ", $interviewerNames),
                         'intervieweeName' => $a->interviewees->name." ".$a->interviewees->surname,
