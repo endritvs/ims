@@ -48,6 +48,7 @@ class IntervieweeController extends Controller
                 'name' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
                 'surname' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
                 'interviewee_types_id' => ['required'],
+                'email' => ['required', 'string', 'max:40'],
                 'cv_path' => ['required', 'mimes:pdf,docx,jpeg,png,jpg,jpj', 'max:2048'],
                 'img' => ['required', 'mimes:jpeg,png,jpg,jpj', 'max:2048'],
             ]);
@@ -56,6 +57,7 @@ class IntervieweeController extends Controller
                 'surname' => $request['surname'],
                 'cv_path' => $file_path,
                 'external_cv_path' => $request['external_cv_path'],
+                'email' => $request['email'],
                 'img' => $img_path,
                 'interviewee_types_id' => $request['interviewee_types_id'],
           
@@ -97,6 +99,7 @@ class IntervieweeController extends Controller
                 'surname' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
                 'interviewee_types_id' => ['required'],
                 'cv_path' => ['required', 'mimes:pdf,docx,jpeg,png,jpg,jpj', 'max:2048'],
+                'email' => ['required', 'string', 'max:40'],
                 'img' => ['required', 'mimes:jpeg,png,jpg,jpj', 'max:2048'],
             ]);
 
@@ -104,6 +107,7 @@ class IntervieweeController extends Controller
             $interviewee->surname = $request->surname;
             $interviewee->cv_path = $file_path;
             $interviewee->external_cv_path = $request->external_cv_path;
+            $interviewee->email = $request->email;
             $interviewee->interviewee_types_id = $request->interviewee_types_id;
             $interviewee->img = $img_path;
 
@@ -113,13 +117,14 @@ class IntervieweeController extends Controller
                 'name' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
                 'surname' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
                 'interviewee_types_id' => ['required'],
-             
+                'email' => ['required', 'string', 'max:40'],
 
             ]);
             $interviewee->name = $request->name;
             $interviewee->surname = $request->surname;
             $interviewee->cv_path =  $interviewee->cv_path;
             $interviewee->external_cv_path = $request->external_cv_path;
+            $interviewee->email = $request->email;
             $interviewee->interviewee_types_id = $request->interviewee_types_id;
             $interviewee->img = $interviewee->img;
 

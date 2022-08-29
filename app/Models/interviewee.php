@@ -17,6 +17,7 @@ class interviewee extends Model
         'surname',
         'cv_path',
         'external_cv_path',
+        'email',
         'interviewee_types_id',
         'img',
     ];
