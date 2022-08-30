@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('interviewees_id')
                 ->references('id')->on('interviewees')
                 ->onDelete('cascade');
-            $table->date('interview_date')->format('d/m/Y');
+            $table->datetime('interview_date');
             $table->timestamps();
         });
     }
