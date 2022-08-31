@@ -8,6 +8,7 @@ use App\Http\Controllers\IntervieweeTypesController;
 use App\Http\Controllers\Interviewee_AttributesController;
 use App\Http\Controllers\interviewer;
 use App\Http\Controllers\interviewController;
+use App\Http\Controllers\ReviewController;
 
 use Illuminate\Support\Facades\Auth;
 /*
@@ -109,9 +110,24 @@ Route::prefix('interview')->group(
         Route::get('/create', [interviewController::class, 'create'])->name('interview.create');
         Route::post('/store-interview', [interviewController::class, 'store'])->name('interview.store');
         Route::get('/public', [interviewController::class, 'public_index'])->name('public.index');
+        Route::get('/edit-profile/{id}', [interviewer::class, 'editProfile'])->name('interview.editProfile');
+        Route::post('/update-profile/{id}', [interviewer::class, 'updateProfile'])->name('interview.updateProfile');
+        Route::post('/update-password/', [interviewer::class, 'update_password'])->name('interview.updatePassword');
     }
 );
 
 Route::get('/dashboard', [interviewController::class, 'index1'])->name('dashboard.index');
+
+Route::prefix('review')->group(
+    function () {
+        Route::get('/', [ReviewController::class, 'index'])->name('review.index');
+        Route::get('/edit-interview/{id}', [interviewController::class, 'edit'])->name('interview.edit');
+        Route::post('/update-interview/{id}', [interviewController::class, 'update'])->name('interview.update');
+        Route::get('/destroy/{id}', [interviewController::class, 'destroy'])->name('interview.destroy');
+        Route::get('/create', [interviewController::class, 'create'])->name('interview.create');
+        Route::post('/store-interview', [interviewController::class, 'store'])->name('interview.store');
+        Route::get('/public', [interviewController::class, 'public_index'])->name('public.index');
+    }
+);
 
 require __DIR__ . '/auth.php';

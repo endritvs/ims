@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\interviewee;
+use App\Models\review;
 
 class interview extends Model
 {
@@ -28,5 +29,9 @@ class interview extends Model
         return $this->belongsTo(interviewee::class, "interviewees_id");
     }
 
+    public function review()
+    {
+        return $this->hasMany(review::class);
+    }
 
 }
