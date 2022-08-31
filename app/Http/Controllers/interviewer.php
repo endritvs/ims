@@ -71,6 +71,53 @@ class interviewer extends Controller
 
 
 
+    public function edit($id)
+    {
+        $interviewer = User::findOrFail($id);
+
+        return view('interviewerComponents/edit')->with(['interviewer' => $interviewer]);
+    }
+
+
+    public function update(Request $request, $id)
+    {
+ 
+        $img =  $request->hasFile('img');
+        $interviewer = User::findOrFail($id);
+        if ($img) {
+            
+            $newImg = $request->file('img');
+            $img_path = $newImg->store('/public/img');
+        $request->validate([
+            'name' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
+            'email' => ['required', 'string', 'max:40'],
+            'role' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
+            'img' => ['required', 'mimes:jpeg,png,jpg,jpj', 'max:2048'],
+        ]);
+        $interviewer->name = $request->name;
+        $interviewer->email = $request->email;
+        $interviewer->role = $request->role;
+        $interviewer->img = $img_path;
+        
+        $interviewer->save();
+
+        return redirect()->route('interviewer.index');
+    }else{
+        $request->validate([
+            'name' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
+            'email' => ['required', 'string', 'max:40'],
+            'role' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
+         
+        ]);
+        $interviewer->name = $request->name;
+        $interviewer->email = $request->email;
+        $interviewer->role = $request->role;
+        $interviewer->img = $interviewer->img;
+        $interviewer->save();
+        return redirect()->route('interviewer.index');
+    }
+    }
+
     public function editProfile($id)
     {
         $interviewer = User::findOrFail($id);
@@ -130,7 +177,6 @@ class interviewer extends Controller
 
         return back()->with("status", "Password changed successfully!");
     }
-
 
     public function destroy($id)
     {

@@ -31,5 +31,6 @@ class review extends Model
     {
         return $this->belongsTo(interview::class, "interview_id");
     }
+   
     
 }
