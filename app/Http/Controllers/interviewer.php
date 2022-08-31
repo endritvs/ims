@@ -71,51 +71,64 @@ class interviewer extends Controller
 
 
 
-    public function edit($id)
+    public function editProfile($id)
     {
         $interviewer = User::findOrFail($id);
 
-        return view('interviewerComponents/edit')->with(['interviewer' => $interviewer]);
+        return view('profile/profile')->with(['interviewer' => $interviewer]);
     }
 
 
-    public function update(Request $request, $id)
+
+    public function updateProfile(Request $request, $id)
     {
- 
         $img =  $request->hasFile('img');
         $interviewer = User::findOrFail($id);
+
         if ($img) {
-            
             $newImg = $request->file('img');
             $img_path = $newImg->store('/public/img');
         $request->validate([
             'name' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
             'email' => ['required', 'string', 'max:40'],
-            'role' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
-            // 'img' => ['required', 'mimes:jpeg,png,jpg,jpj', 'max:2048'],
+            'img' => ['required', 'mimes:jpeg,png,jpg,jpj', 'max:2048'],
         ]);
         $interviewer->name = $request->name;
         $interviewer->email = $request->email;
-        $interviewer->role = $request->role;
         $interviewer->img = $img_path;
-        
         $interviewer->save();
+        return back();
 
-        return redirect()->route('interviewer.index');
-    }else{
-        $request->validate([
-            'name' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
-            'email' => ['required', 'string', 'max:40'],
-            'role' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
-         
-        ]);
-        $interviewer->name = $request->name;
-        $interviewer->email = $request->email;
-        $interviewer->role = $request->role;
-        $interviewer->img = $interviewer->img;
-        $interviewer->save();
-        return redirect()->route('interviewer.index');
+        }else{
+            $request->validate([
+                'name' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
+                'email' => ['required', 'string', 'max:40'],
+            ]);
+            $interviewer->name = $request->name;
+            $interviewer->email = $request->email;
+            $interviewer->save();
+            return back();
+        }
     }
+
+    public function update_password(Request $request)
+    {
+        $request->validate([
+            'old_password' => 'required',
+            'new_password' => ['required','regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$.%^&*-]).{8,}$/ '],
+        ]);
+        if (!Hash::check($request->old_password, auth()->user()->password)) {
+            return back()->with("error", "Old Password Doesn't match!");
+        }
+        if($request->new_password!==$request->new_password_confirmation){
+            return back()->with("error", "Confirm Password Doesn't match!");
+        }
+
+        User::whereId(auth()->user()->id)->update([
+            'password' => Hash::make($request->new_password)
+        ]);
+
+        return back()->with("status", "Password changed successfully!");
     }
 
 
