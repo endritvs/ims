@@ -121,12 +121,12 @@ Route::get('/dashboard', [interviewController::class, 'index1'])->name('dashboar
 Route::prefix('review')->group(
     function () {
         Route::get('/', [ReviewController::class, 'index'])->name('review.index');
-        Route::get('/edit-interview/{id}', [interviewController::class, 'edit'])->name('interview.edit');
-        Route::post('/update-interview/{id}', [interviewController::class, 'update'])->name('interview.update');
-        Route::get('/destroy/{id}', [interviewController::class, 'destroy'])->name('interview.destroy');
-        Route::get('/create', [interviewController::class, 'create'])->name('interview.create');
-        Route::post('/store-interview', [interviewController::class, 'store'])->name('interview.store');
-        Route::get('/public', [interviewController::class, 'public_index'])->name('public.index');
+        Route::get('/edit-interview/{id}', [ReviewController::class, 'edit'])->name('review.edit');
+        Route::post('/update-interview/{id}', [ReviewController::class, 'update'])->name('review.update');
+        Route::get('/destroy/{id}', [ReviewController::class, 'destroy'])->name('review.destroy');
+        Route::get('/create', [ReviewController::class, 'create'])->name('review.create');
+        Route::post('/store-review', [ReviewController::class, 'store'])->name('review.store');
+        Route::get('/public', [ReviewController::class, 'public_index'])->name('public.index');
     }
 );
 

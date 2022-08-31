@@ -83,22 +83,8 @@
                             </div>
                           
                             <div class="text-center">
-
-
-                                {{-- <p class="text-xl dark:text-white text-indigo-600 font-bold mb-2 capitalize">
-                                    {{ $d['interviewees']['name'] . ' ' . $d['interviewees']['surname'] }}</p> --}}
-                                {{-- <p class="text-base dark:text-white text-indigo-600 text-gray-400 font-normal capitalize">
-                                    {{ $d['interviewees']['interviewee_type']['name'] }}</p> --}}
-
                             </div>
                             <div class="grid grid-cols-2 gap-x-20 gap-y-7">
-                                {{-- <div> --}}
-                                    {{-- <label class="dark:text-white text-indigo-600">Attributes:</label>
-                                    @foreach ($d['interviewees']['interviewee_type']['interviewee_attributes'] as $attribute)
-                                        <p class="dark:text-base text-gray-400  font-normal capitalize">
-                                            {{ $attribute['name'] }}</p>
-                                    @endforeach --}}
-                                {{-- </div> --}}
                                 <div class="sm:grid-cols-2 mt-2">
                                     <label class="dark:text-white text-indigo-600">Attributes:</label>
                                     @foreach ($d['interviewees']['interviewee_type']['interviewee_attributes'] as $attribute)
@@ -120,18 +106,12 @@
                                     <label class="dark:text-white text-indigo-600">Date:</label>
                                     <p class="text-base text-gray-400 font-normal"> {{ $d['interview_date'] }}</p>
                                 </div>
-                                {{-- <div>
-                                    <label class="dark:text-white text-indigo-600">Questioners:</label>
-                                    <p class="text-base text-gray-400 font-normal capitalize"> {{ $d['user']['name'] }}</p>
-                                    <div class="flex-space-x-1 overflow-hidden">
-                                    </div>
-
-                                </div> --}}
                                 <div>
                                     <label class="dark:text-white text-indigo-600">CV:</label>
                                     <button type="button" data-modal-toggle="defaultModal{{ $d['id'] }}"
                                         class="bg-gray-500 hover:bg-gray-700 text-white p-1 rounded">See CV</button>
                                 </div>
+                               
                             </div>
                             <div class="mt-5">
                                 <a href="/storage/cv_path/{{ $cv[2] }}" download>
@@ -181,8 +161,7 @@
                                 <!-- Modal content -->
                                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                                     <!-- Modal header -->
-                                    <div
-                                        class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
+                                    <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
                                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                                             CV
                                         </h3>
@@ -207,6 +186,7 @@
 
                                 </div>
                             </div>
+                        </div>
                         </div>
                     @endforeach
 

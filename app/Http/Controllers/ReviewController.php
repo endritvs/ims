@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\review;
-use App\Http\Requests\StorereviewRequest;
-use App\Http\Requests\UpdatereviewRequest;
+use Illuminate\Http\Request;
+
 
 
 class ReviewController extends Controller
@@ -29,7 +29,8 @@ class ReviewController extends Controller
      */
     public function create()
     {
-        //
+        //$interviewer = review::orderBy('id', 'desc')->get();
+       // return view('interviewerComponents/create')->with(['interviewer' => $interviewer]);
     }
 
     /**
@@ -38,9 +39,25 @@ class ReviewController extends Controller
      * @param  \App\Http\Requests\StorereviewRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorereviewRequest $request)
+    public function store(Request $request)
     {
-        //
+        /*$request->validate([
+            'candidate_id' => ['required',  'string', 'max:25'],
+            'questionnaire_id' => ['required', 'string', 'max:25'],
+            'interview_id' => ['required', 'string', 'max:25'],
+            'rating_amount' => ['required',  'numeric', 'max:1'],
+            
+        ]); */
+        
+        review::create([
+            'candidate_id' => $request['candidate_id'],
+            'questionnaire_id' => $request['questionnaire_id'],
+            'interview_id' => $request['interview_id'],
+            'rating_amount' => $request['rating_amount'],
+            
+        ]);
+      
+        return redirect('/dashboard');
     }
 
     /**
