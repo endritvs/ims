@@ -7,7 +7,7 @@
 @section('content')
     <title>Interviewee</title>
     <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
-        <div class="mt-4 mx-4">
+        <div class="mt-[145px] mx-4">
             <div class="w-full overflow-hidden rounded-lg shadow-xs">
                 <div class="w-full overflow-x-auto">
                     <table class="w-full">

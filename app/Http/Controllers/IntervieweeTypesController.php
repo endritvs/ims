@@ -39,7 +39,7 @@ class IntervieweeTypesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
+            'name' => ['required', 'regex:/^[a-z A-Z]+$/u', 'string', 'max:25'],
         ]);
         Interviewee_Type::create([
             'name' => $request['name'],
@@ -68,7 +68,7 @@ class IntervieweeTypesController extends Controller
     {
         $interviewee = Interviewee_Type::findOrFail($id);
         $request->validate([
-            'name' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
+            'name' => ['required', 'regex:/^[a-z A-Z]+$/u', 'string', 'max:25'],
         ]);
         $interviewee->name = $request->name;
 
