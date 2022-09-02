@@ -4,50 +4,36 @@ namespace App\Http\Controllers;
 
 use App\Models\review;
 use Illuminate\Http\Request;
-
-
+use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
 
-        $review = review::with('candidates', 'questionnaires', 'interviews')->get();
+        $review = review::with('candidates', 'questionnaires', 'interviews')->where('questionnaire_id',Auth::user()->id)->paginate(5);
       
-        return view('review/index')->with('review', $review);
+        return view('review/table')->with('review', $review);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function create()
     {
         //$interviewer = review::orderBy('id', 'desc')->get();
        // return view('interviewerComponents/create')->with(['interviewer' => $interviewer]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StorereviewRequest  $request
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function store(Request $request)
     {
-        /*$request->validate([
-            'candidate_id' => ['required',  'string', 'max:25'],
-            'questionnaire_id' => ['required', 'string', 'max:25'],
-            'interview_id' => ['required', 'string', 'max:25'],
-            'rating_amount' => ['required',  'numeric', 'max:1'],
+        $request->validate([
+            'candidate_id' => ['required'],
+            'questionnaire_id' => ['required'],
+            'interview_id' => ['required'],
+            'rating_amount' => ['required',  'numeric', 'max:5'],
             
-        ]); */
+        ]); 
         
         review::create([
             'candidate_id' => $request['candidate_id'],
@@ -60,48 +46,32 @@ class ReviewController extends Controller
         return redirect('/dashboard');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\review  $review
-     * @return \Illuminate\Http\Response
-     */
+  
     public function show(review $review)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\review  $review
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function edit(review $review)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdatereviewRequest  $request
-     * @param  \App\Models\review  $review
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdatereviewRequest $request, review $review)
+
+    public function update(Request $request, $id)
     {
-        //
+        $review = review::findOrFail($id);
+    
+        $review->rating_amount = $request->rating_amount;
+        $review->save();
+        return redirect('review');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\review  $review
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(review $review)
+    public function destroy($id)
     {
-        //
+        $review = review::findOrFail($id);
+        $review->delete();
+        return back();
     }
 }

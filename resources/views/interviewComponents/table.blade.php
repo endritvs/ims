@@ -4,10 +4,10 @@
 
 <title>Interview</title>
 <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
-    <div class="mt-4 mx-4">
+    <div class="mt-[145px] mx-4">
         <div class="w-full overflow-hidden rounded-lg shadow-xs">
             <div class="w-full overflow-x-auto">
-                <table class="w-full">
+                <table class="w-full rounded">
                     <caption
                         class="p-5 relative text-lg font-semibold text-left  text-gray-500 border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                         Interview

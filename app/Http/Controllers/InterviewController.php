@@ -8,7 +8,10 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Models\User;
+use App\Models\review;
 use App\Models\interviewee;
+use App\Models\comment;
+use App\Models\Interviewee_Type;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -22,45 +25,49 @@ class InterviewController extends Controller
 
     public function index1()
     {
+        $review = review::with('candidates', 'questionnaires', 'interviews')->where('questionnaire_id',Auth::user()->id)->get();
+        $review=$review->toArray();
         $interview = interview::with('user', 'interviewees')->where('interviewer', Auth::user()->id)->orderBy('interview_date', 'asc')->paginate(5);
-        return view('pages/newPage', compact('interview'));
+       
+        return view('pages/newPage', compact('interview'),compact('review'));
     }
-    public function public_index()
-    {
-        $interview = interview::with('user', 'interviewees')->orderBy('interview_date', 'asc')->get();
+
+    public function public_index(Request $request)
+    {   
+        
+        $comment = comment::with('candidates', 'questionnaires')->get();
+        $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
+        $interview=interview::with('user', 'interviewees')->where([
+            ['interviewees_id', '!=' , Null],
+            [function ($query) use ($request){
+                if(($term=$request->term)){
+                    $query->orWhere('interviewees_id','LIKE','%'.$term.'%')->get();
+                }
+            }]
+        ])->orderBy('interview_date', 'asc')->get();
+  
         $interview = $interview->groupBy('interview_id')->toArray();
        
         foreach ($interview as $a => $i) {
             if (count($i) > 1) {
                 $names = "";
-                $images="";
                 foreach ($i as $x) {
                     $names .= $x['user']['name'] . ",";
-                  
                 }
-                foreach ($i as $x) {
-                    $images .= $x['user']['img'].",";
-                  
-                }
-            
                 $test = $i;
-                $test2 = $i;
-                
-              
                 array_splice($test, 0, -1);
-                array_splice($test2, 0, -1);
                 $test[0]['user']['name'] = $names;
-                $test[0]['user']['img'] = $images;
-                $interview[$a] = $test2;
                 $interview[$a] = $test;
-                
             }
         }
 
         $interview = collect($interview)->flatten(1)->toArray();
         $interview = $this->paginate($interview);
         $interview->withPath('/interview/public');
-        return view('interviewComponents/public_table', compact('interview'));
+        $sql="SELECT candidate_id,AVG(rating_amount) as rating FROM reviews GROUP BY candidate_id";
+        $exec = DB::select(DB::raw($sql));
+  
+        return view('interviewComponents/public_table', compact('interview'),compact('exec'))->with('comment', $comment,'i',(request()->input('page',1)-1)*5)->with(['intervieweesT'=>$intervieweesT]);
     }
     public function index()
     {
@@ -140,6 +147,12 @@ class InterviewController extends Controller
         $interview->save();
 
         return redirect()->route('interview.index');
+    }
+    public function destroyComment($id)
+    {
+        $comment = comment::findOrFail($id);
+        $comment->delete();
+        return back();
     }
 
     public function destroy($id)

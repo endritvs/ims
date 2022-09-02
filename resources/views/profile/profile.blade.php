@@ -5,7 +5,7 @@
     <div class="h-full ml-14 mb-10 md:ml-64">
         <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1">
 
-            <div tabindex="0" aria-label="form" class="focus:outline-none w-full bg-white p-10 dark:bg-gray-800">
+            <div tabindex="0" aria-label="form" class="focus:outline-none w-full mt-10 bg-white p-10 dark:bg-gray-800">
                 <div class="md:flex items-center border-b pb-6 border-gray-200">
                     <div class="flex items-center md:mt-0 mt-4">
                         <div class="w-full h-8 p-2 bg-indigo-700 rounded flex items-center justify-center">
