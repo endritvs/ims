@@ -4,6 +4,12 @@
 
 <title>My Upcoming Interviews</title>
 @if(Auth::user()->role==="interviewer")
+
+
+<link href="https://cdn.jsdelivr.net/npm/daisyui@2.24.0/dist/full.css" rel="stylesheet" type="text/css" />
+<script src="https://cdn.tailwindcss.com"></script>
+
+
 <div class="h-full ml-14 mb-10 md:ml-64">
   <div class="mt-[145px] mx-4">
       <div class="w-full overflow-hidden rounded-lg shadow-xs">
@@ -161,13 +167,15 @@
                                                 
                                                   <div>
                                                     <label for="rating_amount">Choose a grade:</label>
-                                                      <select name="rating_amount" id="rating_amount" class="@error('rating_amount') is-invalid @enderror capitalize bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white ">
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                        <option value="5">5</option>
-                                                      </select>
+
+                                                    <div class="rating">
+  <input type="radio" name="rating-1" class="mask mask-star" value="1" />
+  <input type="radio" name="rating-1" class="mask mask-star" value="2" />
+  <input type="radio" name="rating-1" class="mask mask-star" value="3" />
+  <input type="radio" name="rating-1" class="mask mask-star" value="4"/>
+  <input type="radio" name="rating-1" class="mask mask-star" value="5"/>
+</div>
+
                                                             @error('name')
                                                             <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
                                                         @enderror 
@@ -177,7 +185,7 @@
                                             <div
                                                 class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
                                                 <button type="submit" data-modal-toggle="RatingModal{{ $a->id }}"
-                                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Rate</button>
+                                                    class="btn btn-info">Rate</button>
                                             </div>
                                         </form>
                         </div>
