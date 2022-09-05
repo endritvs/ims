@@ -17,9 +17,16 @@ return new class extends Migration
             $table->string('password');
             $table->string('role', length: 15)->default('admin');
             $table->text('img');
+            // $table->unsignedBigInteger('company_id');
+            // $table->foreign('company_id')->references('id')->on('companies');
+            $table->foreignId('company_id')
+                ->references('id')->on('companies')
+                ->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
         });
+
+   
     }
 
    

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Companies;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -25,6 +26,7 @@ class RegisteredUserController extends Controller
          $img =  $request->hasFile('img');
         $request->validate([
             'name' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
+            'company_name' => ['required', 'regex:/^[a-z A-Z]+$/u', 'string', 'max:25'],
             'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
             'password' => ['required', 'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/ ', 'confirmed', Rules\Password::defaults()],
         ]);
@@ -32,25 +34,32 @@ class RegisteredUserController extends Controller
         if ($img) {
             $newImg = $request->file('img');
             $img_path = $newImg->store('/public/img');
+            $company = Companies::create([
+                'company_name'=>$request['company_name']
+            ]);
             $user = User::create([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
             'img' => $img_path,
+            'company_id'=>$company['id']
         ]); 
       
         event(new Registered($user));
 
          Auth::login($user);
     }else{
-
+        $company = Companies::create([
+            'company_name'=>$request['company_name']
+        ]);
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'img'=>"public/noProfilePhoto/nofoto.jpg"
+            'img'=>"public/noProfilePhoto/nofoto.jpg",
+            'company_id'=>$company['id']
         ]);
-  
+
         event(new Registered($user));
 
         Auth::login($user);

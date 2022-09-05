@@ -10,7 +10,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('interviewee_attributes', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->String('name');
             $table->foreignId('interviewee_type_id')
                 ->references('id')->on('interviewee_types')

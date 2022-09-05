@@ -9,7 +9,7 @@
             <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4 py-16">
                 <div class="text-center pb-12">
                     <h2 class="text-base font-bold text-indigo-600">
-                        STARLABS
+                        {{Auth::user()->company->company_name}}
                     </h2>
                     <h1 class="dark:text-white text-indigo-600 font-bold text-3xl md:text-4xl lg:text-5xl font-heading ">
                         Interview
@@ -22,11 +22,11 @@
 
         <div class="relative w-full">
             <input type="search" id="search-dropdown" name="term" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Search Mockups, Logos, Design Templates..." >
-            <select class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" name="termT" id="termT">
+            {{-- <select class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" name="termT" id="termT">
                 @foreach ($intervieweesT as $t)
                 <option value="{{$t->id}}">{{$t->name}}</option>
                 @endforeach
-              </select>
+              </select> --}}
             <a href={{route('public.index')}}>
             <button type="submit" class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 <svg aria-hidden="true" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
@@ -224,7 +224,7 @@
                             class="hidden  fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full">
                             <div class="relative p-4 w-full max-w-md h-full md:h-auto">
 
-                                <div class="relative bg-white rounded-lg dark:bg-gray-700 ">
+                                <div class="overflow-y-auto h-[700px] relative bg-white rounded-lg dark:bg-gray-700 ">
                                 
                                     @foreach ($comment as $c)
                                         @php
@@ -233,10 +233,10 @@
                                         @endphp
                              
                                       @if ($c->candidate_id===$d['interviewees']['id'])
-                                        <div class="overflow-y m-4 relative grid grid-cols-1 gap-4 p-4 mb-8  rounded-lg shadow-lg">
+                                        <div class="m-4 relative grid grid-cols-1 gap-4 p-4 mb-8  rounded-lg shadow-lg">
                                             <div class="relative flex gap-4">
                                               
-                                                <div class="flex  justify-center ">
+                                                <div class="flex justify-center ">
                                                     <div class="text-black dark:text-gray-200 antialiased flex max-w-lg">
                                                        
                                                             @if ($c->questionnaires->img === 'public/noProfilePhoto/nofoto.jpg')
@@ -248,14 +248,14 @@
                                                         @endif
                                                         <div>
                                                             <div
-                                                                class="bg-gray-100 dark:bg-gray-700 rounded-3xl px-4 pt-2 pb-2.5">
-                                                                <div class="font-semibold text-sm leading-relaxed ml-[-18px]">{{$c->questionnaires->name}}
+                                                                class="bg-gray-100 dark:bg-gray-700 rounded-3xl px-12 pt-2 pb-2.5">
+                                                                <div class="font-semibold text-sm leading-relaxed ml-[-30px]">{{$c->questionnaires->name}}
                                                                 </div>
-                                                                <div class="text-normal leading-snug md:leading-normal ml-[-20px]">
+                                                                <div class="text-normal leading-snug md:leading-normal ml-[-30px]">
                                                                     {{$c->message}}</div>
                                                             </div>
                                                             <div
-                                                                class="text-sm ml-[-36px] mt-0.5 text-gray-500 dark:text-gray-400">
+                                                                class="text-sm ml-[20px] mt-0.5 text-gray-500 dark:text-gray-400">
                                                                 {{$c->created_at}}</div>
 
                                                         </div>
@@ -287,13 +287,16 @@
                                                 </svg>
                                                 <span class="sr-only">Close modal</span>
                                             </button>
+                                            @if (Auth::user()->id===$d['user']['id'])
                                             <div
                                                 class="mb-4 w-full bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600">
                                                 <div class="py-2 px-4 bg-white rounded-t-lg dark:bg-gray-800">
                                                     <label for="comment" class="sr-only">Your comment</label>
+                                                    
                                                     <textarea name="message" id="comment" rows="4"
                                                         class="px-0 w-full text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
                                                         placeholder="Write a comment..." required></textarea>
+                                                     
                                                     <input type="hidden" name="candidate_id"
                                                         value={{ $d['interviewees_id'] }}>
                                                     {{-- <input type="hidden" name="interview_id"
@@ -307,9 +310,10 @@
                                                         class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
                                                         Post comment
                                                     </button>
-
+                                               
                                                 </div>
                                             </div>
+                                             @endif
                                         </form>
 
                                     </div>

@@ -31,11 +31,10 @@ class IntervieweeController extends Controller
             ['interviewee_types_id', '!=' , Null],
             [function ($query) use ($request){
                 if(($term=$request->term)){
-                    $query->orWhere('name','LIKE','%'.$term.'%');
+                    $query->where('name', 'LIKE', '%'.$term.'%')
+                    ->orWhere(DB::raw('CONCAT(name," ",surname)'), 'LIKE', '%' . $term . '%');
                 }
-                if(($termS=$request->termS)){
-                    $query->orWhere('surname','LIKE','%'.$termS.'%');
-                }
+            
                 if(($termT=$request->termT)){
                     $query->orWhere('interviewee_types_id','LIKE','%'.$termT.'%');
                 }

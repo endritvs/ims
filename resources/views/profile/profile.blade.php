@@ -49,6 +49,7 @@
                                 <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
+                        
                     </div>
                     @php
                         
@@ -72,6 +73,17 @@
                                     height="50px">
                             @endif
                         </div>
+                        <div class="flex flex-col md:ml-11 md:mt-[-60px]">
+                            <label class="mb-3 text-sm leading-none text-gray-800 dark:text-white">Company Name</label>
+                            <input value="{{Auth::user()->company->company_name}}" type="text" name="company_name" tabindex="0"
+                            class="@error('company_name') is-invalid @enderror focus:outline-none focus:ring-2 focus:ring-indigo-400 w-64 bg-gray-100 text-sm font-medium leading-none text-gray-800 p-3 border rounded border-gray-200"/>
+                            @error('company_name')
+                            <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
+                        @enderror
+
+                         
+                        </div>
+                        
                     </div>
 
                     <button role="button" aria-label="Next step"

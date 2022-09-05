@@ -34,20 +34,22 @@ class InterviewController extends Controller
 
     public function public_index(Request $request)
     {   
-        
+       
         $comment = comment::with('candidates', 'questionnaires')->get();
         $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
+        $interv = interview::with('user', 'interviewees')->get();
         $interview=interview::with('user', 'interviewees')->where([
-            ['interviewees_id', '!=' , Null],
+            ['interviewer', '!=' , Null],
             [function ($query) use ($request){
                 if(($term=$request->term)){
-                    $query->orWhere('interviewees_id','LIKE','%'.$term.'%')->get();
+                    $query->join('interview', 'interview.interviewer', '=', 'users.id' )
+                    ->where( 'interviewer', 'LIKE', '%'.$term.'%' );
                 }
             }]
-        ])->orderBy('interview_date', 'asc')->get();
+        ])->get();
   
         $interview = $interview->groupBy('interview_id')->toArray();
-       
+            
         foreach ($interview as $a => $i) {
             if (count($i) > 1) {
                 $names = "";

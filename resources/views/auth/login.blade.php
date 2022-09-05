@@ -62,6 +62,15 @@
                 <form method="POST" action ="{{ route('register') }}" class="sign-up-form" enctype='multipart/form-data'>
                     @csrf
                     <h2 class="title">Sign up</h2>
+
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        <input  class="@error('company_name') is-invalid @enderror" type="text" name="company_name" placeholder="Company Name">
+                      
+                    </div> 
+                     @error('company_name')
+                        <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
+                        @enderror
                     <div class="input-field">
                         <i class="fas fa-user"></i>
                         <input  class="@error('name') is-invalid @enderror" type="text" name="name" placeholder="Name">

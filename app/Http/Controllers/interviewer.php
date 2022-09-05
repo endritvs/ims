@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Companies;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class interviewer extends Controller
 {
@@ -42,11 +44,15 @@ class interviewer extends Controller
                     'role' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
                     'img' => ['required', 'mimes:jpeg,png,jpg,jpj', 'max:2048'],
                 ]);
+            $company = Companies::create([
+                    'company_name'=>$request['company_name']
+                ]);
              User::create([
                 'name' => $request['name'],
                 'email' => $request['email'],
                 'password' => Hash::make($request['password']),
                 'img' => $img_path,
+                'company_id'=>$company['id']
             ]); 
         }else{
             $request->validate([
@@ -56,11 +62,15 @@ class interviewer extends Controller
                 'role' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
                
             ]);
+            $company = Companies::create([
+                'company_name'=>$request['company_name']
+            ]);
             User::create([
                         'name' => $request->name,
                         'email' => $request->email,
                         'password' => Hash::make($request->password),
-                        'img'=>"public/noProfilePhoto/nofoto.jpg"
+                        'img'=>"public/noProfilePhoto/nofoto.jpg",
+                        'company_id'=>$company['id']
                     ]);
         }
     
@@ -131,7 +141,7 @@ class interviewer extends Controller
     {
         $img =  $request->hasFile('img');
         $interviewer = User::findOrFail($id);
-
+        $company = Companies::findOrFail(Auth::user()->company_id);
         if ($img) {
             $newImg = $request->file('img');
             $img_path = $newImg->store('/public/img');
@@ -139,21 +149,27 @@ class interviewer extends Controller
             'name' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
             'email' => ['required', 'string', 'max:40'],
             'img' => ['required', 'mimes:jpeg,png,jpg,jpj', 'max:2048'],
+            'company_name' => ['required', 'regex:/^[a-z A-Z]+$/u', 'string', 'max:25'],
         ]);
         $interviewer->name = $request->name;
         $interviewer->email = $request->email;
         $interviewer->img = $img_path;
+        $company->company_name=$request->company_name;
         $interviewer->save();
+        $company->save();
         return back();
 
         }else{
             $request->validate([
                 'name' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
                 'email' => ['required', 'string', 'max:40'],
+                'company_name' => ['required', 'regex:/^[a-z A-Z]+$/u', 'string', 'max:25'],
             ]);
             $interviewer->name = $request->name;
             $interviewer->email = $request->email;
+            $company->company_name=$request->company_name;
             $interviewer->save();
+            $company->save();
             return back();
         }
     }
