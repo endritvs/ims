@@ -175,7 +175,7 @@
             @include('includes.sidebar')
 
 
-            <div class="mt-28">
+            <div>
                 @yield('content')
             </div>
             <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>

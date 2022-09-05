@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Interviewee_Type;
 use App\Models\interview;
 use App\Models\review;
+use App\Models\comment;
 
 class interviewee extends Model
 {
@@ -39,5 +40,9 @@ class interviewee extends Model
     public function review()
     {
         return $this->hasMany(review::class);
+    }
+    public function comments()
+    {
+        return $this->hasMany(comment::class);
     }
 }

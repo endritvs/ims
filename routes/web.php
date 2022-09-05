@@ -7,6 +7,7 @@ use App\Http\Controllers\IntervieweeController;
 use App\Http\Controllers\IntervieweeTypesController;
 use App\Http\Controllers\Interviewee_AttributesController;
 use App\Http\Controllers\interviewer;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\interviewController;
 use App\Http\Controllers\ReviewController;
 
@@ -101,15 +102,24 @@ Route::prefix('interviewer')->group(
     }
 );
 
+Route::prefix('comment')->group(
+    function () {
+        Route::get('/', [CommentController::class, 'index'])->name('comment.index');
+        Route::post('/store', [CommentController::class, 'store'])->name('comment.store');
+    }
+);
+
 Route::prefix('interview')->group(
     function () {
-        Route::get('/', [interviewController::class, 'index'])->name('interview.index');
+        Route::get('/', [interviewController::class, 'public_index'])->name('public.index');
+        Route::get('/public', [interviewController::class, 'index'])->name('interview.index');
         Route::get('/edit-interview/{id}', [interviewController::class, 'edit'])->name('interview.edit');
         Route::post('/update-interview/{id}', [interviewController::class, 'update'])->name('interview.update');
         Route::get('/destroy/{id}', [interviewController::class, 'destroy'])->name('interview.destroy');
+        Route::get('/destroyComment/{id}', [interviewController::class, 'destroyComment'])->name('interview.Commentdestroy');
         Route::get('/create', [interviewController::class, 'create'])->name('interview.create');
         Route::post('/store-interview', [interviewController::class, 'store'])->name('interview.store');
-        Route::get('/public', [interviewController::class, 'public_index'])->name('public.index');
+       
         Route::get('/edit-profile/{id}', [interviewer::class, 'editProfile'])->name('interview.editProfile');
         Route::post('/update-profile/{id}', [interviewer::class, 'updateProfile'])->name('interview.updateProfile');
         Route::post('/update-password/', [interviewer::class, 'update_password'])->name('interview.updatePassword');
@@ -121,12 +131,12 @@ Route::get('/dashboard', [interviewController::class, 'index1'])->name('dashboar
 Route::prefix('review')->group(
     function () {
         Route::get('/', [ReviewController::class, 'index'])->name('review.index');
-        Route::get('/edit-interview/{id}', [ReviewController::class, 'edit'])->name('review.edit');
-        Route::post('/update-interview/{id}', [ReviewController::class, 'update'])->name('review.update');
+        Route::get('/edit-review/{id}', [ReviewController::class, 'edit'])->name('review.edit');
+        Route::post('/update-review/{id}', [ReviewController::class, 'update'])->name('review.update');
         Route::get('/destroy/{id}', [ReviewController::class, 'destroy'])->name('review.destroy');
         Route::get('/create', [ReviewController::class, 'create'])->name('review.create');
         Route::post('/store-review', [ReviewController::class, 'store'])->name('review.store');
-        Route::get('/public', [ReviewController::class, 'public_index'])->name('public.index');
+  
     }
 );
 

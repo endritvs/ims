@@ -5,7 +5,7 @@
     <div class="h-full ml-14 mb-10 md:ml-64">
         <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1">
 
-            <div tabindex="0" aria-label="form" class="focus:outline-none w-full bg-white p-10 dark:bg-gray-800">
+            <div tabindex="0" aria-label="form" class="focus:outline-none w-full mt-10 bg-white p-10 dark:bg-gray-800">
                 <div class="md:flex items-center border-b pb-6 border-gray-200">
                     <div class="flex items-center md:mt-0 mt-4">
                         <div class="w-full h-8 p-2 bg-indigo-700 rounded flex items-center justify-center">
@@ -49,6 +49,7 @@
                                 <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
+                        
                     </div>
                     @php
                         
@@ -72,6 +73,17 @@
                                     height="50px">
                             @endif
                         </div>
+                        <div class="flex flex-col md:ml-11 md:mt-[-60px]">
+                            <label class="mb-3 text-sm leading-none text-gray-800 dark:text-white">Company Name</label>
+                            <input value="{{Auth::user()->company->company_name}}" type="text" name="company_name" tabindex="0"
+                            class="@error('company_name') is-invalid @enderror focus:outline-none focus:ring-2 focus:ring-indigo-400 w-64 bg-gray-100 text-sm font-medium leading-none text-gray-800 p-3 border rounded border-gray-200"/>
+                            @error('company_name')
+                            <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
+                        @enderror
+
+                         
+                        </div>
+                        
                     </div>
 
                     <button role="button" aria-label="Next step"

@@ -10,6 +10,9 @@ use App\Models\Interviewee_Type;
 use App\Models\Interviewee_Attribute;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class IntervieweeController extends Controller
 {
@@ -19,15 +22,39 @@ class IntervieweeController extends Controller
     {
         $this->middleware('auth');
     }
-    public function index()
+    public function index(Request $request)
     {
 
-        $intervieweesA = interviewee::with('interviewee_type')->orderBy('id', 'asc')->paginate(5);
+        $intervieweesA = interviewee::with('interviewee_type')->where([
+            ['name', '!=' , Null],
+            ['surname', '!=' , Null],
+            ['interviewee_types_id', '!=' , Null],
+            [function ($query) use ($request){
+                if(($term=$request->term)){
+                    $query->where('name', 'LIKE', '%'.$term.'%')
+                    ->orWhere(DB::raw('CONCAT(name," ",surname)'), 'LIKE', '%' . $term . '%');
+                }
+            
+                if(($termT=$request->termT)){
+                    $query->orWhere('interviewee_types_id','LIKE','%'.$termT.'%');
+                }
+                
+            }]
+        ])
+        ->orderBy('id', 'asc')->get();
+        $intervieweesA = $this->paginate($intervieweesA);
+        $intervieweesA->withPath('/interviewees');
         $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
         $sql="SELECT t.name, GROUP_CONCAT( i.name ) as 'Attributes' FROM interviewee_attributes i inner join interviewee_types t on i.interviewee_type_id=t.id group by i.interviewee_type_id, ims_database.t.name";
         $exec=DB::select(DB::raw($sql));
     
         return view('intervieweesMainComponents/table')->with(['exec'=>$exec,'intervieweesA' => $intervieweesA, 'intervieweesT' => $intervieweesT]);
+    }
+    public function paginate($items, $perPage = 6, $page = null, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 
 

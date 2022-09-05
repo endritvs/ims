@@ -1,296 +1,483 @@
 @extends('layouts.layout')
 
 @section('content')
-
-<title>Interview</title>
-
-
-
-<div class="h-full ml-14 mt-14 mb-10 md:ml-64">
-    <div class="w-full bg-white dark:bg-gray-800 ">
-        <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4 py-12">
-          
-            <div class="text-center pb-12">
-                <h2 class="text-base font-bold text-indigo-600">
-                    STARLABS
-                </h2>
-                <h1 class="dark:text-white text-indigo-600 font-bold text-3xl md:text-4xl lg:text-5xl font-heading ">
-                    Interview
-                </h1>
-            </div>
-            
-            
-            <a class="absolute top-16 right-6" href="#">
-                                <button type="button" data-modal-toggle="addUserModal"
-                                class="bg-blue-500 hover:bg-blue-700 text-white p-1 rounded">Create</button>
-                            </a>
-
-
-  <div id="addUserModal" tabindex="-1" aria-hidden="true"
-            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
-            <div class="relative p-4 w-full max-w-md h-full md:h-auto">
-
-                <form method="POST" action="{{ route('interviewees.store') }}" enctype="multipart/form-data"
-                    class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                    @csrf
-
-                    <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
-                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                            Candidate
-                        </h3>
-                        <button type="button"
-                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                            data-modal-toggle="addUserModal">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
-                        </button>
-                        
-                    </div>
+    <title>Candidates</title>
+    <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
+        <div class="w-full bg-white dark:bg-gray-800 ">
+            <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4 py-12">
+              
+                <div class="text-center pb-12">
+                    <h2 class="text-base font-bold text-indigo-600">
+                        {{Auth::user()->company->company_name}}
+                    </h2>
+                    <h1 class="dark:text-white text-indigo-600 font-bold text-3xl md:text-4xl lg:text-5xl font-heading ">
+                        Candidates
+                    </h1>
+                    <a class="float-right" href="#">
+                        <button type="button" data-modal-toggle="addUserModal"
+                        class="bg-blue-500 hover:bg-blue-700 text-white p-1 rounded">Create</button>
+                    </a>
+                    <form action="{{ route('interviewees.index') }}" method="GET" role="search">
+                        <div class="flex">
+                            <label for="search-dropdown" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Your Email</label>
                     
-
-                    <div class="p-6 space-y-6">
-                        <div class="space-y-6">
-                            <div>
-                                <label for="name"
-                                    class="block text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                                <input type="text" name="name" id="name" autocomplete="given-name"
-                                    class="@error('name') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                    placeholder="Name" required>
-                                    @error('name')
-                                    <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
-                                @enderror 
-                                
-                            </div>
-                            
-                            <div>
-                                <label for="name"
-                                    class="block  text-sm font-medium text-gray-900 dark:text-white">Surname</label>
-                                <input type="text" name="surname" id="surname" autocomplete="given-name"
-                                    class="@error('surname') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                    placeholder="Surname" required>
-                                    
-                                    @error('surname')
-                                    <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
-                                @enderror 
-                            </div>
-
-                            <div>
-                                <label for="email"
-                                    class="block  text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                                <input type="text" name="email" id="email" autocomplete="given-email"
-                                    class="@error('email') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                    placeholder="Email" required>
-                                    
-                                    @error('surname')
-                                    <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
-                                @enderror 
-                            </div>
-
-                            <div >
-                                <label for="name"
-                                    class="block text-sm font-medium text-gray-900 dark:text-white">Insert CV</label>
-                                <input type="file" name="cv_path" id="cv_path" autocomplete="given-name"
-                                    class="@error('cv_path') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                    placeholder="cv_path" required>
-                                    @error('cv_path')
-                                    <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
-                                @enderror 
-
-
-
-                            </div>
-                            <div>
-                                <label for="name"
-                                    class="block text-sm font-medium text-gray-900 dark:text-white">External CV Path</label>
-                                <input type="text" name="external_cv_path" id="name" autocomplete="given-name"
-                                    class="@error('external_cv_path') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                    placeholder="External CV Path" required>
-                                    @error('external_cv_path')
-                                    <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
-                                @enderror 
-                            </div>
-                            <div>
-                                <label for="name"
-                                    class="block  text-sm font-medium text-gray-900 dark:text-white">Candidate
-                                    Type</label>
-
-                                <select
-                                    class="@error('interviewee_types_id') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                    name="interviewee_types_id" id="interviewee_types_id">
-                                    @foreach ($intervieweesT as $i)
-                                        <option value="{{ $i->id }}">{{ $i->name }}</option>
+                            <div class="relative w-full">
+                                <input type="search" id="search-dropdown" name="term" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Search Mockups, Logos, Design Templates..." >
+                                {{-- <input type="search" id="search-dropdown" name="termS" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Search Mockups, Logos, Design Templates..." > --}}
+                                <select class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" name="termT" id="termT">
+                                    <option value=""></option>
+                                    @foreach ($intervieweesT as $t)
+                                    <option value="{{$t->id}}">{{$t->name}}</option>
                                     @endforeach
-                                </select>
-                                @error('interviewee_types_id')
-                                <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
-                            @enderror
+                                  </select>
+                                <a href={{route('interviewees.index')}}>
+                                <button type="submit" class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                    <svg aria-hidden="true" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                    <span class="sr-only">Search</span>
+                                </button>
+                            </a>
                             </div>
-                            <div>
-
-                            </div>
-                            <div >
-
-                                <label for="name"
-                                    class="block text-sm font-medium text-gray-900 dark:text-white">Insert Image</label>
-                                <input type="file" name="img" id="img" autocomplete="given-name"
-                                    class="@error('img') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                     required>
-                                    @error('img')
-                                    <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
-                                @enderror
-
-                            </div>
-                            
                         </div>
-                        
-                        
-
-                        <div class=" flex items-center space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-                            <button type="submit" data-modal-toggle="addUserModal"
-                                class="mt-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create</button>
-                                
-                        </div>
-                        
-                </form>
+                    </form>
+                </div>
                 
-            </div>
-            
 
-        </div>
-        
-        </div>
-        
-            <div class=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
- 
-                @foreach ($intervieweesA as $i) 
-                  
-                @php
-                                    $link = explode('/', $i->img);
-                                    $cv = explode('/', $i->cv_path);
-                                @endphp
-            
-                      
-          
-                  
-                    <div class=" relative w-full bg-gray-200 dark:bg-gray-900 rounded-lg sahdow-lg p-12 flex flex-col justify-center items-center hover:scale-105 hover:drop-shadow-[0_30px_30px_rgba(0,0,0,0.25)] hover:ease-in-out duration-300">
-                      
-                        <div class="mb-8">
-                            <img class="object-center object-cover rounded-full h-36 w-36"
-                                src="/storage/images/{{ $link[2] }}" alt="photo">
-                            
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-                        </div>
-                        
-                        
-                        <div class="text-center">
-                        
+                    @foreach ($intervieweesA as $i)
+                        @php
+                            $link = explode('/', $i->img);
+                            $cv = explode('/', $i->cv_path);
+                        @endphp
+                        <div
+                            class="w-full bg-gray-200 dark:bg-gray-900 rounded-lg sahdow-lg p-12 flex flex-col justify-center items-center">
 
 
-                            <p class="text-xl dark:text-white text-indigo-600 font-bold mb-2 capitalize">
-                                {{ $i->name . ' ' . $i->surname }}</p>
-                            <p class="text-base dark:text-white text-indigo-600 text-gray-400 font-normal capitalize">
-                                </p>
-                             
-                        </div>
-                       
-                        
-                        <div class="grid grid-cols-2 gap-x-20 gap-y-7 mb-12">
-                       
-                        <div>
-                            <label class="dark:text-white text-indigo-600">Attributes:</label>
-                            @foreach ($i->interviewee_type->interviewee_attributes as $attribute)
-                               <p  class="dark:text-base text-gray-400  font-normal capitalize"> {{ $attribute->name }}</p>
-                            @endforeach
-                            
-                        </div>
-                        
-                        <div>
-                          
-                          <label class="dark:text-white text-indigo-600">Intw. Date:</label>
-                          <p  class="text-base text-gray-400 font-normal"> {{ $i->interview_date }}</p>
-                         
-                        </div>
-                        
-                        
+                            <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots{{ $i->id }}"
+                                class="relative left-[145px] bottom-[30px] inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                                type="button">
+                                <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z">
+                                    </path>
+                                </svg>
+                            </button>
 
-                        </div>
-                        
-                        <div class="flex flex-row absolute bottom-0.5 m-5 mb-1 " >
-                            <a href="/storage/cv_path/{{ $cv[2] }}" download>
-                                <button
-                                    class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center text-sm">
-                                    <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 20 20">
-                                        <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
-                                    </svg>
-                                    <span> Download CV</span>
-                                </button>
-                            </a>
-                            <a href="{{ $i -> external_cv_path }}">
-                                <button
-                                    class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center ml-5 text-sm">
-                                    <i class="fa-solid fa-arrow-up-right-from-square pr-5"></i>
-                                        
-                                   
-                                    <span> External Link </span>
-                                </button>
-                            </a>
+
+                            <div id="dropdownDots{{ $i->id }}"
+                                class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                                    aria-labelledby="dropdownMenuIconButton">
+                                    <li>
+                                        <a data-modal-toggle="editModal{{ $i->id }}" href="#"
+                                            class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                                    </li>
+
+                                    <li>
+                                        <a data-modal-toggle="deleteUserModal{{ $i->id }}" href="#"
+                                            class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Delete</a>
+                                    </li>
+
+                                </ul>
+
                             </div>
+
+
+                            <div class="gap-8 sm:grid sm:grid-cols-1 mt-2">
+                                <div class="mb-8 mt-[-50px]">
+                                    
+                                    <img class="object-center object-cover rounded-full h-28 w-28"
+                                        src="/storage/images/{{ $link[2] }}" alt="photo">
+                                    <p class="dark:text-white text-indigo-600 font-bold capitalize text-center">
+                                        {{ $i->name . ' ' . $i->surname }}</p>
+                                    <p class="text-xs dark:text-white text-indigo-600 capitalize text-center">
+                                        {{ $i->interviewee_type->name }}</p>
+                                </div>
+
                             </div>
-                        
-                            
+
+
+                            <div class="grid grid-cols-2 gap-x-20 gap-y-7">
+
+                                <div>
+                                    <label class="dark:text-white text-indigo-600">Email:</label>
+                                    <p class="text-base text-gray-400 font-normal"> {{ $i->email }}</p>
+                                </div>
+
+
+                            </div>
+                            <label class="mt-3 dark:text-white text-indigo-600">Attributes:</label>
+                            <div class="grid grid-cols-3 gap-x-12 gap-y-7">
+
+
+                                @foreach ($i->interviewee_type->interviewee_attributes as $attribute)
+                                    <dl>
+
+                                        <div class="sm:grid-cols-2 mt-2">
+                                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 capitalize">
+                                                {{ $attribute->name }}</dt>
+                                            <dd class="flex items-center mb-3">
+                                                <div class="w-full bg-gray-200 rounded h-2.5 dark:bg-gray-700 mr-2">
+                                                    <div class="bg-blue-600 h-2.5 rounded dark:bg-blue-500"
+                                                        style="width: 88%"></div>
+                                                </div>
+                                                <span
+                                                    class="text-sm font-medium text-gray-500 dark:text-gray-400">8.8</span>
+                                            </dd>
+                                        </div>
+                                    </dl>
+                                @endforeach
+
+                            </div>
+
+                            <div class="mt-5">
+                                <button type="button" data-modal-toggle="defaultModal{{ $i->id }}"
+                                    class="px-[10px] bg-blue-500 hover:bg-blue-700 text-white p-1 rounded">Show CV</button>
+
+                            </div>
+
                         </div>
-                        
-                    </div>
-                    <div id="defaultModal{{$i->id}}" tabindex="-1" class="hidden  overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center flex" aria-modal="true" role="dialog">
-                      
-                        <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
-                            <!-- Modal content -->
-                            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                <!-- Modal header -->
-                                <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
-                                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                                        CV
-                                    </h3>
-                                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="defaultModal{{$i->id}}">
-                                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+
+                        <div id="defaultModal{{ $i->id }}" tabindex="-1"
+                            class="hidden  overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center flex"
+                            aria-modal="true" role="dialog">
+                            <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+
+                                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+
+                                    <div
+                                        class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
+                                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                            CV
+                                        </h3>
+                                        <button type="button"
+                                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                            data-modal-toggle="defaultModal{{ $i->id }}">
+                                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                                    clip-rule="evenodd"></path>
+                                            </svg>
+                                            <span class="sr-only">Close modal</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="p-6 space-y-6">
+                                        <iframe class="w-full" src={{ '/storage/cv_path/' . $cv[2] }} height="600px">
+                                        </iframe>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div id="deleteUserModal{{ $i->id }}" tabindex="-1"
+                            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full">
+                            <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+                                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                    <button type="button"
+                                        class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+                                        data-modal-toggle="deleteUserModal{{ $i->id }}">
+                                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
                                         <span class="sr-only">Close modal</span>
                                     </button>
+                                    <div class="p-6 text-center">
+                                        <svg aria-hidden="true"
+                                            class="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200" fill="none"
+                                            stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are
+                                            you sure you want to delete this?</h3>
+                                        <a href="{{ route('interviewees.destroy', $i->id) }}">
+                                            <button data-modal-toggle="deleteUserModal{{ $i->id }}" type="button"
+                                                class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                                                Yes, I'm sure
+                                            </button>
+                                        </a>
+                                        <button data-modal-toggle="deleteUserModal{{ $i->id }}" type="button"
+                                            class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                                            data-modal-toggle="deleteUserModal{{ $i->id }}">No,
+                                            cancel</button>
+                                    </div>
                                 </div>
-                                
-                                <!-- Modal body -->
-                                <div class="p-6 space-y-6">
-                                  <iframe class="w-full" src={{ "/storage/cv_path/".$cv[2] }} height="600px">
-                                  </iframe>
-                                </div>
-                                
-                                <!-- Modal footer -->
-                              
                             </div>
-                            
                         </div>
-                        
-                    </div>
-                    
-                    
-                @endforeach
+                        <div id="editModal{{ $i->id }}" tabindex="-1"
+                            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full">
+                            <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+                                
+                                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                            
+                                   
+                                       <form method="POST" action="{{ route('interviewees.update',$i->id) }}" enctype="multipart/form-data"
+                                        class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                        @csrf
+                                        <button type="button"
+                                        class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+                                        data-modal-toggle="editModal{{ $i->id }}">
+                                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span class="sr-only">Close modal</span>
+                                    </button>
+                                    <div class="p-6 text-center">
+                                       <div class="flex">
+                                        <div class="m-1">
+                                        <label for="name"
+                                            class="float-left block m-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                                        <input type="text" name="name" id="name" autocomplete="given-name"
+                                            class="@error('name') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                            value="{{ $i->name }}" required>
 
-            </div>
-            
+                                        @error('name')
+                                            <div class="ml-1 text-red-500 text-sm alert alert-danger">{{ $message }}
+                                            </div>
+                                        @enderror
+                                        </div>
+                                        <div class="m-1">
+                                        <label for="name"
+                                            class="float-left block m-2 text-sm font-medium text-gray-900 dark:text-white">Surname</label>
+                                        <input type="text" name="surname" id="name" autocomplete="given-name"
+                                            class="@error('surname') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                            value="{{ $i->surname }}" required>
+                                        @error('surname')
+                                            <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    </div>
+                                    <div>
+                                        <label for="name"
+                                        class="float-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                                    <input type="email" name="email" id="email" autocomplete="given-name"
+                                        class="@error('email') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                        value="{{ $i->email }}" required>
+                                    @error('surname')
+                                        <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}
+                                        </div>
+                                    @enderror
+                                    </div>
+                                    <div>
+                                        <label for="name"
+                                            class="float-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Insert
+                                            CV</label>
+                                        <input type="file" name="cv_path" id="cv_path" autocomplete="given-name"
+                                            class="@error('cv_path') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                            placeholder="cv_path">
+                                        <a href="/storage/cv_path/{{ $cv[2] }}" download
+                                            class="underline">Download the Current CV</a>
+                                        @error('cv_path')
+                                            <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div>
+                                        <label for="name"
+                                            class="float-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">External
+                                            CV</label>
+                                        <input type="text" name="external_cv_path" id="name"
+                                            autocomplete="given-name"
+                                            class="@error('external_cv_path') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                            placeholder="Interviewee Type Name" value="{{ $i->external_cv_path }}"
+                                            required>
+                                        @error('external_cv_path')
+                                            <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div>
+                                        <label for="name"
+                                            class="float-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Interviewee
+                                            Attributes</label>
+                                        <select
+                                            class="@error('interviewee_types_id') is-invalid @enderror  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                            name="interviewee_types_id" id="interviewee_types_id">
+                                            <option value="{{ $i->interviewee_type->id }}">
+                                                {{ $i->interviewee_type->name }}</option>
+                                            @foreach ($intervieweesT as $a)
+                                                @if ($a->id !== $i->interviewee_type->id)
+                                                    <option value="{{ $a->id }}">{{ $a->name }}</option>
+                                                @endif
+                                            @endforeach
 
-            
+                                        </select>
+                                        @error('interviewee_types_id')
+                                            <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div>
+                                        <label for="name"
+                                            class="float-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Insert
+                                            Image</label>
+                                        <input type="file" name="img" id="img" autocomplete="given-name"
+                                            class="@error('img') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
 
-        </section>
-        <div class="flex justify-evenly">
-            <div></div>
-            <div>{{ $intervieweesA ->links() }}</div>
-            <div></div>
-          </div>
-        
-    </div>
+                                        @error('img')
+                                            <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                        <p class="float-left m-1">Current Image</p>
+                                        <img class="mt-2" src="/storage/images/{{ $link[2] }}" width="70px"
+                                            height="70px">
+                                          
+                                    </div>  <div
+                                            class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+                                            <button type="submit" data-modal-toggle="editModal{{ $i->id }}"
+                                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Edit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    @endforeach
+                    <div id="addUserModal" tabindex="-1" aria-hidden="true"
+        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+        <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+
+            <form method="POST" action="{{ route('interviewees.store') }}" enctype="multipart/form-data"
+                class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                @csrf
+
+                <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                        Candidate
+                    </h3>
+                    <button type="button"
+                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                        data-modal-toggle="addUserModal">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="p-6 space-y-6">
+                    <div class="space-y-6">
+                        <div class="flex">
+                        <div class="m-1">
+                            <label for="name"
+                                class="block text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                            <input type="text" name="name" id="name" autocomplete="given-name"
+                                class="@error('name') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                placeholder="Name" required>
+                                @error('name')
+                                <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
+                            @enderror 
+                        </div>
+                        <div class="m-1">
+                            <label for="name"
+                                class="block  text-sm font-medium text-gray-900 dark:text-white">Surname</label>
+                            <input type="text" name="surname" id="surname" autocomplete="given-name"
+                                class="@error('surname') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                placeholder="Surname" required>
+                                
+                                @error('surname')
+                                <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
+                            @enderror 
+                        </div>
 </div>
+                        <div>
+                            <label for="email"
+                                class="block  text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                            <input type="email" name="email" id="email" autocomplete="given-email"
+                                class="@error('email') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                placeholder="Email" required>
+                                
+                                @error('surname')
+                                <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
+                            @enderror 
+                        </div>
+
+                        <div >
+                            <label for="name"
+                                class="block text-sm font-medium text-gray-900 dark:text-white">Insert CV</label>
+                            <input type="file" name="cv_path" id="cv_path" autocomplete="given-name"
+                                class="@error('cv_path') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                placeholder="cv_path" required>
+                                @error('cv_path')
+                                <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
+                            @enderror 
+
+
+
+                        </div>
+                        <div>
+                            <label for="name"
+                                class="block text-sm font-medium text-gray-900 dark:text-white">External CV
+                                Path</label>
+                            <input type="text" name="external_cv_path" id="name" autocomplete="given-name"
+                                class="@error('external_cv_path') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                placeholder="External CV Path" required>
+                                @error('external_cv_path')
+                                <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
+                            @enderror 
+                        </div>
+                        <div>
+                            <label for="name"
+                                class="block  text-sm font-medium text-gray-900 dark:text-white">Interviewee
+                                Types</label>
+
+                            <select
+                                class="@error('interviewee_types_id') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                name="interviewee_types_id" id="interviewee_types_id">
+                                @foreach ($intervieweesT as $i)
+                                    <option value="{{ $i->id }}">{{ $i->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('interviewee_types_id')
+                            <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
+                        @enderror
+                        </div>
+                        <div>
+
+                        </div>
+                        <div >
+
+                            <label for="name"
+                                class="block text-sm font-medium text-gray-900 dark:text-white">Insert Image</label>
+                            <input type="file" name="img" id="img" autocomplete="given-name"
+                                class="@error('img') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                 required>
+                                @error('img')
+                                <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
+                            @enderror
+
+                        </div>
+                    </div>
+
+                    <div class=" flex items-center space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+                        <button type="submit" data-modal-toggle="addUserModal"
+                            class="mt-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create</button>
+                    </div>
+            </form>
+        </div>
+
+    </div>
+
+                </div>
+            </section>
+        </div>
+        <div class="dark:bg-gray-800 p-3">
+            {{ $intervieweesA->links() }}
+        </div>
+    </div>
 @endsection('content')
