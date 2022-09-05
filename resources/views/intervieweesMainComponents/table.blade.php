@@ -107,15 +107,15 @@
 
 
                             </div>
-                            <label class="mt-3 dark:text-white text-indigo-600">Attributes:</label>
+                            <label class="mt-3 dark:text-white text-indigo-600 font-semibold underline">Attributes:</label>
                             <div class="grid grid-cols-3 gap-x-12 gap-y-7">
 
 
                                 @foreach ($i->interviewee_type->interviewee_attributes as $attribute)
                                     <dl>
 
-                                        <div class="sm:grid-cols-2 mt-2">
-                                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 capitalize">
+                                        <div class="sm:grid-cols-2 mt-2 ">
+                                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 capitalize inline-flex items-center font-medium leading-sm uppercase px-3 py-1 bg-blue-200 text-blue-700 rounded-full ">
                                                 {{ $attribute->name }}</dt>
                                             <dd class="flex items-center mb-3">
                                                 <div class="w-full bg-gray-200 rounded h-2.5 dark:bg-gray-700 mr-2">
@@ -130,12 +130,22 @@
                                 @endforeach
 
                             </div>
-
+                            <div class="flex flex-row">
                             <div class="mt-5">
                                 <button type="button" data-modal-toggle="defaultModal{{ $i->id }}"
-                                    class="px-[10px] bg-blue-500 hover:bg-blue-700 text-white p-1 rounded">Show CV</button>
+                                    class="px-[10px] bg-blue-500 hover:bg-blue-700 text-white p-1 rounded-lg">Show CV</button>
 
                             </div>
+
+                            <div class="mt-5 pl-5">
+                            <a href="{{ $i -> external_cv_path }}"><button type="button" 
+                                    class="px-[10px] bg-blue-500 hover:bg-blue-700 text-white p-1 rounded-lg">External Link</button> </a>
+
+                            </div>
+                            </div>
+                            
+
+                            
 
                         </div>
 
