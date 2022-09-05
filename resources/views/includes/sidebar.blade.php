@@ -47,7 +47,7 @@
                             </path>
                         </svg>
                     </span>
-                    <span class="ml-2 text-sm tracking-wide truncate">Interview</span>
+                    <span class="ml-2 text-sm tracking-wide truncate">Candidates</span>
                     <span class="hidden md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-blue-500 bg-white rounded-full">
                         <svg class="ml-2 w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -120,6 +120,6 @@
             </li>
 
         </ul>
-        <p class="mb-14 px-5 py-3 hidden md:block text-center text-xs"> {{Auth::user()->company->company_name." ". date("Y")}}</p>
+        <p class="px-5 py-3 hidden md:block text-center text-xs"> {{Auth::user()->company->company_name." ". date("Y")}}</p>
     </div>
 </div>
