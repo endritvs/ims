@@ -169,11 +169,11 @@
                                                     <label for="rating_amount">Choose a grade:</label>
 
                                                     <div class="rating">
-  <input type="radio" name="rating-1" class="mask mask-star" value="1" />
-  <input type="radio" name="rating-1" class="mask mask-star" value="2" />
-  <input type="radio" name="rating-1" class="mask mask-star" value="3" />
-  <input type="radio" name="rating-1" class="mask mask-star" value="4"/>
-  <input type="radio" name="rating-1" class="mask mask-star" value="5"/>
+  <input type="radio" name="rating_amount" class="mask mask-star" value="1" />
+  <input type="radio" name="rating_amount" class="mask mask-star" value="2" />
+  <input type="radio" name="rating_amount" class="mask mask-star" value="3" />
+  <input type="radio" name="rating_amount" class="mask mask-star" value="4"/>
+  <input type="radio" name="rating_amount" class="mask mask-star" value="5"/>
 </div>
 
                                                             @error('name')
