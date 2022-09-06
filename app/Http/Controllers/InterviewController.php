@@ -14,13 +14,31 @@ use App\Models\comment;
 use App\Models\Interviewee_Type;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use GuzzleHttp\Client;
+use Log;
+use Carbon\Carbon;
+use App\Traits\ZoomMeetingTrait;
 
 
 class InterviewController extends Controller
 {
+    use ZoomMeetingTrait;
+
+    const MEETING_TYPE_INSTANT = 0;
+    const MEETING_TYPE_SCHEDULE = 2;
+    const MEETING_TYPE_RECURRING = 3;
+    const MEETING_TYPE_FIXED_RECURRING_FIXED = 8;
+
     public function __construct()
     {
         $this->middleware('auth');
+        $this->client = new Client();
+        $this->jwt = $this->generateZoomToken();
+        $this->headers = [
+            'Authorization' => 'Bearer '.$this->jwt,
+            'Content-Type'  => 'application/json',
+            'Accept'        => 'application/json',
+        ];
     }
 
     public function index1()
@@ -98,10 +116,11 @@ class InterviewController extends Controller
     public function store(Request $request)
     {
 
-        $admin = User::orderBy('id', 'desc')->where('role', 'admin')->get();
-
+        $admin = User::orderBy('id', 'desc')->where('role', 'interviewer')->get();
 
         $interviewer = $request['interviewer'];
+        $interviewee = interviewee::orderBy('id', 'desc')->where('id', $request['interviewees_id'])->get();
+        $index = 0;
 
         for ($i = 0; $i < count($interviewer); $i++) {
 
@@ -119,7 +138,70 @@ class InterviewController extends Controller
             ]);
         }
 
-        return  redirect()->route('interview.index')->with(['admin' => $admin]);
+        $interview = interview::with('user', 'interviewees')->where('interview_id', $request['interview_id'])->get();
+
+        $id = 8574484059;
+              
+        $meeting = $this->get($id);
+
+        $data = [
+
+           'topic'              => $interview[0]->interviewees->interviewee_type->name,                 // Interview Type
+           'start_time'         => $request['interview_date'],                                          // Interview Date
+           'duration'           => 60,
+           'host_video'         => 0,
+           'participant_video'  => 0
+        ];
+
+        $info = $this -> create($data);
+
+        $meetingId = $info['data']['id'];
+
+        $startLink = $info['data']['start_url'];             // Interviewer Link (Multiple hosts)
+        $joinLink  = $info['data']['join_url'];              // Interviewee Link 
+
+        foreach ($interview as $a) {
+
+            $interviewerNames[$index++] = $a->user->name;
+        }
+
+        foreach ($interviewer as $i) {
+            foreach ($interview as $a) {
+
+             if ($i == $a->user->id) {
+                $mail_data = [
+
+                        'recipient' => $a->user->email,
+                        'link' => $startLink,
+                        'interviewType' => $a->interviewees->interviewee_type->name,
+                        'interviewer' => implode(", ", $interviewerNames),
+                        'intervieweeName' => $a->interviewees->name." ".$a->interviewees->surname,
+
+                        'fromEmail' => 'dionkelmendi@gmail.com',
+                        'fromName' => 'IMS Company'
+                    ];
+
+                \Mail::send('/interviewComponents/emailTemplate', $mail_data, function($message) use ($mail_data){
+
+                $message->to($mail_data['recipient'])
+                        ->from($mail_data['fromEmail'], $mail_data['fromName'])
+                        ->subject("Interview Info - Interviewer");
+
+                }); 
+            }
+        }}
+
+        $mail_data['recipient'] = $interview[0]->interviewees->email;
+        $mail_data['link'] = $joinLink;
+
+        \Mail::send('/interviewComponents/emailTemplate', $mail_data, function($message) use ($mail_data){
+
+                $message->to($mail_data['recipient'])
+                        ->from($mail_data['fromEmail'], $mail_data['fromName'])
+                        ->subject("Interview Info - Interviewee");
+        }); 
+
+        return redirect()->route('interview.index')->with(['admin' => $admin]);
     }
 
     public function edit($id)
