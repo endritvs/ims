@@ -120,7 +120,7 @@
             </div>
            
             <div id="RatingModal{{$a->id}}" tabindex="-1" class="hidden  overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center flex" aria-modal="true" role="dialog">
-                <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+                <div class="relative p-4 w-auto max-w-2xl h-full md:h-auto">
                     <!-- Modal content -->
                     <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                         <!-- Modal header -->
@@ -137,7 +137,7 @@
                         <div class="p-6 space-y-6">
                         <form method="POST" action="{{ route('review.store') }}" class="relative bg-white rounded-lg shadow dark:bg-gray-700" >
                                             @csrf
-                                                  <div>
+                                                  <div class="hidden">
                                                     <label for="candidate_id">Candidate</label>
                                                     
                                                       <select  name="candidate_id"  id="candidate_id" class="@error('candidate_id') is-invalid @enderror capitalize bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white ">
@@ -148,32 +148,39 @@
                                                         @enderror 
                                                   </div>
                                                   <div>
-                                                    <label for="questionnaire_id">Questionnaire</label>
-                                                      <select  name="questionnaire_id"  id="questionnaire_id" class="@error('questionnaire_id') is-invalid @enderror capitalize bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white ">
-                                                        <option class="capitalize" value="{{ $a -> user->id }}"> {{ $a -> user->name }}</option>
+                                                    <label for="questionnaire_id" class="hidden">Questionnaire</label>
+                                                      <select  name="questionnaire_id"  id="questionnaire_id" class="hidden @error('questionnaire_id') is-invalid @enderror capitalize bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white ">
+                                                        <option class="capitalize hidden" value="{{ $a -> user->id }}"> {{ $a -> user->name }}</option>
                                                       </select>
                                                             @error('questionnaire_id')
-                                                            <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
+                                                            <div class="ml-1 text-red-500 text-xs alert alert-danger hidden">{{ $message }}</div>
                                                         @enderror 
                                                   </div>
                                                   <div>
                                               
-                                                    <input value="{{ $a ->id }}" name="interview_id" id="interview_id" class="@error('interview_id') is-invalid @enderror capitalize bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white " type="hidden">
+                                                    <input value="{{ $a ->id }}" name="interview_id" id="interview_id" class="hidden @error('interview_id') is-invalid @enderror capitalize bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white " type="hidden">
                                                   
                                                             @error('interview_id')
                                                             <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
                                                         @enderror 
                                                   </div>
                                                 
+
                                                   <div>
                                                     <label for="rating_amount">Choose a grade:</label>
 
-                                                    <div class="rating">
-  <input type="radio" name="rating_amount" class="mask mask-star" value="1" />
-  <input type="radio" name="rating_amount" class="mask mask-star" value="2" />
-  <input type="radio" name="rating_amount" class="mask mask-star" value="3" />
-  <input type="radio" name="rating_amount" class="mask mask-star" value="4"/>
-  <input type="radio" name="rating_amount" class="mask mask-star" value="5"/>
+                                                    <div class="rating rating-lg rating-half">
+  <input type="radio" name="rating_amount" id="star1" class="rating-hidden" />
+  <input type="radio" name="rating_amount" id="star2" class="bg-green-500 mask mask-star-2 mask-half-1" />
+  <input type="radio" name="rating_amount" id="star3"class="bg-green-500 mask mask-star-2 mask-half-2" />
+  <input type="radio" name="rating_amount" id="star4"class="bg-green-500 mask mask-star-2 mask-half-1" />
+  <input type="radio" name="rating_amount"id="star5"class="bg-green-500 mask mask-star-2 mask-half-2" />
+  <input type="radio" name="rating_amount"id="star6"class="bg-green-500 mask mask-star-2 mask-half-1" />
+  <input type="radio" name="rating_amount"id="star7"class="bg-green-500 mask mask-star-2 mask-half-2" />
+  <input type="radio" name="rating_amount"id="star8"class="bg-green-500 mask mask-star-2 mask-half-1" />
+  <input type="radio" name="rating_amount"id="star9"class="bg-green-500 mask mask-star-2 mask-half-2" />
+  <input type="radio" name="rating_amount"id="star1"class="bg-green-500 mask mask-star-2 mask-half-1" />
+  <input type="radio" name="rating_amount"id="star0"class="bg-green-500 mask mask-star-2 mask-half-2" />
 </div>
 
                                                             @error('name')
