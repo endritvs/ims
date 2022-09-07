@@ -5,8 +5,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/brands.min.css" integrity="sha512-nS1/hdh2b0U8SeA8tlo7QblY6rY6C+MgkZIeRzJQQvMsFfMQFUKp+cgMN2Uuy+OtbQ4RoLMIlO2iF7bIEY3Oyg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/5d54a13ffa.js" crossorigin="anonymous"></script>
+
 </head>
 <style>
+    
     /* Compiled dark classes from Tailwind */
     .dark .dark\:divide-gray-700> :not([hidden])~ :not([hidden]) {
         border-color: rgba(55, 65, 81);
