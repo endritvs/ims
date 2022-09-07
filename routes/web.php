@@ -10,6 +10,7 @@ use App\Http\Controllers\interviewer;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\interviewController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\ReviewsAttributesController;
 
 use Illuminate\Support\Facades\Auth;
 /*
@@ -136,6 +137,18 @@ Route::prefix('review')->group(
         Route::get('/destroy/{id}', [ReviewController::class, 'destroy'])->name('review.destroy');
         Route::get('/create', [ReviewController::class, 'create'])->name('review.create');
         Route::post('/store-review', [ReviewController::class, 'store'])->name('review.store');
+  
+    }
+);
+
+Route::prefix('review_attributes')->group(
+    function () {
+        Route::get('/', [ReviewsAttributesController::class, 'index'])->name('review_attributes.index');
+        Route::get('/edit-review/{id}', [ReviewsAttributesController::class, 'edit'])->name('review_attributes.edit');
+        Route::post('/update-review/{id}', [ReviewsAttributesController::class, 'update'])->name('review_attributes.update');
+        Route::get('/destroy/{id}', [ReviewsAttributesController::class, 'destroy'])->name('review_attributes.destroy');
+        Route::get('/create', [ReviewsAttributesController::class, 'create'])->name('review_attributes.create');
+        Route::post('/store-review', [ReviewsAttributesController::class, 'store'])->name('review_attributes.store');
   
     }
 );

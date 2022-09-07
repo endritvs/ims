@@ -77,22 +77,27 @@
  
               <td class="px-4 py-3 text-sm  ">
                {{-- {{dd($review)}} --}}
-         
 
-                @if($today > $date)
-                  <button type="button" data-modal-toggle="RatingModal{{$a->id}}"
-                    class="bg-blue-500 hover:bg-blue-700 text-white p-1 rounded">Rate Now</button> 
-                  
-                @else
-                    
-                <button data-tooltip-target="tooltip-default" type="button" class="bg-red-500 hover:bg-red-700 text-white p-1 rounded">Can't rate now!</button>
-                <div id="tooltip-default" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="top" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(344px, 44px, 0px);">
-                  The interview has not been held yet!
-                    <div class="tooltip-arrow" data-popper-arrow="" style="position: absolute; left: 0px; transform: translate3d(58.4px, 0px, 0px);"></div>
-                </div>
- 
-                @endif
-              </td>
+               @if ($today > $date &&  !App\Models\review::where('candidate_id', $a->interviewees->id )->exists())
+              <button  data-modal-toggle="RatingModal{{ $a->id }}"
+                                                    class="bg-blue-700 text-white p-1 rounded">Rate
+                                                    Now</button>
+                                            @else
+                                                <button data-tooltip-target="tooltip-default" 
+                                                    class="bg-red-500  text-white p-1 rounded">Can't rate
+                                                    now!</button>
+                                                <div id="tooltip-default" role="tooltip"
+                                                    class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700"
+                                                    data-popper-reference-hidden="" data-popper-escaped=""
+                                                    data-popper-placement="top"
+                                                    style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(344px, 44px, 0px);">
+                                                    The interview has not been held yet or you already rated it!
+                                                    <div class="tooltip-arrow" data-popper-arrow=""
+                                                        style="position: absolute; left: 0px; transform: translate3d(58.4px, 0px, 0px);">
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        </td>
               </tr>
               <div id="defaultModal{{$a->id}}" tabindex="-1" class="hidden  overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center flex" aria-modal="true" role="dialog">
                 <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
@@ -120,7 +125,7 @@
             </div>
            
             <div id="RatingModal{{$a->id}}" tabindex="-1" class="hidden  overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center flex" aria-modal="true" role="dialog">
-                <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+                <div class="relative p-4 w-auto max-w-2xl h-full md:h-auto">
                     <!-- Modal content -->
                     <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                         <!-- Modal header -->
@@ -137,7 +142,7 @@
                         <div class="p-6 space-y-6">
                         <form method="POST" action="{{ route('review.store') }}" class="relative bg-white rounded-lg shadow dark:bg-gray-700" >
                                             @csrf
-                                                  <div>
+                                                  <div class="hidden">
                                                     <label for="candidate_id">Candidate</label>
                                                     
                                                       <select  name="candidate_id"  id="candidate_id" class="@error('candidate_id') is-invalid @enderror capitalize bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white ">
@@ -148,35 +153,42 @@
                                                         @enderror 
                                                   </div>
                                                   <div>
-                                                    <label for="questionnaire_id">Questionnaire</label>
-                                                      <select  name="questionnaire_id"  id="questionnaire_id" class="@error('questionnaire_id') is-invalid @enderror capitalize bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white ">
-                                                        <option class="capitalize" value="{{ $a -> user->id }}"> {{ $a -> user->name }}</option>
+                                                    <label for="questionnaire_id" class="hidden">Questionnaire</label>
+                                                      <select  name="questionnaire_id"  id="questionnaire_id" class="hidden @error('questionnaire_id') is-invalid @enderror capitalize bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white ">
+                                                        <option class="capitalize hidden" value="{{ $a -> user->id }}"> {{ $a -> user->name }}</option>
                                                       </select>
                                                             @error('questionnaire_id')
-                                                            <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
+                                                            <div class="ml-1 text-red-500 text-xs alert alert-danger hidden">{{ $message }}</div>
                                                         @enderror 
                                                   </div>
                                                   <div>
                                               
-                                                    <input value="{{ $a ->id }}" name="interview_id" id="interview_id" class="@error('interview_id') is-invalid @enderror capitalize bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white " type="hidden">
+                                                    <input value="{{ $a ->id }}" name="interview_id" id="interview_id" class="hidden @error('interview_id') is-invalid @enderror capitalize bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white " type="hidden">
                                                   
                                                             @error('interview_id')
                                                             <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
                                                         @enderror 
                                                   </div>
                                                 
+
                                                   <div>
                                                     <label for="rating_amount">Choose a grade:</label>
 
-                                                    <div class="rating">
-  <input type="radio" name="rating_amount" class="mask mask-star" value="1" />
-  <input type="radio" name="rating_amount" class="mask mask-star" value="2" />
-  <input type="radio" name="rating_amount" class="mask mask-star" value="3" />
-  <input type="radio" name="rating_amount" class="mask mask-star" value="4"/>
-  <input type="radio" name="rating_amount" class="mask mask-star" value="5"/>
+                                                    <div class="rating rating-lg rating-half">
+  <input type="radio" name="rating_amount" id="star0" class="rating-hidden" />
+  <input type="radio" value="1"  name="rating_amount" id="star1"  class="bg-green-500 mask mask-star-2 mask-half-1 @error('rating_amount') is-invalid @enderror" />
+  <input type="radio" value="2"  name="rating_amount" id="star2"  class="bg-green-500 mask mask-star-2 mask-half-2 @error('rating_amount') is-invalid @enderror" />
+  <input type="radio" value="3"  name="rating_amount" id="star3"  class="bg-green-500 mask mask-star-2 mask-half-1 @error('rating_amount') is-invalid @enderror" />
+  <input type="radio" value="4"  name="rating_amount" id="star4"  class="bg-green-500 mask mask-star-2 mask-half-2 @error('rating_amount') is-invalid @enderror" />
+  <input type="radio" value="5"  name="rating_amount" id="star5"  class="bg-green-500 mask mask-star-2 mask-half-1 @error('rating_amount') is-invalid @enderror" />
+  <input type="radio" value="6"  name="rating_amount" id="star6"  class="bg-green-500 mask mask-star-2 mask-half-2 @error('rating_amount') is-invalid @enderror" />
+  <input type="radio" value="7"  name="rating_amount" id="star7"  class="bg-green-500 mask mask-star-2 mask-half-1 @error('rating_amount') is-invalid @enderror" />
+  <input type="radio" value="8"  name="rating_amount" id="star8"  class="bg-green-500 mask mask-star-2 mask-half-2 @error('rating_amount') is-invalid @enderror" />
+  <input type="radio" value="9"  name="rating_amount" id="star9"  class="bg-green-500 mask mask-star-2 mask-half-1 @error('rating_amount') is-invalid @enderror" />
+  <input type="radio" value="10" name="rating_amount" id="star10" class="bg-green-500 mask mask-star-2 mask-half-2 @error('rating_amount') is-invalid @enderror" />
 </div>
 
-                                                            @error('name')
+                                                            @error('rating amount')
                                                             <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
                                                         @enderror 
                                                   </div>

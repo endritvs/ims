@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Interviewee_Type;
-
+use App\Models\reviews_attributes;
 
 class Interviewee_Attribute extends Model
 {
@@ -19,6 +19,9 @@ class Interviewee_Attribute extends Model
     {
         return $this->belongsTo(Interviewee_Type::class, "interviewee_type_id","id");
     }
-
+    public function review_attributes()
+    {
+        return $this->hasMany(reviews_attributes::class);
+    }
    
 }

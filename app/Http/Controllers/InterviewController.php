@@ -12,15 +12,34 @@ use App\Models\review;
 use App\Models\interviewee;
 use App\Models\comment;
 use App\Models\Interviewee_Type;
+use App\Models\reviews_attributes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use GuzzleHttp\Client;
+use Log;
+use Carbon\Carbon;
+use App\Traits\ZoomMeetingTrait;
 
 
 class InterviewController extends Controller
 {
+    use ZoomMeetingTrait;
+
+    const MEETING_TYPE_INSTANT = 0;
+    const MEETING_TYPE_SCHEDULE = 2;
+    const MEETING_TYPE_RECURRING = 3;
+    const MEETING_TYPE_FIXED_RECURRING_FIXED = 8;
+
     public function __construct()
     {
         $this->middleware('auth');
+        $this->client = new Client();
+        $this->jwt = $this->generateZoomToken();
+        $this->headers = [
+            'Authorization' => 'Bearer '.$this->jwt,
+            'Content-Type'  => 'application/json',
+            'Accept'        => 'application/json',
+        ];
     }
 
     public function index1()
@@ -33,21 +52,22 @@ class InterviewController extends Controller
     }
 
     public function public_index(Request $request)
-    {   
-       
+    {  
+
+        $review_attributes = reviews_attributes::with('candidates', 'questionnaires', 'interviews', 'attributes')->get();
+
         $comment = comment::with('candidates', 'questionnaires')->get();
         $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
-        $interv = interview::with('user', 'interviewees')->get();
-        $interview=interview::with('user', 'interviewees')->where([
-            ['interviewer', '!=' , Null],
-            [function ($query) use ($request){
-                if(($term=$request->term)){
-                    $query->join('interview', 'interview.interviewer', '=', 'users.id' )
-                    ->where( 'interviewer', 'LIKE', '%'.$term.'%' );
-                }
-            }]
-        ])->get();
-  
+        $interview=interview::with('user', 'interviewees')->get();
+        $searchString=$request->term;
+        $interview = interview::whereHas('interviewees', function ($query) use ($searchString){
+            $query->where('name', 'like', '%'.$searchString.'%');
+        })
+        ->with(['interviewees' => function($query) use ($searchString){
+            $query->where('name', 'like', '%'.$searchString.'%');
+        }])->with('user')
+        ->get();
+//   dd($categories);
         $interview = $interview->groupBy('interview_id')->toArray();
             
         foreach ($interview as $a => $i) {
@@ -65,11 +85,11 @@ class InterviewController extends Controller
 
         $interview = collect($interview)->flatten(1)->toArray();
         $interview = $this->paginate($interview);
-        $interview->withPath('/interview/public');
+        $interview->withPath('/interview');
         $sql="SELECT candidate_id,AVG(rating_amount) as rating FROM reviews GROUP BY candidate_id";
         $exec = DB::select(DB::raw($sql));
   
-        return view('interviewComponents/public_table', compact('interview'),compact('exec'))->with('comment', $comment,'i',(request()->input('page',1)-1)*5)->with(['intervieweesT'=>$intervieweesT]);
+        return view('interviewComponents/public_table', compact('interview'),compact('exec'))->with('comment', $comment,'i',(request()->input('page',1)-1)*5)->with(['intervieweesT'=>$intervieweesT, 'review_attributes' => $review_attributes]);
     }
     public function index()
     {
@@ -80,7 +100,6 @@ class InterviewController extends Controller
 
         $interviewss = interview::with('user', 'interviewees')->orderBy('interview_id', 'asc')->get();
         $interview = interview::with('user', 'interviewees')->orderBy('interview_id', 'asc')->paginate(5);
-
 
         return view('interviewComponents/table')->with(['exec' => $exec, 'interview' => $interview, 'admin' => $admin, 'interviewee' => $interviewee, 'interviewss' => $interviewss]);
     }
@@ -98,10 +117,11 @@ class InterviewController extends Controller
     public function store(Request $request)
     {
 
-        $admin = User::orderBy('id', 'desc')->where('role', 'admin')->get();
-
+        $admin = User::orderBy('id', 'desc')->where('role', 'interviewer')->get();
 
         $interviewer = $request['interviewer'];
+        $interviewee = interviewee::orderBy('id', 'desc')->where('id', $request['interviewees_id'])->get();
+        $index = 0;
 
         for ($i = 0; $i < count($interviewer); $i++) {
 
@@ -119,7 +139,70 @@ class InterviewController extends Controller
             ]);
         }
 
-        return  redirect()->route('interview.index')->with(['admin' => $admin]);
+        $interview = interview::with('user', 'interviewees')->where('interview_id', $request['interview_id'])->get();
+
+        $id = 8574484059;
+              
+        $meeting = $this->get($id);
+
+        $data = [
+
+           'topic'              => $interview[0]->interviewees->interviewee_type->name,                 // Interview Type
+           'start_time'         => $request['interview_date'],                                          // Interview Date
+           'duration'           => 60,
+           'host_video'         => 0,
+           'participant_video'  => 0
+        ];
+
+        $info = $this -> create($data);
+
+        $meetingId = $info['data']['id'];
+
+        $startLink = $info['data']['start_url'];             // Interviewer Link (Multiple hosts)
+        $joinLink  = $info['data']['join_url'];              // Interviewee Link 
+
+        foreach ($interview as $a) {
+
+            $interviewerNames[$index++] = $a->user->name;
+        }
+
+        foreach ($interviewer as $i) {
+            foreach ($interview as $a) {
+
+             if ($i == $a->user->id) {
+                $mail_data = [
+
+                        'recipient' => $a->user->email,
+                        'link' => $startLink,
+                        'interviewType' => $a->interviewees->interviewee_type->name,
+                        'interviewer' => implode(", ", $interviewerNames),
+                        'intervieweeName' => $a->interviewees->name." ".$a->interviewees->surname,
+
+                        'fromEmail' => 'dionkelmendi@gmail.com',
+                        'fromName' => 'IMS Company'
+                    ];
+
+                \Mail::send('/interviewComponents/emailTemplate', $mail_data, function($message) use ($mail_data){
+
+                $message->to($mail_data['recipient'])
+                        ->from($mail_data['fromEmail'], $mail_data['fromName'])
+                        ->subject("Interview Info - Interviewer");
+
+                }); 
+            }
+        }}
+
+        $mail_data['recipient'] = $interview[0]->interviewees->email;
+        $mail_data['link'] = $joinLink;
+
+        \Mail::send('/interviewComponents/emailTemplate', $mail_data, function($message) use ($mail_data){
+
+                $message->to($mail_data['recipient'])
+                        ->from($mail_data['fromEmail'], $mail_data['fromName'])
+                        ->subject("Interview Info - Interviewee");
+        }); 
+
+        return redirect()->route('interview.index')->with(['admin' => $admin]);
     }
 
     public function edit($id)

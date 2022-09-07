@@ -206,8 +206,8 @@
                             
                             
                                                 <label class="block text-sm font-medium text-gray-900 dark:text-white">Choose date</label>
-                                                <input type="date" name="interview_date" min=<?php echo date('Y-m-d'); ?> id="dateId"
-                                                  value="{{$i->interview_date}}"  class="@error('interview_date') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white ">
+                                                <input value={{$i->interview_date}} type="date" name="interview_date" min=<?php echo date('Y-m-d'); ?> id="dateId"
+                                                   class="@error('interview_date') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" />
                             
                                                 @error('interview_date')
                                                 <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
@@ -233,7 +233,7 @@
             
            
             <div class="dark:bg-gray-800 p-3 ">
-                <a class="underline" href="{{route('public.index')}}">Se all interviews</a>
+                <a class="underline" href="{{route('public.index')}}">See all interviews</a>
                 {{$interview->links() }}
             </div>
         </div>
