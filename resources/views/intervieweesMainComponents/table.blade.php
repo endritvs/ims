@@ -14,8 +14,8 @@
                     Candidates
                 </h1>
 
-                <form action="{{ route('interviewees.index') }}" method="GET" role="search" class="my-12">
-                    <div class="flex justify-center mx-20">
+                <form action="{{ route('interviewees.index') }}" method="GET" role="search" class="my-12 mx-20">
+                    <div class="flex justify-center">
                         <select class="flex-shrink-0 inline-flex items-center px-1 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" name="termT" id="termT">
                             <option selected>Choose a category</option>
                             @foreach ($intervieweesT as $t)
@@ -46,15 +46,12 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-
-
                 @foreach ($intervieweesA as $i)
                 @php
                 $link = explode('/', $i->img);
                 $cv = explode('/', $i->cv_path);
                 @endphp
                 <div class="w-full bg-gray-200 dark:bg-gray-900 rounded-lg sahdow-lg p-12 flex flex-col justify-center items-center">
-
 
                     <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots{{ $i->id }}" class="relative left-[145px] bottom-[30px] inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button">
                         <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -73,15 +70,12 @@
                             <li>
                                 <a data-modal-toggle="deleteUserModal{{ $i->id }}" href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Delete</a>
                             </li>
-
                         </ul>
-
                     </div>
 
 
                     <div class="gap-8 sm:grid sm:grid-cols-1 mt-2">
-                        <div class="mb-8 mt-[-50px]">
-
+                        <div class="mb-4 mt-[-50px]">
                             <img class="object-center object-cover rounded-full h-28 w-28" src="/storage/images/{{ $link[2] }}" alt="photo">
                             <p class="dark:text-white text-indigo-600 font-bold capitalize text-center">
                                 {{ $i->name . ' ' . $i->surname }}
@@ -90,45 +84,43 @@
                                 {{ $i->interviewee_type->name }}
                             </p>
                         </div>
-
                     </div>
 
-
-                    <div class="grid grid-cols-2 gap-x-20 gap-y-7">
-
-                        <div>
-                            <label class="dark:text-white text-indigo-600">Email:</label>
-                            <p class="text-base text-gray-400 font-normal"> {{ $i->email }}</p>
-                        </div>
-
-
+                    <div class="flex items-center min-w-0 mb-10">
+                        <p class="font-medium text-gray-900 dark:text-white mr-2">
+                            Email:
+                        </p>
+                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                            {{ $i->email }}
+                        </p>
                     </div>
-                    <label class="mt-3 dark:text-white text-indigo-600 font-semibold underline">Attributes:</label>
-                    <div class="grid grid-cols-3 gap-x-12 gap-y-7">
 
+                    <div class="flex items-center w-full mb-3">
+                        <p class="bg-blue-100 text-blue-800 text-sm font-semibold inline-flex items-center p-1 rounded dark:bg-blue-200 dark:text-blue-800">8.7</p>
+                        <p class="ml-2 font-medium text-gray-900 dark:text-white">Excellent</p>
+                        <span class="mx-2 w-1 h-1 bg-gray-900 rounded-full dark:bg-gray-500"></span>
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">376 reviews</p>
+                    </div>
 
+                    <div class="grid grid-cols-1 grid-rows-3 gap-x-8 gap-y-2 w-full ">
                         @foreach ($i->interviewee_type->interviewee_attributes as $attribute)
                         <dl>
-
-                            <div class="sm:grid-cols-2 mt-2 ">
-                                <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 capitalize inline-flex items-center font-medium leading-sm uppercase px-3 py-1 bg-blue-200 text-blue-700 rounded-full ">
-                                    {{ $attribute->name }}
-                                </dt>
-                                <dd class="flex items-center mb-3">
-                                    <div class="w-full bg-gray-200 rounded h-2.5 dark:bg-gray-700 mr-2">
-                                        <div class="bg-blue-600 h-2.5 rounded dark:bg-blue-500" style="width: 88%"></div>
-                                    </div>
-                                    <span class="text-sm font-medium text-gray-500 dark:text-gray-400">8.8</span>
-                                </dd>
-                            </div>
+                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
+                                {{ $attribute->name }}
+                            </dt>
+                            <dd class="flex items-center mb-3">
+                                <div class="w-full bg-gray-200 rounded h-2.5 dark:bg-gray-700 mr-2">
+                                    <div class="bg-blue-600 h-2.5 rounded dark:bg-blue-500" style="width: 88%"></div>
+                                </div>
+                                <span class="text-sm font-medium text-gray-500 dark:text-gray-400">8.8</span>
+                            </dd>
                         </dl>
                         @endforeach
-
                     </div>
+
                     <div class="flex flex-row">
                         <div class="mt-5">
                             <button type="button" data-modal-toggle="defaultModal{{ $i->id }}" class="px-[10px] bg-blue-500 hover:bg-blue-700 text-white p-1 rounded-lg">Show CV</button>
-
                         </div>
 
                         <div class="mt-5 pl-5">
@@ -136,10 +128,6 @@
 
                         </div>
                     </div>
-
-
-
-
                 </div>
 
                 <div id="defaultModal{{ $i->id }}" tabindex="-1" class="hidden  overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center flex" aria-modal="true" role="dialog">
