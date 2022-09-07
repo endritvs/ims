@@ -175,18 +175,18 @@
                                                     <label for="rating_amount">Choose a grade:</label>
 
                                                     <div class="rating rating-lg rating-half">
-  <input type="radio" name="rating_amount" id="star0" class="rating-hidden" />
-  <input type="radio" value="1"  name="rating_amount" id="star1"  class="bg-green-500 mask mask-star-2 mask-half-1 @error('rating_amount') is-invalid @enderror" />
-  <input type="radio" value="2"  name="rating_amount" id="star2"  class="bg-green-500 mask mask-star-2 mask-half-2 @error('rating_amount') is-invalid @enderror" />
-  <input type="radio" value="3"  name="rating_amount" id="star3"  class="bg-green-500 mask mask-star-2 mask-half-1 @error('rating_amount') is-invalid @enderror" />
-  <input type="radio" value="4"  name="rating_amount" id="star4"  class="bg-green-500 mask mask-star-2 mask-half-2 @error('rating_amount') is-invalid @enderror" />
-  <input type="radio" value="5"  name="rating_amount" id="star5"  class="bg-green-500 mask mask-star-2 mask-half-1 @error('rating_amount') is-invalid @enderror" />
-  <input type="radio" value="6"  name="rating_amount" id="star6"  class="bg-green-500 mask mask-star-2 mask-half-2 @error('rating_amount') is-invalid @enderror" />
-  <input type="radio" value="7"  name="rating_amount" id="star7"  class="bg-green-500 mask mask-star-2 mask-half-1 @error('rating_amount') is-invalid @enderror" />
-  <input type="radio" value="8"  name="rating_amount" id="star8"  class="bg-green-500 mask mask-star-2 mask-half-2 @error('rating_amount') is-invalid @enderror" />
-  <input type="radio" value="9"  name="rating_amount" id="star9"  class="bg-green-500 mask mask-star-2 mask-half-1 @error('rating_amount') is-invalid @enderror" />
-  <input type="radio" value="10" name="rating_amount" id="star10" class="bg-green-500 mask mask-star-2 mask-half-2 @error('rating_amount') is-invalid @enderror" />
-</div>
+                                                      <input type="radio" name="rating_amount" id="star0" class="rating-hidden" />
+                                                      <input type="radio" value="1"  name="rating_amount" id="star1"  class="bg-green-500 mask mask-star-2 mask-half-1 @error('rating_amount') is-invalid @enderror" />
+                                                      <input type="radio" value="2"  name="rating_amount" id="star2"  class="bg-green-500 mask mask-star-2 mask-half-2 @error('rating_amount') is-invalid @enderror" />
+                                                      <input type="radio" value="3"  name="rating_amount" id="star3"  class="bg-green-500 mask mask-star-2 mask-half-1 @error('rating_amount') is-invalid @enderror" />
+                                                      <input type="radio" value="4"  name="rating_amount" id="star4"  class="bg-green-500 mask mask-star-2 mask-half-2 @error('rating_amount') is-invalid @enderror" />
+                                                      <input type="radio" value="5"  name="rating_amount" id="star5"  class="bg-green-500 mask mask-star-2 mask-half-1 @error('rating_amount') is-invalid @enderror" />
+                                                      <input type="radio" value="6"  name="rating_amount" id="star6"  class="bg-green-500 mask mask-star-2 mask-half-2 @error('rating_amount') is-invalid @enderror" />
+                                                      <input type="radio" value="7"  name="rating_amount" id="star7"  class="bg-green-500 mask mask-star-2 mask-half-1 @error('rating_amount') is-invalid @enderror" />
+                                                      <input type="radio" value="8"  name="rating_amount" id="star8"  class="bg-green-500 mask mask-star-2 mask-half-2 @error('rating_amount') is-invalid @enderror" />
+                                                      <input type="radio" value="9"  name="rating_amount" id="star9"  class="bg-green-500 mask mask-star-2 mask-half-1 @error('rating_amount') is-invalid @enderror" />
+                                                      <input type="radio" value="10" name="rating_amount" id="star10" class="bg-green-500 mask mask-star-2 mask-half-2 @error('rating_amount') is-invalid @enderror" />
+                                                    </div>
 
                                                             @error('rating amount')
                                                             <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
@@ -243,7 +243,7 @@
                 @if($i->id%2!=0)
                   <div class="flex items-center mb-5">
                       <div class="flex z-10 justify-center items-center w-6 h-6 bg-blue-200 rounded-full ring-0 ring-white dark:bg-blue-900 sm:ring-8 dark:ring-gray-900 shrink-0">
-                          <svg aria-hidden="true" class="w-3 h-3 text-blue-600 dark:text-blue-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                        {{$i->id}}
                       </div>
                       <div class="hidden sm:flex w-full bg-gray-200 h-0.5 dark:bg-gray-700"></div>
                   </div>
@@ -263,21 +263,20 @@
                                 class="absolute inset-x-0 bottom-0 h-2  bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"
                               ></span>
 
-                              <div class="justify-between sm:flex">
+                              <div class="justify-between items-center sm:flex">
                                 <div>
-                                  <h2 class="text-[30px] font-bold text-white">
+                                  <h2 class="text-[30px]  font-bold text-white">
                                     {{$i->interviewees ->name}}
                                   </h2>
                                   
                                 </div>
 
-                                <div class="flex-shrink-0 hidden ml-3 sm:block">
-                                  <p class="float-left pt-[15px] mx-[10px]">See my CV</p>
+                                <div class="flex-shrink-0 hidden sm:block">
+                                  <button type="button" class="text-gray-900 bg-white border float-left border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-1.5 py-1.5 mr-3 mt-3 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">My CV </button>
                                   <img
                                     class="object-cover w-16 h-16 rounded-lg shadow-sm"
-                                    src="/img/pepestonks.png"
-                                    alt=""
-                                  />
+                                    src="/img/me-about.jpg"
+                                    alt="" />
                                 </div>
                               </div>
 
@@ -290,7 +289,7 @@
                               <div class="mt-4">
                                 <p class="text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 bg-blue-200 text-blue-700 rounded-full">
                                   @foreach ($i->interviewees->interviewee_type->interviewee_attributes as $s)
-                                      {{ $s->name . ' .' }}
+                                      {{ $s->name . ' |' }}
                                   @endforeach
                                 </p>
                               </div>
@@ -350,8 +349,8 @@
                         
                       @if($i->id%2==0)
                         <div class="flex items-center mt-5">
-                            <div class="flex z-10 justify-center items-center w-6 h-6 bg-blue-200 rounded-full ring-0 ring-white dark:bg-blue-900 sm:ring-8 dark:ring-gray-900 shrink-0">
-                                <svg aria-hidden="true" class="w-3 h-3 text-blue-600 dark:text-blue-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                            <div class="flex z-10 justify-center items-center w-6 h-6 bg-blue-900 rounded-full ring-0 ring-blue-900 sm:ring-8 ">
+                                {{$i->id}}
                             </div>
                             <div class="hidden sm:flex w-full bg-gray-200 h-0.5 dark:bg-gray-700"></div>
                         </div>
