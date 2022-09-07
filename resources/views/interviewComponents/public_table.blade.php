@@ -16,8 +16,8 @@
                 </h1>
                 <a class="underline" href="{{ route('interview.index') }}">Se all interviews</a>
 
-                <form action="{{ route('public.index') }}" method="GET" role="search" class="my-12">
-                    <div class="flex mx-20">
+                <form action="{{ route('public.index') }}" method="GET" role="search" class="px-20 my-12 mx-20">
+                    <div class="flex justify-center">
                         <select class="flex-shrink-0 inline-flex items-center px-1 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" name="termT" id="termT">
                             <option selected>Choose a category</option>
                             @foreach ($intervieweesT as $t)
@@ -75,16 +75,16 @@
 
                     </div>
 
-                    <div class="gap-8 sm:grid sm:grid-cols-2 mt-2">
-                        <div class="mb-8">
+                    <div class="gap-8 sm:grid sm:grid-cols-2 mb-4">
+                        <div class="mb-2">
                             <img class="object-center object-cover rounded-full h-28 w-36" src="/storage/images/{{ $link[2] }}" alt="photo">
                             <div class="text-center">
 
 
-                                <p class="dark:text-white text-indigo-600 font-bold capitalize">
+                                <p class="dark:text-white text-indigo-600 font-bold">
                                     {{ $d['interviewees']['name'] . ' ' . $d['interviewees']['surname'] }}
                                 </p>
-                                <p class="text-xs dark:text-white text-indigo-600 text-gray-400 capitalize">
+                                <p class="text-xs dark:text-white text-indigo-600 ">
                                     {{ $d['interviewees']['interviewee_type']['name'] }}
                                 </p>
                             </div>
@@ -125,36 +125,34 @@
             </div>
 
 
-            <div class="grid grid-cols-2 gap-x-20 gap-y-7">
-
-                <div>
-                    <label class="dark:text-white text-indigo-600">Date:</label>
-                    <p class="text-base text-gray-400 font-normal"> {{ $d['interview_date'] }}</p>
-                </div>
-                <div>
-                    <label class="dark:text-white text-indigo-600">CV:</label>
-                    <button type="button" data-modal-toggle="defaultModal{{ $d['id'] }}" class="bg-gray-500 hover:bg-gray-700 text-white p-1 rounded">See CV</button>
-                </div>
-
+            <div class="flex items-center w-full mb-8">
+                <label class="dark:text-white text-indigo-600 mr-3">Date:</label>
+                <p class="text-base text-gray-400 font-normal"> {{ $d['interview_date'] }}</p>
             </div>
 
-            <label class="dark:text-white text-indigo-600">Attributes:</label>
-            <div class="grid grid-cols-3 gap-x-12 gap-y-7">
+            <div class="flex items-center w-full mb-3">
+                <p class="bg-blue-100 text-blue-800 text-sm font-semibold inline-flex items-center p-1 rounded dark:bg-blue-200 dark:text-blue-800">8.7</p>
+                <p class="ml-2 font-medium text-gray-900 dark:text-white">Excellent</p>
+                <span class="mx-2 w-1 h-1 bg-gray-900 rounded-full dark:bg-gray-500"></span>
+                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">376 reviews</p>
+            </div>
+
+            <div class="grid grid-cols-1 grid-rows-3 gap-x-8 gap-y-2 w-full ">
                 @foreach ($d['interviewees']['interviewee_type']['interviewee_attributes'] as $attribute)
                 <dl>
-                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 capitalize">
+                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
                         {{ $attribute['name'] }}
                     </dt>
                     <dd class="flex items-center mb-3">
                         <div class="w-full bg-gray-200 rounded h-2.5 dark:bg-gray-700 mr-2">
-                            <div class="bg-blue-600 h-2.5 rounded dark:bg-blue-500" style="width: 88%">
-                            </div>
+                            <div class="bg-blue-600 h-2.5 rounded dark:bg-blue-500" style="width: 88%"></div>
                         </div>
                         <span class="text-sm font-medium text-gray-500 dark:text-gray-400">8.8</span>
                     </dd>
                 </dl>
                 @endforeach
             </div>
+
             <div class="mt-5">
                 <a href="/storage/cv_path/{{ $cv[2] }}" download>
                     <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">

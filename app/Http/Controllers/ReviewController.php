@@ -27,11 +27,16 @@ class ReviewController extends Controller
  
     public function store(Request $request)
     {
+
+        if (empty($request['rating_amount'])) {
+            $request['rating_amount'] = 10;
+        }
+
         $request->validate([
             'candidate_id' => ['required'],
             'questionnaire_id' => ['required'],
             'interview_id' => ['required'],
-            'rating_amount' => ['required',  'numeric', 'max:5'],
+            'rating_amount' => ['required',  'numeric', 'max:10'],
             
         ]); 
         

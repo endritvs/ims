@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
+use App\Models\reviews_attributes;
 
 class IntervieweeController extends Controller
 {
@@ -24,7 +25,7 @@ class IntervieweeController extends Controller
     }
     public function index(Request $request)
     {
-
+        $review_attributes = reviews_attributes::with('candidates', 'questionnaires', 'interviews', 'attributes')->get();
         $intervieweesA = interviewee::with('interviewee_type')->where([
             ['name', '!=' , Null],
             ['surname', '!=' , Null],
@@ -50,7 +51,7 @@ class IntervieweeController extends Controller
         $sql1="SELECT candidate_id,AVG(rating_amount) as rating FROM reviews GROUP BY candidate_id";
         $exec1 = DB::select(DB::raw($sql1));
     
-        return view('intervieweesMainComponents/table')->with(['exec'=>$exec,'exec1'=>$exec1,'intervieweesA' => $intervieweesA, 'intervieweesT' => $intervieweesT]);
+        return view('intervieweesMainComponents/table')->with(['exec'=>$exec,'exec1'=>$exec1,'intervieweesA' => $intervieweesA, 'intervieweesT' => $intervieweesT, 'review_attributes' => $review_attributes]);
     }
     public function paginate($items, $perPage = 6, $page = null, $options = [])
     {

@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\interviewee;
 use App\Models\review;
 use App\Models\comment;
+use App\Models\reviews_attributes;
+
 
 class interview extends Model
 {
@@ -33,6 +35,10 @@ class interview extends Model
     public function review()
     {
         return $this->hasMany(review::class);
+    }
+    public function review_attributes()
+    {
+        return $this->hasMany(reviews_attributes::class);
     }
     // public function comments()
     // {
