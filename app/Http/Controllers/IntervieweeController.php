@@ -47,8 +47,10 @@ class IntervieweeController extends Controller
         $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
         $sql="SELECT t.name, GROUP_CONCAT( i.name ) as 'Attributes' FROM interviewee_attributes i inner join interviewee_types t on i.interviewee_type_id=t.id group by i.interviewee_type_id, ims_database.t.name";
         $exec=DB::select(DB::raw($sql));
+        $sql1="SELECT candidate_id,AVG(rating_amount) as rating FROM reviews GROUP BY candidate_id";
+        $exec1 = DB::select(DB::raw($sql1));
     
-        return view('intervieweesMainComponents/table')->with(['exec'=>$exec,'intervieweesA' => $intervieweesA, 'intervieweesT' => $intervieweesT]);
+        return view('intervieweesMainComponents/table')->with(['exec'=>$exec,'exec1'=>$exec1,'intervieweesA' => $intervieweesA, 'intervieweesT' => $intervieweesT]);
     }
     public function paginate($items, $perPage = 6, $page = null, $options = [])
     {
