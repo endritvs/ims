@@ -5,9 +5,8 @@
 <link href="https://cdn.jsdelivr.net/npm/daisyui@2.24.0/dist/full.css" rel="stylesheet" type="text/css" />
 <script src="https://cdn.tailwindcss.com"></script>
 
-
-
 <title>Candidates</title>
+
 <div class="h-full ml-14 mt-8 mb-10 md:ml-64">
     <div class="w-full bg-white dark:bg-gray-800">
         <section class="max-w-6xl mx-auto pb-4 px-4 sm:px-6 lg:px-4 py-12">
@@ -59,7 +58,9 @@
                 @php
                 $link = explode('/', $i->img);
                 $cv = explode('/', $i->cv_path);
+                
                 @endphp
+
                 <div class="w-full bg-gray-200 dark:bg-gray-900 rounded-lg sahdow-lg p-12 flex flex-col justify-center items-center">
 
 
@@ -101,17 +102,17 @@
                     </div>
 
                     <div class="rating mb-5">
+                       
                         @foreach($exec1 as $rating)
                         @if($i->id==$rating->candidate_id)
                         
-   @for($n=0;$n<floatval($rating->rating);$n++)
-   <input type="radio" name="rating_amount" class="mask mask-star" value="RatingModal{{$i->id}}" />
+  @for($n=0;$n<floatval($rating->rating);$n++)
+    <input type="radio" name="rating_amount" class="mask mask-star" value="RatingModal{{$i->id}}" />
   @endfor
   @endif
   @endforeach
   
 </div>
-
 
                     <div class="grid grid-cols-2 gap-x-20 gap-y-7">
 
@@ -127,17 +128,41 @@
 
 
                         @foreach ($i->interviewee_type->interviewee_attributes as $attribute)
+                        
                         <dl>
-
+                            
                             <div class="sm:grid-cols-2 mt-2 ">
                                 <dt class="text-sm font-medium text-gray-700 dark:text-gray-400 capitalize inline-flex items-center font-medium leading-sm uppercase px-3 py-1 bg-blue-200 text-blue-700 rounded-full ">
                                     {{ $attribute->name }}
                                 </dt>
                                 <dd class="flex items-center mb-3">
+
+                        @php
+
+                            $total = 0;
+                            $index = 0;
+                            $rate = 'No Rating';
+
+                            foreach($review_attributes as $review_attribute){
+                                if( $review_attribute->candidate_id == $i->id & $review_attribute->attribute_id == $attribute->id){
+
+                                    $total += $review_attribute->rating_amount;
+                                    $index++;
+                                }
+                            }
+
+                            if($index != 0){
+
+                                $rate = $total/$index;
+                                floatval($rate);
+
+                            }
+                        @endphp
+
                                     <div class="w-full bg-gray-200 rounded h-2.5 dark:bg-gray-700 mr-2">
-                                        <div class="bg-blue-600 h-2.5 rounded dark:bg-blue-700" style="width: 88%"></div>
+                                        <div class="bg-blue-600 h-2.5 rounded dark:bg-blue-700" style="width: {{($rate == 'No Rating' ? 0 : $rate) * 10 }}%"></div>
                                     </div>
-                                    <span class="text-sm font-medium text-gray-700 dark:text-gray-400">8.8</span>
+                                    <span class="text-sm font-medium text-gray-700 dark:text-gray-400">{{$rate}}</span>
                                 </dd>
                             </div>
                         </dl>

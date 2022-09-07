@@ -3,7 +3,6 @@
 @section('content')
 <title>Interview</title>
 
-
 <div class="h-full ml-14 mt-8 mb-10 md:ml-64">
     <div class="w-full bg-white dark:bg-gray-800">
         <section class="max-w-6xl mx-auto pb-4 px-4 sm:px-6 lg:px-4 py-12">
@@ -14,16 +13,16 @@
                 <h1 class="dark:text-white text-indigo-600 font-bold text-3xl md:text-4xl lg:text-5xl font-heading ">
                     Interview
                 </h1>
-                <a class="underline" href="{{ route('interview.index') }}">Se all interviews</a>
+                <a class="underline" href="{{ route('interview.index') }}">See all interviews</a>
 
                 <form action="{{ route('public.index') }}" method="GET" role="search" class="my-12">
                     <div class="flex mx-20">
-                        <select class="flex-shrink-0 inline-flex items-center px-1 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" name="termT" id="termT">
+                        {{-- <select class="flex-shrink-0 inline-flex items-center px-1 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" name="termT" id="termT">
                             <option selected>Choose a category</option>
                             @foreach ($intervieweesT as $t)
                             <option value="{{$t->id}}">{{$t->name}}</option>
                             @endforeach
-                        </select>
+                        </select> --}}
                         <div class="relative w-full">
                             <input type="search" id="search-dropdown" name="term" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Search Mockups, Logos, Design Templates...">
                             <a href={{route('public.index')}}>
@@ -70,6 +69,16 @@
                         <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconButton">
                             <li>
                                 <a data-modal-toggle="editModal{{ $d['id'] }}" href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Comments</a>
+                            </li>
+                            <li>
+                                @if (!App\Models\reviews_attributes::where('candidate_id', $d['interviewees']['id'] )->exists() || !App\Models\reviews_attributes::where('questionnaire_id', $d['user']['id'] )->exists() || !App\Models\reviews_attributes::where('interview_id', $d['id'] )->exists())
+                                    <a data-modal-toggle="rateModal{{ $d['id'] }}" href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Rate</a>
+
+                                @else
+                                    <a class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-red-500 dark:hover:text-white"> 
+                                       You Already Rated!
+                                    </a>
+                             @endif
                             </li>
                         </ul>
 
@@ -139,18 +148,40 @@
             </div>
 
             <label class="dark:text-white text-indigo-600">Attributes:</label>
-            <div class="grid grid-cols-3 gap-x-12 gap-y-7">
+            <div class="grid grid-cols-2 gap-x-12 gap-y-7">
                 @foreach ($d['interviewees']['interviewee_type']['interviewee_attributes'] as $attribute)
                 <dl>
                     <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 capitalize">
                         {{ $attribute['name'] }}
                     </dt>
                     <dd class="flex items-center mb-3">
-                        <div class="w-full bg-gray-200 rounded h-2.5 dark:bg-gray-700 mr-2">
-                            <div class="bg-blue-600 h-2.5 rounded dark:bg-blue-500" style="width: 88%">
+                        
+                    @php
+
+                        $total = 0;
+                        $index = 0;
+                        $rate = 'No Rating';
+
+                        foreach($review_attributes as $review_attribute){
+
+                            if( $review_attribute->candidate_id == $d['interviewees']['id'] & $review_attribute->questionnaire_id == $d['user']['id'] & $review_attribute->attribute_id == $attribute['id'] & $review_attribute->interview_id == $d['id']){
+
+                                $total += $review_attribute->rating_amount;
+                                $index++;
+                            }
+                        }
+
+                        if($index != 0){
+
+                            $rate = $total/$index;
+                        }
+                    @endphp
+                    
+                                <div class="w-full bg-gray-200 rounded h-2.5 dark:bg-gray-700 mr-2">
+                                    <div class="bg-blue-600 h-2.5 rounded dark:bg-blue-500" style="width: {{($rate == 'No Rating' ? 0 : $rate) * 10 }}%">
+                                </div>
                             </div>
-                        </div>
-                        <span class="text-sm font-medium text-gray-500 dark:text-gray-400">8.8</span>
+                            <span class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ $rate }}</span>
                     </dd>
                 </dl>
                 @endforeach
@@ -285,6 +316,57 @@
             </div>
         </div>
     </div>
+
+    <div id="rateModal{{$d['id']}}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+    <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <!-- Modal header -->
+            <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    Terms of Service
+                </h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="rateModal{{$d['id']}}">
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="p-6 space-y-6">
+                <form action="{{ route('review_attributes.store') }}" method="POST">
+                     @csrf 
+            
+                        <input type="hidden" name="candidate_id" id="candidate_id" value="{{ $d['interviewees']['id'] }}" class="bg-gray-600 text-white rounded-lg"> <!-- Candidate ID -->
+                        <input type="hidden" name="questionnaire_id" id="questionnaire_id" value="{{ $d['user']['id'] }}" class="bg-gray-600 text-white rounded-lg"> <!-- Questionnaire ID -->
+                        <input type="hidden" name="interview_id" id="interview_id" value="{{ $d['id'] }}" class="bg-gray-600 text-white rounded-lg"> <!-- Interview ID -->
+                        
+                 @foreach ($d['interviewees']['interviewee_type']['interviewee_attributes'] as $attribute)
+                <dl>
+                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 capitalize">
+                    <input type="hidden" name="attribute_id[]" id="attribute_id" value="{{$attribute['id']}}" class="bg-gray-600 text-white rounded-lg" style="width: 5%"> <!-- Interview ID -->
+                        
+                    {{ $attribute['name'] }}
+
+                    </dt>
+                    <dd class="flex items-center mb-3">
+                        <div class="w-full bg-gray-200 rounded h-2.5 dark:bg-gray-700 mr-2">
+                            <div class="bg-blue-600 h-2.5 rounded dark:bg-blue-500" style="width: 88%">
+                            </div>
+                        </div>
+                        <input type="number" value="" name="rating_amount[]" id="rating_amount" autocomplete="given-name" class="bg-gray-600 text-white rounded-lg" style="width: 10% " min="1" max="10">
+                    </dd>
+                </dl>
+                @endforeach
+            </div>
+            <!-- Modal footer -->
+            <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
+            </div>
+            
+            <form>
+        </div>
+    </div>
+</div>
     @endforeach
 </div>
 </div>

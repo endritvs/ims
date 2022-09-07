@@ -15,7 +15,7 @@
                     </span>
 
                 </div>
-                <span class="font-medium text-white relative bottom-3 uppercase">{{Auth::user()->name}}</span>
+                <span class="font-medium text-white relative bottom-3 capitalize">{{Auth::user()->name}}</span>
                 @else
                 <div class="inline-flex overflow-hidden relative justify-center items-center w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600">
                     <span class="font-medium text-gray-600 dark:text-white">
