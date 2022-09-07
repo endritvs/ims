@@ -174,7 +174,7 @@
                                             <option value="{{$r->rating_amount}}">{{$r->rating_amount}}</option>
                                             @for ($i=1; $i<6; $i++)
                                             @if ($r->rating_amount!==$i)                                       
-                                            <option value="{{$i}}">{{$i}}</option>
+                                            <option  value="{{$i}}">{{$i}}</option>
                                             @endif
                                             @endfor
                                             </select>

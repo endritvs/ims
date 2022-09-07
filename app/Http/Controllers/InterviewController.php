@@ -12,6 +12,7 @@ use App\Models\review;
 use App\Models\interviewee;
 use App\Models\comment;
 use App\Models\Interviewee_Type;
+use App\Models\reviews_attributes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use GuzzleHttp\Client;
@@ -51,21 +52,22 @@ class InterviewController extends Controller
     }
 
     public function public_index(Request $request)
-    {   
-       
+    {  
+
+        $review_attributes = reviews_attributes::with('candidates', 'questionnaires', 'interviews', 'attributes')->get();
+
         $comment = comment::with('candidates', 'questionnaires')->get();
         $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
-        $interv = interview::with('user', 'interviewees')->get();
-        $interview=interview::with('user', 'interviewees')->where([
-            ['interviewer', '!=' , Null],
-            [function ($query) use ($request){
-                if(($term=$request->term)){
-                    $query->join('interview', 'interview.interviewer', '=', 'users.id' )
-                    ->where( 'interviewer', 'LIKE', '%'.$term.'%' );
-                }
-            }]
-        ])->get();
-  
+        $interview=interview::with('user', 'interviewees')->get();
+        $searchString=$request->term;
+        $interview = interview::whereHas('interviewees', function ($query) use ($searchString){
+            $query->where('name', 'like', '%'.$searchString.'%');
+        })
+        ->with(['interviewees' => function($query) use ($searchString){
+            $query->where('name', 'like', '%'.$searchString.'%');
+        }])->with('user')
+        ->get();
+//   dd($categories);
         $interview = $interview->groupBy('interview_id')->toArray();
             
         foreach ($interview as $a => $i) {
@@ -83,11 +85,11 @@ class InterviewController extends Controller
 
         $interview = collect($interview)->flatten(1)->toArray();
         $interview = $this->paginate($interview);
-        $interview->withPath('/interview/public');
+        $interview->withPath('/interview');
         $sql="SELECT candidate_id,AVG(rating_amount) as rating FROM reviews GROUP BY candidate_id";
         $exec = DB::select(DB::raw($sql));
   
-        return view('interviewComponents/public_table', compact('interview'),compact('exec'))->with('comment', $comment,'i',(request()->input('page',1)-1)*5)->with(['intervieweesT'=>$intervieweesT]);
+        return view('interviewComponents/public_table', compact('interview'),compact('exec'))->with('comment', $comment,'i',(request()->input('page',1)-1)*5)->with(['intervieweesT'=>$intervieweesT, 'review_attributes' => $review_attributes]);
     }
     public function index()
     {
@@ -98,7 +100,6 @@ class InterviewController extends Controller
 
         $interviewss = interview::with('user', 'interviewees')->orderBy('interview_id', 'asc')->get();
         $interview = interview::with('user', 'interviewees')->orderBy('interview_id', 'asc')->paginate(5);
-
 
         return view('interviewComponents/table')->with(['exec' => $exec, 'interview' => $interview, 'admin' => $admin, 'interviewee' => $interviewee, 'interviewss' => $interviewss]);
     }
