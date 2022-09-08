@@ -96,10 +96,21 @@
                     </div>
 
                     <div class="flex items-center w-full mb-3">
-                        <p class="bg-blue-100 text-blue-800 text-sm font-semibold inline-flex items-center p-1 rounded dark:bg-blue-200 dark:text-blue-800">8.7</p>
-                        <p class="ml-2 font-medium text-gray-900 dark:text-white">Excellent</p>
+                        @foreach ($exec1 as $rat => $dd)
+                            @if ($dd->candidate_id === $i->id)
+                        <p class="bg-blue-100 text-blue-800 text-sm font-semibold inline-flex items-center p-1 rounded dark:bg-blue-200 dark:text-blue-800">{{ floatval($dd->rating) }}</p>
+                        <p class="ml-2 font-medium text-gray-900 dark:text-white">Rating</p>
                         <span class="mx-2 w-1 h-1 bg-gray-900 rounded-full dark:bg-gray-500"></span>
                         <p class="text-sm font-medium text-gray-500 dark:text-gray-400">376 reviews</p>
+                                @break
+                            @endif
+                        @endforeach
+                            @if(!($dd->candidate_id === $i->id))
+                        <p class="bg-blue-100 text-blue-800 text-sm font-semibold inline-flex items-center p-1 rounded dark:bg-blue-200 dark:text-blue-800"></p>
+                        <p class="ml-2 font-medium text-gray-900 dark:text-white">Not Yet Rated</p>
+                        <span class="mx-2 w-1 h-1 bg-gray-900 rounded-full dark:bg-gray-500"></span>
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">0 reviews</p>
+                            @endif
                     </div>
 
                     <div class="grid grid-cols-1 grid-rows-3 gap-x-8 gap-y-2 w-full ">
@@ -108,12 +119,35 @@
                             <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
                                 {{ $attribute->name }}
                             </dt>
+
+                            @php
+
+                            $total = 0;
+                            $index = 0;
+                            $rate = 'No Rating';
+
+                            foreach($review_attributes as $review_attribute){
+                                if( $review_attribute->candidate_id == $i->id && $review_attribute->attribute_id == $attribute->id){
+
+                                    $total += $review_attribute->rating_amount;
+                                    $index++;
+                                }
+                            }
+
+                            if($index != 0){
+
+                                $rate = $total/$index;
+                                floatval($rate);
+                            }
+                        @endphp
+
                             <dd class="flex items-center mb-3">
                                 <div class="w-full bg-gray-200 rounded h-2.5 dark:bg-gray-700 mr-2">
-                                    <div class="bg-blue-600 h-2.5 rounded dark:bg-blue-500" style="width: 88%"></div>
+                                    <div class="bg-blue-600 h-2.5 rounded dark:bg-blue-500" style="width: {{($rate == 'No Rating' ? 0 : round(floatval($rate), 1)) * 10 }}%"></div>
                                 </div>
-                                <span class="text-sm font-medium text-gray-500 dark:text-gray-400">8.8</span>
+                                <span class="text-sm font-medium text-gray-500 dark:text-gray-400">{{round(floatval($rate), 1)}}</span>
                             </dd>
+                                
                         </dl>
                         @endforeach
                     </div>

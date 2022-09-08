@@ -21,9 +21,9 @@ return new class extends Migration
             $table->foreignId('questionnaire_id')
                 ->references('id')->on('users')
                 ->onDelete('cascade');
-                // $table->foreignId('interview_id')
-                // ->references('id')->on('interviews')
-                // ->onDelete('cascade');
+            $table->foreignId('interview_id')
+                ->references('id')->on('interviews')
+                ->onDelete('cascade');
             $table->text('message');
             $table->timestamps();
         });

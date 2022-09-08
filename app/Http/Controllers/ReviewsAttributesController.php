@@ -87,7 +87,7 @@ class ReviewsAttributesController extends Controller
      * @param  \App\Models\reviews_attributes  $reviews_attributes
      * @return \Illuminate\Http\Response
      */
-    public function edit(reviews_attributes $reviews_attributes)
+    public function edit($id)
     {
         //
     }
@@ -99,7 +99,7 @@ class ReviewsAttributesController extends Controller
      * @param  \App\Models\reviews_attributes  $reviews_attributes
      * @return \Illuminate\Http\Response
      */
-    public function update(Updatereviews_attributesRequest $request, reviews_attributes $reviews_attributes)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -110,8 +110,10 @@ class ReviewsAttributesController extends Controller
      * @param  \App\Models\reviews_attributes  $reviews_attributes
      * @return \Illuminate\Http\Response
      */
-    public function destroy(reviews_attributes $reviews_attributes)
+    public function destroy($id)
     {
-        //
+        $review = reviews_attributes::findOrFail($id);
+        $review->delete();
+        return redirect()->route('interview.index');
     }
 }
