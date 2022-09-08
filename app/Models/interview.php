@@ -40,9 +40,9 @@ class interview extends Model
     {
         return $this->hasMany(reviews_attributes::class);
     }
-    // public function comments()
-    // {
-    //     return $this->hasMany(comment::class);
-    // }
+    public function comments()
+    {
+        return $this->hasMany(comment::class);
+    }
 
 }

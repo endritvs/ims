@@ -27,7 +27,7 @@ class CommentController extends Controller
         comment::create([
             'candidate_id' => $request['candidate_id'],
             'questionnaire_id' => Auth::user()->id,
-            // 'interview_id' => $request['interview_id'],
+            'interview_id' => $request['interview_id'],
             'message' => $request['message'],
         ]);
 
