@@ -14,7 +14,7 @@
                 <h1 class="dark:text-white text-indigo-600 font-bold text-3xl md:text-4xl lg:text-5xl font-heading ">
                     Interview
                 </h1>
-                <a class="underline" href="{{ route('interview.index') }}">Se all interviews</a>
+                <a class="underline" href="{{ route('interview.index') }}">See all interviews</a>
 
                 <form action="{{ route('public.index') }}" method="GET" role="search" class="px-20 my-12 mx-20">
                     <div class="flex justify-center">
