@@ -36,7 +36,7 @@ class ReviewController extends Controller
             'candidate_id' => ['required'],
             'questionnaire_id' => ['required'],
             'interview_id' => ['required'],
-            'rating_amount' => ['required',  'numeric', 'max:10'],
+            'rating_amount' => ['required',  'numeric', 'max:5'],
             
         ]); 
         
