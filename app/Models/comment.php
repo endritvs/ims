@@ -15,7 +15,7 @@ class comment extends Model
     protected $fillable = [
         'candidate_id',
         'questionnaire_id',
-        // 'interview_id',
+        'interview_id',
         'message',
     ];
 
@@ -27,9 +27,9 @@ class comment extends Model
     {
         return $this->belongsTo(User::class, "questionnaire_id");
     }
-    // public function interviews()
-    // {
-    //     return $this->belongsTo(interview::class, "interview_id");
-    // }
+    public function interviews()
+    {
+        return $this->belongsTo(interview::class, "interview_id");
+    }
 
 }

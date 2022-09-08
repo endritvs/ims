@@ -73,12 +73,20 @@ class InterviewController extends Controller
         foreach ($interview as $a => $i) {
             if (count($i) > 1) {
                 $names = "";
+                $id = "";
                 foreach ($i as $x) {
                     $names .= $x['user']['name'] . ",";
+                    $id .= $x['user']['id'] . ",";
+
                 }
+                
                 $test = $i;
+
                 array_splice($test, 0, -1);
+
                 $test[0]['user']['name'] = $names;
+                $test[0]['user']['id'] = $id;
+                
                 $interview[$a] = $test;
             }
         }
@@ -87,6 +95,7 @@ class InterviewController extends Controller
         $interview = $this->paginate($interview);
         $interview->withPath('/interview');
         $sql="SELECT candidate_id,AVG(rating_amount) as rating FROM reviews GROUP BY candidate_id";
+        
         $exec = DB::select(DB::raw($sql));
   
         return view('interviewComponents/public_table', compact('interview'),compact('exec'))->with('comment', $comment,'i',(request()->input('page',1)-1)*5)->with(['intervieweesT'=>$intervieweesT, 'review_attributes' => $review_attributes]);

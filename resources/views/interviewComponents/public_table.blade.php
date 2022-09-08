@@ -50,6 +50,7 @@
                 $link = explode('/', $d['interviewees']['img']);
                 $cv = explode('/', $d['interviewees']['cv_path']);
                 $quest = explode(',', $d['user']['name']);
+                $questID = explode(',', $d['user']['id']);
 
                 @endphp
 
@@ -71,14 +72,17 @@
                                 <a data-modal-toggle="editModal{{ $d['id'] }}" href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Comments</a>
                             </li>
                             <li>
-                                @if (!App\Models\reviews_attributes::where('candidate_id', $d['interviewees']['id'] )->exists() || !App\Models\reviews_attributes::where('questionnaire_id', $d['user']['id'] )->exists() || !App\Models\reviews_attributes::where('interview_id', $d['id'] )->exists())
+                        @if (in_array(Auth::user()->id, $questID))
+
+                                @if (!App\Models\reviews_attributes::where('candidate_id', $d['interviewees']['id'] )->exists() || !App\Models\reviews_attributes::where('questionnaire_id', Auth::user()->id )->exists() || !App\Models\reviews_attributes::where('interview_id', $d['id'] )->exists())
                                     <a data-modal-toggle="rateModal{{ $d['id'] }}" href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Rate</a>
 
                                 @else
-                                    <a class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-red-500 dark:hover:text-white"> 
-                                       You Already Rated!
+                                    <a data-modal-toggle="editRateModal{{$d['id']}}" href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-red-500 dark:hover:text-white"> 
+                                       Edit Rating
                                     </a>
                              @endif
+                        @endif
                             </li>
                         </ul>
 
@@ -99,18 +103,15 @@
                             </div>
 
                             <div class="flex items-center mt-5">
-                                @foreach ($exec as $rat => $dd)
-                                @if ($dd->candidate_id === $d['interviewees']['id'])
-                                <p class="bg-blue-100 text-blue-800 text-sm font-semibold inline-flex items-center p-1.5 rounded dark:bg-blue-200 dark:text-blue-800">
+                               
+                                <!-- <p class="bg-blue-100 text-blue-800 text-sm font-semibold inline-flex items-center p-1.5 rounded dark:bg-blue-200 dark:text-blue-800">
 
-                                    {{ floatval($dd->rating) }}
-                                <p class="ml-1">Rating</p>
+                                <p class="ml-1"></p>
 
 
 
-                                </p>
-                                @endif
-                                @endforeach
+                                </p> -->
+                                
 
 
                             </div>
@@ -124,10 +125,9 @@
                         </div>{{ $quest[$i] }}
                         @endfor
                         @else
-                        @for ($i = 0; $i < count($quest); $i++) <div class="m-1 inline-flex overflow-hidden relative justify-center items-center w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600">
-                            <span data-popover-target="popover-default" class="font-medium text-gray-600 dark:text-white">{{ substr($quest[$i], 0, 1) }}</span>
-                    </div>{{ $quest[$i] }}
-                    @endfor
+                        <div class="m-1 inline-flex overflow-hidden relative justify-center items-center w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600">
+                            <span data-popover-target="popover-default" class="font-medium text-gray-600 dark:text-white">{{ substr($quest[0], 0, 1) }}</span>
+                    </div>{{ $quest[0] }}
                     @endif
                 </div>
 
@@ -145,6 +145,22 @@
                     <button type="button" data-modal-toggle="defaultModal{{ $d['id'] }}" class="bg-gray-500 hover:bg-gray-700 text-white p-1 rounded">See CV</button>
                 </div>
 
+            <div class="flex items-center w-full mb-3">
+                @foreach ($exec as $rat => $dd)
+                    @if ($dd->candidate_id === $d['interviewees']['id'])
+                <p class="bg-blue-100 text-blue-800 text-sm font-semibold inline-flex items-center p-1 rounded dark:bg-blue-200 dark:text-blue-800">{{ floatval($dd->rating) }}</p>
+                <p class="ml-2 font-medium text-gray-900 dark:text-white">Rating</p>
+                <span class="mx-2 w-1 h-1 bg-gray-900 rounded-full dark:bg-gray-500"></span>
+                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">376 reviews</p>
+                        @break
+                    @endif
+                @endforeach
+                    @if (!($dd->candidate_id === $d['interviewees']['id']))
+                <p class="bg-blue-100 text-blue-800 text-sm font-semibold inline-flex items-center p-1 rounded dark:bg-blue-200 dark:text-blue-800"></p>
+                <p class="ml-2 font-medium text-gray-900 dark:text-white">Not Yet Rated</p>
+                <span class="mx-2 w-1 h-1 bg-gray-900 rounded-full dark:bg-gray-500"></span>
+                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">0 reviews</p>
+                    @endif   
             </div>
 
             <label class="dark:text-white text-indigo-600">Attributes:</label>
@@ -155,7 +171,6 @@
                         {{ $attribute['name'] }}
                     </dt>
                     <dd class="flex items-center mb-3">
-                        
                     @php
 
                         $total = 0;
@@ -164,7 +179,7 @@
 
                         foreach($review_attributes as $review_attribute){
 
-                            if( $review_attribute->candidate_id == $d['interviewees']['id'] & $review_attribute->questionnaire_id == $d['user']['id'] & $review_attribute->attribute_id == $attribute['id'] & $review_attribute->interview_id == $d['id']){
+                            if( $review_attribute->candidate_id == $d['interviewees']['id'] && $review_attribute->attribute_id == $attribute['id'] && $review_attribute->interview_id == $d['id']){
 
                                 $total += $review_attribute->rating_amount;
                                 $index++;
@@ -176,12 +191,12 @@
                             $rate = $total/$index;
                         }
                     @endphp
-                    
-                                <div class="w-full bg-gray-200 rounded h-2.5 dark:bg-gray-700 mr-2">
-                                    <div class="bg-blue-600 h-2.5 rounded dark:bg-blue-500" style="width: {{($rate == 'No Rating' ? 0 : $rate) * 10 }}%">
-                                </div>
-                            </div>
-                            <span class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ $rate }}</span>
+
+                        <div class="w-full bg-gray-200 rounded h-2.5 dark:bg-gray-700 mr-2">
+                            <div class="bg-blue-600 h-2.5 rounded dark:bg-blue-500" style="width: {{($rate == 'No Rating' ? 0 : $rate) * 10 }}%"></div>
+                        </div>
+                        <span class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ round($rate, 1) }}</span>
+
                     </dd>
                 </dl>
                 @endforeach
@@ -239,7 +254,7 @@
 
                 @endphp
 
-                @if ($c->candidate_id===$d['interviewees']['id'])
+                @if ($c->candidate_id===$d['interviewees']['id'] && $c->interview_id===$d['id'])
                 <div class="m-4 relative grid grid-cols-1 gap-4 p-4 mb-8  rounded-lg shadow-lg">
                     <div class="relative flex gap-4">
 
@@ -280,7 +295,7 @@
 
                 <div class="flex mx-auto items-center justify-center mx-8 mb-4 max-w-lg">
 
-                    <form method="POST" action={{ route('comment.store') }} class="dark:bg-gray w-full max-w-xl rounded-lg px-4 pt-2">
+                    <form method="POST" id="comment" action={{ route('comment.store') }} class="dark:bg-gray w-full max-w-xl rounded-lg px-4 pt-2">
                         @csrf
                         <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="editModal{{ $d['id'] }}">
                             <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -288,7 +303,8 @@
                             </svg>
                             <span class="sr-only">Close modal</span>
                         </button>
-                        @if (Auth::user()->id===$d['user']['id'])
+
+                        @if (in_array(Auth::user()->id, $questID))
                         <div class="mb-4 w-full bg-gray-50 rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600">
                             <div class="py-2 px-4 bg-white rounded-t-lg dark:bg-gray-800">
                                 <label for="comment" class="sr-only">Your comment</label>
@@ -296,13 +312,12 @@
                                 <textarea name="message" id="comment" rows="4" class="px-0 w-full text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Write a comment..." required></textarea>
 
                                 <input type="hidden" name="candidate_id" value={{ $d['interviewees_id'] }}>
-                                {{-- <input type="hidden" name="interview_id"
-                                                        value={{ $d['interviewer'] }}> --}}
+                                <input type="hidden" name="interview_id" value={{ $d['id'] }}>
 
 
                             </div>
                             <div class="flex justify-between items-center py-2 px-3 border-t dark:border-gray-600">
-                                <button type="submit" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
+                                <button type="submit" id="comment" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
                                     Post comment
                                 </button>
 
@@ -324,7 +339,7 @@
             <!-- Modal header -->
             <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
                 <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                    Terms of Service
+                    Attribute Rating
                 </h3>
                 <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="rateModal{{$d['id']}}">
                     <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
@@ -333,11 +348,11 @@
             </div>
             <!-- Modal body -->
             <div class="p-6 space-y-6">
-                <form action="{{ route('review_attributes.store') }}" method="POST">
+                <form id="rate" action="{{ route('review_attributes.store') }}" method="POST">
                      @csrf 
             
                         <input type="hidden" name="candidate_id" id="candidate_id" value="{{ $d['interviewees']['id'] }}" class="bg-gray-600 text-white rounded-lg"> <!-- Candidate ID -->
-                        <input type="hidden" name="questionnaire_id" id="questionnaire_id" value="{{ $d['user']['id'] }}" class="bg-gray-600 text-white rounded-lg"> <!-- Questionnaire ID -->
+                        <input type="hidden" name="questionnaire_id" id="questionnaire_id" value="{{ Auth::user()->id }}" class="bg-gray-600 text-white rounded-lg"> <!-- Questionnaire ID -->
                         <input type="hidden" name="interview_id" id="interview_id" value="{{ $d['id'] }}" class="bg-gray-600 text-white rounded-lg"> <!-- Interview ID -->
                         
                  @foreach ($d['interviewees']['interviewee_type']['interviewee_attributes'] as $attribute)
@@ -360,10 +375,63 @@
             </div>
             <!-- Modal footer -->
             <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
+                <button id="rate" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
             </div>
             
-            <form>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- ------------------------------------------------------------------------- -->
+
+    <div id="editRateModal{{$d['id']}}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+    <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <!-- Modal header -->
+            <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    Attribute Rating
+                </h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="editRateModal{{$d['id']}}">
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="p-6 space-y-6">
+                <form id="rate" action="{{ route('review_attributes.update', $d['id']) }}" method="POST">
+                     @csrf 
+            
+                        <input type="hidden" name="candidate_id" id="candidate_id" value="{{ $d['interviewees']['id'] }}" class="bg-gray-600 text-white rounded-lg"> <!-- Candidate ID -->
+                        <input type="hidden" name="questionnaire_id" id="questionnaire_id" value="{{ Auth::user()->id }}" class="bg-gray-600 text-white rounded-lg"> <!-- Questionnaire ID -->
+                        <input type="hidden" name="interview_id" id="interview_id" value="{{ $d['id'] }}" class="bg-gray-600 text-white rounded-lg"> <!-- Interview ID -->
+                        
+                 @foreach ($d['interviewees']['interviewee_type']['interviewee_attributes'] as $attribute)
+                <dl>
+                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 capitalize">
+                    <input type="hidden" name="attribute_id[]" id="attribute_id" value="{{$attribute['id']}}" class="bg-gray-600 text-white rounded-lg" style="width: 5%"> <!-- Interview ID -->
+                        
+                    {{ $attribute['name'] }}
+
+                    </dt>
+                    <dd class="flex items-center mb-3">
+                        <div class="w-full bg-gray-200 rounded h-2.5 dark:bg-gray-700 mr-2">
+                            <div class="bg-blue-600 h-2.5 rounded dark:bg-blue-500" style="width: 88%">
+                            </div>
+                        </div>
+                        <input type="number" value="4" name="rating_amount[]" id="rating_amount" autocomplete="given-name" class="bg-gray-600 text-white rounded-lg" style="width: 10% " min="1" max="10">
+                    </dd>
+                </dl>
+                @endforeach
+            </div>
+            <!-- Modal footer -->
+            <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+                <button id="rate" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
+            </div>
+            
+            </form>
         </div>
     </div>
 </div>
