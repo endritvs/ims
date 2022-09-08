@@ -421,7 +421,7 @@
             </div>
         </section>
     </div>
-    <div class="dark:bg-gray-800 p-3">
+    <div class="dark:bg-gray-800 p-3 flex justify-center">
         {{ $intervieweesA->links() }}
     </div>
 </div>

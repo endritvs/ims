@@ -2,6 +2,11 @@
 
 @section('content')
 <title>My Upcoming Interviews</title>
+
+@php
+  $flip = 0;
+@endphp
+
 @if(Auth::user()->role==="interviewer")
 
 
@@ -36,7 +41,6 @@
             <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
               @foreach ($interview as $a) 
           
-            
               @php
               date_default_timezone_set("Europe/Belgrade");
            
@@ -53,7 +57,7 @@
               <tr class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
                
                 <td class="px-4 py-3 text-sm capitalize ">
-                  {{ $a -> user->name }}
+                  {{ $a -> user ->name }}
                 </td>
                 <td class="px-4 py-3 text-sm capitalize ">
                   {{ $a -> interviewees -> name }}
@@ -208,6 +212,7 @@
               </div>
             </div>
               @endforeach
+
           </tbody>
         </table>
         <div class="dark:bg-gray-800 p-3">
@@ -236,28 +241,48 @@
                 }
               }
             </style>
-            
-            <ol class="h-[500px] text-center sm:flex no-scrollbar overflow-x-auto h-auto">
-              @foreach($interview as $i)
-              <li class="mx-[10px] relative mb-6 sm:mb-0 min-w-[350px] {{$i->id%2==0 ? '' : 'mt-[23.8rem]'}}">
-                @if($i->id%2!=0)
-                  <div class="flex items-center mb-5">
-                      <div class="flex z-10 justify-center items-center w-6 h-6 bg-blue-200 rounded-full ring-0 ring-white dark:bg-blue-900 sm:ring-8 dark:ring-gray-900 shrink-0">
-                        {{$i->id}}
+            <ol class="h-[600px] text-center sm:flex no-scrollbar overflow-x-auto h-auto">
+              
+            @php
+
+              $interviewAll[count($interviewAll)] = '';
+
+              for($index = count($interviewAll)-1; $index > 0; $index--){
+                $interviewAll[$index] = $interviewAll[$index-1];
+              }
+
+            @endphp
+            @for($index = 1 ; $index < count($interviewAll)-1; $index++)
+                  @if($interviewAll[$index]->interview_id != $interviewAll[($index-1)]->interview_id || $index == 1)
+                      <div class="flex items-center mt-100 relative">
+                      <div class="relative flex z-10 justify-center items-center w-6 h-6 bg-blue-200 rounded-full ring-0 ring-white dark:bg-blue-900 sm:ring-8 dark:ring-gray-900 shrink-0">
+                        {{$interviewAll[$index]->id}}
                       </div>
-                      <div class="hidden sm:flex w-full bg-gray-200 h-0.5 dark:bg-gray-700"></div>
-                  </div>
+                      <hr class="absolute w-[400px] ">
+              </div>
+
+                @if($flip == 0)
+                  <li class="mx-[10px] relative mb-6 sm:mb-0 min-w-[350px]">
+                  
+                         
+                  @php
+                    $flip = 1;
+                  @endphp
+                @else
+
+                  <li class="mx-[10px] relative mb-6 sm:mb-0 min-w-[350px] mt-[26.8rem]">
+                        
+                    @php
+                    $flip = 0;
+                  @endphp
+              
                 @endif
+
+                
                   
                   <!-- ==================================== -->
                   <!-- ========== Card => Start =========== -->
                   <!-- ==================================== -->
-                      {{-- <h3 class="text-lg font-semibold text-gray-900 dark:text-white">{{$i -> interviewees -> name}}</h3>
-                      <p class="text-base font-normal text-white dark:text-white">{{$i->interviewees->interviewee_type->name}}</p>
-                      <p class="text-base font-normal text-white dark:text-white">@foreach ($i->interviewees->interviewee_type->interviewee_attributes as $s)
-                        {{ $s->name . ',' }}
-                        @endforeach</p>
-                        <p class="text-base font-normal text-gray-500 dark:text-white">{{$i -> interview_date}}</p> --}}
                         <div class="relative block p-8 overflow-hidden border border-gray-100 rounded-lg">
                               <span
                                 class="absolute inset-x-0 bottom-0 h-2  bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"
@@ -266,7 +291,9 @@
                               <div class="justify-between items-center sm:flex">
                                 <div>
                                   <h2 class="text-[30px]  font-bold text-white">
-                                    {{$i->interviewees ->name}}
+                                  
+                                      {{ $interviewAll[$index] -> interviewees -> name }}
+
                                   </h2>
                                   
                                 </div>
@@ -282,13 +309,13 @@
 
                               <div class="mt-4">
                                 <p class="text-[20px] text-white">
-                                  {{$i->interviewees->interviewee_type->name}}
+                                    {{$interviewAll[$index]->interviewees->interviewee_type->name}}
                                 </p>
                               </div>
 
                               <div class="mt-4">
                                 <p class="text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 bg-blue-200 text-blue-700 rounded-full">
-                                  @foreach ($i->interviewees->interviewee_type->interviewee_attributes as $s)
+                                  @foreach ($interviewAll[$index]->interviewees->interviewee_type->interviewee_attributes as $s)
                                       {{ $s->name . ' |' }}
                                   @endforeach
                                 </p>
@@ -296,7 +323,7 @@
 
                               <div class=" text-center mt-6">
                                 <div class="flex flex-col-reverse">
-                                  {{$i->interview_date}}
+                                  {{$interviewAll[$index]->interview_date}}
                               
                                 </div>
                               </div>
@@ -347,17 +374,10 @@
                           </div>
                         </div>
                         
-                      @if($i->id%2==0)
-                        <div class="flex items-center mt-5">
-                            <div class="flex z-10 justify-center items-center w-6 h-6 bg-blue-900 rounded-full ring-0 ring-blue-900 sm:ring-8 ">
-                                {{$i->id}}
-                            </div>
-                            <div class="hidden sm:flex w-full bg-gray-200 h-0.5 dark:bg-gray-700"></div>
-                        </div>
-                      @endif 
+                      
                       </li>
-
-              @endforeach
+                    @endif
+              @endfor
             </ol>
             
 
