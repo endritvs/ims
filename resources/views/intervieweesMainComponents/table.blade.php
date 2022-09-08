@@ -35,14 +35,39 @@
                         </div>
                     </div>
                 </form>
-                <div class="flex justify-end">
+                <div class="flex justify-evenly items-center">
                     <a class="mb-2" href="#">
                         <button type="button" data-modal-toggle="addUserModal" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Create</button>
                     </a>
+                    <a class="mr-4 ml-auto justify-center items-center"
+                     
+                     >Sort:
+                     <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 pr-4 mx-2">
+                      <a class="cursor-pointer" href="#">Rating  
+                       <i onclick="changeIconA(this)" class="fa-solid fa-arrow-up-long" id="SortNr"></i> 
+                      </a> 
+                     </button>
+                     <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 pr-4 mx-2">
+                      <a class="pl-5 py-2.5 p-0 mr-2 mb-2" href="#">Date
+                       <i onclick="changeIconB(this)" class="fa-solid fa-arrow-up-long" id="Date"></i>
+                      </a>
+                     </button>
+                     <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 pr-4 mx-2">
+                      <a class="pl-5 py-2.5 p-0 mr-2 mb-2" href="#">A-Z
+                       <i onclick="changeIconC(this)" class="fa-solid fa-arrow-up-long" id="AandZ"></i>
+                      </a>
+                     </button>
+
+                    </a>
+                    
+                     
                 </div>
             </div>
-
-
+            <script>
+                function myFunction(x) {
+                    x.classList.toggle("fas fa-sort-numeric-down");
+                }
+            </script>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
@@ -425,4 +450,28 @@
         {{ $intervieweesA->links() }}
     </div>
 </div>
+
+    <script type="text/javascript">
+      var angle = 0;
+function changeIconA(){
+    var spin1 = document.getElementById("SortNr");
+    spin2 = document.getElementById("SortNr");
+    angle+=180;
+    spin1.style.transform = "rotate("+angle+"deg)";
+}
+function changeIconB(){
+    var spin1 = document.getElementById("Date");
+    spin2 = document.getElementById("Date");
+    angle+=180;
+    spin1.style.transform = "rotate("+angle+"deg)";
+}
+function changeIconC(){
+    var spin1 = document.getElementById("AandZ");
+    spin2 = document.getElementById("AandZ");
+    angle+=180;
+    spin1.style.transform = "rotate("+angle+"deg)";
+}
+
+
+    </script>
 @endsection('content')
