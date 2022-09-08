@@ -45,11 +45,17 @@ class InterviewController extends Controller
     public function index1()
     {
         $review = review::with('candidates', 'questionnaires', 'interviews')->where('questionnaire_id',Auth::user()->id)->get();
-        $review=$review->toArray();
+        $review = $review->toArray();
+
         $interview = interview::with('user', 'interviewees')->where('interviewer', Auth::user()->id)->orderBy('interview_date', 'asc')->paginate(5);
+
         $interviewAll = interview::with('user', 'interviewees')->orderBy('interview_date', 'asc')->paginate(15); //+3 mashum se sa na vyn
+
+        $sql="SELECT candidate_id,AVG(rating_amount) as rating FROM reviews GROUP BY candidate_id";
+        
+        $exec = DB::select(DB::raw($sql));
        
-        return view('pages/newPage', compact('interview'),compact('review'))->with(['interviewAll' => $interviewAll]);
+        return view('pages/newPage', compact('interview'),compact('review'))->with(['interviewAll' => $interviewAll, 'exec' => $exec]);
     }
 
     public function public_index(Request $request)
