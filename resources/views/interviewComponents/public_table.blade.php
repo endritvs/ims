@@ -438,8 +438,7 @@
 
 </section>
 
-<div class="flex justify-evenly">
-    <div></div>
+<div class="flex justify-center">
     <div>{{ $interview->links() }}</div>
     <div></div>
 </div>
