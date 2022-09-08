@@ -1,6 +1,6 @@
 <div class="fixed w-full flex items-center h-14 text-white z-10">
 
-  <div class="flex w-full justify-end h-14 bg-blue-800 dark:bg-gray-900 header-right">
+  <div class="flex w-full justify-end h-14 bg-blue-900 dark:bg-gray-900 header-right">
 
     <ul class="flex items-center">
       <li>
