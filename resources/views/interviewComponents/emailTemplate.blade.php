@@ -1,4 +1,3 @@
-<h1> Job answer</h1>    
 
 <h3> Here is your upcoming meeting about {{ $interviewType }} <br>
 
