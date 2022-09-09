@@ -2,6 +2,7 @@
 
 @section('content')
 <title>Interviewee Attribute</title>
+    @if(Auth::user()->role==='admin')
     <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
         <div class="mt-[145px] mx-4">
             <div class="w-full overflow-hidden rounded-lg shadow-xs">
@@ -432,4 +433,10 @@
         </div>
 
     </div>
+    @else
+
+            <script>     window.location = "/dashboard";   </script>
+
+    @endif
+
 @endsection('content')

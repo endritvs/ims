@@ -114,6 +114,9 @@ Route::prefix('comment')->group(
 Route::prefix('interview')->group(
     function () {
         Route::get('/', [interviewController::class, 'public_index'])->name('public.index');
+        Route::get('/sort', [interviewController::class, 'sort'])->name('public.sort');
+        Route::get('/sortDate', [interviewController::class, 'sortDate'])->name('public.sortDate');
+        Route::get('/sortRating', [interviewController::class, 'sortRating'])->name('public.sortRating');
         Route::get('/public', [interviewController::class, 'index'])->name('interview.index');
         Route::get('/edit-interview/{id}', [interviewController::class, 'edit'])->name('interview.edit');
         Route::post('/update-interview/{id}', [interviewController::class, 'update'])->name('interview.update');

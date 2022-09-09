@@ -58,7 +58,44 @@ class InterviewController extends Controller
         return view('pages/newPage', compact('interview'),compact('review'))->with(['interviewAll' => $interviewAll, 'exec' => $exec]);
     }
 
-
+    public function sort(){
+        $comment = comment::with('candidates', 'questionnaires')->get();
+        $interview=interview::select('interviews.*')
+        ->join('interviewees', 'interviews.interviewees_id', '=', 'interviewees.id')
+        ->orderBy('interviewees.name')
+        ->paginate(6);
+        // SELECT * FROM interviews JOIN interviewees
+        //  ON interviews.interviewees_id = interviewees.id ORDER BY interviewees.name;
+        $sql="SELECT candidate_id,AVG(rating_amount) as rating FROM reviews GROUP BY candidate_id";
+        $exec = DB::select(DB::raw($sql));
+        $review_attributes = reviews_attributes::with('candidates', 'questionnaires', 'interviews', 'attributes')->get();
+        $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
+        return view('interviewComponents/public_table')->with(['interview'=>$interview,"intervieweesT"=>$intervieweesT,"review_attributes"=>$review_attributes,'exec'=>$exec,'comment'=>$comment]);
+    }
+    public function sortDate(){
+        $comment = comment::with('candidates', 'questionnaires')->get();
+        $interview=interview::orderBy('interview_date','asc')
+        ->paginate(6);
+        $sql="SELECT candidate_id,AVG(rating_amount) as rating FROM reviews GROUP BY candidate_id";
+        $exec = DB::select(DB::raw($sql));
+        
+$review_attributes = reviews_attributes::with('candidates', 'questionnaires', 'interviews', 'attributes')->get();
+$intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
+        return view('interviewComponents/public_table')->with(['interview'=>$interview,"intervieweesT"=>$intervieweesT,"review_attributes"=>$review_attributes,'exec'=>$exec,'comment'=>$comment]);
+    }
+    public function sortRating(){
+        $comment = comment::with('candidates', 'questionnaires')->get();
+        $interview=interview::select('interviews.*')
+        ->join('reviews', 'interviews.interview_id', '=', 'reviews.id')
+        ->orderBy('reviews.rating_amount','desc')
+        ->paginate(6);
+        $sql="SELECT candidate_id,AVG(rating_amount) as rating FROM reviews GROUP BY candidate_id";
+        $exec = DB::select(DB::raw($sql));
+        
+$review_attributes = reviews_attributes::with('candidates', 'questionnaires', 'interviews', 'attributes')->get();
+$intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
+        return view('interviewComponents/public_table')->with(['interview'=>$interview,"intervieweesT"=>$intervieweesT,"review_attributes"=>$review_attributes,'exec'=>$exec,'comment'=>$comment]);
+    }
 
 
     public function public_index(Request $request)

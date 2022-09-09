@@ -7,7 +7,7 @@
 <div class="h-full ml-14 mt-8 mb-10 md:ml-64">
     <div class="w-full bg-white dark:bg-gray-800">
         <section class="max-w-6xl mx-auto pb-4 px-4 sm:px-6 lg:px-4 py-12">
-            <div class="text-center pb-2">
+            <div class="text-center">
                 <h2 class="text-base font-bold text-indigo-600">
                     {{Auth::user()->company->company_name}}
                 </h2>
@@ -16,16 +16,11 @@
                 </h1>
                 <a class="underline" href="{{ route('interview.index') }}">See all interviews</a>
 
-                <form action="{{ route('public.index') }}" method="GET" role="search" class="px-20 my-12 mx-20">
-                    <div class="flex justify-center">
-                        <select class="flex-shrink-0 inline-flex items-center px-1 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" name="termT" id="termT">
-                            <option selected>Choose a category</option>
-                            @foreach ($intervieweesT as $t)
-                            <option value="{{$t->id}}">{{$t->name}}</option>
-                            @endforeach
-                        </select>
+                <div class="flex justify-evenly items-center pt-[67px] h-[156px]">
+                    <form action="{{ route('public.index') }}" method="GET" role="search" class=" ">
+                    <div class="flex justify-center ">
                         <div class="relative w-full">
-                            <input type="search" id="search-dropdown" name="term" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Search Mockups, Logos, Design Templates...">
+                            <input type="search" id="search-dropdown" name="term" class="rounded block p-2.5 w-[720px] z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Search Mockups, Logos, Design Templates...">
                             <a href={{route('public.index')}}>
                                 <button type="submit" class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                     <svg aria-hidden="true" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -37,6 +32,38 @@
                         </div>
                     </div>
                 </form>
+                   
+                    <a class="mr-1 ml-auto"
+                     
+                     >Sort:
+                     <form action="{{ route('public.sortRating') }}" method="GET" role="search" class="my-12">
+                         <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 pr-4 mx-2">
+                      <a class="cursor-pointer" href="#">Rating  
+                       <i onclick="changeIconA(this)" class="fa-solid fa-arrow-up-long" id="SortNr"></i> 
+                      </a> 
+                     </button>
+                     </form>
+                     <form action="{{ route('public.sortDate') }}" method="GET" role="search" class="my-12">
+                     <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 pr-4 mx-2">
+                      <a class="pl-5 py-2.5 p-0 mr-2 mb-2" href="#">Date
+                       <i onclick="changeIconB(this)" class="fa-solid fa-arrow-up-long" id="Date"></i>
+                      </a>
+                     </button>
+                     </form>
+                     <form action="{{ route('public.sort') }}" method="GET" role="search" class="my-12">
+                     <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 pr-4 mx-2">
+                      <a class="pl-5 py-2.5 p-0 mr-2 mb-2" href="#">A-Z
+                       <i onclick="changeIconC(this)" class="fa-solid fa-arrow-up-long" id="AandZ"></i>
+                      </a>
+                     </button>
+                     </form>
+
+                    </a>
+                    
+                     
+                </div>
+
+                
 
             </div>
 
