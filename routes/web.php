@@ -71,6 +71,7 @@ Route::prefix('interviewee')->group(function () {
 
 Route::prefix('interviewee-attributes')->group(
     function () {
+        
         Route::get('/', [Interviewee_AttributesController::class, 'index'])->name('intervieweeAttributes.index');
         Route::get('/edit-interviewee/{id}', [Interviewee_AttributesController::class, 'edit'])->name('intervieweeAttributes.edit');
         Route::post('/update-interviewee/{id}', [Interviewee_AttributesController::class, 'update'])->name('intervieweeAttributes.update');
@@ -128,6 +129,8 @@ Route::prefix('interview')->group(
 );
 
 Route::get('/dashboard', [interviewController::class, 'index1'])->name('dashboard.index');
+
+
 
 Route::prefix('review')->group(
     function () {

@@ -18,8 +18,10 @@ class Interviewee_AttributesController extends Controller
     }
     public function index()
     {
-        $intervieweesA = Interviewee_Attribute::with('interviewee_type')->orderBy('id', 'asc')->paginate(5);
-        $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
+
+        $intervieweesA = Interviewee_Attribute::with('interviewee_type')->orderBy('id', 'asc')->paginate(5, ['*'], 'intervieweesA');
+        $intervieweesT = Interviewee_Type::orderBy('id', 'asc')->paginate(5, ['*'], 'intervieweesT');
+
         $sql="SELECT t.name, GROUP_CONCAT( i.name ) as 'Attributes' FROM interviewee_attributes i inner join interviewee_types t on i.interviewee_type_id=t.id group by i.interviewee_type_id, ims_database.t.name";
         $exec=DB::select(DB::raw($sql));
 

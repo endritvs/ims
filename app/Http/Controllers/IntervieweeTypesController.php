@@ -26,7 +26,7 @@ class IntervieweeTypesController extends Controller
         // dd("ardit");
         $interviewees = Interviewee_Type::orderBy('id', 'asc')->paginate(5);
       
-        return view('intervieweeComponents/table')->with('interviewees', $interviewees);
+        return view('intervieweeAttributes/table')->with('interviewees', $interviewees);
     }
 
 
@@ -44,7 +44,7 @@ class IntervieweeTypesController extends Controller
         Interviewee_Type::create([
             'name' => $request['name'],
         ]);
-        return  redirect()->route('interviewee.index');
+        return redirect('/interviewee-attributes');
     }
 
 
@@ -76,7 +76,7 @@ class IntervieweeTypesController extends Controller
 
         $interviewee->save();
 
-        return redirect('interviewee');
+        return redirect('/interviewee-attributes');
     }
 
 
