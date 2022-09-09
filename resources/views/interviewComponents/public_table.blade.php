@@ -168,6 +168,7 @@
             </div>
 
             <div class="flex items-center w-full mb-3">
+                @if(count($exec) > 1)
                 @foreach ($exec as $rat => $dd)
                     @if ($dd->candidate_id === $d['interviewees']['id'])
                 <p class="bg-blue-100 text-blue-800 text-sm font-semibold inline-flex items-center p-1 rounded dark:bg-blue-200 dark:text-blue-800">{{ floatval($dd->rating) }}</p>
@@ -182,7 +183,8 @@
                 <p class="ml-2 font-medium text-gray-900 dark:text-white">Not Yet Rated</p>
                 <span class="mx-2 w-1 h-1 bg-gray-900 rounded-full dark:bg-gray-500"></span>
                 <p class="text-sm font-medium text-gray-500 dark:text-gray-400">0 reviews</p>
-                    @endif   
+                    @endif
+                    @endif 
             </div>
 
             <div class="grid grid-cols-1 grid-rows-3 gap-x-8 gap-y-2 w-full ">
