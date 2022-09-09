@@ -149,7 +149,7 @@
 
                 </div>
                 <div class="dark:bg-gray-800 p-3">
-                    {{ $interviewees->links() }}
+                    {{ $interviewees->appends(['intervieweesT'=>$intervieweesT->currentPage()])->links() }}
                 </div>
             </div>
         </div>

@@ -58,6 +58,9 @@ class InterviewController extends Controller
         return view('pages/newPage', compact('interview'),compact('review'))->with(['interviewAll' => $interviewAll, 'exec' => $exec]);
     }
 
+
+
+
     public function public_index(Request $request)
     {  
 
