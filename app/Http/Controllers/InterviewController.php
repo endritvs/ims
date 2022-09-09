@@ -47,7 +47,7 @@ class InterviewController extends Controller
         $review = review::with('candidates', 'questionnaires', 'interviews')->where('questionnaire_id',Auth::user()->id)->get();
         $review = $review->toArray();
 
-        $interview = interview::with('user', 'interviewees')->where('interviewer', Auth::user()->id)->orderBy('interview_date', 'asc')->paginate(5);
+        $interview = interview::with('user', 'interviewees')->where('interviewer', Auth::user()->id)->orderBy('interview_date', 'asc')->paginate(15);
 
         $interviewAll = interview::with('user', 'interviewees')->orderBy('interview_date', 'asc')->paginate(15); //+3 mashum se sa na vyn
 
