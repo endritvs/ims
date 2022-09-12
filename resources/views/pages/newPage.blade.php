@@ -15,7 +15,7 @@ $flip = 0;
 
 @include('components.timeline')
 
-@if (count ($interview) > 1)
+@if (count ($interview) >= 1)
             @foreach ($interview as $a)
 
             @php
@@ -65,20 +65,11 @@ $flip = 0;
       </style>
       <div id="scroll" class="h-[800px] mb-4 overflow-x-scroll">
         <ol class="text-center sm:flex  h-auto">
+        @foreach($interviewAll as $iAll)
 
-        @php
-
-        $interviewAll[count($interviewAll)] = '';
-
-        for($index = count($interviewAll)-1; $index > 0; $index--){
-        $interviewAll[$index] = $interviewAll[$index-1];
-        }
-
-        @endphp
-        @for($index = 1 ; $index < count($interviewAll)-1; $index++) @if($interviewAll[$index]->interview_id != $interviewAll[($index-1)]->interview_id || $index == 1)
           <div class="flex items-center mt-100 relative ">
             <div class="absolute w-[195px] px-10 flex z-10 justify-center items-center h-10 bg-blue-200 rounded-full ring-0 ring-white dark:bg-blue-900 sm:ring-8 dark:ring-gray-900 shrink-0">
-              {{date("M jS, Y", strtotime($interviewAll[$index]->interview_date))}}
+              {{date("M jS, Y", strtotime($iAll[0]['interview_date']))}}
 
             </div>
             <hr class="absolute w-[450px] ">
@@ -113,22 +104,24 @@ $flip = 0;
                 <div>
                   <h2 class="text-[30px]  font-bold text-white">
 
-                    {{ $interviewAll[$index] -> interviewees -> name }}
+                    {{ $iAll['0']['interviewees']['name'] }}
 
                   </h2>
-
+                  <p> 
+                    {{$iAll['0']['user']['name']}}
+                  </p>
                 </div>
 
                 @php
 
-                $link = explode('/', $interviewAll[$index]->interviewees->img);
-                $cv = explode('/', $interviewAll[$index]->interviewees->cv_path);
+                $link = explode('/', $iAll['0']['interviewees']['img']);
+                $cv = explode('/', $iAll['0']['interviewees']['cv_path']);
 
                 @endphp
 
                 <div class="flex-shrink-0 p-[10px] hidden sm:block">
                   <img class="object-cover w-16 h-16  rounded-lg shadow-sm" src="/storage/images/{{ $link[2] }}" alt="" />
-                  <button type="button" data-modal-toggle="defaultModal{{ $interviewAll[$index]->id }}" class="mt-[7px] text-gray-900 bg-white border float-left border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-1.5 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+                  <button type="button" data-modal-toggle="defaultModal{{ $iAll['0']['id'] }}" class="mt-[7px] text-gray-900 bg-white border float-left border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-1.5 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
                     Show CV
                   </button>
                 </div>
@@ -137,21 +130,22 @@ $flip = 0;
               <div class="space-y-4">
                 
                   <p class="text-[25px] font-[500] text-white">
-                    {{$interviewAll[$index]->interviewees->interviewee_type->name}}
+                    {{$iAll['0']['interviewees']['interviewee_type']['name']}}
                   </p>
                
   
                   
-                  <p class="text-[15px] inline-flex items-center font-bold leading-sm uppercase px-3 bg-blue-200 text-blue-700 rounded-full">
-                    @foreach ($interviewAll[$index]->interviewees->interviewee_type->interviewee_attributes as $s)
-                    {{ $s->name . ' |' }}
+                  <p class="text-[14px] inline-flex items-center font-bold leading-sm uppercase px-3 bg-blue-200 text-blue-700 rounded-full">
+                  |  
+                  @foreach ($iAll['0']['interviewees']['interviewee_type']['interviewee_attributes'] as $s)
+                    {{ $s['name'] . ' |' }}
                     @endforeach
                   </p>
                
   
                 <div class="text-center">
                   <div class="flex text-[15px] flex-col-reverse">
-                    {{$interviewAll[$index]->interview_date}}
+                    {{$iAll['0']['interview_date']}}
   
                   </div>
                 </div>
@@ -160,8 +154,7 @@ $flip = 0;
                   
                   @foreach ($exec as $rat => $dd)
                   @if(count($exec) > 1)
-                  {{-- @endif --}}
-                  @elseif ($dd->candidate_id === $interviewAll[$index]->interviewees->id)
+                  @elseif ($dd->candidate_id === $iAll['0']['interviewees']['id'])
   
                   @for ($i=0; $i < floatval($dd->rating); $i++)
                   
@@ -169,24 +162,20 @@ $flip = 0;
                  
                     @endfor
   
-                    {{-- <p class="ml-2 font-medium text-gray-900 dark:text-white">Rating</p> --}}
-                    @break
+                    <p class="ml-2 font-medium text-gray-900 dark:text-white">Rating</p>
                     @endif
                     
                     @endforeach
                     @if(count($exec) > 1)
-                    {{-- @else (!($dd->candidate_id === $interviewAll[$index]->interviewees->id)) --}}
-                    @else
+                    @elseif (!($dd->candidate_id === $iAll['0']['interviewees']['id']))
                     <p class="bg-blue-100 text-blue-800 text-sm font-semibold inline-flex items-center p-1 rounded dark:bg-blue-200 dark:text-blue-800"></p>
                     <p class="ml-2 font-medium text-gray-900 dark:text-white">Not Yet Rated</p>
                     @endif
-                   
-                    
   
                 </div>
               </div>
           </li>
-          <div id="defaultModal{{ $interviewAll[$index]->id }}" tabindex="-1" class="hidden  overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center flex" aria-modal="true" role="dialog">
+          <div id="defaultModal{{ $iAll['0']['id'] }}" tabindex="-1" class="hidden  overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center flex" aria-modal="true" role="dialog">
             <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
 
               <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -195,7 +184,7 @@ $flip = 0;
                   <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                     CV
                   </h3>
-                  <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="defaultModal{{ $interviewAll[$index]->id }}">
+                  <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="defaultModal{{ $iAll['0']['id'] }}">
                     <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                       <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                     </svg>
@@ -212,8 +201,7 @@ $flip = 0;
               </div>
             </div>
           </div>
-          @endif
-          @endfor
+          @endforeach
       </ol>
     </div>
       @include('components.dashboardFooter')
