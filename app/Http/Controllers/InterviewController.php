@@ -49,7 +49,31 @@ class InterviewController extends Controller
 
         $interview = interview::with('user', 'interviewees')->where('interviewer', Auth::user()->id)->orderBy('interview_date', 'asc')->paginate(15);
 
-        $interviewAll = interview::with('user', 'interviewees')->orderBy('interview_date', 'asc')->paginate(15); //+3 mashum se sa na vyn
+        $interviewAll = interview::with('user', 'interviewees')->orderBy('interview_date', 'asc')->get(); //+3 mashum se sa na vyn
+        
+        $interviewAll = $interviewAll ->groupBy ('interview_id') -> toArray();
+        
+
+        foreach ($interviewAll as $a => $i) {
+            if (count($i) > 1) {
+                $names = "";
+                $id = "";
+                foreach ($i as $x) {
+                    $names .= $x['user']['name'] . ",";
+                    $id .= $x['user']['id'] . ",";
+
+                }
+                
+                $test = $i;
+
+                array_splice($test, 0, -1);
+
+                $test[0]['user']['name'] = $names;
+                $test[0]['user']['id'] = $id;
+                
+                $interviewAll[$a] = $test;
+            }
+        }
 
         $sql="SELECT candidate_id,AVG(rating_amount) as rating FROM reviews GROUP BY candidate_id";
         

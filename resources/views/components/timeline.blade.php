@@ -1,4 +1,3 @@
-
 <div class="h-full ml-14 mt-10 mb-10 md:ml-64">
     <div class="w-full bg-gray-900 dark:bg-gray-800 ">
       <section class=" mx-auto px-4 sm:px-6 lg:px-4 py-12">
@@ -22,16 +21,7 @@
         </style>
         <ol class="text-center sm:flex no-scrollbar overflow-x-auto h-auto">
   
-          @php
-  
-          $interview[count($interview)] = '';
-  
-          for($index = count($interview)-1; $index > 0; $index--){
-          $interview[$index] = $interview[$index-1];
-          }
-  
-          @endphp
-          @for($index = 1 ; $index < count($interview)-1; $index++) @if($interview[$index]->interview_id != $interview[($index-1)]->interview_id || $index == 1)
+          @for($index = 0 ; $index < count($interview); $index++)
             <div class="flex items-center mt-100 relative ">
               <div class="absolute w-[195px] px-10 flex z-10 justify-center items-center h-10 bg-blue-200 rounded-full ring-0 ring-white dark:bg-blue-900 sm:ring-8 dark:ring-gray-900 shrink-0">
                 {{date("M jS, Y", strtotime($interview[$index]->interview_date))}}
@@ -101,9 +91,10 @@
                
   
                   
-                  <p class="text-[15px] inline-flex items-center font-bold leading-sm uppercase px-3 bg-blue-200 text-blue-700 rounded-full">
+                  <p class="text-[14px] inline-flex items-center font-bold leading-sm uppercase px-3 bg-blue-200 text-blue-700 rounded-full">
+                  |  
                     @foreach ($interview[$index]->interviewees->interviewee_type->interviewee_attributes as $s)
-                    {{ $s->name . ' |' }}
+                      {{ $s->name . ' |' }}
                     @endforeach
                   </p>
                
@@ -159,7 +150,6 @@
                 </div>
               </div>
             </div>
-            @endif
             <div id="RatingModal{{$interview[$index]->id}}" tabindex="-1" class="hidden  overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center flex" aria-modal="true" role="dialog">
               <div class="relative p-4 w-auto max-w-2xl h-full md:h-auto">
                 <!-- Modal content -->
