@@ -48,6 +48,9 @@ Route::get('/sidebari', function () {
 Route::get('/register', function () {
     return view('/auth/register');
 });
+Route::get('/typeform', function () {
+    return view('/auth/typeform');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
