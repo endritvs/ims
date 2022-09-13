@@ -2,12 +2,12 @@
 <head>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.27.0/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/login-signup.css">
 </head>
 
  
 <style>
 button{
-    
   padding: 15px 30px;
   background: #000;
   border:0;
@@ -64,6 +64,21 @@ button:hover::before{
   opacity: 1;
   right: 15px;
 }
+
+
+body::-webkit-scrollbar{
+            height: 10px;
+                width: 10px;
+            }
+           body::-webkit-scrollbar-track{
+                display: none;
+                background:whitesmoke;
+            }
+            body::-webkit-scrollbar-thumb{
+
+                border-radius: 20px;
+                background-color:grey;
+            }
 </style>
 <script>
     window.smoothScroll = function(target) {
@@ -91,7 +106,16 @@ button:hover::before{
 
 </script>
 <body>
+    
     <div class="bg-gradient-to-r from-[#380036] to-[#0cbaba] " >
+        <img src="img/ims.png" class="w-16 h-16 sticky top-1"  alt="">
+    <div class="float-right sticky top-10">
+                    
+                    <h1 class="text-white">Interviews were never easier than with our IMS</h1></br>
+                    <button class="btn transparent" >Sign in</button>
+                    <img src="img/register.svg" class="h-screen w-[550px] sticky top-0 float-right" alt="">
+                </div>
+        
     <div class="grid w-6/12 bg-transparent place-content-center h-[550px]" id="first">
         <p>1.
             Hello, what's your name?</p>
