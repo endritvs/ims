@@ -79,7 +79,7 @@ class InterviewController extends Controller
         
         $exec = DB::select(DB::raw($sql));
        
-        return view('pages/newPage', compact('interview'),compact('review'))->with(['interviewAll' => $interviewAll, 'exec' => $exec]);
+        return view('pages/dashboard', compact('interview'),compact('review'))->with(['interviewAll' => $interviewAll, 'exec' => $exec]);
     }
 
     public function sort(){

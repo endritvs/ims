@@ -227,7 +227,7 @@
                 </div>
               </div>
             </div>
-            @endfor
+            @endforj
             
         </ol>
   
