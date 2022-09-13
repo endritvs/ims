@@ -25,6 +25,9 @@ class IntervieweeController extends Controller
     }
     public function index(Request $request)
     {
+
+        $interviewss = interview::with('user', 'interviewees')->orderBy('interview_id', 'asc')->get();
+
         $review_attributes = reviews_attributes::with('candidates', 'questionnaires', 'interviews', 'attributes')->get();
         $intervieweesA = interviewee::with('interviewee_type')->where([
             ['name', '!=' , Null],
@@ -51,7 +54,7 @@ class IntervieweeController extends Controller
         $sql1="SELECT candidate_id,AVG(rating_amount) as rating FROM reviews GROUP BY candidate_id";
         $exec1 = DB::select(DB::raw($sql1));
     
-        return view('intervieweesMainComponents/table')->with(['exec'=>$exec,'exec1'=>$exec1,'intervieweesA' => $intervieweesA, 'intervieweesT' => $intervieweesT, 'review_attributes' => $review_attributes]);
+        return view('intervieweesMainComponents/table')->with(['exec'=>$exec,'exec1'=>$exec1,'intervieweesA' => $intervieweesA, 'intervieweesT' => $intervieweesT, 'review_attributes' => $review_attributes, 'interviewss' => $interviewss]);
     }
     public function paginate($items, $perPage = 6, $page = null, $options = [])
     {
@@ -175,6 +178,7 @@ class IntervieweeController extends Controller
         $interviewee->delete();
         return back();
     }
+
 }
 
 

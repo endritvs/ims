@@ -3,6 +3,8 @@
 @section('content')
 <title>Interview</title>
 
+<link href="https://cdn.jsdelivr.net/npm/daisyui@2.27.0/dist/full.css" rel="stylesheet" type="text/css" />
+<script src="https://cdn.tailwindcss.com/%22%3E"></script>
 
 <div class="h-full ml-14 mt-8 mb-10 md:ml-64">
     <div class="w-full bg-white dark:bg-gray-800">
@@ -316,8 +318,6 @@
                 @endif
                 @endforeach
 
-
-
                 <div class="flex mx-auto items-center justify-center mx-8 mb-4 max-w-lg">
 
                     <form method="POST" id="comment" action={{ route('comment.store') }} class="dark:bg-gray w-full max-w-xl rounded-lg px-4 pt-2">
@@ -388,12 +388,24 @@
                     {{ $attribute['name'] }}
 
                     </dt>
+                    <input type="range" name="rating_amount[]" id="rating_amount"  value="1" min="1" max="10" class="range" step="1" />
                     <dd class="flex items-center mb-3">
+
                         <div class="w-full bg-gray-200 rounded h-2.5 dark:bg-gray-700 mr-2">
-                            <div class="bg-blue-600 h-2.5 rounded dark:bg-blue-500" style="width: 88%">
-                            </div>
+
+                        <div class="w-full flex justify-between text-xs px-2">
+                            <span>1</span>
+                            <span>2</span>
+                            <span>3</span>
+                            <span>4</span>
+                            <span>5</span>
+                            <span>6</span>
+                            <span>7</span>
+                            <span>8</span>
+                            <span>9</span>
+                            <span>10</span>
                         </div>
-                        <input type="number" value="" name="rating_amount[]" id="rating_amount" autocomplete="given-name" class="bg-gray-600 text-white rounded-lg" style="width: 10% " min="1" max="10">
+                        </div>
                     </dd>
                 </dl>
                 @endforeach
@@ -409,7 +421,6 @@
 </div>
 
 <!-- ------------------------------------------------------------------------- -->
-
     <div id="editRateModal{{$d['id']}}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
     <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
         <!-- Modal content -->
@@ -425,28 +436,59 @@
                 </button>
             </div>
             <!-- Modal body -->
+
+            @php
+
+                $index = 0;
+                $review_attribute_id;
+
+                foreach($review_attributes as $r){
+                    if($r->interview_id === $d['id'] && $r->questionnaire_id === Auth::user()->id){
+
+                        $review_attribute_id[$index++] = $r->id;
+                    }
+                }
+            @endphp
+
+
             <div class="p-6 space-y-6">
-                <form id="rate" action="{{ route('review_attributes.update', $d['id']) }}" method="POST">
+                <form id="rate" action="{{ route('review_attributes.update', $review_attribute_id ?? '') }}" method="POST">
                      @csrf 
             
                         <input type="hidden" name="candidate_id" id="candidate_id" value="{{ $d['interviewees']['id'] }}" class="bg-gray-600 text-white rounded-lg"> <!-- Candidate ID -->
                         <input type="hidden" name="questionnaire_id" id="questionnaire_id" value="{{ Auth::user()->id }}" class="bg-gray-600 text-white rounded-lg"> <!-- Questionnaire ID -->
                         <input type="hidden" name="interview_id" id="interview_id" value="{{ $d['id'] }}" class="bg-gray-600 text-white rounded-lg"> <!-- Interview ID -->
-                        
-                 @foreach ($d['interviewees']['interviewee_type']['interviewee_attributes'] as $attribute)
+                    @foreach ($d['interviewees']['interviewee_type']['interviewee_attributes'] as $attribute)
                 <dl>
                     <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 capitalize">
                     <input type="hidden" name="attribute_id[]" id="attribute_id" value="{{$attribute['id']}}" class="bg-gray-600 text-white rounded-lg" style="width: 5%"> <!-- Interview ID -->
                         
                     {{ $attribute['name'] }}
-
+                    
                     </dt>
+
+                    @foreach($review_attributes as $r)
+                        @if($r->attribute_id === $attribute['id'] && $r->interview_id === $d['id'] && $r->questionnaire_id === Auth::user()->id)
+                            <input type="range" name="rating_amount[]" id="rating_amount" value="{{ $r->rating_amount }}"  min="1" max="10" class="range" step="1" />
+                        @endif
+                    @endforeach
                     <dd class="flex items-center mb-3">
+
                         <div class="w-full bg-gray-200 rounded h-2.5 dark:bg-gray-700 mr-2">
-                            <div class="bg-blue-600 h-2.5 rounded dark:bg-blue-500" style="width: 88%">
-                            </div>
+
+                        <div class="w-full flex justify-between text-xs px-2">
+                            <span>1</span>
+                            <span>2</span>
+                            <span>3</span>
+                            <span>4</span>
+                            <span>5</span>
+                            <span>6</span>
+                            <span>7</span>
+                            <span>8</span>
+                            <span>9</span>
+                            <span>10</span>
                         </div>
-                        <input type="number" value="4" name="rating_amount[]" id="rating_amount" autocomplete="given-name" class="bg-gray-600 text-white rounded-lg" style="width: 10% " min="1" max="10">
+                        </div>
                     </dd>
                 </dl>
                 @endforeach
