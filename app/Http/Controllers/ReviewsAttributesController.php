@@ -101,7 +101,25 @@ class ReviewsAttributesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $reviews_attributes = reviews_attributes::findOrFail($id);
+
+
+        for ($i=0; $i < count($request['attribute_id']); $i++) { 
+
+        dd($request['id']);
+
+            $reviews_attributes-> candidate_id = $request->candidate_id;
+            $reviews_attributes-> questionnaire_id = $request->questionnaire_id;
+            $reviews_attributes-> interview_id = $request->interview_id;
+            $reviews_attributes-> rating_amount = $request->rating_amount[$i];
+            $reviews_attributes-> attribute_id = $request->attribute_id[$i];
+
+            $reviews_attributes->save();
+
+        }        
+      
+        return back();
     }
 
     /**
@@ -112,8 +130,8 @@ class ReviewsAttributesController extends Controller
      */
     public function destroy($id)
     {
-        $review = reviews_attributes::findOrFail($id);
-        $review->delete();
+        $reviews_attributes = reviews_attributes::findOrFail($id);
+        $reviews_attributes->delete();
         return redirect()->route('interview.index');
     }
 }
