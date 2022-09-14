@@ -25,8 +25,6 @@ class interview extends Model
         return $this->belongsTo(User::class, "interviewer");
     }
 
- 
-
     public function interviewees()
     {
         return $this->belongsTo(interviewee::class, "interviewees_id");
@@ -36,10 +34,12 @@ class interview extends Model
     {
         return $this->hasMany(review::class);
     }
+
     public function review_attributes()
     {
         return $this->hasMany(reviews_attributes::class);
     }
+    
     public function comments()
     {
         return $this->hasMany(comment::class);

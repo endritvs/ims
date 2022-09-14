@@ -126,20 +126,22 @@
                             {{ $i->email }}
                         </p>
                     </div>
-
                     <div class="flex items-center w-full mb-3">
-                        @if(count($exec) > 1)
-                        @foreach ($exec1 as $rat => $dd)
-                            @if ($dd->candidate_id === $i->id)
-                        <p class="bg-blue-100 text-blue-800 text-sm font-semibold inline-flex items-center p-1 rounded dark:bg-blue-200 dark:text-blue-800">{{ floatval($dd->rating) }}</p>
-                        <p class="ml-2 font-medium text-gray-900 dark:text-white">Rating</p>
-                      @else
-                        <p class="bg-blue-100 text-blue-800 text-sm font-semibold inline-flex items-center p-1 rounded dark:bg-blue-200 dark:text-blue-800"></p>
-                        <p class="ml-2 font-medium text-gray-900 dark:text-white">Not Yet Rated</p>
-                            @endif 
-                            @break
-                            @endforeach
-                            @endif
+                       @if(count($exec1) > 1)
+                @foreach ($exec1 as $rat => $dd)
+                    @if ($dd->candidate_id === $i['id'])
+                <p class="bg-blue-100 text-blue-800 text-sm font-semibold inline-flex items-center p-1 rounded dark:bg-blue-200 dark:text-blue-800">{{ floatval($dd->rating) }}</p>
+                <p class="ml-2 font-medium text-gray-900 dark:text-white">Rating</p>
+                        @break
+                    @endif
+                @endforeach
+                    @if (!($dd->candidate_id === $i['id']))
+                <p class="bg-blue-100 text-blue-800 text-sm font-semibold inline-flex items-center p-1 rounded dark:bg-blue-200 dark:text-blue-800"></p>
+                <p class="ml-2 font-medium text-gray-900 dark:text-white">Not Yet Rated</p>
+                <span class="mx-2 w-1 h-1 bg-gray-900 rounded-full dark:bg-gray-500"></span>
+                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">0 reviews</p>
+                    @endif
+                    @endif 
                     </div>
 
                     <div class="grid grid-cols-1 grid-rows-3 gap-x-8 gap-y-2 w-full ">
@@ -354,7 +356,7 @@
         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
         <div class="relative p-4 w-full max-w-md h-full md:h-auto">
       
-            <form method="POST" action="{{ route('interview.quickStore') }}"
+            <form method="POST" action="{{ route('interview.store') }}"
                 class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                 @csrf
             
@@ -381,12 +383,22 @@
                                 value="{{ empty($interviewss->last()->interview_id) ? '1' : ++$interviewss->last()->interview_id }}"
                                 class="hidden bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                 required>
-
+                            <input type="hidden" name="interviewer[]" value="{{Auth::user()->id}}" class="hidden bg-gray-700">
+                            
                         </div>
                         <div>
-
-                            <input type="hidden" name="interviewer" value="{{Auth::user()->id}}" class="hidden bg-gray-700">
+                        <label class="block text-sm font-medium text-gray-900 dark:text-white">Choose other interviewers (Optional):</label>
                           
+                        <select name="interviewer[]"
+                                class="@error('interviewer') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                id="interviewer" multiple="multiple">
+
+                            @foreach ($interviewer as $a)
+                                @if(!($a->name === Auth::user()->name))
+                                    <option value="{{ $a->id }}">{{ $a->name }}</option>
+                                @endif
+                            @endforeach
+                        </select>
                             
                         </div>
                     </div>
