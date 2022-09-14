@@ -103,14 +103,12 @@
                             </li>
                             <li>
                         @if (in_array(Auth::user()->id, $questID))
-
-                                @if (!App\Models\reviews_attributes::where('candidate_id', $d['interviewees']['id'] )->exists() || !App\Models\reviews_attributes::where('questionnaire_id', Auth::user()->id )->exists() || !App\Models\reviews_attributes::where('interview_id', $d['id'] )->exists())
-                                    <a data-modal-toggle="rateModal{{ $d['id'] }}" href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Rate</a>
-
-                                @else
+                                @if (App\Models\reviews_attributes::where('candidate_id', $d['interviewees']['id'] )->where('questionnaire_id', Auth::user()->id )->where('interview_id', $d['id'] )->exists())
                                     <a data-modal-toggle="editRateModal{{$d['id']}}" href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-red-500 dark:hover:text-white"> 
                                        Edit Rating
                                     </a>
+                                @else  
+                                    <a data-modal-toggle="rateModal{{ $d['id'] }}" href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Rate</a>
                              @endif
                         @endif
                             </li>

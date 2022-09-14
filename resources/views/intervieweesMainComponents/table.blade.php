@@ -97,10 +97,11 @@
                             <li>
                                 <a data-modal-toggle="deleteUserModal{{ $i->id }}" href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Delete</a>
                             </li>
-
+                    @if(Auth::user() -> role == "interviewer")
                             <li>
                                 <a data-modal-toggle="AddToInterviewModal{{ $i->id }}" href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Add to Interview</a>
                             </li>
+                    @endif
                         </ul>
                     </div>
 
