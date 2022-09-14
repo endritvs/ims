@@ -107,15 +107,14 @@ body::-webkit-scrollbar{
 </script>
 <body>
     
-    <div class="bg-gradient-to-r from-[#380036] to-[#0cbaba] " >
-        <img src="img/ims.png" class="w-16 h-16 sticky top-1"  alt="">
-    <div class="float-right sticky top-10">
-                    
+    <div class="bg-gradient-to-r from-[#380036] to-[#0cbaba]">
+        <img src="img/starlabslogo.png" class="w-[65px] h-[65px]  sticky top-1"  alt="">
+    <div class="float-right sticky top-10">                   
                     <h1 class="text-white">Interviews were never easier than with our IMS</h1></br>
                     <button class="btn transparent" >Sign in</button>
                     <img src="img/register.svg" class="h-screen w-[550px] sticky top-0 float-right" alt="">
                 </div>
-        
+                <form action="">
     <div class="grid w-6/12 bg-transparent place-content-center h-[550px]" id="first">
         <p>1.
             Hello, what's your name?</p>
@@ -144,6 +143,7 @@ body::-webkit-scrollbar{
          <input type="text" class="block p-2 rounded w-[310px] border-none outline-none" placeholder="Company Name" name="fname" value=""><br>
     <button type="button" onclick="smoothScroll(document.getElementById('fifth'))">OK!</button>
 </div>
+</form>
 <div class="grid w-6/12 bg-transparent place-content-center h-[550px]" id="fifth">
     <p>5.
         Candidate Types and Attributes</p>
