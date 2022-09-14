@@ -11,11 +11,11 @@
                         <img src="img/me-about.jpg" alt="profile" class="w-[150px] h-[200px] rounded-lg ">
                         <div class="flex flex-col justify-between p-4 leading-normal">
                             <h2 class="mb-2 text-2xl font-bold tracking-tight">Albert</h2>
-                            <p class="mb-3 font-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt expedita dolor quasi eius quod voluptatem rerum dolores</p>
+                            <p class="mb-3 font-normal">Since beginning my journey as a self-taught developer, I've been coding and creating freshly websites for clients around the world.</br> I have a diverse set of skills, ranging from design, to HTML + CSS + Javascript, all the way to React.</p>
                         </div>
-                        <div>
-                            <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Default</button>
-                            <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Default</button>
+                        <div class="flex flex-col">
+                            <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm mb-5 px-5 py-2.5  dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Work with "name"</button>
+                            <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Remove from list</button>
                         </div>
                     </div>
                     <div class="flex items-center mt-4">
