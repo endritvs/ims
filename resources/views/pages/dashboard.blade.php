@@ -102,7 +102,7 @@ $flip = 0;
 
               <div class="justify-between items-center sm:flex">
                 <div>
-                  <h2 class="text-[30px]  font-bold text-white">
+                  <h2 class="text-[30px]  font-bold text-gray-600 dark:text-white">
 
                     {{ $iAll['0']['interviewees']['name'] }}
 
@@ -129,7 +129,7 @@ $flip = 0;
 
               <div class="space-y-4">
                 
-                  <p class="text-[25px] font-[500] text-white">
+                  <p class="text-[25px] font-[500] text-gray-600 dark:text-white">
                     {{$iAll['0']['interviewees']['interviewee_type']['name']}}
                   </p>
                
