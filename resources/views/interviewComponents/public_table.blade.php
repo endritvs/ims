@@ -173,8 +173,6 @@
                     @if ($dd->candidate_id === $d['interviewees']['id'])
                 <p class="bg-blue-100 text-blue-800 text-sm font-semibold inline-flex items-center p-1 rounded dark:bg-blue-200 dark:text-blue-800">{{ floatval($dd->rating) }}</p>
                 <p class="ml-2 font-medium text-gray-900 dark:text-white">Rating</p>
-                <span class="mx-2 w-1 h-1 bg-gray-900 rounded-full dark:bg-gray-500"></span>
-                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">376 reviews</p>
                         @break
                     @endif
                 @endforeach

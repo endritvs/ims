@@ -22,10 +22,25 @@
         <ol class="text-center sm:flex no-scrollbar overflow-x-auto h-auto">
   
           @for($index = 0 ; $index < count($interview); $index++)
+
+          @php
+                  
+                  date_default_timezone_set("Europe/Belgrade");
+                  $today = date("Y-m-d H:i:s");
+                  $sot = date("Y-m-d");
+                  $date = $interview[$index]->interview_date;
+                  $link = explode('/', $interview[$index]->interviewees->img);
+                  $cv = explode('/', $interview[$index]->interviewees->cv_path);
+
+          @endphp
             <div class="flex items-center mt-100 relative ">
               <div class="absolute w-[195px] px-10 flex z-10 justify-center items-center h-10 bg-blue-200 rounded-full ring-0 ring-white dark:bg-blue-900 sm:ring-8 dark:ring-gray-900 shrink-0">
-                {{date("M jS, Y", strtotime($interview[$index]->interview_date))}}
-  
+                
+              @if(date("M jS, Y", strtotime($interview[$index]->interview_date)) === date("M jS, Y", strtotime($sot)))  
+                    Today
+                @else
+                  {{date("M jS, Y", strtotime($interview[$index]->interview_date))}}
+                @endif
               </div>
               <hr class="absolute w-[450px] ">
             </div>
@@ -65,17 +80,6 @@
   
                   </div>
   
-                  @php
-                  
-                  date_default_timezone_set("Europe/Belgrade");
-                  $today = date("Y-m-d H:i:s");
-                  $date = $interview[$index]->interview_date;
-  
-                  $link = explode('/', $interview[$index]->interviewees->img);
-                  $cv = explode('/', $interview[$index]->interviewees->cv_path);
-  
-                  @endphp
-  
                   <div class="flex-shrink-0 p-[10px] hidden sm:block">
                     <img class="object-cover w-16 h-16  rounded-lg shadow-sm" src="/storage/images/{{ $link[2] }}" alt="" />
                     <button type="button" data-modal-toggle="defaultModal{{ $interview[$index]->id }}" class="mt-[7px] text-gray-900 bg-white border float-left border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-1.5 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
@@ -97,7 +101,6 @@
                       {{ $s->name . ' |' }}
                     @endforeach
                   </p>
-               
   
                 <div class="text-center">
                   <div class="flex text-[15px] flex-col-reverse">
@@ -105,15 +108,11 @@
   
                   </div>
                 </div>
-  
                 <div class="flex justify-center">
-                  
-                  @if ($today > $date && !App\Models\review::where('candidate_id', $interview[$index]->interviewees->id )->exists())
-                  <button data-modal-toggle="RatingModal{{ $interview[$index]->id }}" class="bg-blue-700 text-white p-1 rounded">Rate
-                    Now</button>
+                  @if ($today > $date && !(App\Models\review::where('candidate_id', $interview[$index]->interviewees->id )->where('questionnaire_id', $interview[$index]->user->id )->where('interview_id', $interview[$index]->id)->exists()))
+                  <button data-modal-toggle="RatingModal{{ $interview[$index]->id }}" class="bg-blue-700 text-white p-1 rounded">Rate Now</button>
                   @else
-                  <button data-tooltip-target="tooltip-default" class="bg-red-500  text-white p-1 rounded">Can't rate
-                    now!</button>
+                  <button data-tooltip-target="tooltip-default" class="bg-red-500  text-white p-1 rounded">Can't rate now!</button>
                   <div id="tooltip-default" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="top" style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(344px, 44px, 0px);">
                     The interview has not been held yet or you already rated it!
                     <div class="tooltip-arrow" data-popper-arrow="" style="position: absolute; left: 0px; transform: translate3d(58.4px, 0px, 0px);">
@@ -191,7 +190,7 @@
                       </div>
                       <div>
 
-                        <input value="{{ $interview[$index] ->id }}" name="interview_id" id="interview_id" class="hidden @error('interview_id') is-invalid @enderror capitalize bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white " type="hidden">
+                        <input value="{{ $interview[$index] -> id }}" name="interview_id" id="interview_id" class="hidden @error('interview_id') is-invalid @enderror capitalize bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white " type="hidden">
 
                         @error('interview_id')
                         <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>

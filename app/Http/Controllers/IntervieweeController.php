@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\interviewee;
 use App\Http\Requests\Store;
 use App\Models\interview;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Interviewee_Type;
 use App\Models\Interviewee_Attribute;
@@ -27,7 +28,7 @@ class IntervieweeController extends Controller
     {
 
         $interviewss = interview::with('user', 'interviewees')->orderBy('interview_id', 'asc')->get();
-
+        $interviewer = user::where('role', 'interviewer')->orderBy('id', 'asc')->get();
         $review_attributes = reviews_attributes::with('candidates', 'questionnaires', 'interviews', 'attributes')->get();
         $intervieweesA = interviewee::with('interviewee_type')->where([
             ['name', '!=' , Null],
@@ -49,12 +50,14 @@ class IntervieweeController extends Controller
         $intervieweesA = $this->paginate($intervieweesA);
         $intervieweesA->withPath('/interviewees');
         $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
+
         $sql="SELECT t.name, GROUP_CONCAT( i.name ) as 'Attributes' FROM interviewee_attributes i inner join interviewee_types t on i.interviewee_type_id=t.id group by i.interviewee_type_id, ims_database.t.name";
         $exec=DB::select(DB::raw($sql));
+
         $sql1="SELECT candidate_id,AVG(rating_amount) as rating FROM reviews GROUP BY candidate_id";
         $exec1 = DB::select(DB::raw($sql1));
-    
-        return view('intervieweesMainComponents/table')->with(['exec'=>$exec,'exec1'=>$exec1,'intervieweesA' => $intervieweesA, 'intervieweesT' => $intervieweesT, 'review_attributes' => $review_attributes, 'interviewss' => $interviewss]);
+
+        return view('intervieweesMainComponents/table')->with(['exec'=>$exec,'exec1'=>$exec1,'intervieweesA' => $intervieweesA, 'intervieweesT' => $intervieweesT, 'review_attributes' => $review_attributes, 'interviewss' => $interviewss, 'interviewer' => $interviewer]);
     }
     public function paginate($items, $perPage = 6, $page = null, $options = [])
     {
@@ -97,7 +100,7 @@ class IntervieweeController extends Controller
             ]);
        
         }
-        return  redirect()->route('interviewees.index');
+        return redirect()->route('interviewees.index');
     }
 
 
