@@ -120,7 +120,7 @@ $flip = 0;
                 @endphp
 
                 <div class="flex-shrink-0 p-[10px] hidden sm:block">
-                  <img class="object-cover w-16 h-16  rounded-lg shadow-sm" src="/storage/images/{{ $link[2] }}" alt="" />
+                  <img class="object-cover w-16 h-16               rounded-lg shadow-sm" src="/storage/images/{{ $link[2] }}" alt="" />
                   <button type="button" data-modal-toggle="defaultModal{{ $iAll['0']['id'] }}" class="mt-[7px] text-gray-900 bg-white border float-left border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-1.5 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
                     Show CV
                   </button>
