@@ -3,8 +3,7 @@
 @section('content')
 <title>Interview</title>
 
-<link href="https://cdn.jsdelivr.net/npm/daisyui@2.27.0/dist/full.css" rel="stylesheet" type="text/css" />
-<script src="https://cdn.tailwindcss.com/%22%3E"></script>
+
 
 <div class="h-full ml-14 mt-8 mb-10 md:ml-64">
     <div class="w-full bg-white dark:bg-gray-800">
@@ -86,7 +85,7 @@
 
 
 
-                <div class="w-full bg-gray-200 dark:bg-gray-900 rounded-lg sahdow-lg p-12 flex flex-col justify-center items-center">
+                <div class="w-full bg-gray-200 h-auto dark:bg-gray-900 rounded-xl sahdow-lg p-12 flex flex-col justify-center items-center">
 
                     <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots{{ $d['id'] }}" class="relative left-[145px] bottom-[30px] inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button">
                         <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -387,7 +386,8 @@
                     <input type="range" name="rating_amount[]" id="rating_amount"  value="1" min="1" max="10" class="range" step="1" />
                     <dd class="flex items-center mb-3">
 
-                        <div class="w-full bg-gray-200 rounded h-2.5 dark:bg-gray-700 mr-2">
+                        <div class="w-full bg-white rounded h-2.5 dark:bg-gray-700 mr-2">
+                 
 
                         <div class="w-full flex justify-between text-xs px-2">
                             <span>1</span>
@@ -408,7 +408,7 @@
             </div>
             <!-- Modal footer -->
             <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-                <button id="rate" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
+                <button id="rate" type="submit" class="text-gray-500 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
             </div>
             
             </form>

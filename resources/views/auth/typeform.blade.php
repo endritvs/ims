@@ -107,7 +107,7 @@ body::-webkit-scrollbar{
 </script>
 <body>
     
-    <div class="bg-gradient-to-r from-[#380036] to-[#0cbaba]">
+    <div class="bg-gradient-to-r from-[#301e4b] to-[#0cbaba]">
         <img src="img/starlabslogo.png" class="w-[65px] h-[65px]  sticky top-1"  alt="">
     <div class="float-right sticky top-10">                   
                     <h1 class="text-white">Interviews were never easier than with our IMS</h1></br>
@@ -115,11 +115,11 @@ body::-webkit-scrollbar{
                     <img src="img/register.svg" class="h-screen w-[550px] sticky top-0 float-right" alt="">
                 </div>
                 <form action="">
-    <div class="grid w-6/12 bg-transparent place-content-center h-[550px]" id="first">
+    <div class="grid w-6/12 bg-transparent place-content-center h-[550px] " id="first">
         <p>1.
             Hello, what's your name?</p>
             <br>
-            <input type="text" class="block p-2 rounded w-[310px] border-none outline-none"  placeholder="Name" name="fname" value=""><br>
+            <input type="text" class="block p-2 rounded w-[310px] border-none  outline-none"  placeholder="Name" name="fname" value=""><br>
         <button type="button" onclick="smoothScroll(document.getElementById('second'))">OK!</button>
     </div>
 <div class="grid w-6/12 bg-transparent place-content-center h-[550px] " id="second" >
@@ -148,7 +148,7 @@ body::-webkit-scrollbar{
     <p>5.
         Candidate Types and Attributes</p>
         <br>
-        <select id="language" onChange="update()" class="select select-md w-[310px] max-w-xs">
+        <select id="language" onChange="update()" class="select select-md w-[310px] max-w-xs ">
             <option disabled selected>Select</option>
             <option>Front</option>
             <option>Back</option>

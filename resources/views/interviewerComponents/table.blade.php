@@ -9,10 +9,10 @@
     <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
         <div class="mt-[145px] mx-4">
             <div class="w-full overflow-hidden rounded-lg shadow-xs">
-                <div class="w-full overflow-x-auto">
-                    <table class="w-full">
+                <div class="w-full  overflow-x-auto">
+                    <table class="w-full ">
                         <caption
-                            class="p-5 relative text-lg font-semibold text-left  text-gray-500 border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                            class="p-5 bg-gray-200 relative text-lg font-semibold text-left  text-gray-500 border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                             Interviewer
                             <p class="mt-1 text-sm font-normal text-gray-400">Browse a list of Interviewee Types products
                                 designed to help you work, grow your business, and more. (Fix this text)</p>
@@ -23,7 +23,7 @@
                         </caption>
                         <thead>
                             <tr
-                                class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                                class="text-xs bg-gray-200 font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                                 <th class="px-4 py-3">Name</th>
                                 <th class="px-4 py-3">Email</th>
                                 <th class="px-4 py-3">Role</th>
@@ -43,7 +43,7 @@
                      
                     
                             <tr
-                                    class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
+                                    class=" bg-gray-200 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
 
                                     <td class="px-4 py-3 text-sm capitalize ">
                                         {{ $i->name }}
@@ -226,7 +226,7 @@
                     </table>
 
                 </div>
-                <div class="dark:bg-gray-800 p-3">
+                <div class="bg-gray-100 dark:bg-gray-800 p-3">
                     {{ $interviewer->links() }}
                 </div>
             </div>

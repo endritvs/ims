@@ -232,7 +232,7 @@
             </div>
             
            
-            <div class="dark:bg-gray-800 p-3 ">
+            <div class=" bg-gray-100 dark:bg-gray-800 p-3 ">
                 <a class="underline" href="{{route('public.index')}}">See all interviews</a>
                 {{$interview->links() }}
             </div>

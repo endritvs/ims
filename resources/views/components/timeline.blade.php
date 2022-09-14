@@ -1,9 +1,11 @@
+@extends("layouts.layout")
 <div class="h-full ml-14 mt-10 mb-10 md:ml-64">
-    <div class="w-full bg-gray-900 dark:bg-gray-800 ">
+    <div class="w-full bg-white dark:bg-gray-800 ">
       <section class=" mx-auto px-4 sm:px-6 lg:px-4 py-12">
         <!-- component -->
         @include('components.dashboardHeader')
         <style>
+       
           @layer utilities {
   
             /* Chrome, Safari and Opera */
@@ -67,7 +69,7 @@
               <!-- ==================================== -->
               <!-- ========== Card => Start =========== -->
               <!-- ==================================== -->
-              <div class="relative block p-6 overflow-hidden border bg-gray-900 border-gray-100 rounded-xl">
+              <div class="relative block p-6 overflow-hidden border border-gray-400 rounded-xl">
                 <span class="absolute inset-x-0 bottom-0 h-2  bg-gradient-to-r from-blue-300 via-blue-500 to-blue-600"></span>
   
                 <div class="justify-between items-center sm:flex">
