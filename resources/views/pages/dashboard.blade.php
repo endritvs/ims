@@ -95,9 +95,9 @@ $flip = 0;
 
 
             <!-- ==================================== -->
-            <!-- ========== Card => Start =========== -->
+            <!-- ========== Card => Start for admin =========== -->
             <!-- ==================================== -->
-            <div class="relative block p-8 overflow-hidden border border-gray-100 rounded-xl">
+            <div class="relative block p-8 overflow-hidden border border-gray-400 rounded-xl">
               <span class="absolute inset-x-0 bottom-0 h-2  bg-gradient-to-r from-blue-300 via-blue-500 to-blue-600"></span>
 
               <div class="justify-between items-center sm:flex">

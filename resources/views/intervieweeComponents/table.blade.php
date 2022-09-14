@@ -148,7 +148,7 @@
                     </table>
 
                 </div>
-                <div class="dark:bg-gray-800 p-3">
+                <div class=" bg-gray-100 dark:bg-gray-800 p-3">
                     {{ $interviewees->appends(['intervieweesT'=>$intervieweesT->currentPage()])->links() }}
                 </div>
             </div>

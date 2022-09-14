@@ -9,7 +9,7 @@
             <div class="w-full overflow-x-auto">
                     <table class="w-full">
                         <caption
-                            class="p-5 relative text-lg font-semibold text-left  text-gray-500 border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                            class="p-5 bg-gray-200 relative text-lg font-semibold text-left  text-gray-500 border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                             Interviewee Types
                             <p class="mt-1 text-sm font-normal text-gray-400">Browse a list of Interviewee Types products
                                 designed to help you work, grow your business, and more. (Fix this text)</p>
@@ -20,16 +20,16 @@
                         </caption>
                         <thead>
                             <tr
-                                class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                                class="text-xs bg-gray-200 font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                                 <th class="px-4 py-3">Name</th>
                                 <th class="px-4 py-3">Edit</th>
                                 <th class="px-4 py-3">Delete</th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                        <tbody class="bg-gray-200 divide-y dark:divide-gray-700 dark:bg-gray-800">
                             @foreach ($intervieweesT as $i)
                                 <tr
-                                    class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
+                                    class="bg-gray-200 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
 
                                     <td class="px-4 py-3 text-sm capitalize ">
                                         {{ $i->name }}
@@ -147,13 +147,13 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <div class="dark:bg-gray-800 p-3">
+                    <div class="bg-gray-100 dark:bg-gray-800 p-3">
                     {{ $intervieweesT->appends(['intervieweesA'=>$intervieweesA->currentPage()])->links() }}
                 </div>
                 <div class="w-full overflow-x-auto mt-20">
                     <table class="w-full">
                         <caption
-                            class="p-5 relative text-lg font-semibold text-left  text-gray-500 border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                            class="p-5 bg-gray-200 relative text-lg font-semibold text-left  text-gray-500 border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                                 Candidate Attributes
                             <p class="mt-1 text-sm font-normal text-gray-400">Browse a list of Interviewee Types products
                                 designed to help you work, grow your business, and more. (Fix this text)</p>
@@ -164,7 +164,7 @@
                         </caption>
                         <thead>
                             <tr
-                                class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                                class="text-xs bg-gray-200 font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                                 <th class="px-4 py-3">Name</th>
                                 <th class="px-4 py-3">Interviewee Type Name</th>
                                 <th class="px-4 py-3">Edit</th>
@@ -174,7 +174,7 @@
                         <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                             @foreach ($intervieweesA as $i)
                                 <tr
-                                    class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
+                                    class="bg-gray-200 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
                                     <td class="px-4 py-3 text-sm capitalize ">
                                         {{ $i->name }}
                                     </td>
@@ -314,7 +314,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="dark:bg-gray-800 p-3">
+                <div class="bg-gray-100 dark:bg-gray-800 p-3">
                 {{ $intervieweesA->appends(['intervieweesT' => $intervieweesT->currentPage()])->links() }}
                 </div>
                 

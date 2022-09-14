@@ -1,11 +1,11 @@
 <div class="my-20 grid lg:grid-cols-3 md:grid-cols-3 gap-8">
 
-    <div class="shadow-xl shadow-blue-500/50 col-span-2 flex flex-col p-8 bg-white dark:bg-gray-900 rounded-3xl ">
+    <div class="shadow-xl shadow-blue-500/50 col-span-2 flex flex-col p-8 bg-blue-900 dark:bg-gray-900 rounded-3xl ">
         <b class="flex flex-row text-gray-500">Property Release for today</b>
         <canvas class="p-5" id="chartLine"></canvas>
     </div>
 
-    <div class="shadow-lg shadow-blue-500/50 items-center justify-center flex flex-col p-5 bg-white dark:bg-gray-900 rounded-3xl ">
+    <div class="shadow-lg shadow-blue-500/50 bg-blue-900 items-center justify-center flex flex-col p-5  dark:bg-gray-900 rounded-3xl ">
         <b class="flex mb-10 flex-row text-gray-500">Calendar</b>
 
         <div inline-datepicker="">
