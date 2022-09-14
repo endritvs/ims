@@ -164,13 +164,14 @@ $flip = 0;
   
                     <p class="ml-2 font-medium text-gray-900 dark:text-white">Rating</p>
                     @endif
-                    
-                    @endforeach
                     @if(count($exec) > 1)
                     @elseif (!($dd->candidate_id === $iAll['0']['interviewees']['id']))
                     <p class="bg-blue-100 text-blue-800 text-sm font-semibold inline-flex items-center p-1 rounded dark:bg-blue-200 dark:text-blue-800"></p>
                     <p class="ml-2 font-medium text-gray-900 dark:text-white">Not Yet Rated</p>
                     @endif
+                    @endforeach
+
+                    
   
                 </div>
               </div>
