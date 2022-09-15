@@ -233,5 +233,74 @@
         </ol>
   
       </section>
+      <div class="mx-4">
+        <div class="w-full overflow-hidden rounded-lg shadow-xs">
+            <div class="w-full overflow-x-auto">
+    <table class="w-full">
+                        <caption
+                            class="p-5 relative text-lg font-semibold text-left  text-gray-500 border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                             Your past Interviews                           
+                        </caption>
+                    <thead>
+                        <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"> 
+                           
+                            <th class="px-4 py-3">Interviewer</th>
+                            <th class="px-4 py-3">CV</th>
+                            <th class="px-4 py-3">Candidate</th>
+                            <th class="px-4 py-3">Date</th>
+                            <th class="px-4 py-3">Candidate Types</th>
+                            <th class="px-4 py-3">Candidate Attribute</th>
+
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                        @foreach ($pastInterview as $i)
+                        @php
+                        
+                        $link = explode('/', $i->interviewees->img);
+                        $cv = explode('/', $i->interviewees->cv_path);
+                        @endphp
+                            <tr class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
+                                <td class="px-4 py-3 text-sm ">
+                                    {{ $i->user->name }}
+                                </td>
+                                <td class="px-4 py-3 text-sm capitalize ">
+                                    <a href="/storage/cv_path/{{ $cv[2] }}" download>
+                                        <button
+                                        class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+                                        <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 20 20">
+                                            <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
+                                        </svg>
+                                        <span> Download CV</span>
+                                    </button>
+                                    </a>
+                                </td>
+                                <td class="px-4 py-3 text-sm capitalize">
+                                    {{ $i->interviewees->name . ' ' . $i->interviewees->surname }}
+                                </td>
+                                <td class="px-4 py-3 text-sm capitalize">
+                                    {{ $i->interview_date }}
+                                </td>
+                             
+                                <td class="px-4 py-3 text-sm capitalize">
+                                {{ $i->interviewees->interviewee_type->name }}
+                                </td>
+                                <td class="px-4 py-3 text-sm capitalize">
+                                @foreach ($i->interviewees->interviewee_type->interviewee_attributes as $a)
+                                        {{ $a->name }}
+                                @endforeach
+                                    </td>
+                                
+          </tr>
+        @endforeach
+      </tbody>
+    </table>
+        </div>
+        <div class="dark:bg-gray-800 p-3 ">
+                {{$pastInterview->links() }}
+            </div>
+        </div>
+        </div>
     </div>
   </div>
