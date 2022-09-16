@@ -47,13 +47,13 @@ class InterviewController extends Controller
         $review = review::with('candidates', 'questionnaires', 'interviews')->where('questionnaire_id',Auth::user()->id)->get();
         $review = $review->toArray();
 
-        $interview = interview::with('user', 'interviewees', 'review')->where('interviewer', Auth::user()->id)->orderBy('interview_date', 'asc')->paginate(15);
-        $interviewAll = interview::with('user', 'interviewees')->orderBy('interview_date', 'asc')->get(); //+3 mashum se sa na vyn
-        
-        $interviewAll = $interviewAll ->groupBy ('interview_id') -> toArray();
-
         date_default_timezone_set("Europe/Belgrade");
         $today = date("Y-m-d H:i:s");
+
+        $interview = interview::with('user', 'interviewees', 'review')->where('interview_date', '>=', $today)->where('interviewer', Auth::user()->id)->orderBy('interview_date', 'asc')->paginate(15);
+        $interviewAll = interview::with('user', 'interviewees')->where('interview_date', '>=', $today)->orderBy('interview_date', 'asc')->get(); //+3 mashum se sa na vyn
+        
+        $interviewAll = $interviewAll ->groupBy ('interview_id') -> toArray();
 
         $pastInterview = interview::with('user', 'interviewees', 'review')->where('interview_date', '<', $today)->where('interviewer', Auth::user()->id)->orderBy('interview_date', 'asc')->paginate(5);
         $pastInterviewAll = interview::with('user', 'interviewees', 'review')->where('interview_date', '<', $today)->orderBy('interview_date', 'asc')->paginate(5);
@@ -264,7 +264,7 @@ $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
                         'interviewer' => implode(", ", $interviewerNames),
                         'intervieweeName' => $a->interviewees->name." ".$a->interviewees->surname,
 
-                        'fromEmail' => 'dionkelmendi@gmail.com',
+                        'fromEmail' => 'imsinfoteam@gmail.com',
                         'fromName' => 'IMS Company'
                     ];
 

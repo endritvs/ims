@@ -48,7 +48,7 @@
                   
                 <td class="px-4 py-3 text-sm capitalize ">
                     @for ($i=0; $i<$r->rating_amount; $i++)
-                    <input type="radio" name="rating_amount" class="mask mask-star bg-orange-400" value="{{$r->rating_amount}}" />
+                    <input type="radio" disabled name="rating_amount" class="mask mask-star bg-orange-400" value="{{$r->rating_amount}}" />
         
                         @endfor 
                 </td>

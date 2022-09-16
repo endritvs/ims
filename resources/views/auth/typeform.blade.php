@@ -116,31 +116,31 @@ body::-webkit-scrollbar{
                 </div>
                 <form action="">
     <div class="grid w-6/12 bg-transparent place-content-center h-[550px] " id="first">
-        <p>1.
+        <p class="text-4xl">1.
             Hello, what's your name?</p>
             <br>
-            <input type="text" class="block p-2 rounded w-[310px] border-none  outline-none"  placeholder="Name" name="fname" value=""><br>
+            <input type="text" class="block p-2 rounded w-[450px] h-[50px] border-none  outline-none"  placeholder="Name" name="fname" value=""><br>
         <button type="button" onclick="smoothScroll(document.getElementById('second'))">OK!</button>
     </div>
 <div class="grid w-6/12 bg-transparent place-content-center h-[550px] " id="second" >
-    <p>2.
+    <p class="text-4xl">2.
         Now we need your email:</p>
         <br>
-        <input type="email" class="block p-2 rounded w-[310px] border-none outline-none" placeholder="name@example.com" name="fname" value=""><br>
+        <input type="email" class="block p-2 rounded w-[450px] h-[50px] border-none outline-none" placeholder="name@example.com" name="fname" value=""><br>
     <button type="button" onclick="smoothScroll(document.getElementById('third'))">OK!</button>
 </div>
 <div class="grid w-6/12 bg-transparent place-content-center h-[550px]" id="third">
-    <p>3.
+    <p class="text-4xl">3.
         Password and confirm password</p>
         <br>
-        <input type="password" class="block p-2 rounded w-[310px] border-none outline-none" placeholder="Password" name="fname" value=""><br>
+        <input type="password" class="block p-2 rounded w-[450px] h-[50px] border-none outline-none" placeholder="Password" name="fname" value=""><br>
     <button type="button" onclick="smoothScroll(document.getElementById('forth'))">OK!</button>
 </div>
 <div class="grid w-6/12 bg-transparent place-content-center h-[550px]" id="forth">
-    <p>4.
+    <p class="text-4xl">4.
         Company Name</p>
          <br>
-         <input type="text" class="block p-2 rounded w-[310px] border-none outline-none" placeholder="Company Name" name="fname" value=""><br>
+         <input type="text" class="block p-2 rounded w-[450px] h-[50px] border-none outline-none" placeholder="Company Name" name="fname" value=""><br>
     <button type="button" onclick="smoothScroll(document.getElementById('fifth'))">OK!</button>
 </div>
 </form>
