@@ -6,7 +6,7 @@
                 <h1 class="text-[25px] font-medium">We've found you some perfect Candidates</h1>
                 <p class="mb-10 text-[15px]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum suscipit</p>
             </div>
-                <div class="flex relative rounded-3xl bg-blue-900 mx-10 p-7">
+                <div class="flex relative rounded-3xl bg-blue-900 dark:bg-gray-900 mx-10 p-7">
                     <div class="flex-1">
                         <div class="flex">
                             <img src="img/me-about.jpg" alt="profile" class="w-[150px] h-[200px] rounded-lg">
@@ -20,66 +20,105 @@
                             <span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">React</span>
                             <span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">Javascript</span>
                         </div>
-                        <div class="flex items-center pt-5">
-                            <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>First star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                            <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Second star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                            <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Third star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                            <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fourth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                            <svg aria-hidden="true" class="w-5 h-5 text-gray-300 dark:text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fifth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                            <p class="ml-2 text-sm font-medium text-white dark:text-gray-400">4.95 out of 5</p>
-                        </div>
+                        
                     </div>
                     <div class="flex-1">
                         
                         {{-- RATING SECTION --}}
+                        <div>
+                            <p class="text-lg pb-3 underline text-white">Rate attributes!</p>
+                        </div>
                         <div class="gap-8 sm:grid">
-                            <div>
+                            <div class="space-y-6">
                                 <dl>
-                                    <dt class="text-sm font-medium text-white dark:text-gray-400">Staff</dt>
-                                    <dd class="flex items-center mb-3">
-                                        <div class="w-full bg-gray-200 rounded h-2.5 dark:bg-gray-700 mr-2">
-                                            <div class="bg-blue-600 h-2.5 rounded dark:bg-blue-500" style="width: 88%"></div>
-                                        </div>
-                                        <span class="text-sm font-medium text-white dark:text-gray-400">8.8</span>
+                                    <dt class="text-sm font-medium text-white dark:text-gray-200">HTML</dt>
+                                    <dd class="flex flex-col w-full">
+                                        <input type="range" class="w-full" min="1" max="10" step="1" />
+                                        <ul class="flex justify-between text-[15px] w-full px-[5px]">
+                                            <li class="flex justify-center relative"><span class="absolute">1</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">2</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">3</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">4</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">5</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">6</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">7</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">8</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">9</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">10</span></li>
+                                        </ul>
                                     </dd>
                                 </dl>
                                 <dl>
-                                    <dt class="text-sm font-medium text-white dark:text-gray-400">Comfort</dt>
-                                    <dd class="flex items-center mb-3">
-                                        <div class="w-full bg-gray-200 rounded h-2.5 dark:bg-gray-700 mr-2">
-                                            <div class="bg-blue-600 h-2.5 rounded dark:bg-blue-500" style="width: 89%"></div>
-                                        </div>
-                                        <span class="text-sm font-medium text-white dark:text-gray-400">8.9</span>
+                                    <dt class="text-sm font-medium text-white dark:text-gray-200">CSS</dt>
+                                    <dd class="flex flex-col w-full">
+                                        <input type="range" class="w-full" min="1" max="10" step="1" />
+                                        <ul class="flex justify-between w-full px-[5px]">
+                                            <li class="flex justify-center relative"><span class="absolute">1</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">2</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">3</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">4</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">5</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">6</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">7</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">8</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">9</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">10</span></li>
+                                        </ul>
                                     </dd>
                                 </dl>
                                 <dl>
-                                    <dt class="text-sm font-medium text-white dark:text-gray-400">Free WiFi</dt>
-                                    <dd class="flex items-center mb-3">
-                                        <div class="w-full bg-gray-200 rounded h-2.5 dark:bg-gray-700 mr-2">
-                                            <div class="bg-blue-600 h-2.5 rounded dark:bg-blue-500" style="width: 88%"></div>
-                                        </div>
-                                        <span class="text-sm font-medium text-white dark:text-gray-400">8.8</span>
+                                    <dt class="text-sm font-medium text-white dark:text-gray-200">Javascript</dt>
+                                    <dd class="flex flex-col w-full">
+                                        <input type="range" class="w-full" min="1" max="10" step="1" />
+                                        <ul class="flex justify-between w-full px-[5px]">
+                                            <li class="flex justify-center relative"><span class="absolute">1</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">2</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">3</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">4</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">5</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">6</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">7</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">8</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">9</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">10</span></li>
+                                        </ul>
                                     </dd>
                                 </dl>
                                 <dl>
-                                    <dt class="text-sm font-medium text-white dark:text-gray-400">Facilities</dt>
-                                    <dd class="flex items-center">
-                                        <div class="w-full bg-gray-200 rounded h-2.5 dark:bg-gray-700 mr-2">
-                                            <div class="bg-blue-600 h-2.5 rounded dark:bg-blue-500" style="width: 54%"></div>
-                                        </div>
-                                        <span class="text-sm font-medium text-white dark:text-gray-400">5.4</span>
+                                    <dt class="text-sm font-medium text-white dark:text-gray-200">React JS</dt>
+                                    <dd class="flex flex-col w-full">
+                                        <input type="range" class="w-full" min="1" max="10" step="1" />
+                                        <ul class="flex justify-between w-full px-[5px]">
+                                            <li class="flex justify-center relative"><span class="absolute">1</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">2</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">3</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">4</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">5</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">6</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">7</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">8</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">9</span></li>
+                                            <li class="flex justify-center relative"><span class="absolute">10</span></li>
+                                        </ul>
                                     </dd>
                                 </dl>
                             </div>
                         </div>
+                                <div class="flex items-center pt-5">
+                                    <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>First star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Second star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Third star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fourth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <svg aria-hidden="true" class="w-5 h-5 text-gray-300 dark:text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fifth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                    <p class="ml-2 text-sm font-medium text-white dark:text-gray-400">Rate now!</p>
+                                </div>
                         {{-- RATING SECTION END --}}
                             <div class="h-auto w-[400px] pt-10 rounded-[12px]">
                                 <p class="text-xl font-semibold text-white cursor-pointer transition-all">Add Comment/Questions</p>
-                                <textarea class="h-auto px-3 text-sm py-1 mt-5 outline-none border-pink-300 w-full resize-none border rounded-lg placeholder:text-sm" rows="5" placeholder="Add your comments here"></textarea>  
+                                <textarea class="h-auto px-3 text-sm py-1 mt-5 outline-none border-pink-300 w-full resize-none border dark:text-black rounded-lg placeholder:text-sm" rows="5" placeholder="Add your comments here"></textarea>  
                                 
                                 <div class="flex justify-between mt-2"> 
-                                    <button class="h-12 w-[150px] bg-blue-400 text-sm text-white rounded-lg transition-all cursor-pointer hover:bg-blue-600">Submit comment</button>
-                                    <p class="text-sm text-blue-900 ">Enter atleast 15 characters</p>
+                                    <button class="h-12 w-[150px] bg-blue-500 text-md text-white rounded-lg transition-all cursor-pointer hover:bg-blue-600">Submit All</button>
                                 </div>
                             </div>  
                         
