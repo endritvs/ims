@@ -39,9 +39,16 @@ class MeetingReminder extends Command
         foreach($interviewAll as $iAll){
 
                 $dateThirtyMins = date("Y-m-d H:i:s", strtotime($iAll->interview_date));
-                $time = strtotime($dateThirtyMins);
-                $time = $time - (30 * 60);
-                $dateThirtyMins = date("Y-m-d H:i:s", $time);
+                $timeThirtyMins = strtotime($dateThirtyMins);
+                $timeThirtyMins = $timeThirtyMins - (30 * 60);
+                $dateThirtyMins = date("Y-m-d H:i:s", $timeThirtyMins);
+
+                $dateOneHour = date("Y-m-d H:i:s", strtotime($iAll->interview_date));
+                $timeOneHour = strtotime($dateOneHour);
+                $timeOneHour = $timeOneHour + (60 * 60);
+                $dateOneHour = date("Y-m-d H:i:s", $timeOneHour);
+
+                dd($dateOneHour);
 
             // echo("Is ".$today." thirty minutes away from ");
             // echo($iAll->interview_date."? ");
@@ -66,6 +73,9 @@ class MeetingReminder extends Command
 
                 echo "Mail sent";
 
+            } elseif($dateOneHour >= $today){
+
+                
             }
         }
 

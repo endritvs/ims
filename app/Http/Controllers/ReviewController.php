@@ -5,9 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\interview;
 
 class ReviewController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index()
     {
@@ -20,10 +26,14 @@ class ReviewController extends Controller
  
     public function create()
     {
-        //$interviewer = review::orderBy('id', 'desc')->get();
-       // return view('interviewerComponents/create')->with(['interviewer' => $interviewer]);
-    }
+       
+       date_default_timezone_set("Europe/Belgrade");
+       $today = date("Y-m-d H:i:s");
 
+       $pastInterview = interview::with('user', 'interviewees', 'review')->where('interview_date', '<', $today)->where('interviewer', Auth::user()->id)->orderBy('interview_date', 'asc')->paginate(5);
+
+       return view('/review/allRatings')->with('pastInterview', $pastInterview);
+    }
  
     public function store(Request $request)
     {
@@ -32,14 +42,14 @@ class ReviewController extends Controller
             $request['rating_amount'] = 10;
         }
 
-        $request->validate([
+         $request->validate([
             'candidate_id' => ['required'],
             'questionnaire_id' => ['required'],
             'interview_id' => ['required'],
             'rating_amount' => ['required',  'numeric', 'max:5'],
             
         ]); 
-        
+
         review::create([
             'candidate_id' => $request['candidate_id'],
             'questionnaire_id' => $request['questionnaire_id'],

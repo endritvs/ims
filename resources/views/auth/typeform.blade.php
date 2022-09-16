@@ -109,41 +109,59 @@ body::-webkit-scrollbar{
     
     <div class="bg-gradient-to-r from-[#301e4b] to-[#0cbaba]">
         <img src="img/starlabslogo.png" class="w-[70px] h-[65px]  sticky top-4 pl-[10px]"  alt="">
-    <div class="float-right sticky top-10 ">                   
+    <div class="float-right sticky top-10">                   
                     <h1 class="text-white">Interviews were never easier than with our IMS</h1></br>
                     <button type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Sign In</button>
 
                     <img src="img/register.svg" class="h-screen w-[550px] sticky top-4 float-right" alt="">
                 </div>
-                <form action="">
+                <form action="{{route('typeform.typeform')}}" method="POST" enctype='multipart/form-data'>
+                    @csrf
     <div class="grid w-[500px] bg-transparent place-content-center h-[850px] " id="first">
       <div class="pb-[100px] grid place-content-center"> 
-    <p class="text-4xl">1.
+        <p class="text-4xl">1.
             Hello, what's your name?</p>
             <br>
-            <input type="text" class="block p-2 rounded w-[450px] h-[50px] border-none  outline-none"  placeholder="Name" name="fname" value=""><br>
+            <input type="text" class="@error('name') is-invalid @enderror block p-2 rounded w-[450px] h-[50px] border-none outline-none"  placeholder="Name" name="name" value=""><br>
+            @error('name')
+                        <div class="ml-1 text-xl text-red-500 text-xs alert alert-danger w-[400px] bg-transparent">{{ $message }}</div>
+            @enderror
         <button type="button" onclick="smoothScroll(document.getElementById('second'))">OK!</button>
         </div>
     </div>
-<div class="grid w-[500px] bg-transparent place-content-center h-[850px] " id="second" >
+<div class="grid w-[500px] bg-transparent place-content-center h-[850px]" id="second" >
     <p class="text-4xl">2.
         Now we need your email:</p>
         <br>
-        <input type="email" class="block p-2 rounded w-[450px] h-[50px] border-none outline-none" placeholder="name@example.com" name="fname" value=""><br>
+        <input type="email" class="@error('email') is-invalid @enderror block p-2 rounded w-[450px] h-[50px] border-none outline-none" placeholder="name@example.com" name="email" value=""><br>
+        @error('email')
+                        <div class="ml-1 text-red-500 text-xs alert alert-danger w-[400px] bg-transparent">{{ $message }}</div>
+        @enderror
     <button type="button" onclick="smoothScroll(document.getElementById('third'))">OK!</button>
 </div>
 <div class="grid w-[500px] bg-transparent place-content-center h-[850px]" id="third">
     <p class="text-4xl">3.
         Password and confirm password</p>
         <br>
-        <input type="password" class="block p-2 rounded w-[450px] h-[50px] border-none outline-none" placeholder="Password" name="fname" value=""><br>
+        <input type="password" class="@error('password') is-invalid @enderror block p-2 rounded w-[450px] h-[50px] border-none outline-none" placeholder="Password" name="password" value=""><br>
+        @error('password')
+                        <div class="ml-1 text-red-500 text-xs alert alert-danger w-[400px] bg-transparent">{{ $message }}</div>
+         @enderror
+        <input type="password" class="@error('password_confirmation') is-invalid @enderror block p-2 rounded w-[450px] h-[50px] border-none outline-none" placeholder="Confirm Password" name="password_confirmation" value=""><br>
+        @error('password_confirmation')
+                        <div class="ml-1 text-red-500 text-xs alert alert-danger w-[400px] bg-transparent">{{ $message }}</div>
+         @enderror
     <button type="button" onclick="smoothScroll(document.getElementById('forth'))">OK!</button>
 </div>
 <div class="grid w-[500px] bg-transparent place-content-center h-[850px]" id="forth">
     <p class="text-4xl">4.
         Company Name</p>
          <br>
-         <input type="text" class="block p-2 rounded w-[450px] h-[50px] border-none outline-none" placeholder="Company Name" name="fname" value=""><br>
+         <input type="text" class="@error('company_name') is-invalid @enderror block p-2 rounded w-[450px] h-[50px] border-none outline-none" placeholder="Company Name" name="company_name" value=""><br>
+         @error('company_name')
+                        <div class="ml-1 text-red-500 text-xs alert alert-danger w-[400px] bg-transparent">{{ $message }}</div>
+         @enderror
+         
     <button type="button" onclick="smoothScroll(document.getElementById('fifth'))">OK!</button>
 </div>
 <div class="grid w-[500px]  bg-transparent place-content-center h-[850px]" id="fifth">
@@ -151,31 +169,24 @@ body::-webkit-scrollbar{
 <p class="text-4xl">5.
         Candidate Types and Attributes</p>
         <br>
-        <select id="language" onChange="update()" class="select h-[50px] w-[450px]  ">
-            <option disabled selected>Select</option>
-            <option>Front</option>
-            <option>Back</option>
-            <option>DevOps</option>
-            <option>QA</option>
-          </select><br>
-          <!-- <input id="text" type="text" placeholder="Type here" class="input input-ghost w-full max-w-xs" /> -->
-    <button type="button"  onclick="smoothScroll(document.getElementById('first'))">Submit</button>
+        <input type="text" class="@error('interview_type') is-invalid @enderror block p-2 rounded w-[450px] h-[50px] border-none outline-none" placeholder="Interview Type" name="interview_type" value=""><br>
+        @error('interview_type')
+                        <div class="ml-1 text-red-500 text-xs alert alert-danger w-[400px] bg-transparent">{{ $message }}</div>
+         @enderror
+        <input type="text" class="@error('interview_attribute') is-invalid @enderror block p-2 rounded w-[450px] h-[50px] border-none outline-none" placeholder="Interview Attribute" name="interview_attribute" value=""><br>
+        @error('interview_attribute')
+                        <div class="ml-1 text-red-500 text-xs alert alert-danger w-[400px] bg-transparent">{{ $message }}</div>
+         @enderror
+
+         <input class="@error('img') is-invalid @enderror block p-2 rounded w-[450px] h-[50px] border-none outline-none" style="line-height:3 !important;"  type="file" name="img" ><br>
+                       
+        @error('img')
+                        <div class="ml-1 text-red-500 text-xs alert alert-danger w-[400px] bg-transparent">{{ $message }}</div>
+        @enderror
+
+    <button type="submit">Submit</button>
 </div>
 </form>
 
-    
-<!-- <script type="text/javascript">
-    function update() {
-        var select = document.getElementById('language');
-        var option = select.options[select.selectedIndex];
-
-    
-        document.getElementById('text').value = option.text;
-    }
-
-    update(); -->
-
-   
-</script>
 </div>
 </body>
