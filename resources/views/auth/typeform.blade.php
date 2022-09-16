@@ -108,58 +108,63 @@ body::-webkit-scrollbar{
 <body>
     
     <div class="bg-gradient-to-r from-[#301e4b] to-[#0cbaba]">
-        <img src="img/starlabslogo.png" class="w-[65px] h-[65px]  sticky top-1"  alt="">
-    <div class="float-right sticky top-10">                   
+        <img src="img/starlabslogo.png" class="w-[70px] h-[65px]  sticky top-4 pl-[10px]"  alt="">
+    <div class="float-right sticky top-10 ">                   
                     <h1 class="text-white">Interviews were never easier than with our IMS</h1></br>
-                    <button class="btn transparent" >Sign in</button>
-                    <img src="img/register.svg" class="h-screen w-[550px] sticky top-0 float-right" alt="">
+                    <button type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Sign In</button>
+
+                    <img src="img/register.svg" class="h-screen w-[550px] sticky top-4 float-right" alt="">
                 </div>
                 <form action="">
-    <div class="grid w-6/12 bg-transparent place-content-center h-[550px] " id="first">
-        <p class="text-4xl">1.
+    <div class="grid w-[500px] bg-transparent place-content-center h-[850px] " id="first">
+      <div class="pb-[100px] grid place-content-center"> 
+    <p class="text-4xl">1.
             Hello, what's your name?</p>
             <br>
             <input type="text" class="block p-2 rounded w-[450px] h-[50px] border-none  outline-none"  placeholder="Name" name="fname" value=""><br>
         <button type="button" onclick="smoothScroll(document.getElementById('second'))">OK!</button>
+        </div>
     </div>
-<div class="grid w-6/12 bg-transparent place-content-center h-[550px] " id="second" >
+<div class="grid w-[500px] bg-transparent place-content-center h-[850px] " id="second" >
     <p class="text-4xl">2.
         Now we need your email:</p>
         <br>
         <input type="email" class="block p-2 rounded w-[450px] h-[50px] border-none outline-none" placeholder="name@example.com" name="fname" value=""><br>
     <button type="button" onclick="smoothScroll(document.getElementById('third'))">OK!</button>
 </div>
-<div class="grid w-6/12 bg-transparent place-content-center h-[550px]" id="third">
+<div class="grid w-[500px] bg-transparent place-content-center h-[850px]" id="third">
     <p class="text-4xl">3.
         Password and confirm password</p>
         <br>
         <input type="password" class="block p-2 rounded w-[450px] h-[50px] border-none outline-none" placeholder="Password" name="fname" value=""><br>
     <button type="button" onclick="smoothScroll(document.getElementById('forth'))">OK!</button>
 </div>
-<div class="grid w-6/12 bg-transparent place-content-center h-[550px]" id="forth">
+<div class="grid w-[500px] bg-transparent place-content-center h-[850px]" id="forth">
     <p class="text-4xl">4.
         Company Name</p>
          <br>
          <input type="text" class="block p-2 rounded w-[450px] h-[50px] border-none outline-none" placeholder="Company Name" name="fname" value=""><br>
     <button type="button" onclick="smoothScroll(document.getElementById('fifth'))">OK!</button>
 </div>
-</form>
-<div class="grid w-6/12 bg-transparent place-content-center h-[550px]" id="fifth">
-    <p>5.
+<div class="grid w-[500px]  bg-transparent place-content-center h-[850px]" id="fifth">
+  
+<p class="text-4xl">5.
         Candidate Types and Attributes</p>
         <br>
-        <select id="language" onChange="update()" class="select select-md w-[310px] max-w-xs ">
+        <select id="language" onChange="update()" class="select h-[50px] w-[450px]  ">
             <option disabled selected>Select</option>
             <option>Front</option>
             <option>Back</option>
             <option>DevOps</option>
             <option>QA</option>
           </select><br>
-          <input id="text" type="text" placeholder="Type here" class="input input-ghost w-full max-w-xs" />
+          <!-- <input id="text" type="text" placeholder="Type here" class="input input-ghost w-full max-w-xs" /> -->
     <button type="button"  onclick="smoothScroll(document.getElementById('first'))">Submit</button>
+</div>
+</form>
 
     
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     function update() {
         var select = document.getElementById('language');
         var option = select.options[select.selectedIndex];
@@ -168,7 +173,7 @@ body::-webkit-scrollbar{
         document.getElementById('text').value = option.text;
     }
 
-    update();
+    update(); -->
 
    
 </script>
