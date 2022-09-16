@@ -11,7 +11,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\interviewController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ReviewsAttributesController;
-
+use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -48,9 +48,6 @@ Route::get('/sidebari', function () {
 Route::get('/register', function () {
     return view('/auth/register');
 });
-Route::get('/typeform', function () {
-    return view('/auth/typeform');
-});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -59,7 +56,6 @@ Route::get('/dashboard', function () {
 Route::get('/profile', function () {
     return view('profile/profile');
 })->middleware(['auth'])->name('profile');
-
 
 Route::prefix('interviewee')->group(function () {
 
@@ -137,17 +133,14 @@ Route::prefix('interview')->group(
 
 Route::get('/dashboard', [interviewController::class, 'index1'])->name('dashboard.index');
 
-
-
 Route::prefix('review')->group(
     function () {
         Route::get('/', [ReviewController::class, 'index'])->name('review.index');
         Route::get('/edit-review/{id}', [ReviewController::class, 'edit'])->name('review.edit');
         Route::post('/update-review/{id}', [ReviewController::class, 'update'])->name('review.update');
         Route::get('/destroy/{id}', [ReviewController::class, 'destroy'])->name('review.destroy');
-        Route::get('/create', [ReviewController::class, 'create'])->name('review.create');
+        Route::get('/allRatings', [ReviewController::class, 'create'])->name('review.create');
         Route::post('/store-review', [ReviewController::class, 'store'])->name('review.store');
-  
     }
 );
 
@@ -159,6 +152,17 @@ Route::prefix('review_attributes')->group(
         Route::get('/destroy/{id}', [ReviewsAttributesController::class, 'destroy'])->name('review_attributes.destroy');
         Route::get('/create', [ReviewsAttributesController::class, 'create'])->name('review_attributes.create');
         Route::post('/store-review', [ReviewsAttributesController::class, 'store'])->name('review_attributes.store');
+  
+    }
+);
+
+Route::get('/typeform', function () {
+    return view('/auth/typeform');
+});
+
+Route::prefix('/typeform')->group(
+    function () {
+        Route::post('/store-typeform', [RegisteredUserController::class, 'typeform'])->name('typeform.typeform');
   
     }
 );
