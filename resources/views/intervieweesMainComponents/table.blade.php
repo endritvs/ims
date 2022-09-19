@@ -2,6 +2,7 @@
 
 @section('content')
 <title>Candidates</title>
+<link rel='stylesheet' type='text/css' media='screen' href='css/quick-add.css'>
 
 <div class="h-full ml-14 mt-8 mb-10 md:ml-64">
     <div class="w-full bg-white dark:bg-gray-800">
@@ -15,33 +16,35 @@
                     Candidates
                 </h1>
 
-                
+
                 <div class="flex justify-evenly items-center">
-                    <a class="mb-2" href="#">
+                    <a class="mr-4" href="#">
                         <button type="button" data-modal-toggle="addUserModal" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Create</button>
                     </a>
-                    <a class="mr-4 ml-auto justify-center items-center"
-                     
-                     >Sort:
-                     <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 pr-4 mx-2">
-                      <a class="cursor-pointer" href="#">Rating  
-                       <i onclick="changeIconA(this)" class="fa-solid fa-arrow-up-long" id="SortNr"></i> 
-                      </a> 
-                     </button>
-                     <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 pr-4 mx-2">
-                      <a class="pl-5 py-2.5 p-0 mr-2 mb-2" href="#">Date
-                       <i onclick="changeIconB(this)" class="fa-solid fa-arrow-up-long" id="Date"></i>
-                      </a>
-                     </button>
-                     <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 pr-4 mx-2">
-                      <a class="pl-5 py-2.5 p-0 mr-2 mb-2" href="#">A-Z
-                       <i onclick="changeIconC(this)" class="fa-solid fa-arrow-up-long" id="AandZ"></i>
-                      </a>
-                     </button>
+                    <a class="mr-4" href="#">
+                        <button type="button" data-modal-toggle="quick-add" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Quick Add</button>
+                    </a>
+
+                    <a class="mr-4 ml-auto justify-center items-center">Sort:
+                        <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 pr-4 mx-2">
+                            <a class="cursor-pointer" href="#">Rating
+                                <i onclick="changeIconA(this)" class="fa-solid fa-arrow-up-long" id="SortNr"></i>
+                            </a>
+                        </button>
+                        <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 pr-4 mx-2">
+                            <a class="pl-5 py-2.5 p-0 mr-2 mb-2" href="#">Date
+                                <i onclick="changeIconB(this)" class="fa-solid fa-arrow-up-long" id="Date"></i>
+                            </a>
+                        </button>
+                        <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 pr-4 mx-2">
+                            <a class="pl-5 py-2.5 p-0 mr-2 mb-2" href="#">A-Z
+                                <i onclick="changeIconC(this)" class="fa-solid fa-arrow-up-long" id="AandZ"></i>
+                            </a>
+                        </button>
 
                     </a>
-                    
-                     
+
+
                 </div>
                 <form action="{{ route('interviewees.index') }}" method="GET" role="search" class="my-3 ">
                     <div class="flex justify-center">
@@ -97,11 +100,11 @@
                             <li>
                                 <a data-modal-toggle="deleteUserModal{{ $i->id }}" href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Delete</a>
                             </li>
-                    @if(Auth::user() -> role == "interviewer")
+                            @if(Auth::user() -> role == "interviewer")
                             <li>
                                 <a data-modal-toggle="AddToInterviewModal{{ $i->id }}" href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Add to Interview</a>
                             </li>
-                    @endif
+                            @endif
                         </ul>
                     </div>
 
@@ -127,21 +130,21 @@
                         </p>
                     </div>
                     <div class="flex items-center w-full mb-3">
-                       @if(count($exec1) > 1)
-                @foreach ($exec1 as $rat => $dd)
-                    @if ($dd->candidate_id === $i['id'])
-                <p class="bg-blue-100 text-blue-800 text-sm font-semibold inline-flex items-center p-1 rounded dark:bg-blue-200 dark:text-blue-800">{{ floatval($dd->rating) }}</p>
-                <p class="ml-2 font-medium text-gray-900 dark:text-white">Rating</p>
+                        @if(count($exec1) > 1)
+                        @foreach ($exec1 as $rat => $dd)
+                        @if ($dd->candidate_id === $i['id'])
+                        <p class="bg-blue-100 text-blue-800 text-sm font-semibold inline-flex items-center p-1 rounded dark:bg-blue-200 dark:text-blue-800">{{ floatval($dd->rating) }}</p>
+                        <p class="ml-2 font-medium text-gray-900 dark:text-white">Rating</p>
                         @break
-                    @endif
-                @endforeach
-                    @if (!($dd->candidate_id === $i['id']))
-                <p class="bg-blue-100 text-blue-800 text-sm font-semibold inline-flex items-center p-1 rounded dark:bg-blue-200 dark:text-blue-800"></p>
-                <p class="ml-2 font-medium text-gray-900 dark:text-white">Not Yet Rated</p>
-                <span class="mx-2 w-1 h-1 bg-gray-900 rounded-full dark:bg-gray-500"></span>
-                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">0 reviews</p>
-                    @endif
-                    @endif 
+                        @endif
+                        @endforeach
+                        @if (!($dd->candidate_id === $i['id']))
+                        <p class="bg-blue-100 text-blue-800 text-sm font-semibold inline-flex items-center p-1 rounded dark:bg-blue-200 dark:text-blue-800"></p>
+                        <p class="ml-2 font-medium text-gray-900 dark:text-white">Not Yet Rated</p>
+                        <span class="mx-2 w-1 h-1 bg-gray-900 rounded-full dark:bg-gray-500"></span>
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">0 reviews</p>
+                        @endif
+                        @endif
                     </div>
 
                     <div class="grid grid-cols-1 grid-rows-3 gap-x-8 gap-y-2 w-full ">
@@ -158,19 +161,19 @@
                             $rate = 'No Rating';
 
                             foreach($review_attributes as $review_attribute){
-                                if( $review_attribute->candidate_id == $i->id && $review_attribute->attribute_id == $attribute->id){
+                            if( $review_attribute->candidate_id == $i->id && $review_attribute->attribute_id == $attribute->id){
 
-                                    $total += $review_attribute->rating_amount;
-                                    $index++;
-                                }
+                            $total += $review_attribute->rating_amount;
+                            $index++;
+                            }
                             }
 
                             if($index != 0){
 
-                                $rate = $total/$index;
-                                floatval($rate);
+                            $rate = $total/$index;
+                            floatval($rate);
                             }
-                        @endphp
+                            @endphp
 
                             <dd class="flex items-center mb-3">
                                 <div class="w-full bg-gray-200 rounded h-2.5 dark:bg-gray-700 mr-2">
@@ -178,7 +181,7 @@
                                 </div>
                                 <span class="text-sm font-medium text-gray-500 dark:text-gray-400">{{round(floatval($rate), 1)}}</span>
                             </dd>
-                                
+
                         </dl>
                         @endforeach
                     </div>
@@ -347,83 +350,135 @@
                             </form>
                         </div>
                     </div>
-
-
                 </div>
 
-                
-    <div id="AddToInterviewModal{{ $i->id }}" tabindex="-1" aria-hidden="true"
-        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
-        <div class="relative p-4 w-full max-w-md h-full md:h-auto">
-      
-            <form method="POST" action="{{ route('interview.store') }}"
-                class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                @csrf
-            
-                <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                        Add Interview
-                    </h3>
-                    <button type="button"
-                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                        data-modal-toggle="AddToInterviewModal{{ $i->id }}">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
-                </div>
-     
-                <div class="p-6 ">
-                    <div class="">
-                        <div>
 
-                            <input type="hidden" name="interview_id" id="interview_name"
-                                value="{{ empty($interviewss->last()->interview_id) ? '1' : ++$interviewss->last()->interview_id }}"
-                                class="hidden bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                required>
-                            <input type="hidden" name="interviewer[]" value="{{Auth::user()->id}}" class="hidden bg-gray-700">
-                            
+                <!-- Quick Add Modal -->
+                <div id="quick-add" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+                    <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+
+                        <!-- Modal header -->
+                        <div id="profiles" class="w-full relative h-[500px] before:flex before:items-center before:justify-center before:h-full before:text-2xl before:content-['End']">
+
+                            <div id="profile" class="absolute left-0 top-0 w-full overflow-hidden cursor-pointer select-none rounded-xl shadow-md">
+                                <div id="profile__image" class="h-0 bg-cover pb-[120%] bg-center" style="background-image: url('https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg');">
+                                    <button type="button" class="float-right text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="quick-add">
+                                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span class="sr-only">Close modal</span>
+                                    </button>
+                                </div>
+                                <div id="profile__infos" class="p-3 absolute bottom-0 w-full bg-gradient-to-t from-gray-800 to-transparent">
+                                    <div class="profile__name">Ardit Xhaferi<span id="profile__age" class="font-normal pl-3">20</span></div>
+                                    <div class="profile__description">Full Stack</div>
+                                </div>
+                            </div>
+                            <div id="profile" class="absolute left-0 top-0 w-full overflow-hidden cursor-pointer select-none rounded-xl shadow-md">
+                                <div id="profile__image" class="h-0 bg-cover pb-[120%] bg-center" style="background-image: url('https://images.unsplash.com/photo-1615900304401-923d2dfd8beb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8aHVudGVyfGVufDB8fDB8fA%3D%3D&w=1000&q=80');">
+                                    <button type="button" class="float-right text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="quick-add">
+                                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span class="sr-only">Close modal</span>
+                                    </button>
+                                </div>
+                                <div id="profile__infos" class="p-3 absolute bottom-0 w-full bg-gradient-to-t from-gray-800 to-transparent">
+                                    <div class="profile__name">Albert Bislimi<span id="profile__age" class="font-normal pl-3">22</span></div>
+                                    <div class="profile__description">BackEnd</div>
+                                </div>
+                            </div>
+                            <div id="profile" class="absolute left-0 top-0 w-full overflow-hidden cursor-pointer select-none rounded-xl shadow-md">
+                                <div id="profile__image" class="h-0 bg-cover pb-[120%] bg-center" style="background-image: url('https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aHVtYW58ZW58MHx8MHx8&w=1000&q=80');">
+                                    <button type="button" class="float-right text-gray-400 bg-transparent rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:text-white" data-modal-toggle="quick-add">
+                                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span class="sr-only">Close modal</span>
+                                    </button>
+                                </div>
+                                <div id="profile__infos" class="p-3 absolute bottom-0 w-full bg-gradient-to-t from-gray-800 to-transparent">
+                                    <div id="profile__name" class="text-white font-bold text-xl">Qendrim Rexhepi<span id="profile__age" class="font-normal pl-3">42</span></div>
+                                    <div class="profile__description">FrontEnd</div>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                        <label class="block text-sm font-medium text-gray-900 dark:text-white">Choose other interviewers (Optional):</label>
-                          
-                        <select name="interviewer[]"
-                                class="@error('interviewer') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                id="interviewer" multiple="multiple">
-                                    <option value="" disabled class="bg-[#1e8fff] text-white">{{ Auth::user()->name }}</option>
 
-                            @foreach ($interviewer as $a)
-                                @if(!($a->name === Auth::user()->name))
-                                    <option value="{{ $a->id }}">{{ $a->name }}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                            
+                        <div id="bottombar" class="mt-6 flex justify-center items-center gap-6">
+                            <div id="bottombar__button" class="w-16 h-16 rounded-full bg-white p-4 text-red-600 font-black shadow-md duration-4000 hover:cursor-pointer hover:opacity-80">
+                                <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </div>
+                            <div id="bottombar__button" class="w-16 h-16 rounded-full bg-white p-4 text-green-700 font-black shadow-md duration-4000 hover:cursor-pointer hover:opacity-80">
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
                         </div>
                     </div>
+                </div>
 
-                    <div>
-                            <input type="hidden" name="interviewees_id" value="{{ $i->id }}" class="hidden bg-gray-700">
+
+                <div id="AddToInterviewModal{{ $i->id }}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+                    <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+
+                        <form method="POST" action="{{ route('interview.store') }}" class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                            @csrf
+
+                            <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
+                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                    Add Interview
+                                </h3>
+                                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="AddToInterviewModal{{ $i->id }}">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <div class="p-6 ">
+                                <div class="">
+                                    <div>
+
+                                        <input type="hidden" name="interview_id" id="interview_name" value="{{ empty($interviewss->last()->interview_id) ? '1' : ++$interviewss->last()->interview_id }}" class="hidden bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                                        <input type="hidden" name="interviewer[]" value="{{Auth::user()->id}}" class="hidden bg-gray-700">
+
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-900 dark:text-white">Choose other interviewers (Optional):</label>
+
+                                        <select name="interviewer[]" class="@error('interviewer') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" id="interviewer" multiple="multiple">
+
+                                            @foreach ($interviewer as $a)
+                                            @if(!($a->name === Auth::user()->name))
+                                            <option value="{{ $a->id }}">{{ $a->name }}</option>
+                                            @endif
+                                            @endforeach
+                                        </select>
+
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <input type="hidden" name="interviewees_id" value="{{ $i->id }}" class="hidden bg-gray-700">
+                                </div>
+
+
+                                <label class="block text-sm font-medium text-gray-900 dark:text-white">Choose date</label>
+                                <input type="datetime-local" name="interview_date" min=<?php echo date('Y-m-d') . 'T00:00'; ?> id="dateId" class="@error('interview_date') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white ">
+
+                            </div>
+
+                            <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+                                <button type="submit" data-modal-toggle="AddToInterviewModal{{ $i->id }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create</button>
+                            </div>
+                        </form>
                     </div>
-
-
-                    <label class="block text-sm font-medium text-gray-900 dark:text-white">Choose date</label>
-                    <input type="datetime-local" name="interview_date" min=<?php echo date('Y-m-d').'T00:00'; ?> id="dateId"
-                        class="@error('interview_date') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white ">
-
                 </div>
-          
-                <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-                    <button type="submit" data-modal-toggle="AddToInterviewModal{{ $i->id }}"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create</button>
-                </div>
-            </form>
-        </div>
-    </div>
 
                 @endforeach
+
                 <div id="addUserModal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
                     <div class="relative p-4 w-full max-w-md h-full md:h-auto">
 
@@ -521,8 +576,8 @@
                     </div>
 
                 </div>
-
             </div>
+
         </section>
     </div>
     <div class="dark:bg-gray-800 bg-gray-100 p-3 flex justify-center">
@@ -531,27 +586,33 @@
 
 </div>
 
-    <script type="text/javascript">
-      var angle = 0;
-function changeIconA(){
-    var spin1 = document.getElementById("SortNr");
-    spin2 = document.getElementById("SortNr");
-    angle+=180;
-    spin1.style.transform = "rotate("+angle+"deg)";
-}
-function changeIconB(){
-    var spin1 = document.getElementById("Date");
-    spin2 = document.getElementById("Date");
-    angle+=180;
-    spin1.style.transform = "rotate("+angle+"deg)";
-}
-function changeIconC(){
-    var spin1 = document.getElementById("AandZ");
-    spin2 = document.getElementById("AandZ");
-    angle+=180;
-    spin1.style.transform = "rotate("+angle+"deg)";
-}
+<script src='js/hammer.min.js'></script>
+<script src='js/quick-add.js'></script>
+
+<script type="text/javascript">
+    var angle = 0;
+
+    function changeIconA() {
+        var spin1 = document.getElementById("SortNr");
+        spin2 = document.getElementById("SortNr");
+        angle += 180;
+        spin1.style.transform = "rotate(" + angle + "deg)";
+    }
+
+    function changeIconB() {
+        var spin1 = document.getElementById("Date");
+        spin2 = document.getElementById("Date");
+        angle += 180;
+        spin1.style.transform = "rotate(" + angle + "deg)";
+    }
+
+    function changeIconC() {
+        var spin1 = document.getElementById("AandZ");
+        spin2 = document.getElementById("AandZ");
+        angle += 180;
+        spin1.style.transform = "rotate(" + angle + "deg)";
+    }
+</script>
 
 
-    </script>
 @endsection('content')

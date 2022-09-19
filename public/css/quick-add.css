@@ -1,0 +1,44 @@
+:root {
+  --light-grey:#ececec;
+  --dark-grey:#acacac;
+  --green:#4CAF50;
+  --red:#FF5252;
+  --black-transparent:rgba(0,0,0, 0.8);
+
+  --transition-time:.4s;
+}
+
+.profile--match {
+  transition: var(--transition-time);
+  transform:translateX(1500px) translateY(600px) rotate(90deg);
+}
+
+.profile--next {
+  transition: var(--transition-time);
+  transform:translateX(-1500px) translateY(600px) rotate(-90deg);
+}
+
+.profile--back {
+  transition:var(--transition-time);
+}
+
+.profile--matching::after, .profile--nexting::after {
+  content:'ACCEPT';
+  font-weight: bold;
+  font-size:28px;
+  padding:8px 12px;
+  border:solid 2px var(--green);
+  color:var(--green);
+  background: transparent;
+  position:absolute;
+  top:24px;
+  right:12px;
+  border-radius: 4px;
+  transform:rotate(24deg);
+} 
+
+.profile--nexting::after {
+  content:'REJECT';
+  border:solid 2px var(--red);
+  color:var(--red);
+}
