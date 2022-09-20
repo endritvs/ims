@@ -111,7 +111,12 @@
 
                     <div class="gap-8 sm:grid sm:grid-cols-1 mt-2">
                         <div class="mb-4 mt-[-50px]">
+                            @if (Auth::user()->img==="public/noProfilePhoto/nofoto.jpg")
+                            <img class="object-center object-cover rounded-full h-28 w-28" src="{{asset('/noProfilePhoto/'.$link[2])}}" alt="photo">
+                            @else
                             <img class="object-center object-cover rounded-full h-28 w-28" src="/storage/images/{{ $link[2] }}" alt="photo">
+
+                            @endif
                             <p class="dark:text-white text-indigo-600 font-bold capitalize text-center">
                                 {{ $i->name . ' ' . $i->surname }}
                             </p>

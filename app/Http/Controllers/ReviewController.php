@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\review;
+use App\Models\comment;
+use App\Models\reviews_attributes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\interview;
@@ -17,10 +19,12 @@ class ReviewController extends Controller
 
     public function index()
     {
-
+        date_default_timezone_set("Europe/Belgrade");
+        $today = date("Y-m-d H:i:s");
+ 
         $review = review::with('candidates', 'questionnaires', 'interviews')->where('questionnaire_id',Auth::user()->id)->paginate(5);
-      
-        return view('review/table')->with('review', $review);
+        $reviews = interview::with('user', 'interviewees', 'review')->where('interview_date', '<', $today)->where('interviewer', Auth::user()->id)->orderBy('interview_date', 'desc')->first();
+        return view('review/table')->with(['review'=>$review,'reviews'=> $reviews]);
     }
 
  
@@ -65,6 +69,35 @@ class ReviewController extends Controller
     public function show(review $review)
     {
         //
+    }
+
+    public function rateComment(Request $request){
+        for ($i=0; $i < count($request['attribute_id']); $i++) { 
+
+            reviews_attributes::create([
+            'candidate_id' => $request['candidate_id'],
+            'questionnaire_id' => Auth::user()->id,
+            'interview_id' => $request['interview_id'],
+            'rating_amount' => $request['rating_amount'][$i],
+            'attribute_id' => $request['attribute_id'][$i],
+            ]);
+        }
+        review::create([
+            'candidate_id' => $request['candidate_id'],
+            'questionnaire_id' => Auth::user()->id,
+            'interview_id' => $request['interview_id'],
+            'rating_amount' => $request['rating_amount_review'],
+            
+        ]);
+
+        comment::create([
+            'candidate_id' => $request['candidate_id'],
+            'questionnaire_id' => Auth::user()->id,
+            'interview_id' => $request['interview_id'],
+            'message' => $request['message'],
+        ]);
+
+        return back();
     }
 
  
