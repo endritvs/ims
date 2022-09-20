@@ -6,8 +6,10 @@
 <link href="https://cdn.jsdelivr.net/npm/daisyui@2.24.0/dist/full.css" rel="stylesheet" type="text/css" />
 <script src="https://cdn.tailwindcss.com"></script>
 
-<div class="w-full bg-gray-800">
-    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4 py-12">
+<div class="h-full ml-14  mb-10 md:ml-64">
+  <div class="mt-[145px] mx-4">
+      <div class="w-full overflow-hidden rounded-lg shadow-xs">
+        <div class="w-full overflow-x-auto">
        
     <div class="text-center pb-12">    
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -30,7 +32,9 @@
           @endforeach
         </div>
 
-    </section>
-</div>
+    </div>
+        </div>
+      </div>
+  </div>
 
 @endsection

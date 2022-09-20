@@ -45,8 +45,8 @@ class InterviewController extends Controller
     public function index1()
     {
         $review = review::with('candidates', 'questionnaires', 'interviews')->where('questionnaire_id',Auth::user()->id)->get();
-        $review = $review->toArray();
-
+         $review = $review->toArray();
+      
         date_default_timezone_set("Europe/Belgrade");
         $today = date("Y-m-d H:i:s");
 

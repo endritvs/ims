@@ -141,6 +141,7 @@ Route::prefix('review')->group(
         Route::get('/destroy/{id}', [ReviewController::class, 'destroy'])->name('review.destroy');
         Route::get('/allRatings', [ReviewController::class, 'create'])->name('review.create');
         Route::post('/store-review', [ReviewController::class, 'store'])->name('review.store');
+        Route::post('/rate',[ReviewController::class,'rateComment'])->name('review.rateComment');
     }
 );
 
