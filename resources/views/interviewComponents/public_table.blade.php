@@ -111,6 +111,9 @@
                              @endif
                         @endif
                             </li>
+                            <li>
+                                <a  href="{{route('review.index',$d['interviewees']['id'])}}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Overall Rating</a>
+                            </li>
                         </ul>
 
                     </div>

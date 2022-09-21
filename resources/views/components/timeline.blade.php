@@ -1,4 +1,4 @@
-@extends("layouts.layout")
+
 <div class="h-full ml-14 mt-10 mb-10 md:ml-64">
     <div class="w-full bg-white dark:bg-gray-800 ">
       <section class=" mx-auto px-4 sm:px-6 lg:px-4 py-12">
