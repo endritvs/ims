@@ -135,7 +135,7 @@ Route::get('/dashboard', [interviewController::class, 'index1'])->name('dashboar
 
 Route::prefix('review')->group(
     function () {
-        Route::get('/', [ReviewController::class, 'index'])->name('review.index');
+        Route::get('/candidate/{id}', [ReviewController::class, 'overallRating'])->name('review.index');
         Route::get('/edit-review/{id}', [ReviewController::class, 'edit'])->name('review.edit');
         Route::post('/update-review/{id}', [ReviewController::class, 'update'])->name('review.update');
         Route::get('/destroy/{id}', [ReviewController::class, 'destroy'])->name('review.destroy');

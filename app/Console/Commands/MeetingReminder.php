@@ -45,20 +45,19 @@ class MeetingReminder extends Command
 
                 $dateOneHour = date("Y-m-d H:i:s", strtotime($iAll->interview_date));
                 $timeOneHour = strtotime($dateOneHour);
-                $timeOneHour = $timeOneHour + (60 * 60);
+                $timeOneHour = $timeOneHour + (5*60);
                 $dateOneHour = date("Y-m-d H:i:s", $timeOneHour);
 
-                dd($dateOneHour);
+                // dd($dateOneHour);
 
-            // echo("Is ".$today." thirty minutes away from ");
-            // echo($iAll->interview_date."? ");
+            echo("Is ".$today." one hour after \n");
+            echo($iAll->interview_date."? \n");
 
             if($dateThirtyMins <= $today){
 
                 $mail_data = [
 
                         'recipient' => $iAll->interviewees->email,
-
                         'fromEmail' => 'imsinfoteam@gmail.com',
                         'fromName' => 'IMS Company'
                     ];
@@ -73,10 +72,30 @@ class MeetingReminder extends Command
 
                 echo "Mail sent";
 
-            } elseif($dateOneHour >= $today){
+            } 
+            if($dateOneHour >= $today){
+                $mail_data = [
 
+                    'recipient' => $iAll->interviewees->email,
+                    'fromEmail' => 'imsinfoteam@gmail.com',
+                    'fromName' => 'IMS Company',
+                    'linkForReview'=>'http://127.0.0.1:8000/review/candidate/'.$iAll->interviewees->id
+                ];
+
+            \Mail::send('/interviewComponents/reviewEmail', $mail_data, function($message) use ($mail_data){
+
+            $message->to($mail_data['recipient'])
+                    ->from($mail_data['fromEmail'], $mail_data['fromName'])
+                    ->subject("Meeting Reminder");
+
+            }); 
+
+            echo "Mail sent";
                 
+            }else{
+                echo "Jooooooo";
             }
+            
         }
 
         echo("\n");

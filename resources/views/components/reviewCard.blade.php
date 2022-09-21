@@ -6,10 +6,7 @@
                 <h1 class="text-[25px] font-medium">We've found you some perfect interviewees</h1>
                 <p class="mb-10 text-[15px]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum suscipit</p>
             </div>
-              {{-- {{dd($reviewseview)}} --}}
-                
-         {{-- @foreach ($reviewseview as $reviews) --}}
-    {{-- {{dd($reviews)}} --}}
+
              @php
     $link = explode('/', $reviews->interviewees->img);
              @endphp
@@ -17,14 +14,13 @@
                 <div class="flex relative rounded-3xl bg-blue-900 dark:bg-gray-900 mb-10 mx-10 p-7">
                     <div class="flex-1">
                         <div class="flex">
-                            @if (Auth::user()->img==="public/noProfilePhoto/nofoto.jpg")
+                            @if ($reviews->interviewees->img==="public/noProfilePhoto/nofoto.jpg")
                             <img src="{{asset('/noProfilePhoto/'.$link[2])}}" alt="profile" class="w-[150px] h-[200px] rounded-lg">
                             @else
-                            <img src="/storage/img/{{$link[2]}}" alt="profile" class="w-[150px] h-[200px] rounded-lg">
-
+                            <img src="{{asset('/storage/images/'.$link[2])}}" alt="profile" class="w-[150px] h-[200px] rounded-lg">
                             @endif
                             <h2 class="text-white ml-[35px] text-[25px] mt-[70px] font-[500]"> {{ $reviews ->interviewees->name." ".$reviews ->interviewees->surname }}</h2>
-                            <h4 class="text-gray-500 relative right-[190px]  text-[18px] mt-[110px] font-[500]">{{ $reviews ->interviewees->interviewee_type->name}}</h4>
+                            <h4 class="text-gray-500 relative right-[150px]  text-[18px] mt-[110px] font-[500]">{{ $reviews ->interviewees->interviewee_type->name}}</h4>
                         </div>
                         <div class="mt-5">
                             <p class="font-normal w-[65%] text-white">Since the beginning of my journey as a self-taught developer, I've been coding and creating freshly websites for clients around the world.</p>

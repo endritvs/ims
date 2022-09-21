@@ -263,7 +263,7 @@ $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
                         'interviewType' => $a->interviewees->interviewee_type->name,
                         'interviewer' => implode(", ", $interviewerNames),
                         'intervieweeName' => $a->interviewees->name." ".$a->interviewees->surname,
-
+                        'linkForReview'=>'review/candidate/'.$a->user->id,
                         'fromEmail' => 'imsinfoteam@gmail.com',
                         'fromName' => 'IMS Company'
                     ];
