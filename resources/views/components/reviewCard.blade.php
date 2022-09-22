@@ -13,17 +13,19 @@
 
                 <div class="flex relative rounded-3xl bg-blue-900 dark:bg-gray-900 mb-10 mx-10 p-7">
                     <div class="flex-1">
-                        <div class="flex">
+                        <div class="flex items-center">
                             @if ($reviews->interviewees->img==="public/noProfilePhoto/nofoto.jpg")
                             <img src="{{asset('/noProfilePhoto/'.$link[2])}}" alt="profile" class="w-[150px] h-[200px] rounded-lg">
                             @else
                             <img src="{{asset('/storage/images/'.$link[2])}}" alt="profile" class="w-[150px] h-[200px] rounded-lg">
                             @endif
-                            <h2 class="text-white ml-[35px] text-[25px] mt-[70px] font-[500]"> {{ $reviews ->interviewees->name." ".$reviews ->interviewees->surname }}</h2>
-                            <h4 class="text-gray-500 relative right-[150px]  text-[18px] mt-[110px] font-[500]">{{ $reviews ->interviewees->interviewee_type->name}}</h4>
+                            <div class="align-center ml-[20px]">
+                                <h2 class="text-white text-[25px] font-[500]"> {{ $reviews ->interviewees->name." ".$reviews ->interviewees->surname }}</h2>
+                                <h4 class="text-gray-300 text-[18px]">{{ $reviews ->interviewees->interviewee_type->name}}</h4>
+                            </div>
                         </div>
                         <div class="mt-5">
-                            <p class="font-normal w-[65%] text-white">Since the beginning of my journey as a self-taught developer, I've been coding and creating freshly websites for clients around the world.</p>
+                            <p class="font-normal w-[65%] text-[20px] text-white">Since the beginning of my journey as a self-taught developer, I've been coding and creating freshly websites for clients around the world.</p>
                         </div>
                         <div class="pt-3">
                             @foreach ($reviews->interviewees->interviewee_type->interviewee_attributes as $a)
@@ -47,9 +49,9 @@
                                 <input type="hidden" name="attribute_id[]" id="attribute_id" value="{{$a->id}}" class="bg-gray-600 text-white rounded-lg" style="width: 5%">
                                 <dl>
                                     <dt class="text-sm font-medium text-white dark:text-gray-200 uppercase">{{$a->name}}</dt>
-                                    <dd class="flex flex-col w-full">
+                                    <dd class="flex flex-col w-[90%]">
                                         <input type="range" name="rating_amount[]" class="w-full" min="1" max="10" step="1" value="1"/>
-                                        <ul class="flex justify-between text-[15px] w-full px-[5px]">
+                                        <ul class="flex justify-between text-[15px] w-full px-[5px] text-white">
                                             <li class="flex justify-center relative"><span class="absolute">1</span></li>
                                             <li class="flex justify-center relative"><span class="absolute">2</span></li>
                                             <li class="flex justify-center relative"><span class="absolute">3</span></li>
@@ -69,20 +71,21 @@
                             </div>
                         </div>
                         <div>
-                            <p class="text-lg mt-5 text-white">General Rate!</p>
-                        </div>
-                        <input type="hidden" name="candidate_id" value="{{$reviews->interviewees->id}}">
-                        <input type="hidden" name="interview_id" value="{{$reviews->id}}">
-                                <div class="rating rating-lg">
+                            <p class="text-lg mt-10 text-white">General Rate!</p>
+                            <input type="hidden" name="candidate_id" value="{{$reviews->interviewees->id}}">
+                            <input type="hidden" name="interview_id" value="{{$reviews->id}}">
+                                <div class="rating rating-lg mt-2">
                                     <input type="radio" name="rating_amount_review" id="star0" class="hidden" />
                                     <input type="radio" value="1" name="rating_amount_review" id="star1" class="bg-green-500 mask mask-star-2 @error('rating_amount') is-invalid @enderror" />
                                     <input type="radio" value="2" name="rating_amount_review" id="star3" class="bg-green-500 mask mask-star-2 @error('rating_amount') is-invalid @enderror" />
                                     <input type="radio" value="3" name="rating_amount_review" id="star5" class="bg-green-500 mask mask-star-2 @error('rating_amount') is-invalid @enderror" />
                                     <input type="radio" value="4" name="rating_amount_review" id="star7" class="bg-green-500 mask mask-star-2 @error('rating_amount') is-invalid @enderror" />
                                     <input type="radio" value="5" name="rating_amount_review" id="star9" class="bg-green-500 mask mask-star-2 @error('rating_amount') is-invalid @enderror" />
-                                  </div>
+                                </div>
+                        </div>
+                        
                         {{-- RATING SECTION END --}}
-                            <div class="h-auto w-[400px] pt-10 rounded-[12px]">
+                            <div class="h-auto w-[400px] pt-6 rounded-[12px]">
                                 <p class="text-xl font-semibold text-white cursor-pointer transition-all">Add Comment/Questions</p>
                                 <input type="hidden" name="candidate_id" value="{{$reviews->interviewees->id}}">
                                 <input type="hidden" name="interview_id" value="{{$reviews->id}}">
