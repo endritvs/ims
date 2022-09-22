@@ -59,6 +59,22 @@ class IntervieweeController extends Controller
 
         return view('intervieweesMainComponents/table')->with(['exec'=>$exec,'exec1'=>$exec1,'intervieweesA' => $intervieweesA, 'intervieweesT' => $intervieweesT, 'review_attributes' => $review_attributes, 'interviewss' => $interviewss, 'interviewer' => $interviewer]);
     }
+
+    public function sortByName(){
+        $interviewss = interview::with('user', 'interviewees')->orderBy('interview_id', 'asc')->get();
+        $intervieweesA= interviewee::with('interviewee_type')->orderBy('name','asc')->paginate(6);
+        $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
+        $interviewer = user::where('role', 'interviewer')->orderBy('id', 'asc')->get();
+        $sql="SELECT t.name, GROUP_CONCAT( i.name ) as 'Attributes' FROM interviewee_attributes i inner join interviewee_types t on i.interviewee_type_id=t.id group by i.interviewee_type_id, ims_database.t.name";
+        $exec=DB::select(DB::raw($sql));
+        $review_attributes = reviews_attributes::with('candidates', 'questionnaires', 'interviews', 'attributes')->get();
+
+        $sql1="SELECT candidate_id,AVG(rating_amount) as rating FROM reviews GROUP BY candidate_id";
+        $exec1 = DB::select(DB::raw($sql1));
+        return view('intervieweesMainComponents/table')->with(['interviewer'=>$interviewer,'interviewss'=>$interviewss,'review_attributes'=>$review_attributes,'exec'=>$exec,'exec1'=>$exec1,'intervieweesA'=>$intervieweesA,'intervieweesT'=>$intervieweesT]);
+    }
+
+ 
     public function paginate($items, $perPage = 6, $page = null, $options = [])
     {
         $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);

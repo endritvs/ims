@@ -107,7 +107,7 @@ class ReviewController extends Controller
             'message' => $request['message'],
         ]);
 
-        return back();
+        return redirect('/interview');
     }
 
 
