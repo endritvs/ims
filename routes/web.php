@@ -88,6 +88,8 @@ Route::prefix('interviewees')->group(
         Route::get('/destroy/{id}', [IntervieweeController::class, 'destroy'])->name('interviewees.destroy');
         Route::get('/create', [IntervieweeController::class, 'create'])->name('interviewees.create');
         Route::post('/store-interviewees', [IntervieweeController::class, 'store'])->name('interviewees.store');
+        Route::get('/sortName', [IntervieweeController::class, 'sortByName'])->name('interviewees.sortName');
+        
     }
 );
 

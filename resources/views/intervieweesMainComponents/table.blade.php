@@ -25,31 +25,25 @@
                         <button type="button" data-modal-toggle="quick-add" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Quick Add</button>
                     </a>
 
-                    <a class="mr-4 ml-auto justify-center items-center">Sort:
-                        <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 pr-4 mx-2">
-                            <a class="cursor-pointer" href="#">Rating
-                                <i onclick="changeIconA(this)" class="fa-solid fa-arrow-up-long" id="SortNr"></i>
-                            </a>
-                        </button>
-                        <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 pr-4 mx-2">
-                            <a class="pl-5 py-2.5 p-0 mr-2 mb-2" href="#">Date
-                                <i onclick="changeIconB(this)" class="fa-solid fa-arrow-up-long" id="Date"></i>
-                            </a>
-                        </button>
-                        <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 pr-4 mx-2">
-                            <a class="pl-5 py-2.5 p-0 mr-2 mb-2" href="#">A-Z
+                    <a class=" ml-auto justify-center items-center">Sort:
+                 
+                        <form action="{{ route('interviewees.sortName') }}" method="GET" role="search" class="my-3 ">
+                        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 pr-4 mx-2">
+                            <a class="pl-5 py-2.5 p-0 mr-2 mb-2" >A-Z
                                 <i onclick="changeIconC(this)" class="fa-solid fa-arrow-up-long" id="AandZ"></i>
                             </a>
                         </button>
+                        </form>
 
                     </a>
 
 
                 </div>
+                {{-- interviewees.sortName --}}
                 <form action="{{ route('interviewees.index') }}" method="GET" role="search" class="my-3 ">
                     <div class="flex justify-center">
                         <select class="flex-shrink-0 inline-flex items-center px-1 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600" name="termT" id="termT">
-                            <option selected>Choose a category</option>
+                            <option >Choose a category</option>
                             @foreach ($intervieweesT as $t)
                             <option value="{{$t->id}}">{{$t->name}}</option>
                             @endforeach

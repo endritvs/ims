@@ -34,32 +34,32 @@
                     </div>
                 </form>
                    
-                    <a class="mr-1 ml-auto"
+                 
                      
-                     >Sort:
+                     Sort:
                      <form action="{{ route('public.sortRating') }}" method="GET" role="search" class="my-12">
                          <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 pr-4 mx-2">
-                      <a class="cursor-pointer" href="#">Rating  
+                     Rating  
                        <i onclick="changeIconA(this)" class="fa-solid fa-arrow-up-long" id="SortNr"></i> 
-                      </a> 
+                   
                      </button>
                      </form>
                      <form action="{{ route('public.sortDate') }}" method="GET" role="search" class="my-12">
                      <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 pr-4 mx-2">
-                      <a class="pl-5 py-2.5 p-0 mr-2 mb-2" href="#">Date
+                    Date
                        <i onclick="changeIconB(this)" class="fa-solid fa-arrow-up-long" id="Date"></i>
-                      </a>
+                      
                      </button>
                      </form>
                      <form action="{{ route('public.sort') }}" method="GET" role="search" class="my-12">
                      <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 pr-4 mx-2">
-                      <a class="pl-5 py-2.5 p-0 mr-2 mb-2" href="#">A-Z
+                     A-Z
                        <i onclick="changeIconC(this)" class="fa-solid fa-arrow-up-long" id="AandZ"></i>
-                      </a>
+                      
                      </button>
                      </form>
 
-                    </a>
+         
                     
                      
                 </div>
@@ -83,7 +83,7 @@
 
                 @endphp
 
-
+     
 
                 <div class="w-full bg-gray-200 h-auto dark:bg-gray-900 rounded-xl sahdow-lg p-12 flex flex-col justify-center items-center">
 
@@ -103,17 +103,25 @@
                             <li>
                         @if (in_array(Auth::user()->id, $questID))
                                 @if (App\Models\reviews_attributes::where('candidate_id', $d['interviewees']['id'] )->where('questionnaire_id', Auth::user()->id )->where('interview_id', $d['id'] )->exists())
-                                    <a data-modal-toggle="editRateModal{{$d['id']}}" href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-red-500 dark:hover:text-white"> 
+                                    <a data-modal-toggle="editRateModal{{$d['id']}}" href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"> 
                                        Edit Rating
                                     </a>
                                 @else  
                                     <a data-modal-toggle="rateModal{{ $d['id'] }}" href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Rate</a>
                              @endif
                         @endif
-                            </li>
+                                
+                                    
+                            @if (!App\Models\reviews_attributes::where('candidate_id', $d['interviewees']['id'] )->where('questionnaire_id', Auth::user()->id )->where('interview_id', $d['id'] )->exists()
+                            && !App\Models\review::where('candidate_id', $d['interviewees']['id'] )->where('questionnaire_id',Auth::user()->id)->where('interview_id', $d['id'] )->exists() 
+                            && Auth::user()->id===$d['interviewer']
+                            )
                             <li>
                                 <a  href="{{route('review.index',$d['interviewees']['id'])}}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Overall Rating</a>
                             </li>
+                            @endif
+                            </li>
+                           
                         </ul>
 
                     </div>

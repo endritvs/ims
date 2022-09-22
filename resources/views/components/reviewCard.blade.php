@@ -73,7 +73,8 @@
                         </div>
                         <input type="hidden" name="candidate_id" value="{{$reviews->interviewees->id}}">
                         <input type="hidden" name="interview_id" value="{{$reviews->id}}">
-                                <div class="rating rating-lg">
+                                
+                        <div class="rating rating-lg">
                                     <input type="radio" name="rating_amount_review" id="star0" class="hidden" />
                                     <input type="radio" value="1" name="rating_amount_review" id="star1" class="bg-green-500 mask mask-star-2 @error('rating_amount') is-invalid @enderror" />
                                     <input type="radio" value="2" name="rating_amount_review" id="star3" class="bg-green-500 mask mask-star-2 @error('rating_amount') is-invalid @enderror" />
