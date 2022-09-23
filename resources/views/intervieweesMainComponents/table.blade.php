@@ -111,10 +111,10 @@
                             <img class="object-center object-cover rounded-full h-28 w-28" src="/storage/images/{{ $link[2] }}" alt="photo">
 
                             @endif
-                            <p class="dark:text-white text-indigo-600 font-bold capitalize text-center">
+                            <p class="dark:text-white text-indigo-600 font-semibold text-xl capitalize text-center">
                                 {{ $i->name . ' ' . $i->surname }}
                             </p>
-                            <p class="text-xs dark:text-white text-indigo-600 capitalize text-center">
+                            <p class="text-lg dark:text-white text-indigo-600 capitalize text-center">
                                 {{ $i->interviewee_type->name }}
                             </p>
                         </div>
@@ -284,7 +284,7 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <label for="name" class="float-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                                        <label for="name" class="float-left block m-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
                                         <input type="email" name="email" id="email" autocomplete="given-name" class="@error('email') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" value="{{ $i->email }}" required>
                                         @error('surname')
                                         <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}
@@ -292,9 +292,9 @@
                                         @enderror
                                     </div>
                                     <div>
-                                        <label for="name" class="float-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Insert
+                                        <label for="file_input" class="float-left block m-2 text-sm font-medium text-gray-900 dark:text-white">Insert
                                             CV</label>
-                                        <input type="file" name="cv_path" id="cv_path" autocomplete="given-name" class="@error('cv_path') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="cv_path">
+                                        <input type="file" name="cv_path" id="file_input" autocomplete="given-name" class="@error('cv_path') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="cv_path">
                                         <a href="/storage/cv_path/{{ $cv[2] }}" download class="underline">Download the Current CV</a>
                                         @error('cv_path')
                                         <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}
@@ -302,7 +302,7 @@
                                         @enderror
                                     </div>
                                     <div>
-                                        <label for="name" class="float-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">External
+                                        <label for="name" class="float-left block m-2 text-sm font-medium text-gray-900 dark:text-white">External
                                             CV</label>
                                         <input type="text" name="external_cv_path" id="name" autocomplete="given-name" class="@error('external_cv_path') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Interviewee Type Name" value="{{ $i->external_cv_path }}" required>
                                         @error('external_cv_path')
@@ -311,7 +311,7 @@
                                         @enderror
                                     </div>
                                     <div>
-                                        <label for="name" class="float-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Interviewee
+                                        <label for="name" class="float-left block m-2 text-sm font-medium text-gray-900 dark:text-white">Interviewee
                                             Attributes</label>
                                         <select class="@error('interviewee_types_id') is-invalid @enderror  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" name="interviewee_types_id" id="interviewee_types_id">
                                             <option value="{{ $i->interviewee_type->id }}">
@@ -330,17 +330,17 @@
                                         @enderror
                                     </div>
                                     <div>
-                                        <label for="name" class="float-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Insert
+                                        <label for="name" class="float-left block m-2 text-sm font-medium text-gray-900 dark:text-white">Insert
                                             Image</label>
-                                        <input type="file" name="img" id="img" autocomplete="given-name" class="@error('img') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                                        <input type="file" name="img" id="img" autocomplete="given-name" class="@error('img') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
 
                                         @error('img')
                                         <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}
                                         </div>
                                         @enderror
                                     </div>
-                                    <p class="float-left m-1">Current Image</p>
-                                    <img class="mt-2" src="/storage/images/{{ $link[2] }}" width="70px" height="70px">
+                                    <p class="float-left m-1 text-sm font-medium text-gray-900 dark:text-white">Current Image:</p>
+                                    <img class="rounded-lg mt-2" src="/storage/images/{{ $link[2] }}" width="70px" height="70px">
 
                                 </div>
                                 <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
@@ -352,6 +352,8 @@
                 </div>
 
 
+                <!-- Quick Add Modal -->
+                <!-- Quick Add Modal -->
                 <!-- Quick Add Modal -->
                 <div id="quick-add" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
                     <div class="relative p-4 w-full max-w-md h-full md:h-auto">
@@ -495,18 +497,18 @@
                                 </button>
                             </div>
 
-                            <div class="p-6 space-y-6">
+                            <div class="p-5 space-y-6">
                                 <div class="space-y-6">
                                     <div class="flex">
                                         <div class="m-1">
-                                            <label for="name" class="block text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                                            <label for="name" class="block text-sm m-2 font-medium text-gray-900 dark:text-white">Name</label>
                                             <input type="text" name="name" id="name" autocomplete="given-name" class="@error('name') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Name" required>
                                             @error('name')
                                             <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="m-1">
-                                            <label for="name" class="block  text-sm font-medium text-gray-900 dark:text-white">Surname</label>
+                                            <label for="name" class="block m-2 text-sm font-medium text-gray-900 dark:text-white">Surname</label>
                                             <input type="text" name="surname" id="surname" autocomplete="given-name" class="@error('surname') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Surname" required>
 
                                             @error('surname')
@@ -515,7 +517,7 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <label for="email" class="block  text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                                        <label for="email" class="block m-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
                                         <input type="email" name="email" id="email" autocomplete="given-email" class="@error('email') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Email" required>
 
                                         @error('surname')
@@ -524,8 +526,8 @@
                                     </div>
 
                                     <div>
-                                        <label for="name" class="block text-sm font-medium text-gray-900 dark:text-white">Insert CV</label>
-                                        <input type="file" name="cv_path" id="cv_path" autocomplete="given-name" class="@error('cv_path') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="cv_path" required>
+                                        <label for="name" class="block m-2 text-sm font-medium text-gray-900 dark:text-white">Insert CV</label>
+                                        <input type="file" name="cv_path" id="cv_path" autocomplete="given-name" class="@error('cv_path') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="cv_path" required>
                                         @error('cv_path')
                                         <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
                                         @enderror
@@ -534,7 +536,7 @@
 
                                     </div>
                                     <div>
-                                        <label for="name" class="block text-sm font-medium text-gray-900 dark:text-white">External CV
+                                        <label for="name" class="block m-2 text-sm font-medium text-gray-900 dark:text-white">External CV
                                             Path</label>
                                         <input type="text" name="external_cv_path" id="name" autocomplete="given-name" class="@error('external_cv_path') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="External CV Path" required>
                                         @error('external_cv_path')
@@ -542,7 +544,7 @@
                                         @enderror
                                     </div>
                                     <div>
-                                        <label for="name" class="block  text-sm font-medium text-gray-900 dark:text-white">Interviewee
+                                        <label for="name" class="block m-2 text-sm font-medium text-gray-900 dark:text-white">Interviewee
                                             Types</label>
 
                                         <select class="@error('interviewee_types_id') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" name="interviewee_types_id" id="interviewee_types_id">
@@ -559,8 +561,8 @@
                                     </div>
                                     <div>
 
-                                        <label for="name" class="block text-sm font-medium text-gray-900 dark:text-white">Insert Image</label>
-                                        <input type="file" name="img" id="img" autocomplete="given-name" class="@error('img') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                                        <label for="name" class="block m-2 text-sm font-medium text-gray-900 dark:text-white">Insert Image</label>
+                                        <input type="file" name="img" id="img" autocomplete="given-name" class="@error('img') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
                                         @error('img')
                                         <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
                                         @enderror
