@@ -36,15 +36,20 @@
 
           @endphp
             <div class="flex items-center mt-100 relative ">
-              <div class="absolute w-[195px] px-10 flex z-10 justify-center items-center h-10 bg-blue-200 rounded-full ring-0 ring-white dark:bg-blue-900 sm:ring-8 dark:ring-gray-900 shrink-0">
-                
-              @if(date("M jS, Y", strtotime($interview[$index]->interview_date)) === date("M jS, Y", strtotime($sot)))  
-                    Today
+              @if(count($interview)===1)
+             
+              
                 @else
-                  {{date("M jS, Y", strtotime($interview[$index]->interview_date))}}
-                @endif
-              </div>
-              <hr class="absolute w-[450px] ">
+                <div class="absolute w-[195px] px-10 flex z-10 justify-center items-center h-10 bg-blue-200 rounded-full ring-0 ring-white dark:bg-blue-900 sm:ring-8 dark:ring-gray-900 shrink-0">
+                
+                  @if(date("M jS, Y", strtotime($interview[$index]->interview_date)) === date("M jS, Y", strtotime($sot)))  
+                        Today
+                    @else
+                      {{date("M jS, Y", strtotime($interview[$index]->interview_date))}}
+                    @endif
+                  </div>
+                  <hr class="absolute w-[450px] ">
+              @endif
             </div>
   
             @if($flip == 0)

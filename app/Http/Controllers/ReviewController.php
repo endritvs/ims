@@ -17,22 +17,30 @@ class ReviewController extends Controller
         $this->middleware('auth');
     }
 
-    // public function index()
-    // {
-    //     date_default_timezone_set("Europe/Belgrade");
-    //     $today = date("Y-m-d H:i:s");
-
-    //     $review = review::with('candidates', 'questionnaires', 'interviews')->where('questionnaire_id', Auth::user()->id)->paginate(5);
-    //     $reviews = interview::with('user', 'interviewees', 'review')->where('interview_date', '<', $today)->where('interviewer', Auth::user()->id)->orderBy('interview_date', 'desc')->first();
-    //     return view('review/table')->with(['review' => $review, 'reviews' => $reviews]);
-    // }
-
+    public function index()
+    {
+        date_default_timezone_set("Europe/Belgrade");
+        $today = date("Y-m-d H:i:s");
+        $review = review::with('candidates', 'questionnaires', 'interviews')->where('questionnaire_id', Auth::user()->id)->paginate(5);
+        $reviews = interview::with('user', 'interviewees', 'review')->where('interview_date', '<', $today)->where('interviewer', Auth::user()->id)->orderBy('interview_date', 'desc')->first();
+        
+        return view('review/table')->with(['review' => $review, 'reviews' => $reviews]);
+    }
+    public function interviewAll($id){
+         $review = review::with('candidates', 'questionnaires', 'interviews')->where('interview_id',$id)->get();
+         $review_attributes = reviews_attributes::with('candidates', 'questionnaires', 'interviews', 'attributes')->where('interview_id',$id)->get();
+         $comment = comment::with('candidates', 'questionnaires')->where('interview_id',$id)->get();
+         $grouped = $review->groupBy('questionnaire_id'); 
+         $groupedRA = $review_attributes->groupBy('questionnaire_id'); 
+         $groupedComment = $comment->groupBy('questionnaire_id'); 
+         return view('interviewComponents/allReviews')->with(['grouped'=>$grouped,'groupedRA'=>$groupedRA,'groupedComment'=>$groupedComment]);
+    }
     public function overallRating($id)
     {
         date_default_timezone_set("Europe/Belgrade");
         $today = date("Y-m-d H:i:s");
         // $reviews = interview::findOrFail(['interviewees_id' => $id]);
-        $reviews = interview::with('user', 'interviewees', 'review')->where('interview_date', '<', $today)->where('interviewer', Auth::user()->id)->where('interviewees_id', $id)->orderBy('interview_date', 'desc')->first();
+        $reviews = interview::with('user', 'interviewees', 'review')->where('interviewees_id', $id)->orderBy('interview_date', 'desc')->first();
         return view('review/table')->with(['reviews' => $reviews]);
     }
 

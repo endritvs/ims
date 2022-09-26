@@ -1,6 +1,7 @@
 @extends('layouts.layout')
 
 @section('content')
+
     <title>Interviewee</title>
     <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
         <div class="mt-[145px] mx-4">

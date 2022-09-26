@@ -3,12 +3,16 @@
       <section class="px-4 sm:px-6 lg:px-4 py-12">
         <div class="relative justify-center overflow-hidden py-6 sm:py-12">
             <div class="text-center">
+                
                 <h1 class="text-[25px] font-medium">We've found you some perfect interviewees</h1>
                 <p class="mb-10 text-[15px]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum suscipit</p>
             </div>
-
-             @php
+  {{-- {{ dd($reviews)}} --}}
+             @php 
+          
     $link = explode('/', $reviews->interviewees->img);
+
+   
              @endphp
 
                 <div class="flex relative rounded-3xl bg-blue-900 dark:bg-gray-900 mb-10 mx-10 p-7">
@@ -42,7 +46,7 @@
                         <div class="gap-8 sm:grid">
                             <div class="space-y-6">
                                 <input type="hidden" name="candidate_id" value="{{$reviews->interviewees->id}}">
-                                <input type="hidden" name="interview_id" value="{{$reviews->id}}">
+                                <input type="hidden" name="interview_id" value="{{$_GET["id"]}}">
                                 @foreach ($reviews->interviewees->interviewee_type->interviewee_attributes as $a)
                                 <input type="hidden" name="attribute_id[]" id="attribute_id" value="{{$a->id}}" class="bg-gray-600 text-white rounded-lg" style="width: 5%">
                                 <dl>

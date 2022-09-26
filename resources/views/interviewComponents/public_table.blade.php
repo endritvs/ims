@@ -3,7 +3,7 @@
 @section('content')
 <title>Interview</title>
 
-
+{{-- {{dd($interview)}} --}}
 
 <div class="h-full ml-14 mt-8 mb-10 md:ml-64">
     <div class="w-full bg-white dark:bg-gray-800">
@@ -84,7 +84,7 @@
                 @endphp
 
      
-
+{{-- {{dd($interview)}} --}}
                 <div class="w-full bg-gray-200 h-auto dark:bg-gray-900 rounded-xl sahdow-lg p-12 flex flex-col justify-center items-center">
 
                     <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots{{ $d['id'] }}" class="relative left-[145px] bottom-[30px] inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button">
@@ -112,14 +112,15 @@
                         @endif
                                 
                                     
-                            @if (!App\Models\reviews_attributes::where('candidate_id', $d['interviewees']['id'] )->where('questionnaire_id', Auth::user()->id )->where('interview_id', $d['id'] )->exists()
+                            {{-- @if (!App\Models\reviews_attributes::where('candidate_id', $d['interviewees']['id'] )->where('questionnaire_id', Auth::user()->id )->where('interview_id', $d['id'] )->exists()
                             && !App\Models\review::where('candidate_id', $d['interviewees']['id'] )->where('questionnaire_id',Auth::user()->id)->where('interview_id', $d['id'] )->exists() 
                             && Auth::user()->id===$d['interviewer']
-                            )
+                            ) --}}
+                            {{-- @if(!App\Models\review::where('candidate_id', $d['interviewees']['id'] )->where('questionnaire_id',Auth::user()->id)->where('interview_id', $d['id'] )->exists()) --}}
                             <li>
-                                <a  href="{{route('review.index',$d['interviewees']['id'])}}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Overall Rating</a>
+                                <a  href="/review/candidate/{{$d['interviewees']['id']}}?id={{$d['id']}}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Overall Rating</a>
                             </li>
-                            @endif
+                            {{-- @endif --}}
                             </li>
                            
                         </ul>
