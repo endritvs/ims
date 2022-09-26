@@ -8,10 +8,7 @@
             <div tabindex="0" aria-label="form" class="focus:outline-none w-full mt-10 bg-white p-10 dark:bg-gray-800">
                 <div class="md:flex items-center border-b pb-6 border-gray-200">
                     <div class="flex items-center md:mt-0 mt-4">
-                        <div class="w-full h-8 p-2 bg-indigo-700 rounded flex items-center justify-center">
-                            <p tabindex="0" class="focus:outline-none text-base font-medium leading-none text-white">My
-                                Profile</p>
-                        </div>
+
 
                     </div>
 
@@ -60,7 +57,7 @@
                         <div class="flex flex-col">
                             <label class="mb-3 text-sm leading-none text-gray-800 dark:text-white">Image</label>
                             <input type="file" name="img" tabindex="0"
-                            class="@error('img') is-invalid @enderror focus:outline-none focus:ring-2 focus:ring-indigo-400 w-64 bg-gray-100 text-sm font-medium leading-none text-gray-800 p-3 border rounded border-gray-200"/>
+                            class="@error('img') is-invalid @enderror focus:outline-none focus:ring-2 focus:ring-indigo-400 w-64 bg-gray-100 text-sm font-medium leading-none text-gray-800 p-1 border rounded border-gray-200"/>
                             @error('img')
                             <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -87,7 +84,7 @@
                     </div>
 
                     <button role="button" aria-label="Next step"
-                        class="flex items-center justify-center py-4 px-7 focus:outline-none bg-white border rounded border-gray-400 mt-7 md:mt-14 hover:bg-gray-100  focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 hover:bg-gray-400">
+                        class="flex items-center justify-center py-2 px-4 focus:outline-none bg-white border rounded border-gray-400 mt-7 md:mt-14 hover:bg-gray-100  focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 hover:bg-gray-400">
                         <span class="text-sm font-medium text-center text-gray-800 capitalize">Save</span>
 
                     </button>
@@ -97,10 +94,7 @@
             <div tabindex="0" aria-label="form" class="focus:outline-none w-full bg-white p-10 dark:bg-gray-800">
                 <div class="md:flex items-center border-b pb-6 border-gray-200">
                     <div class="flex items-center md:mt-0 mt-4">
-                        <div class="w-full h-8 p-2 bg-indigo-700 rounded flex items-center justify-center">
-                            <p tabindex="0" class="focus:outline-none text-base font-medium leading-none text-white">
-                                Change Password</p>
-                        </div>
+
 
                     </div>
 
@@ -139,18 +133,20 @@
                             @error('old_password')
                             <span class="ml-1 text-red-500 text-xs alert alert-dangerml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</span>
                         @enderror
-                        </div>
-                    <div class="flex flex-col md:ml-12 md:mt-0 mt-8">
+                    </div>
+                    
+                </div>
+                <div class="mt-12 md:flex items-center justify-start">
+                    <div class="flex flex-col md:mb-12 md:mt-0 mt-8">
                         <label class="mb-3 text-sm leading-none text-gray-800 dark:text-white">New-Password</label>
                         <input placeholder="New-Password" type="password" tabindex="0" name="new_password"
                             class="@error('new_password') is-invalid @enderror focus:outline-none focus:ring-2 focus:ring-indigo-400 w-64 bg-gray-100 text-sm font-medium leading-none text-gray-800 p-3 border rounded border-gray-200" />
                             @error('new_password')
                             <span class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</span>
                         @enderror
-                        </div>
-                </div>
-                <div class="mt-12 md:flex items-center">
-                    <div class="flex flex-col">
+                    </div>
+
+                    <div class="flex flex-col md:mb-12 md:mt-0 mt-8 ml-4">
                         <label class="mb-3 text-sm leading-none text-gray-800 dark:text-white">Confirm-New-Password</label>
                         <input placeholder="Confirm New Password" type="password" tabindex="0" name="new_password_confirmation"
                             aria-label="Confirm New Password"
@@ -158,13 +154,13 @@
                             @error('new_password_confirmation')
                             <span class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</span>
                         @enderror
-                        </div>
+                     </div>
 
                 </div>
 
 
                 <button role="button" aria-label="Next step"
-                    class="flex items-center justify-center py-4 px-7 focus:outline-none bg-white border rounded border-gray-400 mt-7 md:mt-14 hover:bg-gray-100  focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 hover:bg-gray-400">
+                    class="flex items-center justify-center py-2 px-4 focus:outline-none bg-white border rounded border-gray-400 mt-7 md:mt-14 hover:bg-gray-100  focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 hover:bg-gray-400">
                     <span class="text-sm font-medium text-center text-gray-800 capitalize">Save</span>
 
                 </button>
