@@ -48,8 +48,8 @@
     <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
         <div class="mt-[145px] mx-4">
             <div class="w-full overflow-hidden rounded-lg shadow-xs">
-            <div class="w-full overflow-x-auto">
-                    <table class="w-full">
+            <div class="w-full overflow-x-auto flex flex-row justify-evenly">
+                    <table class="w-full mr-20">
                         <caption
                             class="p-5 bg-gray-200 relative text-lg font-semibold text-left  text-gray-500 border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                             Interviewee Types
@@ -189,10 +189,10 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <div class="bg-gray-100 dark:bg-gray-800 p-3">
+                    <!-- <div class="bg-gray-100 dark:bg-gray-800 p-3">
                     {{ $intervieweesT->appends(['intervieweesA'=>$intervieweesA->currentPage()])->links() }}
-                </div>
-                <div class="w-full overflow-x-auto mt-20">
+                </div> -->
+                <div class="w-full overflow-x-auto bg-gray-100 dark:bg-gray-800">
                     <table class="w-full">
                         <caption
                             class="p-5 bg-gray-200 relative text-lg font-semibold text-left  text-gray-500 border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
@@ -356,10 +356,19 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="bg-gray-100 dark:bg-gray-800 p-3">
+                <!-- <div class="bg-gray-100 dark:bg-gray-800 p-3">
                 {{ $intervieweesA->appends(['intervieweesT' => $intervieweesT->currentPage()])->links() }}
-                </div>
+                </div> -->
                 
+                </div>
+                <div class="flex flex-row">
+                <div class="bg-gray-100 dark:bg-gray-800 p-3 w-full mr-20">
+                {{ $intervieweesT->appends(['intervieweesA'=>$intervieweesA->currentPage()])->links() }}
+                </div>
+                <div class="bg-gray-100 dark:bg-gray-800 p-3 w-full">
+                    {{ $intervieweesA->appends(['intervieweesT' => $intervieweesT->currentPage()])->links() }}
+                </div>
+
                 </div>    
             </div>
             <div id="addITypeModal" tabindex="-1" aria-hidden="true"
