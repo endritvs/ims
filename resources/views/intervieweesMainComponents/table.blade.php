@@ -187,7 +187,7 @@
 
                     <div class="flex flex-row">
                         <div class="mt-5">
-                            <button type="button" data-modal-toggle="defaultModal{{ $i->id }}" class="px-[10px] bg-blue-500 hover:bg-blue-700 text-gray-600  p-1 rounded-lg">Show CV</button>
+                            <button type="button" data-modal-toggle="defaultModal{{ $i->id }}" class="px-[10px] bg-blue-500 hover:bg-blue-700 text-white  p-1 rounded-lg">Show CV</button>
                         </div>
 
                         <div class="mt-5 pl-5">
