@@ -23,7 +23,7 @@
                         <div class="relative w-full">
                             <input type="search" id="search-dropdown" name="term" class="rounded block p-2.5 w-[720px] z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Search Mockups, Logos, Design Templates...">
                             <a href={{route('public.index')}}>
-                                <button type="submit" class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                <button type="submit" class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-gradient-to-r from-blue-800 to-blue-800 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                     <svg aria-hidden="true" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                     </svg>
@@ -83,16 +83,17 @@
 
                 @endphp
 
-     
-{{-- {{dd($interview)}} --}}
-                <div class="w-full bg-gray-200 h-auto dark:bg-gray-900 rounded-xl sahdow-lg p-12 flex flex-col justify-center items-center">
 
-                    <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots{{ $d['id'] }}" class="relative left-[145px] bottom-[30px] inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button">
+
+                <div class="group relative w-full bg-gray-200 dark:bg-gray-900 rounded-lg shadow-lg p-12 mt-4 flex flex-col justify-center items-center transition duration-700 ease-in-out">
+               
+
+                    <!-- <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots{{ $d['id'] }}" class="relative left-[145px] bottom-[30px] inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button">
                         <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z">
                             </path>
                         </svg>
-                    </button>
+                    </button> -->
 
 
                     <div id="dropdownDots{{ $d['id'] }}" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
@@ -141,19 +142,7 @@
                                 </p>
                             </div>
 
-                            <div class="flex items-center mt-5">
-                               
-                                <!-- <p class="bg-blue-100 text-blue-800 text-sm font-semibold inline-flex items-center p-1.5 rounded dark:bg-blue-200 dark:text-blue-800">
 
-                                <p class="ml-1"></p>
-
-
-
-                                </p> -->
-                                
-
-
-                            </div>
                         </div>
 
                         <div class="sm:grid-cols-2 mt-2">
@@ -235,7 +224,7 @@
                 @endforeach
             </div>
 
-            <div class="mt-5">
+            <!-- <div class="mt-5">
                 <a href="/storage/cv_path/{{ $cv[2] }}" download>
                     <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
                         <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -244,10 +233,49 @@
                         <span> Download CV</span>
                     </button>
                 </a>
+            </div> -->
 
+            <div class="group-hover:flex hidden">
+                
+            <div class="group-hover:flex hidden bg-blue-700 dark:bg-gray-900  flex-col absolute top-0 left-0 right-0 overflow-hidden w-full h-1/3 transition duration-700 ease-in-out rounded-t-lg text-xs text-center">
+
+            <p class="flex justify-center align-center w-full h-full">
+                            
+            <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots{{ $d['id'] }}" class="flex justify-center items-center text-white bg-gradient-to-r from-gray-300 to-gray-300 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-bold rounded-lg text-lg text-gray-800 px-4 mt-20 text-center h-1/3" type="button">
+            See Comments
+                        
+                            <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z">
+                            </path>
+                        
+                    </button>
+                    </p>
+
+            
+              </div>
+                
+
+             <div class="group-hover:flex hidden bg-blue-700 flex-col absolute top-1/3 left-0 right-0 dark:bg-gray-900 overflow-hidden w-full h-1/3 transition duration-700 ease-in-out text-xs text-center border-t-[2px] border-white">
+             <div class="flex justify-center mt-20">
+                <a href="/storage/cv_path/{{ $cv[2] }}" download>
+                    <button class="bg-gray-300 hover:bg-gray-400 text-lg text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+                        <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
+                        </svg>
+                        <span> Download CV</span>
+                    </button>
+                </a>
+             </div>
+             </div>
+
+              <div class="group-hover:flex hidden bg-blue-700 flex-col absolute bottom-0 left-0 right-0 dark:bg-gray-900 overflow-hidden w-full h-1/3 transition duration-700 ease-in-out rounded-b-lg text-xs text-center text-white border-t-[2px] border-white">
+                <div class="hidden group-hover:flex flex items-center">
+                    <p class="my-20 mx-10 ml-5 text-sm">Set an interview with this candidate?</p>
+                    <button class="bg-green-600 hover:bg-green-700 rounded-lg px-1 py-2 ml-auto mt-12 mb-12 text-sm transition duration-500 ease-in-out">Accept</button>
+                    <button class="bg-red-600 hover:bg-red-700 rounded-lg px-1 py-2 ml-2 mt-12 mb-12 mr-4 text-sm transition duration-500 ease-in-out">Decline</button>
+                </div>
+              </div>
+             
             </div>
-
-
     </div>
 
     <div id="defaultModal{{ $d['id'] }}" tabindex="-1" class="hidden  overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center flex" aria-modal="true" role="dialog">
