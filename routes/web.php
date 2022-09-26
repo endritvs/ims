@@ -130,10 +130,10 @@ Route::prefix('interview')->group(
         Route::get('/create', [interviewController::class, 'create'])->name('interview.create');
         Route::post('/store-interview', [interviewController::class, 'store'])->name('interview.store');
         Route::post('/quickstore-interview', [interviewController::class, 'quickStore'])->name('interview.quickStore');
-       
         Route::get('/edit-profile/{id}', [interviewer::class, 'editProfile'])->name('interview.editProfile');
         Route::post('/update-profile/{id}', [interviewer::class, 'updateProfile'])->name('interview.updateProfile');
         Route::post('/update-password/', [interviewer::class, 'update_password'])->name('interview.updatePassword');
+        Route::get('/{id}', [ReviewController::class, 'interviewAll'])->name('public.interviewAll');
     }
 );
 
