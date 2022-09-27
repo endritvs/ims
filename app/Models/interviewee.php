@@ -22,6 +22,7 @@ class interviewee extends Model
         'email',
         'interviewee_types_id',
         'img',
+        'company_id',
     ];
 
 
@@ -49,5 +50,9 @@ class interviewee extends Model
     public function comments()
     {
         return $this->hasMany(comment::class);
+    }
+    public function company()
+    {
+        return $this->belongsTo(Companies::class, "company_id");
     }
 }

@@ -11,7 +11,7 @@ class Interviewee_Attribute extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'interviewee_type_id'
+        'name', 'interviewee_type_id','company_id',
     ];
     protected $table = 'interviewee_attributes';
 
@@ -23,5 +23,8 @@ class Interviewee_Attribute extends Model
     {
         return $this->hasMany(reviews_attributes::class);
     }
-   
+   public function company()
+    {
+        return $this->belongsTo(Companies::class, "company_id");
+    }
 }

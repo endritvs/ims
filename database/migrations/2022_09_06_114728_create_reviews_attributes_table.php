@@ -25,9 +25,12 @@ return new class extends Migration
                 ->references('id')->on('interviews')
                 ->onDelete('cascade');
             $table->integer('rating_amount')->default(10);
-             $table->foreignId('attribute_id')
+            $table->foreignId('attribute_id')
                 ->references('id')->on('interviewee_attributes')
                 ->onDelete('cascade');
+            $table->foreignId('company_id')
+                ->references('id')->on('companies')
+                ->onDelete('cascade');    
             $table->timestamps();
         });
     }

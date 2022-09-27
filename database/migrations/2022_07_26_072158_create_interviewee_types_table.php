@@ -12,7 +12,11 @@ return new class extends Migration
         Schema::create('interviewee_types', function (Blueprint $table) {
             $table->id();
             $table->String('name');
+            $table->foreignId('company_id')
+                ->references('id')->on('companies')
+                ->onDelete('cascade');
             $table->timestamps();
+            
         });
     }
 

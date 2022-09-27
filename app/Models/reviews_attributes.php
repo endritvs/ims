@@ -19,6 +19,7 @@ class reviews_attributes extends Model
         'interview_id',
         'rating_amount',
         'attribute_id',
+        'company_id',
     ];
 
     public function candidates()
@@ -36,5 +37,9 @@ class reviews_attributes extends Model
     public function attributes()
     {
         return $this->belongsTo(Interviewee_Attribute::class, "attribute_id");
+    }
+    public function company()
+    {
+        return $this->belongsTo(Companies::class, "company_id");
     }
 }

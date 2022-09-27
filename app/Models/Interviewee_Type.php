@@ -13,7 +13,8 @@ class Interviewee_Type extends Model
     use HasFactory;
     protected $table = 'interviewee_types';
     protected $fillable = [
-        'name'
+        'name',
+        'company_id',
     ];
 
     protected $with=["interviewee_attributes"];
@@ -27,6 +28,9 @@ class Interviewee_Type extends Model
     {
         return $this->hasMany(Interviewee::class);
     }
-
+    public function company()
+    {
+        return $this->belongsTo(Companies::class, "company_id");
+    }
     
 }

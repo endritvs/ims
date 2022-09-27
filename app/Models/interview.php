@@ -16,7 +16,7 @@ class interview extends Model
 
     use HasFactory;
     protected $fillable = [
-        'interview_id', 'interviewer', 'interview_date', 'interviewees_id'
+        'interview_id', 'interviewer', 'interview_date', 'interviewees_id', 'company_id',
     ];
     protected $table = 'interviews';
 
@@ -44,5 +44,8 @@ class interview extends Model
     {
         return $this->hasMany(comment::class);
     }
-
+    public function company()
+    {
+        return $this->belongsTo(Companies::class, "company_id");
+    }
 }
