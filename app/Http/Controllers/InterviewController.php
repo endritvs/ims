@@ -51,10 +51,11 @@ class InterviewController extends Controller
         $today = date("Y-m-d H:i:s");
 
         $interview = interview::with('user', 'interviewees', 'review')->where('company_id', Auth::user()->company_id)->where('interview_date', '>=', $today)->where('interviewer', Auth::user()->id)->orderBy('interview_date', 'asc')->paginate(15);
-        $interviewAll = interview::with('user', 'interviewees')->where('company_id', Auth::user()->company_id)->where('interview_date', '>=', $today)->orderBy('interview_date', 'asc')->get(); //+3 mashum se sa na vyn
+        $interviewAll = interview::with('user', 'interviewees')->where('company_id', Auth::user()->company_id)->where('interview_date', '>=', $today)->orderBy('interview_date', 'asc')->get();
         
         $interviewAll = $interviewAll ->groupBy ('interview_id') -> toArray();
-
+        $interviewAll = $this->paginateDash($interviewAll);
+        
         $pastInterview = interview::with('user', 'interviewees', 'review')->where('company_id', Auth::user()->company_id)->where('interview_date', '<', $today)->where('interviewer', Auth::user()->id)->orderBy('interview_date', 'asc')->paginate(5);
         $pastInterviewAll = interview::with('user', 'interviewees', 'review')->where('company_id', Auth::user()->company_id)->where('interview_date', '<', $today)->orderBy('interview_date', 'asc')->paginate(5);
 
@@ -202,6 +203,12 @@ $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->where('company_id', Au
         return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 
+    public function paginateDash($items, $perPage = 15, $page = null, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+    }
 
     public function store(Request $request)
     {

@@ -367,7 +367,7 @@
                 </div>
                 <div class="flex flex-row">
                 <div class="bg-gray-100 dark:bg-gray-800 p-3 w-full mr-20">
-                {{ $intervieweesT->appends(['intervieweesA'=>$intervieweesA->currentPage()])->links() }}
+                    {{ $intervieweesT->appends(['intervieweesA'=>$intervieweesA->currentPage()])->links() }}
                 </div>
                 <div class="bg-gray-100 dark:bg-gray-800 p-3 w-full">
                     {{ $intervieweesA->appends(['intervieweesT' => $intervieweesT->currentPage()])->links() }}

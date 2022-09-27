@@ -63,6 +63,7 @@ class ReviewsAttributesController extends Controller
             'interview_id' => $request['interview_id'],
             'rating_amount' => $request['rating_amount'][$i],
             'attribute_id' => $request['attribute_id'][$i],
+            'company_id' => Auth::user()->company_id
             ]);
         }
         

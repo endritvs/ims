@@ -29,6 +29,7 @@ class CommentController extends Controller
             'questionnaire_id' => Auth::user()->id,
             'interview_id' => $request['interview_id'],
             'message' => $request['message'],
+            'company_id' => Auth::user()->company_id
         ]);
 
         return back();

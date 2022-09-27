@@ -236,7 +236,9 @@
             @endfor
             
         </ol>
-  
+      <div>
+        {{ $interview->links() }}
+      </div>
       </section>
       <div class="mx-4">
         <div class="w-full overflow-hidden rounded-lg shadow-xs">
