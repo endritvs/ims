@@ -17,6 +17,7 @@ class review extends Model
         'questionnaire_id',
         'interview_id',
         'rating_amount',
+        'company_id',
     ];
 
     public function candidates()
@@ -31,6 +32,9 @@ class review extends Model
     {
         return $this->belongsTo(interview::class, "interview_id");
     }
-   
+   public function company()
+    {
+        return $this->belongsTo(Companies::class, "company_id");
+    }
     
 }

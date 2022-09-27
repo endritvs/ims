@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Auth;
 
 class Interviewee_AttributesController extends Controller
 {
@@ -19,8 +20,8 @@ class Interviewee_AttributesController extends Controller
     public function index()
     {
 
-        $intervieweesA = Interviewee_Attribute::with('interviewee_type')->orderBy('id', 'asc')->paginate(5, ['*'], 'intervieweesA');
-        $intervieweesT = Interviewee_Type::orderBy('id', 'asc')->paginate(5, ['*'], 'intervieweesT');
+        $intervieweesA = Interviewee_Attribute::with('interviewee_type')->orderBy('id', 'asc')->where('company_id', Auth::user()->company_id)->paginate(5, ['*'], 'intervieweesA');
+        $intervieweesT = Interviewee_Type::orderBy('id', 'asc')->where('company_id', Auth::user()->company_id)->paginate(5, ['*'], 'intervieweesT');
 
         $sql="SELECT t.name, GROUP_CONCAT( i.name ) as 'Attributes' FROM interviewee_attributes i inner join interviewee_types t on i.interviewee_type_id=t.id group by i.interviewee_type_id, ims_database.t.name";
         $exec=DB::select(DB::raw($sql));
@@ -47,11 +48,14 @@ class Interviewee_AttributesController extends Controller
         $request->validate([
             'name' => ['required'],
             'interviewee_type_id' => ['required'],
+            'company_id' => ['required'],
+
         ]); 
         
         Interviewee_Attribute::create([
             'name' => $request['name'],
-            'interviewee_type_id' => $request['interviewee_type_id']
+            'interviewee_type_id' => $request['interviewee_type_id'],
+            'company_id' => Auth::user()->company_id,
         ]);
       
         return  redirect()->route('intervieweeAttributes.index')->with(['intervieweesT' => $intervieweesT]);

@@ -25,6 +25,9 @@ return new class extends Migration
                 ->references('id')->on('interviews')
                 ->onDelete('cascade');
             $table->text('message');
+            $table->foreignId('company_id')
+                ->references('id')->on('companies')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

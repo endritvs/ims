@@ -44,19 +44,19 @@ class InterviewController extends Controller
 
     public function index1()
     {
-        $review = review::with('candidates', 'questionnaires', 'interviews')->where('questionnaire_id',Auth::user()->id)->get();
-         $review = $review->toArray();
+        $review = review::with('candidates', 'questionnaires', 'interviews')->where('company_id', Auth::user()->company_id)->where('questionnaire_id',Auth::user()->id)->get();
+        $review = $review->toArray();
       
         date_default_timezone_set("Europe/Belgrade");
         $today = date("Y-m-d H:i:s");
 
-        $interview = interview::with('user', 'interviewees', 'review')->where('interview_date', '>=', $today)->where('interviewer', Auth::user()->id)->orderBy('interview_date', 'asc')->paginate(15);
-        $interviewAll = interview::with('user', 'interviewees')->where('interview_date', '>=', $today)->orderBy('interview_date', 'asc')->get(); //+3 mashum se sa na vyn
+        $interview = interview::with('user', 'interviewees', 'review')->where('company_id', Auth::user()->company_id)->where('interview_date', '>=', $today)->where('interviewer', Auth::user()->id)->orderBy('interview_date', 'asc')->paginate(15);
+        $interviewAll = interview::with('user', 'interviewees')->where('company_id', Auth::user()->company_id)->where('interview_date', '>=', $today)->orderBy('interview_date', 'asc')->get(); //+3 mashum se sa na vyn
         
         $interviewAll = $interviewAll ->groupBy ('interview_id') -> toArray();
 
-        $pastInterview = interview::with('user', 'interviewees', 'review')->where('interview_date', '<', $today)->where('interviewer', Auth::user()->id)->orderBy('interview_date', 'asc')->paginate(5);
-        $pastInterviewAll = interview::with('user', 'interviewees', 'review')->where('interview_date', '<', $today)->orderBy('interview_date', 'asc')->paginate(5);
+        $pastInterview = interview::with('user', 'interviewees', 'review')->where('company_id', Auth::user()->company_id)->where('interview_date', '<', $today)->where('interviewer', Auth::user()->id)->orderBy('interview_date', 'asc')->paginate(5);
+        $pastInterviewAll = interview::with('user', 'interviewees', 'review')->where('company_id', Auth::user()->company_id)->where('interview_date', '<', $today)->orderBy('interview_date', 'asc')->paginate(5);
 
         foreach ($interviewAll as $a => $i) {
             if (count($i) > 1) {
@@ -87,43 +87,46 @@ class InterviewController extends Controller
     }
 
     public function sort(){
-        $comment = comment::with('candidates', 'questionnaires')->get();
+        $comment = comment::with('candidates', 'questionnaires')->where('company_id', Auth::user()->company_id)->get();
         $interview=interview::select('interviews.*')
         ->join('interviewees', 'interviews.interviewees_id', '=', 'interviewees.id')
         ->orderBy('interviewees.name')
+        ->where('company_id', Auth::user()->company_id)
         ->paginate(6);
         // SELECT * FROM interviews JOIN interviewees
         //  ON interviews.interviewees_id = interviewees.id ORDER BY interviewees.name;
         $sql="SELECT candidate_id,AVG(rating_amount) as rating FROM reviews GROUP BY candidate_id";
         $exec = DB::select(DB::raw($sql));
-        $review_attributes = reviews_attributes::with('candidates', 'questionnaires', 'interviews', 'attributes')->get();
-        $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
+        $review_attributes = reviews_attributes::with('candidates', 'questionnaires', 'interviews', 'attributes')->where('company_id', Auth::user()->company_id)->get();
+        $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->where('company_id', Auth::user()->company_id)->get();
         return view('interviewComponents/public_table')->with(['interview'=>$interview,"intervieweesT"=>$intervieweesT,"review_attributes"=>$review_attributes,'exec'=>$exec,'comment'=>$comment]);
     }
 
     public function sortDate(){
-        $comment = comment::with('candidates', 'questionnaires')->get();
+        $comment = comment::with('candidates', 'questionnaires')->where('company_id', Auth::user()->company_id)->get();
         $interview=interview::orderBy('interview_date','asc')
+        ->where('company_id', Auth::user()->company_id)
         ->paginate(6);
         $sql="SELECT candidate_id,AVG(rating_amount) as rating FROM reviews GROUP BY candidate_id";
         $exec = DB::select(DB::raw($sql));
         
-        $review_attributes = reviews_attributes::with('candidates', 'questionnaires', 'interviews', 'attributes')->get();
-        $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
+        $review_attributes = reviews_attributes::with('candidates', 'questionnaires', 'interviews', 'attributes')->where('company_id', Auth::user()->company_id)->get();
+        $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->where('company_id', Auth::user()->company_id)->get();
         return view('interviewComponents/public_table')->with(['interview'=>$interview,"intervieweesT"=>$intervieweesT,"review_attributes"=>$review_attributes,'exec'=>$exec,'comment'=>$comment]);
     }
 
     public function sortRating(){
-        $comment = comment::with('candidates', 'questionnaires')->get();
+        $comment = comment::with('candidates', 'questionnaires')->where('company_id', Auth::user()->company_id)->get();
         $interview=interview::select('interviews.*')
         ->join('reviews', 'interviews.interview_id', '=', 'reviews.id')
         ->orderBy('reviews.rating_amount','desc')
+        ->where('company_id', Auth::user()->company_id)
         ->paginate(6);
         $sql="SELECT candidate_id,AVG(rating_amount) as rating FROM reviews GROUP BY candidate_id";
         $exec = DB::select(DB::raw($sql));
         
-$review_attributes = reviews_attributes::with('candidates', 'questionnaires', 'interviews', 'attributes')->get();
-$intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
+$review_attributes = reviews_attributes::with('candidates', 'questionnaires', 'interviews', 'attributes')->where('company_id', Auth::user()->company_id)->get();
+$intervieweesT = Interviewee_Type::orderBy('id', 'desc')->where('company_id', Auth::user()->company_id)->get();
         return view('interviewComponents/public_table')->with(['interview'=>$interview,"intervieweesT"=>$intervieweesT,"review_attributes"=>$review_attributes,'exec'=>$exec,'comment'=>$comment]);
     }
 
@@ -131,17 +134,17 @@ $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
     public function public_index(Request $request)
     {  
 
-        $review_attributes = reviews_attributes::with('candidates', 'questionnaires', 'interviews', 'attributes')->get();
+        $review_attributes = reviews_attributes::with('candidates', 'questionnaires', 'interviews', 'attributes')->where('company_id', Auth::user()->company_id)->get();
 
-        $comment = comment::with('candidates', 'questionnaires')->get();
-        $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
-        $interview=interview::with('user', 'interviewees')->get();
+        $comment = comment::with('candidates', 'questionnaires')->where('company_id', Auth::user()->company_id)->get();
+        $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->where('company_id', Auth::user()->company_id)->get();
+        $interview= interview::with('user', 'interviewees')->where('company_id', Auth::user()->company_id)->get();
         $searchString=$request->term;
         $interview = interview::whereHas('interviewees', function ($query) use ($searchString){
-            $query->where('name', 'like', '%'.$searchString.'%');
+            $query->where('name', 'like', '%'.$searchString.'%')->where('company_id', Auth::user()->company_id);
         })
         ->with(['interviewees' => function($query) use ($searchString){
-            $query->where('name', 'like', '%'.$searchString.'%');
+            $query->where('name', 'like', '%'.$searchString.'%')->where('company_id', Auth::user()->company_id);
         }])->with('user')
         ->get();
 //   dd($categories);
@@ -179,13 +182,13 @@ $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
     }
     public function index()
     {
-        $admin = User::orderBy('id', 'desc')->where('role', 'interviewer')->get();
-        $interviewee = interviewee::orderBy('id', 'desc')->get();
+        $admin = User::orderBy('id', 'desc')->where('company_id', Auth::user()->company_id)->where('role', 'interviewer')->get();
+        $interviewee = interviewee::orderBy('id', 'desc')->where('company_id', Auth::user()->company_id)->get();
         $sql = "SELECT t.name, GROUP_CONCAT( i.name ) as 'Attributes' FROM interviewee_attributes i inner join interviewee_types t on i.interviewee_type_id=t.id group by i.interviewee_type_id,ims_database.t.name";
         $exec = DB::select(DB::raw($sql));
 
-        $interviewss = interview::with('user', 'interviewees')->orderBy('interview_id', 'asc')->get();
-        $interview = interview::with('user', 'interviewees')->orderBy('interview_id', 'asc')->paginate(5);
+        $interviewss = interview::with('user', 'interviewees')->orderBy('interview_id', 'asc')->where('company_id', Auth::user()->company_id)->get();
+        $interview = interview::with('user', 'interviewees')->orderBy('interview_id', 'asc')->where('company_id', Auth::user()->company_id)->paginate(5);
 
         return view('interviewComponents/table')->with(['exec' => $exec, 'interview' => $interview, 'admin' => $admin, 'interviewee' => $interviewee, 'interviewss' => $interviewss]);
     }
@@ -221,7 +224,8 @@ $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
                 'interview_id' => $request['interview_id'],
                 'interviewer' => $interviewer[$i],
                 'interview_date' => $request['interview_date'],
-                'interviewees_id' => $request['interviewees_id']
+                'interviewees_id' => $request['interviewees_id'],
+                'company_id' => Auth::user()->company_id,
             ]);
         }
 

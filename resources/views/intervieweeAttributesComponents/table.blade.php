@@ -141,6 +141,8 @@
                                         <form method="POST" action="{{ route('interviewee.update', $i->id) }}"
                                             class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                                             @csrf
+                                        
+                                            <input type="hidden" name="company_id" id="company_id" value="{{Auth::user()->company_id}}">
 
                                             <div
                                                 class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
@@ -288,6 +290,8 @@
                                             class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                                             @csrf
 
+                                        <input type="hidden" name="company_id" id="company_id" value="{{Auth::user()->company_id}}">
+
                                             <div
                                                 class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
                                                 <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
@@ -378,6 +382,7 @@
                 <form method="POST" action="{{ route('interviewee.store') }}"
                     class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                     @csrf
+                                            <input type="hidden" name="company_id" id="company_id" value="{{Auth::user()->company_id}}">
 
                     <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
@@ -424,6 +429,7 @@
                     <form method="POST" autocomplete="off" action="{{ route('intervieweeAttributes.store') }}"
                         class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                         @csrf
+                                            <input type="hidden" name="company_id" id="company_id" value="{{Auth::user()->company_id}}">
 
                         <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
                             <h3 class="text-xl font-semibold text-gray-900 dark:text-white">

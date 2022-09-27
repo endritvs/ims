@@ -15,6 +15,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Models\reviews_attributes;
+use Illuminate\Support\Facades\Auth;
 
 class IntervieweeController extends Controller
 {
@@ -27,10 +28,10 @@ class IntervieweeController extends Controller
     public function index(Request $request)
     {
 
-        $interviewss = interview::with('user', 'interviewees')->orderBy('interview_id', 'asc')->get();
-        $interviewer = user::where('role', 'interviewer')->orderBy('id', 'asc')->get();
-        $review_attributes = reviews_attributes::with('candidates', 'questionnaires', 'interviews', 'attributes')->get();
-        $intervieweesA = interviewee::with('interviewee_type')->where([
+        $interviewss = interview::with('user', 'interviewees')->orderBy('interview_id', 'asc')->where('company_id', Auth::user()->company_id)->get();
+        $interviewer = user::where('role', 'interviewer')->orderBy('id', 'asc')->where('company_id', Auth::user()->company_id)->get();
+        $review_attributes = reviews_attributes::with('candidates', 'questionnaires', 'interviews', 'attributes')->where('company_id', Auth::user()->company_id)->get();
+        $intervieweesA = interviewee::with('interviewee_type')->where('company_id', Auth::user()->company_id)->where([
             ['name', '!=' , Null],
             ['surname', '!=' , Null],
             ['interviewee_types_id', '!=' , Null],
@@ -49,7 +50,7 @@ class IntervieweeController extends Controller
         ->orderBy('id', 'asc')->get();
         $intervieweesA = $this->paginate($intervieweesA);
         $intervieweesA->withPath('/interviewees');
-        $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
+        $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->where('company_id', Auth::user()->company_id)->get();
 
         $sql="SELECT t.name, GROUP_CONCAT( i.name ) as 'Attributes' FROM interviewee_attributes i inner join interviewee_types t on i.interviewee_type_id=t.id group by i.interviewee_type_id, ims_database.t.name";
         $exec=DB::select(DB::raw($sql));
@@ -112,6 +113,7 @@ class IntervieweeController extends Controller
                 'email' => $request['email'],
                 'img' => $img_path,
                 'interviewee_types_id' => $request['interviewee_types_id'],
+                'company_id' => Auth::user()->company_id,
           
             ]);
        

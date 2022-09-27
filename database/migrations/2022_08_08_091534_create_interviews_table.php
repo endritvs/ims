@@ -19,6 +19,9 @@ return new class extends Migration
                 ->references('id')->on('interviewees')
                 ->onDelete('cascade');
             $table->datetime('interview_date');
+            $table->foreignId('company_id')
+                ->references('id')->on('companies')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

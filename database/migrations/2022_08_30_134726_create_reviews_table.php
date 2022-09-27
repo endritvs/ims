@@ -25,6 +25,9 @@ return new class extends Migration
                 ->references('id')->on('interviews')
                 ->onDelete('cascade');
             $table->integer('rating_amount');
+            $table->foreignId('company_id')
+                ->references('id')->on('companies')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

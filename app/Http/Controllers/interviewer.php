@@ -18,7 +18,8 @@ class interviewer extends Controller
     public function index()
     {
 
-        $interviewer = User::orderBy('id', 'asc')->paginate(5);
+        $interviewer = User::orderBy('id', 'asc')->where('company_id', Auth::user()->company_id)->paginate(5);
+
         return view('interviewerComponents/table')->with(['interviewer' => $interviewer]);
     }
 
@@ -32,8 +33,7 @@ class interviewer extends Controller
     {
      
           $img =  $request->hasFile('img');
- 
- 
+
             if ($img) {
                 $newImg = $request->file('img');
                 $img_path = $newImg->store('/public/img');
@@ -44,15 +44,13 @@ class interviewer extends Controller
                     'role' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
                     'img' => ['required', 'mimes:jpeg,png,jpg,jpj', 'max:2048'],
                 ]);
-            $company = Companies::create([
-                    'company_name'=>$request['company_name']
-                ]);
+
              User::create([
                 'name' => $request['name'],
                 'email' => $request['email'],
                 'password' => Hash::make($request['password']),
                 'img' => $img_path,
-                'company_id'=>$company['id']
+                'company_id' => Auth::user()->company_id
             ]); 
         }else{
             $request->validate([

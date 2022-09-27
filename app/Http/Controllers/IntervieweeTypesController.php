@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests\Storeinterviewee_typesRequest;
 use App\Http\Requests\Updateinterviewee_typesRequest;
-
+use Illuminate\Support\Facades\Auth;
 use App\Models\Interviewee_Type;
 
 
@@ -24,7 +24,7 @@ class IntervieweeTypesController extends Controller
     public function index()
     {  
         // dd("ardit");
-        $interviewees = Interviewee_Type::orderBy('id', 'asc')->paginate(5);
+        $interviewees = Interviewee_Type::orderBy('id', 'asc')->where('company_id', Auth::user()->company_id)->paginate(5);
       
         return view('intervieweeAttributes/table')->with('interviewees', $interviewees);
     }
@@ -40,9 +40,11 @@ class IntervieweeTypesController extends Controller
     {
         $request->validate([
             'name' => ['required', 'regex:/^[a-z A-Z]+$/u', 'string', 'max:25'],
+            'company_id' => ['required'],
         ]);
         Interviewee_Type::create([
             'name' => $request['name'],
+            'company_id' => Auth::user()->company_id,
         ]);
         return redirect('/interviewee-attributes');
     }
@@ -68,7 +70,8 @@ class IntervieweeTypesController extends Controller
     {
         $interviewee = Interviewee_Type::findOrFail($id);
         $request->validate([
-            'name' => ['required', 'regex:/^[a-z A-Z]+$/u', 'string', 'max:25'],
+            'name' => ['required'],
+
         ]);
         $interviewee->name = $request->name;
 
