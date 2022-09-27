@@ -60,15 +60,13 @@ class interviewer extends Controller
                 'role' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
                
             ]);
-            $company = Companies::create([
-                'company_name'=>$request['company_name']
-            ]);
+
             User::create([
                         'name' => $request->name,
                         'email' => $request->email,
                         'password' => Hash::make($request->password),
                         'img'=>"public/noProfilePhoto/nofoto.jpg",
-                        'company_id'=>$company['id']
+                        'company_id' => Auth::user()->company_id
                     ]);
         }
     

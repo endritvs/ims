@@ -30,17 +30,13 @@ $flip = 0;
 
       @endforeach
       @endif
-
-      <div>
-        {{ $interview->links() }}
-      </div>
     
 @else
 
   @php
 
     $sot = date("Y-m-d");
-
+    
   @endphp
 <!-- component -->
 <div class="h-full ml-14 mt-10 mb-10 md:ml-64">
@@ -70,6 +66,8 @@ $flip = 0;
       <div id="scroll" class="h-[800px] mb-4 overflow-x-scroll">
         <ol class="text-center sm:flex  h-auto">
         @foreach($interviewAll as $iAll)
+        
+        @if (count ($interview) > 1)
 
           <div class="flex items-center mt-100 relative ">
             <div class="absolute w-[195px] px-10 flex z-10 justify-center items-center h-10 bg-blue-200 rounded-full ring-0 ring-white dark:bg-blue-900 sm:ring-8 dark:ring-gray-900 shrink-0">
@@ -82,6 +80,8 @@ $flip = 0;
             </div>
             <hr class="absolute w-[450px] ">
           </div>
+
+        @endif
 
           @if($flip == 0)
           <li class="mx-[10px] relative mb-6 sm:mb-0 min-w-[350px]">
@@ -213,7 +213,13 @@ $flip = 0;
           @endforeach
           <!-- --------------------------------------------------------------------------------------- -->
       </ol>
-    </div>
+      </div>
+
+      
+<div>
+    {{ $interview->appends(['pastInterview'=>$pastInterview->currentPage()])->links() }}
+</div>
+
       @include('components.dashboardFooter')
 
     </section>
@@ -283,9 +289,9 @@ $flip = 0;
       </tbody>
     </table>
         </div>
-        <div class="dark:bg-gray-800 p-3 ">
-                {{$pastInterviewAll->links() }}
-            </div>
+          <div class="dark:bg-gray-800 p-3 ">
+                {{ $pastInterviewAll->appends(['interview '=>$interview->currentPage()])->links() }}
+          </div>
         </div>
         </div>
   </div>

@@ -79,7 +79,7 @@ class ReviewController extends Controller
             'questionnaire_id' => $request['questionnaire_id'],
             'interview_id' => $request['interview_id'],
             'rating_amount' => $request['rating_amount'],
-
+            'company_id' => Auth::user()->company_id
         ]);
 
         return redirect('/dashboard');
@@ -101,6 +101,8 @@ class ReviewController extends Controller
                 'interview_id' => $request['interview_id'],
                 'rating_amount' => $request['rating_amount'][$i],
                 'attribute_id' => $request['attribute_id'][$i],
+                'company_id' => Auth::user()->company_id
+
             ]);
         }
         review::create([
@@ -108,6 +110,7 @@ class ReviewController extends Controller
             'questionnaire_id' => Auth::user()->id,
             'interview_id' => $request['interview_id'],
             'rating_amount' => $request['rating_amount_review'],
+            'company_id' => Auth::user()->company_id
 
         ]);
 
@@ -116,6 +119,8 @@ class ReviewController extends Controller
             'questionnaire_id' => Auth::user()->id,
             'interview_id' => $request['interview_id'],
             'message' => $request['message'],
+            'company_id' => Auth::user()->company_id
+
         ]);
 
         return redirect('/interview');

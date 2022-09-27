@@ -17,6 +17,7 @@ class comment extends Model
         'questionnaire_id',
         'interview_id',
         'message',
+        'company_id'
     ];
 
     public function candidates()
