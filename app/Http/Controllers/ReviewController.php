@@ -30,11 +30,14 @@ class ReviewController extends Controller
          $review = review::with('candidates', 'questionnaires', 'interviews')->where('interview_id',$id)->get();
          $review_attributes = reviews_attributes::with('candidates', 'questionnaires', 'interviews', 'attributes')->where('interview_id',$id)->get();
          $comment = comment::with('candidates', 'questionnaires')->where('interview_id',$id)->get();
-         $grouped = $review->groupBy('questionnaire_id'); 
-         $groupedRA = $review_attributes->groupBy('questionnaire_id'); 
-         $groupedComment = $comment->groupBy('questionnaire_id'); 
-         return view('interviewComponents/allReviews')->with(['grouped'=>$grouped,'groupedRA'=>$groupedRA,'groupedComment'=>$groupedComment]);
-    }
+        //  $grouped = $review->groupBy('questionnaire_id'); 
+        //  $groupedRA = $review_attributes->groupBy('questionnaire_id'); 
+        //  $groupedComment = $comment->groupBy('questionnaire_id'); 
+        // $review,$review_attributes,$comment
+         return view('interviewComponents/allReviews')->with(['review'=>$review,'review_attributes'=>$review_attributes,'comment'=>$comment]);
+        //  return view('interviewComponents/allReviews')->with(['grouped'=>$grouped,'groupedRA'=>$groupedRA,'groupedComment'=>$groupedComment]);
+
+        }
     public function overallRating($id)
     {
         date_default_timezone_set("Europe/Belgrade");
