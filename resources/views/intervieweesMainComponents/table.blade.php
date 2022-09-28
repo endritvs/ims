@@ -8,7 +8,7 @@
     <div class="w-full bg-white dark:bg-gray-700">
         <section class="max-w-6xl mx-auto pb-4 px-4 sm:px-6 lg:px-4 py-12">
 
-            <div class="text-center pb-4 sticky top-0">
+            <div class="text-center pb-4 sticky top-0 backdrop-blur">
                 <h2 class="text-base font-bold text-indigo-600 absolute inset-x-0 top-[-20px] h-16">
                     {{Auth::user()->company->company_name}}
                 </h2>
@@ -602,7 +602,7 @@
 
         </section>
     </div>
-    <div class="dark:bg-gray-800 bg-gray-100 p-3 flex justify-center">
+    <div class="dark:bg-gray-700 font-medium p-3 flex justify-center">
         {{ $intervieweesA->links() }}
     </div>
 
