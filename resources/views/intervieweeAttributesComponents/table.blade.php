@@ -51,7 +51,7 @@
             <div class="w-full overflow-x-auto flex flex-row justify-evenly">
                     <table class="w-full mr-20">
                         <caption
-                            class="p-5 bg-gray-200 relative text-lg font-semibold text-left  text-black border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-800">
+                            class="p-5 bg-gray-200 relative text-lg font-semibold text-left  text-black border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-900">
                             Candidate Types
                             <p class="mt-1 text-sm font-normal text-black dark:text-white w-[400px]">Browse a list of Interviewee Types products
                                 designed to help you work, grow your business, and more. (Fix this text)</p>
@@ -62,7 +62,7 @@
                         </caption>
                         <thead>
                             <tr
-                                class="text-xs bg-gray-200 font-semibold tracking-wide text-left text-black uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-800">
+                                class="text-xs bg-gray-200 font-semibold tracking-wide text-left text-black uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-900">
                                 <th class="px-4 py-3">Name</th>
                                 <th class="px-4 py-3">Edit</th>
                                 <th class="px-4 py-3">Delete</th>
@@ -71,7 +71,7 @@
                         <tbody class="bg-gray-200 divide-y dark:divide-gray-700 dark:bg-gray-800">
                             @foreach ($intervieweesT as $i)
                                 <tr
-                                    class="bg-gray-200 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-black dark:text-white">
+                                    class="bg-gray-200 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-black dark:text-white dark:bg-gray-900">
 
                                     <td class="px-4 py-3 text-sm capitalize ">
                                         {{ $i->name }}
@@ -197,7 +197,7 @@
                 <div class="w-full overflow-x-auto bg-gray-100 dark:bg-gray-800">
                     <table class="w-full">
                         <caption
-                            class="p-5 bg-gray-200 relative text-lg font-semibold text-left  text-black border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-800">
+                            class="p-5 bg-gray-200 relative text-lg font-semibold text-left  text-black border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-900">
                                 Candidate Attributes
                             <p class="mt-1 text-sm font-normal text-black dark:text-white w-[400px]">Browse a list of Interviewee Types products
                                 designed to help you work, grow your business, and more. (Fix this text)</p>
@@ -208,7 +208,7 @@
                         </caption>
                         <thead>
                             <tr
-                                class="text-xs bg-gray-200 font-semibold tracking-wide text-left text-black uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-800">
+                                class="text-xs bg-gray-200 font-semibold tracking-wide text-left text-black uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-900">
                                 <th class="px-4 py-3">Name</th>
                                 <th class="px-4 py-3">Interviewee Type Name</th>
                                 <th class="px-4 py-3">Edit</th>
@@ -218,7 +218,7 @@
                         <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                             @foreach ($intervieweesA as $i)
                                 <tr
-                                    class="bg-gray-200 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-black dark:text-white">
+                                    class="bg-gray-200 dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-900 text-black dark:text-white">
                                     <td class="px-4 py-3 text-sm capitalize ">
                                         {{ $i->name }}
                                     </td>
