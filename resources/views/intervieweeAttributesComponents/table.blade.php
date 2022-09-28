@@ -51,18 +51,18 @@
             <div class="w-full overflow-x-auto flex flex-row justify-evenly">
                     <table class="w-full mr-20">
                         <caption
-                            class="p-5 bg-gray-200 relative text-lg font-semibold text-left  text-gray-500 border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                            class="p-5 bg-gray-200 relative text-lg font-semibold text-left  text-black border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-800">
                             Candidate Types
-                            <p class="mt-1 text-sm font-normal text-gray-400">Browse a list of Interviewee Types products
+                            <p class="mt-1 text-sm font-normal text-black dark:text-white w-[400px]">Browse a list of Interviewee Types products
                                 designed to help you work, grow your business, and more. (Fix this text)</p>
-                            <a class="absolute top-4 right-6" href="#">
+                            <a class="absolute top-6 right-6" href="#">
                                 <button type="button" data-modal-toggle="addITypeModal"
-                                class="bg-blue-500 hover:bg-blue-700 text-white p-1 rounded">Create</button>
+                                class="bg-blue-500 hover:bg-blue-700 text-white p-1 rounded ">Create</button>
                             </a>
                         </caption>
                         <thead>
                             <tr
-                                class="text-xs bg-gray-200 font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                                class="text-xs bg-gray-200 font-semibold tracking-wide text-left text-black uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-800">
                                 <th class="px-4 py-3">Name</th>
                                 <th class="px-4 py-3">Edit</th>
                                 <th class="px-4 py-3">Delete</th>
@@ -71,7 +71,7 @@
                         <tbody class="bg-gray-200 divide-y dark:divide-gray-700 dark:bg-gray-800">
                             @foreach ($intervieweesT as $i)
                                 <tr
-                                    class="bg-gray-200 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
+                                    class="bg-gray-200 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-black dark:text-white">
 
                                     <td class="px-4 py-3 text-sm capitalize ">
                                         {{ $i->name }}
@@ -197,18 +197,18 @@
                 <div class="w-full overflow-x-auto bg-gray-100 dark:bg-gray-800">
                     <table class="w-full">
                         <caption
-                            class="p-5 bg-gray-200 relative text-lg font-semibold text-left  text-gray-500 border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                            class="p-5 bg-gray-200 relative text-lg font-semibold text-left  text-black border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-800">
                                 Candidate Attributes
-                            <p class="mt-1 text-sm font-normal text-gray-400">Browse a list of Interviewee Types products
+                            <p class="mt-1 text-sm font-normal text-black dark:text-white w-[400px]">Browse a list of Interviewee Types products
                                 designed to help you work, grow your business, and more. (Fix this text)</p>
-                            <a class="absolute top-4 right-6" href="#">
+                            <a class="absolute top-6 right-6" href="#">
                                 <button type="button" data-modal-toggle="addUserModal"
                                     class="bg-blue-500 hover:bg-blue-700 text-white p-1 rounded">Create</button>
                             </a>
                         </caption>
                         <thead>
                             <tr
-                                class="text-xs bg-gray-200 font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                                class="text-xs bg-gray-200 font-semibold tracking-wide text-left text-black uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-800">
                                 <th class="px-4 py-3">Name</th>
                                 <th class="px-4 py-3">Interviewee Type Name</th>
                                 <th class="px-4 py-3">Edit</th>
@@ -218,7 +218,7 @@
                         <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                             @foreach ($intervieweesA as $i)
                                 <tr
-                                    class="bg-gray-200 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
+                                    class="bg-gray-200 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-black dark:text-white">
                                     <td class="px-4 py-3 text-sm capitalize ">
                                         {{ $i->name }}
                                     </td>
@@ -451,9 +451,9 @@
                             <div class="space-y-6">
                                 <div>
                                     <label for="name"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                                        class="block mb-4 text-sm font-medium text-gray-900 dark:text-white">Name</label>
                                         <div class="autocomplete" style="width:300px;">
-                                            <input id="myInput" type="text" name="name" placeholder="Candidate Attribute Name" class="@error('name') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block dark:text-white w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                            <input id="myInput" type="text" name="name" placeholder="Candidate Attribute Name" class="@error('name') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block dark:text-white w-[368px] p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                         placeholder="Candidate attribute name" required>
                                         </div>
                                         

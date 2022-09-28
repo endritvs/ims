@@ -79,7 +79,7 @@
   
                 <div class="justify-between items-center sm:flex">
                   <div>
-                    <h2 class="text-[30px] pl-[15px]  font-bold text-white">
+                    <h2 class="text-[30px] pl-[15px]  font-bold text-black">
   
                       {{ $interview[$index] -> interviewees -> name }}
   
@@ -96,7 +96,7 @@
                 </div>
               <div class="space-y-4">
                 
-                  <p class="text-[25px] font-[500] text-white">
+                  <p class="text-[25px] font-[500] text-black">
                     {{$interview[$index]->interviewees->interviewee_type->name}}
                   </p>
                
@@ -245,11 +245,11 @@
             <div class="w-full overflow-x-auto">
     <table class="w-full">
                         <caption
-                            class="p-5 relative text-lg font-semibold text-left  text-gray-500 border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                            class="p-5 relative text-lg font-semibold text-left  text-black border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-800">
                              Your past Interviews                           
                         </caption>
                     <thead>
-                        <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"> 
+                        <tr class="text-xs font-semibold tracking-wide text-left text-black uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-800"> 
                            
                             <th class="px-4 py-3">Interviewer</th>
                             <th class="px-4 py-3">Candidate</th>
@@ -267,7 +267,7 @@
                         $link = explode('/', $i->interviewees->img);
                         $cv = explode('/', $i->interviewees->cv_path);
                         @endphp
-                            <tr class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
+                            <tr class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-black dark:text-white">
                                 <td class="px-4 py-3 text-sm ">
                                     {{ $i->user->name }}
                                 </td>
