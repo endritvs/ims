@@ -9,47 +9,53 @@
     <div class="w-full bg-white dark:bg-gray-800">
         <section class="max-w-6xl mx-auto pb-4 px-4 sm:px-6 lg:px-4 py-12">
             <div class="text-center">
-                <h2 class="text-base font-bold text-indigo-600">
-                    {{Auth::user()->company->company_name}}
-                </h2>
-                <h1 class="dark:text-white text-indigo-600 font-bold text-3xl md:text-4xl lg:text-5xl font-heading ">
-                    Interview
-                </h1>
-                <a class="underline" href="{{ route('interview.index') }}">See all interviews</a>
-                <div class="flex">
-                    <form action="{{ route('public.index') }}" method="GET" role="search">
-                        <div class="flex justify-center ">
-                            <div class="relative w-full">
-                                <input type="search" id="search-dropdown" name="term" class="rounded block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Search Mockups, Logos, Design Templates...">
-                                    <a href={{route('public.index')}}>
-                                        <button type="submit" class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-gradient-to-r from-blue-800 to-blue-800 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                            <svg aria-hidden="true" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                                            </svg>
-                                            <span class="sr-only">Search</span>
-                                        </button>
-                                    </a>
+                <div class="flex justify-between items-end">
+                    <div class="flex">
+                        <form action="{{ route('public.index') }}" method="GET" role="search">
+                            <div class="flex justify-center ">
+                                <div class="relative w-full">
+                                    <input type="search" id="search-dropdown" name="term" class="rounded block p-2.5 w-[350px] text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Search Mockups, Logos, Design Templates...">
+                                        <a href={{route('public.index')}}>
+                                            <button type="submit" class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-gradient-to-r from-blue-800 to-blue-800 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                <svg aria-hidden="true" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                                </svg>
+                                                <span class="sr-only">Search</span>
+                                            </button>
+                                        </a>
+                                </div>
                             </div>
-                        </div>
-                    </form>
-                    <form action="{{ route('public.sortRating') }}" method="GET" role="search">
-                        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 pr-4 mx-2">
-                            Rating  
-                            <i onclick="changeIconA(this)" class="fa-solid fa-arrow-up-long" id="SortNr"></i> 
-                        </button>
-                    </form>
-                    <form action="{{ route('public.sortDate') }}" method="GET" role="search">
-                        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 pr-4 mx-2">
-                            Date
-                            <i onclick="changeIconB(this)" class="fa-solid fa-arrow-up-long" id="Date"></i>
-                        </button>
-                    </form>
-                    <form action="{{ route('public.sort') }}" method="GET" role="search">
-                        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 pr-4 mx-2">
-                            A-Z
-                            <i onclick="changeIconC(this)" class="fa-solid fa-arrow-up-long" id="AandZ"></i>
-                        </button>
-                    </form>   
+                        </form>
+                    </div>
+                    <div class="flex flex-col">
+                        <h2 class="text-base font-bold text-indigo-600">
+                            {{Auth::user()->company->company_name}}
+                        </h2>
+                        <h1 class="dark:text-white text-indigo-600 font-bold text-3xl md:text-4xl lg:text-5xl font-heading ">
+                            Interview
+                        </h1>
+                        <a class="underline" href="{{ route('interview.index') }}">See all interviews</a>
+                    </div>
+                    <div class="flex">
+                        <form action="{{ route('public.sortRating') }}" method="GET" role="search">
+                            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 pr-4 mx-2">
+                                Rating  
+                                <i onclick="changeIconA(this)" class="fa-solid fa-arrow-up-long" id="SortNr"></i> 
+                            </button>
+                        </form>
+                        <form action="{{ route('public.sortDate') }}" method="GET" role="search">
+                            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 pr-4 mx-2">
+                                Date
+                                <i onclick="changeIconB(this)" class="fa-solid fa-arrow-up-long" id="Date"></i>
+                            </button>
+                        </form>
+                        <form action="{{ route('public.sort') }}" method="GET" role="search">
+                            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 pr-4 mx-2">
+                                A-Z
+                                <i onclick="changeIconC(this)" class="fa-solid fa-arrow-up-long" id="AandZ"></i>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
