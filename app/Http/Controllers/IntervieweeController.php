@@ -63,7 +63,7 @@ class IntervieweeController extends Controller
 
     public function sortByName(){
         $interviewss = interview::with('user', 'interviewees')->orderBy('interview_id', 'asc')->get();
-        $intervieweesA= interviewee::with('interviewee_type')->orderBy('name','asc')->paginate(6);
+        $intervieweesA= interviewee::with('interviewee_type')->where('company_id',Auth::user()->company_id)->orderBy('name','asc')->paginate(6);
         $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->get();
         $interviewer = user::where('role', 'interviewer')->orderBy('id', 'asc')->get();
         $sql="SELECT t.name, GROUP_CONCAT( i.name ) as 'Attributes' FROM interviewee_attributes i inner join interviewee_types t on i.interviewee_type_id=t.id group by i.interviewee_type_id, ims_database.t.name";

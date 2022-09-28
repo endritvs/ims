@@ -28,7 +28,7 @@ class Interviewee_AttributesController extends Controller
 
         $data = $this->paginate($exec);
 
-        $data->withPath('/interviewee-attributes');
+        $data->withPath('/candidate-options');
 
         return view('intervieweeAttributesComponents/table')->with(['data'=>$data,'intervieweesA' => $intervieweesA, 'intervieweesT' => $intervieweesT]);
     }
@@ -58,7 +58,7 @@ class Interviewee_AttributesController extends Controller
             'company_id' => Auth::user()->company_id,
         ]);
       
-        return  redirect()->route('intervieweeAttributes.index')->with(['intervieweesT' => $intervieweesT]);
+        return  back()->with(['intervieweesT' => $intervieweesT]);
     }
  
     public function edit($id)
@@ -79,7 +79,7 @@ class Interviewee_AttributesController extends Controller
         $interviewee->interviewee_type_id = $request->interviewee_type_id;
         $interviewee->save();
 
-        return redirect('interviewee-attributes');
+        return back();
     }
     public function destroy($id)
     {

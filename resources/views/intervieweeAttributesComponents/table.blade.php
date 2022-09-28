@@ -52,7 +52,7 @@
                     <table class="w-full mr-20">
                         <caption
                             class="p-5 bg-gray-200 relative text-lg font-semibold text-left  text-gray-500 border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                            Interviewee Types
+                            Candidate Types
                             <p class="mt-1 text-sm font-normal text-gray-400">Browse a list of Interviewee Types products
                                 designed to help you work, grow your business, and more. (Fix this text)</p>
                             <a class="absolute top-4 right-6" href="#">
@@ -227,7 +227,7 @@
                                     </td>
                                     <td class="px-4 py-3 text-xs">
                                        
-                                          <a href="#" data-modal-toggle="editModal{{ $i->id }}"
+                                          <a href="#" data-modal-toggle="editModall{{ $i->id }}"
                                             class="text-blue-600 font-bold py-2 px-4 rounded">Edit</a>
                                       
                                     </td>
@@ -281,7 +281,7 @@
                                     </div>
                                 </div>
 
-                                <div id="editModal{{ $i->id }}" tabindex="-1" aria-hidden="true"
+                                <div id="editModall{{ $i->id }}" tabindex="-1" aria-hidden="true"
                                     class=" hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
                                     <div
                                         class="relative p-4 w-full max-w-md h-full md:h-auto bg-white rounded dark:bg-gray-700">
@@ -299,7 +299,7 @@
                                                 </h3>
                                                 <button type="button"
                                                     class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                                    data-modal-toggle="editModal{{ $i->id }}">
+                                                    data-modal-toggle="editModall{{ $i->id }}">
                                                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                                                         xmlns="http://www.w3.org/2000/svg">
                                                         <path fill-rule="evenodd"
@@ -349,7 +349,7 @@
 
                                             <div
                                                 class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-                                                <button type="submit" data-modal-toggle="editModal{{ $i->id }}"
+                                                <button type="submit" data-modal-toggle="editModall{{ $i->id }}"
                                                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
                                             </div>
                                         </form>

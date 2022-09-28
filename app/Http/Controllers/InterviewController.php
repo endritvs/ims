@@ -91,8 +91,8 @@ class InterviewController extends Controller
         $comment = comment::with('candidates', 'questionnaires')->where('company_id', Auth::user()->company_id)->get();
         $interview=interview::select('interviews.*')
         ->join('interviewees', 'interviews.interviewees_id', '=', 'interviewees.id')
+        ->where('interviews.company_id', Auth::user()->company_id)
         ->orderBy('interviewees.name')
-        ->where('company_id', Auth::user()->company_id)
         ->paginate(6);
         // SELECT * FROM interviews JOIN interviewees
         //  ON interviews.interviewees_id = interviewees.id ORDER BY interviewees.name;
@@ -106,7 +106,7 @@ class InterviewController extends Controller
     public function sortDate(){
         $comment = comment::with('candidates', 'questionnaires')->where('company_id', Auth::user()->company_id)->get();
         $interview=interview::orderBy('interview_date','asc')
-        ->where('company_id', Auth::user()->company_id)
+        ->where('interviews.company_id', Auth::user()->company_id)
         ->paginate(6);
         $sql="SELECT candidate_id,AVG(rating_amount) as rating FROM reviews GROUP BY candidate_id";
         $exec = DB::select(DB::raw($sql));
@@ -119,9 +119,9 @@ class InterviewController extends Controller
     public function sortRating(){
         $comment = comment::with('candidates', 'questionnaires')->where('company_id', Auth::user()->company_id)->get();
         $interview=interview::select('interviews.*')
-        ->join('reviews', 'interviews.interview_id', '=', 'reviews.id')
+        ->join('reviews', 'interviews.interview_id', '=', 'reviews.id') 
+        ->where('interviews.company_id', Auth::user()->company_id)
         ->orderBy('reviews.rating_amount','desc')
-        ->where('company_id', Auth::user()->company_id)
         ->paginate(6);
         $sql="SELECT candidate_id,AVG(rating_amount) as rating FROM reviews GROUP BY candidate_id";
         $exec = DB::select(DB::raw($sql));
