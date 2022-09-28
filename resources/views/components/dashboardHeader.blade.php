@@ -18,7 +18,7 @@
                       @php
                       date_default_timezone_set('Europe/Belgrade');
                       $today = date('Y-m-d H:i:s');
-                      @endphp {{ App\Models\interview::where('interview_date', '>', $today)->get()->count() }}
+                      @endphp {{ App\Models\interview::where('interview_date', '>', $today)->where('company_id',Auth::user()->company_id)->get()->count() }}
                   </p>
               </div>
           </div>
@@ -35,7 +35,7 @@
                       Interviews held
                   </p>
                   <p class="text-4xl font-semibold text-white ml-4 dark:text-gray-200">
-                      {{ App\Models\interview::where('interview_date', '<', $today)->get()->count() }}
+                      {{ App\Models\interview::where('interview_date', '<', $today)->where('company_id',Auth::user()->company_id)->get()->count() }}
                   </p>
               </div>
           </div>
@@ -52,7 +52,7 @@
                       Reviews Made
                   </p>
                   <p class="text-4xl font-semibold ml-4 text-white dark:text-gray-200">
-                      {{ App\Models\review::get()->count() }}
+                      {{ App\Models\review::where('company_id',Auth::user()->company_id)->get()->count() }}
                   </p>
               </div>
           </div>
@@ -68,7 +68,7 @@
                       Total Candidates
                   </p>
                   <p class="text-4xl font-semibold ml-4 text-white dark:text-gray-200">
-                      {{ App\Models\interviewee::get()->count() }}
+                      {{ App\Models\interviewee::where('company_id',Auth::user()->company_id)->get()->count() }}
                   </p>
               </div>
           </div>
@@ -92,7 +92,7 @@
                     @php
                     date_default_timezone_set('Europe/Belgrade');
                     $today = date('Y-m-d H:i:s');
-                    @endphp {{ App\Models\interview::where('interview_date', '>', $today)->where('interviewer',Auth::user()->id)->get()->count() }}
+                    @endphp {{ App\Models\interview::where('interview_date', '>', $today)->where('interviewer',Auth::user()->id)->where('company_id',Auth::user()->company_id)->get()->count() }}
                 </p>
             </div>
         </div>
@@ -109,7 +109,7 @@
                     Interviews held
                 </p>
                 <p class="text-4xl font-semibold ml-4 text-white dark:text-gray-200">
-                    {{ App\Models\interview::where('interview_date', '<', $today)->where('interviewer',Auth::user()->id)->get()->count() }}
+                    {{ App\Models\interview::where('interview_date', '<', $today)->where('interviewer',Auth::user()->id)->where('company_id',Auth::user()->company_id)->get()->count() }}
                 </p>
             </div>
         </div>
@@ -126,7 +126,7 @@
                     Reviews Made
                 </p>
                 <p class="text-4xl font-semibold ml-4 text-white dark:text-gray-200">
-                    {{ App\Models\review::where('questionnaire_id',Auth::user()->id)->get()->count() }}
+                    {{ App\Models\review::where('questionnaire_id',Auth::user()->id)->where('company_id',Auth::user()->company_id)->get()->count() }}
                 </p>
             </div>
         </div>

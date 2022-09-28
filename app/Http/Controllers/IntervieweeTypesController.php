@@ -46,7 +46,7 @@ class IntervieweeTypesController extends Controller
             'name' => $request['name'],
             'company_id' => Auth::user()->company_id,
         ]);
-        return redirect('/interviewee-attributes');
+        return back();
     }
 
 
@@ -79,7 +79,7 @@ class IntervieweeTypesController extends Controller
 
         $interviewee->save();
 
-        return redirect('/interviewee-attributes');
+        return back();
     }
 
 

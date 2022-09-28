@@ -72,7 +72,7 @@ Route::prefix('interviewee')->group(function () {
     Route::post('/store-interviewee', [IntervieweeTypesController::class, 'store'])->name('interviewee.store');
 });
 
-Route::prefix('interviewee-attributes')->group(
+Route::prefix('candidate-options')->group(
     function () {
         
         Route::get('/', [Interviewee_AttributesController::class, 'index'])->name('intervieweeAttributes.index');
@@ -84,7 +84,7 @@ Route::prefix('interviewee-attributes')->group(
     }
 );
 
-Route::prefix('interviewees')->group(
+Route::prefix('candidates')->group(
     function () {
         Route::get('/', [IntervieweeController::class, 'index'])->name('interviewees.index');
         Route::get('/edit-interviewees/{id}', [IntervieweeController::class, 'edit'])->name('interviewees.edit');
@@ -98,7 +98,7 @@ Route::prefix('interviewees')->group(
 );
 
 
-Route::prefix('interviewer')->group(
+Route::prefix('questioners')->group(
     function () {
         Route::get('/', [interviewer::class, 'index'])->name('interviewer.index');
         Route::get('/edit-interviewer/{id}', [interviewer::class, 'edit'])->name('interviewer.edit');
@@ -130,13 +130,13 @@ Route::prefix('interview')->group(
         Route::get('/create', [interviewController::class, 'create'])->name('interview.create');
         Route::post('/store-interview', [interviewController::class, 'store'])->name('interview.store');
         Route::post('/quickstore-interview', [interviewController::class, 'quickStore'])->name('interview.quickStore');
-        Route::get('/edit-profile/{id}', [interviewer::class, 'editProfile'])->name('interview.editProfile');
+        
         Route::post('/update-profile/{id}', [interviewer::class, 'updateProfile'])->name('interview.updateProfile');
         Route::post('/update-password/', [interviewer::class, 'update_password'])->name('interview.updatePassword');
         Route::get('/{id}', [ReviewController::class, 'interviewAll'])->name('public.interviewAll');
     }
 );
-
+Route::get('/edit-profile/{id}', [interviewer::class, 'editProfile'])->name('interview.editProfile');
 Route::get('/dashboard', [interviewController::class, 'index1'])->name('dashboard.index');
 
 Route::prefix('review')->group(
