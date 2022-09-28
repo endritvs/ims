@@ -119,7 +119,7 @@
                 </div>
                 <div class="flex items-center w-full">
                     <label class="dark:text-white text-indigo-600 mr-3">Date:</label>
-                    <p class="text-base text-gray-400 font-normal"> {{ $d['interview_date'] }}</p>
+                    <p class="text-base text-gray-400 font-normal dark:text-white"> {{ $d['interview_date'] }}</p>
                 </div>
                 <div class="flex items-center w-full mb-3">
                     @if(count($exec) > 1)

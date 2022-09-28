@@ -2,10 +2,10 @@
 
 @section('content')
     <title>My Profile</title>
-    <div class="h-full ml-14 mb-10 md:ml-64">
+    <div class="h-[300px] ml-12 mb-12 md:ml-64">
         <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1">
 
-            <div tabindex="0" aria-label="form" class="focus:outline-none w-full mt-10 bg-white p-10 dark:bg-gray-800">
+            <div tabindex="0" aria-label="form" class="focus:outline-none w-full bg-white p-10 dark:bg-gray-800">
                 <div class="md:flex items-center border-b pb-6 border-gray-200">
                     <div class="flex items-center md:mt-0 mt-4">
 
@@ -84,7 +84,7 @@
                     </div>
 
                     <button role="button" aria-label="Next step"
-                        class="flex items-center justify-center py-2 px-4 focus:outline-none bg-blue-700 hover:bg-blue-800  border rounded border-gray-400 mt-7 md:mt-14 hover:bg-gray-100  focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 hover:bg-gray-400">
+                        class="flex items-center justify-center py-2 px-4 focus:outline-none bg-blue-700 hover:bg-blue-800  border rounded border-gray-400 mt-5 md:mt-12 hover:bg-gray-100  focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 hover:bg-gray-400">
                         <span class="text-sm font-medium text-center text-white capitalize">Save</span>
 
                     </button>
@@ -160,7 +160,7 @@
 
 
                 <button role="button" aria-label="Next step"
-                    class="flex items-center justify-center py-2 px-4 focus:outline-none bg-blue-700 hover:bg-blue-800 border rounded border-gray-400 mt-7 md:mt-14 hover:bg-gray-100  focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 hover:bg-gray-400">
+                    class="flex items-center justify-center py-2 px-4 focus:outline-none bg-blue-700 hover:bg-blue-800 border rounded border-gray-400 mt-7 md:mt-0 hover:bg-gray-100  focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 hover:bg-gray-400">
                     <span class="text-sm font-medium text-center text-white capitalize">Save</span>
 
                 </button>
