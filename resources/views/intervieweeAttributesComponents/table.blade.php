@@ -51,9 +51,9 @@
             <div class="w-full overflow-x-auto flex flex-row justify-evenly">
                     <table class="w-full mr-20">
                         <caption
-                            class="p-5 bg-gray-200 relative text-lg font-semibold text-left  text-black border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-900">
+                            class="p-5 bg-gray-200 relative text-lg  rounded-lg font-semibold text-left  text-black border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-900">
                             Candidate Types
-                            <p class="mt-1 text-sm font-normal text-black dark:text-white w-[400px]">Browse a list of Interviewee Types products
+                            <p class="mt-1 text-sm rounded-lg font-normal text-black dark:text-white w-[400px]">Browse a list of Interviewee Types products
                                 designed to help you work, grow your business, and more. (Fix this text)</p>
                             <a class="absolute top-6 right-6" href="#">
                                 <button type="button" data-modal-toggle="addITypeModal"
@@ -194,12 +194,12 @@
                     <!-- <div class="bg-gray-100 dark:bg-gray-800 p-3">
                     {{ $intervieweesT->appends(['intervieweesA'=>$intervieweesA->currentPage()])->links() }}
                 </div> -->
-                <div class="w-full overflow-x-auto bg-gray-100 dark:bg-gray-800">
+                <div class="w-full overflow-x-auto bg-gray-100 dark:bg-gray-800  rounded-lg">
                     <table class="w-full">
                         <caption
-                            class="p-5 bg-gray-200 relative text-lg font-semibold text-left  text-black border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-900">
+                            class="p-5 bg-gray-200 relative text-lg font-semibold rounded-lg text-left  text-black border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-900">
                                 Candidate Attributes
-                            <p class="mt-1 text-sm font-normal text-black dark:text-white w-[400px]">Browse a list of Interviewee Types products
+                            <p class="mt-1 text-sm font-normal  text-black dark:text-white w-[400px]">Browse a list of Interviewee Types products
                                 designed to help you work, grow your business, and more. (Fix this text)</p>
                             <a class="absolute top-6 right-6" href="#">
                                 <button type="button" data-modal-toggle="addUserModal"
@@ -366,10 +366,10 @@
                 
                 </div>
                 <div class="flex flex-row">
-                <div class="bg-gray-100 dark:bg-gray-800 p-3 w-full mr-20">
+                <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-3 w-full mr-20">
                     {{ $intervieweesT->appends(['intervieweesA'=>$intervieweesA->currentPage()])->links() }}
                 </div>
-                <div class="bg-gray-100 dark:bg-gray-800 p-3 w-full">
+                <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-3 w-full">
                     {{ $intervieweesA->appends(['intervieweesT' => $intervieweesT->currentPage()])->links() }}
                 </div>
 

@@ -8,16 +8,16 @@
     <div class="w-full bg-white dark:bg-gray-700">
         <section class="max-w-6xl mx-auto pb-4 px-4 sm:px-6 lg:px-4 py-12">
 
-            <div class="text-center pb-4 sticky top-0 backdrop-blur">
+            <div class="text-center pb-16  top-[-50px] sticky z-10">
                 <h2 class="text-base font-bold text-indigo-600 absolute inset-x-0 top-[-20px] h-16">
                     {{Auth::user()->company->company_name}}
                 </h2>
-                <h1 class="dark:text-white text-indigo-600 font-bold text-3xl md:text-4xl lg:text-5xl font-heading mb-14">
+                <h1 class="dark:text-white text-indigo-600 font-bold text-3xl md:text-4xl lg:text-5xl font-heading mb-14 z-0 ">
                     Candidates
                 </h1>
 
 
-                <div class="flex justify-evenly items-center absolute inset-x-0 bottom-0 h-16">
+                <div class="flex justify-evenly items-center absolute inset-x-0 bottom-0 h-16 ">
                     <a class="mr-4" href="#">
                         <button type="button" data-modal-toggle="addUserModal" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Create</button>
                     </a>
