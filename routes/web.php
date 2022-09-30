@@ -93,7 +93,9 @@ Route::prefix('candidates')->group(
         Route::get('/create', [IntervieweeController::class, 'create'])->name('interviewees.create');
         Route::post('/store-interviewees', [IntervieweeController::class, 'store'])->name('interviewees.store');
         Route::get('/sortName', [IntervieweeController::class, 'sortByName'])->name('interviewees.sortName');
-        
+
+        Route::post('/accept-interviewees/{id}', [IntervieweeController::class, 'accept'])->name('interviewees.accept');
+        Route::post('/decline-interviewees/{id}', [IntervieweeController::class, 'decline'])->name('interviewees.decline');
     }
 );
 
