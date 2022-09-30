@@ -78,7 +78,12 @@ class MeetingReminder extends Command
             $timeOneHour = $timeOneHour + (60*60);
             $dateOneHour = date("Y-m-d H:i:s", $timeOneHour);
 
-            if($dateOneHour <= $today){
+            $dateLimit = date("Y-m-d H:i:s", strtotime($pAll->interview_date));
+            $timeLimit = strtotime($dateLimit);
+            $timeLimit = $timeLimit + (89*60);
+            $dateLimit = date("Y-m-d H:i:s", $timeLimit);
+
+            if($dateOneHour <= $today && $today <= $dateLimit){
                 $mail_data = [
 
                     'recipient' => $pAll->interviewees->email,
