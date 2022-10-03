@@ -20,4 +20,9 @@ module.exports = {
     plugins: [require('@tailwindcss/forms'),
                 require('flowbite/plugin'),
             ], 
+    plugins: {
+        tailwindcss: {},
+        autoprefixer: {},
+        ...(process.env.NODE_ENV === 'production' ? { cssnano: {} } : {})
+    }
 };

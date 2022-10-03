@@ -16,3 +16,4 @@
 <script src="https://cdn.tailwindcss.com/%22%3E"></script>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://kit.fontawesome.com/5d54a13ffa.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
