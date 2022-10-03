@@ -142,10 +142,11 @@ $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->where('company_id', Au
         $interview= interview::with('user', 'interviewees')->where('company_id', Auth::user()->company_id)->get();
         $searchString=$request->term;
         $interview = interview::whereHas('interviewees', function ($query) use ($searchString){
-            $query->where('name', 'like', '%'.$searchString.'%')->where('company_id', Auth::user()->company_id);
+            $query->where(DB::raw('CONCAT(name," ",surname)'), 'LIKE', '%' . $searchString . '%')->where('company_id', Auth::user()->company_id);
         })
         ->with(['interviewees' => function($query) use ($searchString){
-            $query->where('name', 'like', '%'.$searchString.'%')->where('company_id', Auth::user()->company_id);
+            $query->where(DB::raw('CONCAT(name," ",surname)'), 'LIKE', '%' . $searchString . '%')
+            ->orWhere(DB::raw('CONCAT(name," ",surname)'), 'LIKE', '%' . $searchString . '%')->where('company_id', Auth::user()->company_id);
         }])->with('user')
         ->get();
 //   dd($categories);
