@@ -7,7 +7,7 @@
                 <h1 class="text-[25px] font-medium">We've found you some perfect interviewees</h1>
                 <p class="mb-10 text-[15px]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum suscipit</p>
             </div>
-  {{-- {{ dd($reviews)}} --}}
+
              @php 
           
     $link = explode('/', $reviews->interviewees->img);
@@ -39,7 +39,7 @@
                     <div class="flex-1">
                         <form action="{{route('review.rateComment')}}" method="post">
                             @csrf
-                        {{-- RATING SECTION --}}
+                      
                         <div>
                             <p class="text-lg pb-3 text-white">Rate attributes!</p>
                         </div>
@@ -86,7 +86,7 @@
                                     <input type="radio" value="4" name="rating_amount_review" id="star7" class="bg-green-500 mask mask-star-2 @error('rating_amount') is-invalid @enderror" />
                                     <input type="radio" value="5" name="rating_amount_review" id="star9" class="bg-green-500 mask mask-star-2 @error('rating_amount') is-invalid @enderror" />
                                   </div>
-                        {{-- RATING SECTION END --}}
+                  
                             <div class="h-auto w-[400px] pt-10 rounded-[12px]">
                                 <p class="text-xl font-semibold text-white cursor-pointer transition-all">Add Comment/Questions</p>
                                 <input type="hidden" name="candidate_id" value="{{$reviews->interviewees->id}}">
@@ -104,7 +104,7 @@
                
                         
                 </div>  
-                {{-- @endforeach --}}
+              
                
         </div>
       </section>

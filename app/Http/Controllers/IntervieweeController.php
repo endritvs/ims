@@ -112,6 +112,7 @@ class IntervieweeController extends Controller
                 'external_cv_path' => $request['external_cv_path'],
                 'email' => $request['email'],
                 'img' => $img_path,
+                'status'=>'pending',
                 'interviewee_types_id' => $request['interviewee_types_id'],
                 'company_id' => Auth::user()->company_id,
           
@@ -222,7 +223,7 @@ class IntervieweeController extends Controller
 
         }); 
 
-        $interviewee->status = 1;
+        $interviewee->status = "accepted";
         $interviewee->save();
 
         return back();
@@ -250,7 +251,7 @@ class IntervieweeController extends Controller
 
         }); 
 
-        $interviewee->status = 0;
+        $interviewee->status = 'declined';
         $interviewee->save();
 
         return back();
