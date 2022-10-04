@@ -61,7 +61,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
                 @foreach ($interview as $d)
-
+              
                 @php
                 $link = explode('/', $d['interviewees']['img']);
                 $cv = explode('/', $d['interviewees']['cv_path']);
@@ -121,17 +121,17 @@
                     <label class="dark:text-white text-indigo-600 mr-3">Date:</label>
                     <p class="text-base text-gray-400 font-normal dark:text-white"> {{ $d['interview_date'] }}
 
-                    @if($d['interviewees']['status'] === "pending")
+                    @if($d['status'] === "pending")
                     <div class="flex items-center ml-4">
-                        <div class="h-2.5 w-2.5 rounded-full bg-yellow-400 mr-2"></div> <span class="capitalize  text-yellow-600 ">{{$d['interviewees']['status']}}</span>
+                        <div class="h-2.5 w-2.5 rounded-full bg-yellow-400 mr-2"></div> <span class="capitalize  text-yellow-600 ">{{$d['status']}}</span>
                     </div>
-                    @elseif($d['interviewees']['status'] === "accepted")
+                    @elseif($d['status'] === "accepted")
                     <div class="flex items-center ml-4">
-                        <div class="h-2.5 w-2.5 rounded-full bg-green-400 mr-2"></div> <span class="capitalize  text-green-600 ">{{$d['interviewees']['status']}}</span>
+                        <div class="h-2.5 w-2.5 rounded-full bg-green-400 mr-2"></div> <span class="capitalize  text-green-600 ">{{$d['status']}}</span>
                     </div>
                     @else
                     <div class="flex items-center ml-4">
-                        <div class="h-2.5 w-2.5 rounded-full bg-red-400 mr-2"></div> <span class="capitalize  text-red-600 ">{{$d['interviewees']['status']}}</span>
+                        <div class="h-2.5 w-2.5 rounded-full bg-red-400 mr-2"></div> <span class="capitalize  text-red-600 ">{{$d['status']}}</span>
                     </div>
                     @endif
                     </p>
@@ -205,14 +205,17 @@
                     </div>
                     <div class="group-hover:flex hidden bg-blue-700 flex-col absolute bottom-0 left-0 right-0 dark:bg-gray-900 overflow-hidden w-full h-1/3 transition duration-700 ease-in-out rounded-b-lg text-xs text-center text-white border-t-[2px] border-white">
                         <div class="flex justify-center mt-5">
-                            <p class="mx-5 text-sm">Set an interview with this candidate?</p>                        
+                            <p class="mx-5 text-sm">Set an interview with this candidate?</p>      
+                            @if ($d['status']!=="accepted")          
                                 <button type="submit" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" data-modal-toggle="rate-modal{{ $d['id'] }}">
                                     Accept
                                 </button>
-                          
+                            @endif 
+                            @if ($d['status']!=="declined") 
                                 <button type="submit" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"  data-modal-toggle="declined-modal{{ $d['id'] }}">
                                     Decline
                                 </button>
+                            @endif
                         </div>
 
 
@@ -451,7 +454,7 @@
               <div class="p-6 text-center">
                   <svg aria-hidden="true" class="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                   <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this product?</h3>
-                  <form method="POST" id="accept" action={{ route('interviewees.accept', $d['interviewees']['id']) }}>
+                  <form method="POST" id="accept" action={{ route('interview.accept', $d['id']) }}>
                     @csrf
                   <button data-modal-toggle="rate-modal{{ $d['id'] }}" type="submit" class="text-white bg-red-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
                       Yes, I'm sure
@@ -476,7 +479,7 @@
               <div class="p-6 text-center">
                   <svg aria-hidden="true" class="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                   <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this product?</h3>
-                  <form method="POST" id="decline" action={{ route('interviewees.decline', $d['interviewees']['id']) }}>
+                  <form method="POST" id="decline" action={{ route('interview.decline', $d['id']) }}>
                     @csrf
                   <button data-modal-toggle="declined-modal{{ $d['id'] }}" type="submit" class="text-white bg-red-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
                       Yes, I'm sure

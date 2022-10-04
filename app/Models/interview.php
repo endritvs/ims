@@ -16,7 +16,7 @@ class interview extends Model
 
     use HasFactory;
     protected $fillable = [
-        'interview_id', 'interviewer', 'interview_date', 'interviewees_id', 'company_id',
+        'interview_id', 'interviewer', 'interview_date', 'interviewees_id', 'company_id','status',
     ];
     protected $table = 'interviews';
 

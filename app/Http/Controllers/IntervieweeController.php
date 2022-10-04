@@ -201,61 +201,6 @@ class IntervieweeController extends Controller
         return back();
     }
 
-    public function accept($id)
-    {
-
-        $interviewee = interviewee::findOrFail($id);
-
-        $mail_data = [
-
-            'recipient' => $interviewee->email,
-            'interviewType' => $interviewee->interviewee_type->name,
-            'intervieweeName' => $interviewee->name." ".$interviewee->surname,
-            'fromEmail' => 'imsinfoteam@gmail.com',
-            'fromName' => 'IMS Company'
-        ];
-
-            \Mail::send('/interviewComponents/acceptEmail', $mail_data, function($message) use ($mail_data){
-
-            $message->to($mail_data['recipient'])
-                    ->from($mail_data['fromEmail'], $mail_data['fromName'])
-                    ->subject("Interview Info - You have been accepted!");
-
-        }); 
-
-        $interviewee->status = "accepted";
-        $interviewee->save();
-
-        return back();
-    }
-
-    public function decline($id)
-    {
-
-        $interviewee = interviewee::findOrFail($id);
-
-        $mail_data = [
-
-            'recipient' => $interviewee->email,
-            'interviewType' => $interviewee->interviewee_type->name,
-            'intervieweeName' => $interviewee->name." ".$interviewee->surname,
-            'fromEmail' => 'imsinfoteam@gmail.com',
-            'fromName' => 'IMS Company'
-        ];
-
-            \Mail::send('/interviewComponents/declineEmail', $mail_data, function($message) use ($mail_data){
-
-            $message->to($mail_data['recipient'])
-                    ->from($mail_data['fromEmail'], $mail_data['fromName'])
-                    ->subject("Interview Info - You have been declined");
-
-        }); 
-
-        $interviewee->status = 'declined';
-        $interviewee->save();
-
-        return back();
-    }
 }
 
 

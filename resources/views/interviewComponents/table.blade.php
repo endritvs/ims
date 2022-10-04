@@ -279,9 +279,7 @@
                                 class="@error('interviewer') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                 id="interviewer" multiple="multiple">
                                 @foreach ($admin as $a)
-                                <img src="/storage/images/{{$link[2]}}" alt="photo"/>
-                                    <option value="{{ $a->id }}">
-                                        
+                                    <option value="{{ $a->id }}">  
                                         {{ $a->name }}</option>
                                 @endforeach
                             </select>

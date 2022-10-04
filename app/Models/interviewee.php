@@ -22,7 +22,6 @@ class interviewee extends Model
         'email',
         'interviewee_types_id',
         'img',
-        'status',
         'company_id',
     ];
 
