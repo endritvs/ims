@@ -20,7 +20,6 @@ return new class extends Migration
             $table->foreignId('interviewee_types_id')
                 ->references('id')->on('interviewee_types')
                 ->onDelete('cascade');
-            $table->String('status')->default('pending');
             $table->foreignId('company_id')
                 ->references('id')->on('companies')
                 ->onDelete('cascade');

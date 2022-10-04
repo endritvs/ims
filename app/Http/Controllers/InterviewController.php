@@ -345,4 +345,60 @@ $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->where('company_id', Au
         $interview->delete();
         return back();
     }
+
+    public function accept($id)
+    {
+
+        $interview = Interview::with('interviewees')->findOrFail($id);
+
+        $mail_data = [
+
+            'recipient' => $interview->interviewees->email,
+            'interviewType' => $interview->interviewees->interviewee_type->name,
+            'intervieweeName' => $interview->interviewees->name." ".$interview->interviewees->surname,
+            'fromEmail' => 'imsinfoteam@gmail.com',
+            'fromName' => 'IMS Company'
+        ];
+
+            \Mail::send('/interviewComponents/acceptEmail', $mail_data, function($message) use ($mail_data){
+
+            $message->to($mail_data['recipient'])
+                    ->from($mail_data['fromEmail'], $mail_data['fromName'])
+                    ->subject("Interview Info - You have been accepted!");
+
+        }); 
+
+        $interview->status = "accepted";
+        $interview->save();
+
+        return back();
+    }
+
+    public function decline($id)
+    {
+
+        $interview = Interview::with('interviewees')->findOrFail($id);
+
+        $mail_data = [
+
+            'recipient' => $interview->interviewees->email,
+            'interviewType' => $interview->interviewees->interviewee_type->name,
+            'intervieweeName' => $interview->interviewees->name." ".$interview->interviewees->surname,
+            'fromEmail' => 'imsinfoteam@gmail.com',
+            'fromName' => 'IMS Company'
+        ];
+
+            \Mail::send('/interviewComponents/declineEmail', $mail_data, function($message) use ($mail_data){
+
+            $message->to($mail_data['recipient'])
+                    ->from($mail_data['fromEmail'], $mail_data['fromName'])
+                    ->subject("Interview Info - You have been declined");
+
+        }); 
+
+        $interview->status = 'declined';
+        $interview->save();
+
+        return back();
+    }
 }

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreignId('company_id')
                 ->references('id')->on('companies')
                 ->onDelete('cascade');
+            $table->String('status')->default('pending');
             $table->timestamps();
         });
     }

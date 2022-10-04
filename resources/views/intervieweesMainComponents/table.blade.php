@@ -141,19 +141,7 @@
                             <p class="text-lg dark:text-white text-indigo-600 capitalize text-center">
                                 {{ $i->interviewee_type->name }}
                             </p>
-                            <div class="flex items-center ml-4">
-                                @if ($i->status==="pending")
-                                <div class="h-2.5 w-2.5 rounded-full bg-yellow-400 mr-2"></div> <span class="capitalize  text-yellow-600 ">{{$i->status}}</span>
-  
-                                @elseif ($i->status==="active")
-                                <div class="h-2.5 w-2.5 rounded-full bg-green-400 mr-2"></div> <span class="capitalize  text-green-600 ">{{$i->status}}</span>
-
-                                @else
-
-                                <div class="h-2.5 w-2.5 rounded-full bg-red-400 mr-2"></div> <span class="capitalize  text-red-600 ">{{$i->status}}</span>
-
-                                @endif
-                            </div>
+                        
                         </div>
                     </div>
 
