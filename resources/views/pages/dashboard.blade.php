@@ -14,34 +14,36 @@ $flip = 0;
 @if(Auth::user()->role==="interviewer")
 
 @include('components.timeline')
+@include('components.chartsInterview')
+@include('components.chartAtributtes')
 
 
 @if (count ($interview) >= 1)
-            @foreach ($interview as $a)
+@foreach ($interview as $a)
 
-            @php
+@php
 
-            date_default_timezone_set("Europe/Belgrade");
-            $today = date("Y-m-d H:i:s");
-            $date = $a->interview_date;
-            $link = explode('/', $a->interviewees->img);
-            $cv = explode('/', $a->interviewees->cv_path);
-            @endphp
+date_default_timezone_set("Europe/Belgrade");
+$today = date("Y-m-d H:i:s");
+$date = $a->interview_date;
+$link = explode('/', $a->interviewees->img);
+$cv = explode('/', $a->interviewees->cv_path);
+@endphp
 
-      @endforeach
-      @endif
+@endforeach
+@endif
 
-      <div>
-        {{ $interview->links() }}
-      </div>
-    
+<div>
+  {{ $interview->links() }}
+</div>
+
 @else
 
-  @php
+@php
 
-    $sot = date("Y-m-d");
+$sot = date("Y-m-d");
 
-  @endphp
+@endphp
 <!-- component -->
 <div class="h-full ml-14 mt-10 mb-10 md:ml-64">
   <div class="w-full bg-white dark:bg-gray-800 ">
@@ -52,32 +54,34 @@ $flip = 0;
         @layer utilities {
 
           /* Chrome, Safari and Opera */
-            #scroll::-webkit-scrollbar{
+          #scroll::-webkit-scrollbar {
             height: 10px;
-                width: 10px;
-            }
-            #scroll::-webkit-scrollbar-track{
-                display: none;
-                background:whitesmoke;
-            }
-            #scroll::-webkit-scrollbar-thumb{
-
-                border-radius: 20px;
-                background-color:grey;
-            }
+            width: 10px;
           }
+
+          #scroll::-webkit-scrollbar-track {
+            display: none;
+            background: whitesmoke;
+          }
+
+          #scroll::-webkit-scrollbar-thumb {
+
+            border-radius: 20px;
+            background-color: grey;
+          }
+        }
       </style>
       <div id="scroll" class="h-[800px] mb-4 overflow-x-scroll">
         <ol class="text-center sm:flex  h-auto">
-        @foreach($interviewAll as $iAll)
+          @foreach($interviewAll as $iAll)
 
           <div class="flex items-center mt-100 relative ">
             <div class="absolute w-[195px] px-10 flex z-10 justify-center items-center h-10 bg-blue-200 rounded-full ring-0 ring-white dark:bg-blue-900 sm:ring-8 dark:ring-gray-900 shrink-0">
-              @if(date("M jS, Y", strtotime($iAll[0]['interview_date'])) === date("M jS, Y", strtotime($sot)))  
-                    Today
-                @else
-                  {{date("M jS, Y", strtotime($iAll[0]['interview_date']))}}
-                @endif
+              @if(date("M jS, Y", strtotime($iAll[0]['interview_date'])) === date("M jS, Y", strtotime($sot)))
+              Today
+              @else
+              {{date("M jS, Y", strtotime($iAll[0]['interview_date']))}}
+              @endif
 
             </div>
             <hr class="absolute w-[450px] ">
@@ -115,7 +119,7 @@ $flip = 0;
                     {{ $iAll['0']['interviewees']['name'] }}
 
                   </h2>
-                  <p> 
+                  <p>
                     {{$iAll['0']['user']['name']}}
                   </p>
                 </div>
@@ -136,40 +140,43 @@ $flip = 0;
               </div>
 
               <div class="space-y-4">
-                
-                  <p class="text-[25px] font-[500] text-gray-600 dark:text-white">
-                    {{$iAll['0']['interviewees']['interviewee_type']['name']}}
-                  </p>
-               
-  
-                  
-                  <p class="text-[14px] inline-flex items-center font-bold leading-sm uppercase px-3 bg-blue-200 text-blue-700 rounded-full">
-                  |  
+
+                <p class="text-[25px] font-[500] text-gray-600 dark:text-white">
+                  {{$iAll['0']['interviewees']['interviewee_type']['name']}}
+                </p>
+
+
+
+                <p class="text-[14px] inline-flex items-center font-bold leading-sm uppercase px-3 bg-blue-200 text-blue-700 rounded-full">
+                  |
                   @foreach ($iAll['0']['interviewees']['interviewee_type']['interviewee_attributes'] as $s)
-                    {{ $s['name'] . ' |' }}
-                    @endforeach
-                  </p>
-               
-  
+                  {{ $s['name'] . ' |' }}
+                  @endforeach
+                </p>
+
+
                 <div class="text-center">
                   <div class="flex text-[15px] flex-col-reverse">
                     {{$iAll['0']['interview_date']}}
-  
+
                   </div>
                 </div>
-  
+
                 <div class="flex justify-center">
-                  
+
                   @foreach ($exec as $rat => $dd)
                   @if(count($exec) > 1)
                   @elseif ($dd->candidate_id === $iAll['0']['interviewees']['id'])
-  
+
                   @for ($i=0; $i < floatval($dd->rating); $i++)
-                  
-                    <svg aria-hidden="true" class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>First star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                 
+
+                    <svg aria-hidden="true" class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                      <title>First star</title>
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                    </svg>
+
                     @endfor
-  
+
                     <p class="ml-2 font-medium text-gray-900 dark:text-white">Rating</p>
                     @endif
                     @if(count($exec) > 1)
@@ -179,8 +186,8 @@ $flip = 0;
                     @endif
                     @endforeach
 
-                    
-  
+
+
                 </div>
               </div>
           </li>
@@ -212,80 +219,77 @@ $flip = 0;
           </div>
           @endforeach
           <!-- --------------------------------------------------------------------------------------- -->
-      </ol>
-    </div>
+        </ol>
+      </div>
       @include('components.dashboardFooter')
 
     </section>
     <div class="mx-4">
-        <div class="w-full overflow-hidden rounded-lg shadow-xs">
-            <div class="w-full overflow-x-auto">
-    <table class="w-full">
-                        <caption
-                            class="p-5 relative text-lg font-semibold text-left  text-gray-500 border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                             Your past Interviews                           
-                        </caption>
-                    <thead>
-                        <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"> 
-                           
-                            <th class="px-4 py-3">Interviewer</th>
-                            <th class="px-4 py-3">CV</th>
-                            <th class="px-4 py-3">Candidate</th>
-                            <th class="px-4 py-3">Date</th>
-                            <th class="px-4 py-3">Candidate Types</th>
-                            <th class="px-4 py-3">Candidate Attribute</th>
+      <div class="w-full overflow-hidden rounded-lg shadow-xs">
+        <div class="w-full overflow-x-auto">
+          <table class="w-full">
+            <caption class="p-5 relative text-lg font-semibold text-left  text-gray-500 border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+              Your past Interviews
+            </caption>
+            <thead>
+              <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
 
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                        @foreach ($pastInterviewAll as $i)
-                        @php
-                        
-                        $link = explode('/', $i->interviewees->img);
-                        $cv = explode('/', $i->interviewees->cv_path);
-                        @endphp
-                            <tr class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
-                                <td class="px-4 py-3 text-sm ">
-                                    {{ $i->user->name }}
-                                </td>
-                                <td class="px-4 py-3 text-sm capitalize ">
-                                    <a href="/storage/cv_path/{{ $cv[2] }}" download>
-                                        <button
-                                        class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-                                        <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20">
-                                            <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
-                                        </svg>
-                                        <span> Download CV</span>
-                                    </button>
-                                    </a>
-                                </td>
-                                <td class="px-4 py-3 text-sm capitalize">
-                                    {{ $i->interviewees->name . ' ' . $i->interviewees->surname }}
-                                </td>
-                                <td class="px-4 py-3 text-sm capitalize">
-                                    {{ $i->interview_date }}
-                                </td>
-                             
-                                <td class="px-4 py-3 text-sm capitalize">
-                                {{ $i->interviewees->interviewee_type->name }}
-                                </td>
-                                <td class="px-4 py-3 text-sm capitalize">
-                                @foreach ($i->interviewees->interviewee_type->interviewee_attributes as $a)
-                                        {{ $a->name }}
-                                @endforeach
-                                    </td>
-                                
-          </tr>
-        @endforeach
-      </tbody>
-    </table>
+                <th class="px-4 py-3">Interviewer</th>
+                <th class="px-4 py-3">CV</th>
+                <th class="px-4 py-3">Candidate</th>
+                <th class="px-4 py-3">Date</th>
+                <th class="px-4 py-3">Candidate Types</th>
+                <th class="px-4 py-3">Candidate Attribute</th>
+
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+              @foreach ($pastInterviewAll as $i)
+              @php
+
+              $link = explode('/', $i->interviewees->img);
+              $cv = explode('/', $i->interviewees->cv_path);
+              @endphp
+              <tr class="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
+                <td class="px-4 py-3 text-sm ">
+                  {{ $i->user->name }}
+                </td>
+                <td class="px-4 py-3 text-sm capitalize ">
+                  <a href="/storage/cv_path/{{ $cv[2] }}" download>
+                    <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+                      <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
+                      </svg>
+                      <span> Download CV</span>
+                    </button>
+                  </a>
+                </td>
+                <td class="px-4 py-3 text-sm capitalize">
+                  {{ $i->interviewees->name . ' ' . $i->interviewees->surname }}
+                </td>
+                <td class="px-4 py-3 text-sm capitalize">
+                  {{ $i->interview_date }}
+                </td>
+
+                <td class="px-4 py-3 text-sm capitalize">
+                  {{ $i->interviewees->interviewee_type->name }}
+                </td>
+                <td class="px-4 py-3 text-sm capitalize">
+                  @foreach ($i->interviewees->interviewee_type->interviewee_attributes as $a)
+                  {{ $a->name }}
+                  @endforeach
+                </td>
+
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
         </div>
         <div class="dark:bg-gray-800 p-3 ">
-                {{$pastInterviewAll->links() }}
-            </div>
+          {{$pastInterviewAll->links() }}
         </div>
-        </div>
+      </div>
+    </div>
   </div>
 </div>
 

@@ -45,6 +45,10 @@ Route::get('/sidebari', function () {
     return view('/components/sidebari');
 });
 
+Route::get('/chartsInterview', function () {
+    return view('/components/chartsInterview');
+});
+
 Route::get('/register', function () {
     return view('/auth/register');
 });
@@ -74,7 +78,7 @@ Route::prefix('interviewee')->group(function () {
 
 Route::prefix('interviewee-attributes')->group(
     function () {
-        
+
         Route::get('/', [Interviewee_AttributesController::class, 'index'])->name('intervieweeAttributes.index');
         Route::get('/edit-interviewee/{id}', [Interviewee_AttributesController::class, 'edit'])->name('intervieweeAttributes.edit');
         Route::post('/update-interviewee/{id}', [Interviewee_AttributesController::class, 'update'])->name('intervieweeAttributes.update');
@@ -93,7 +97,6 @@ Route::prefix('interviewees')->group(
         Route::get('/create', [IntervieweeController::class, 'create'])->name('interviewees.create');
         Route::post('/store-interviewees', [IntervieweeController::class, 'store'])->name('interviewees.store');
         Route::get('/sortName', [IntervieweeController::class, 'sortByName'])->name('interviewees.sortName');
-        
     }
 );
 
@@ -130,7 +133,7 @@ Route::prefix('interview')->group(
         Route::get('/create', [interviewController::class, 'create'])->name('interview.create');
         Route::post('/store-interview', [interviewController::class, 'store'])->name('interview.store');
         Route::post('/quickstore-interview', [interviewController::class, 'quickStore'])->name('interview.quickStore');
-       
+
         Route::get('/edit-profile/{id}', [interviewer::class, 'editProfile'])->name('interview.editProfile');
         Route::post('/update-profile/{id}', [interviewer::class, 'updateProfile'])->name('interview.updateProfile');
         Route::post('/update-password/', [interviewer::class, 'update_password'])->name('interview.updatePassword');
@@ -147,7 +150,7 @@ Route::prefix('review')->group(
         Route::get('/destroy/{id}', [ReviewController::class, 'destroy'])->name('review.destroy');
         Route::get('/allRatings', [ReviewController::class, 'create'])->name('review.create');
         Route::post('/store-review', [ReviewController::class, 'store'])->name('review.store');
-        Route::post('/rate',[ReviewController::class,'rateComment'])->name('review.rateComment');
+        Route::post('/rate', [ReviewController::class, 'rateComment'])->name('review.rateComment');
     }
 );
 
@@ -159,7 +162,6 @@ Route::prefix('review_attributes')->group(
         Route::get('/destroy/{id}', [ReviewsAttributesController::class, 'destroy'])->name('review_attributes.destroy');
         Route::get('/create', [ReviewsAttributesController::class, 'create'])->name('review_attributes.create');
         Route::post('/store-review', [ReviewsAttributesController::class, 'store'])->name('review_attributes.store');
-  
     }
 );
 
@@ -170,7 +172,6 @@ Route::get('/typeform', function () {
 Route::prefix('/typeform')->group(
     function () {
         Route::post('/store-typeform', [RegisteredUserController::class, 'typeform'])->name('typeform.typeform');
-  
     }
 );
 
