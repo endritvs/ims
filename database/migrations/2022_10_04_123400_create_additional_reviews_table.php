@@ -13,19 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('additional_reviews', function (Blueprint $table) {
             $table->id();
+
             $table->foreignId('candidate_id')
                 ->references('id')->on('interviewees')
                 ->onDelete('cascade');
-            $table->foreignId('questionnaire_id')
-                ->references('id')->on('users')
-                ->onDelete('cascade');
+            $table->String('name');
             $table->integer('interview_id');
-            $table->text('message');
+            $table->integer('rating_amount');
             $table->foreignId('company_id')
                 ->references('id')->on('companies')
                 ->onDelete('cascade');
+
             $table->timestamps();
         });
     }
@@ -37,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('additional_reviews');
     }
 };

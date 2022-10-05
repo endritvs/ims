@@ -50,7 +50,7 @@ class MeetingReminder extends Command
 
                 $mail_data = [
 
-                        'recipient' => $iAll->interviewees->email,
+                        'recipient' => $iAll->user->email,
                         'fromEmail' => 'imsinfoteam@gmail.com',
                         'fromName' => 'IMS Company'
                     ];
@@ -84,12 +84,14 @@ class MeetingReminder extends Command
             $dateLimit = date("Y-m-d H:i:s", $timeLimit);
 
             if($dateOneHour <= $today && $today <= $dateLimit){
+            // if(true){
+                
                 $mail_data = [
 
-                    'recipient' => $pAll->interviewees->email,
+                    'recipient' => $pAll->user->email,
                     'fromEmail' => 'imsinfoteam@gmail.com',
                     'fromName' => 'IMS Company',
-                    'linkForReview'=>'http://127.0.0.1:8000/review/candidate/'.$pAll->interviewees->id
+                    'linkForReview'=>'http://127.0.0.1:8000/review/candidate/'.$pAll->interviewees->id.'/?id='.$pAll->interview_id
                 ];
 
             \Mail::send('/interviewComponents/reviewEmail', $mail_data, function($message) use ($mail_data){

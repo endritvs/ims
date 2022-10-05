@@ -66,11 +66,11 @@
                                 </td>
                                     <td class="px-4 py-3 text-xs">                                        
                                         <a href="#" data-modal-toggle="editModal{{ $i->id }}"
-                                            class="text-blue-600 font-bold py-2 px-4 rounded">Edit</a>
+                                            class="text-blue-600 font-bold rounded">Edit</a>
                                     </td>
                                     <td class="px-4 py-3 text-xs">
                                         <a href="#" data-modal-toggle="deleteUserModal{{ $i->id }}"
-                                            class="text-red-600 font-bold py-2 px-4 rounded">Delete</a>
+                                            class="text-red-600 font-bold rounded">Delete</a>
                                     </td>
 
                                 </tr>

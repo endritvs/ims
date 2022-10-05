@@ -46,25 +46,29 @@
                         <div class="gap-8 sm:grid">
                             <div class="space-y-6">
                                 <input type="hidden" name="candidate_id" value="{{$reviews->interviewees->id}}">
-                                <input type="hidden" name="interview_id" value="{{$_GET["id"]}}">
+
+                                <input type="hidden" name="interview_id" value="{{$_GET['id']}}">
+
                                 @foreach ($reviews->interviewees->interviewee_type->interviewee_attributes as $a)
                                 <input type="hidden" name="attribute_id[]" id="attribute_id" value="{{$a->id}}" class="bg-gray-600 text-white rounded-lg" style="width: 5%">
                                 <dl>
                                     <dt class="text-sm font-medium text-white dark:text-gray-200 uppercase">{{$a->name}}</dt>
                                     <dd class="flex flex-col w-full">
                                         <input type="range" name="rating_amount[]" class="w-full" min="1" max="10" step="1" value="1"/>
-                                        <ul class="flex justify-between text-[15px] w-full px-[5px]">
-                                            <li class="flex justify-center relative"><span class="absolute">1</span></li>
-                                            <li class="flex justify-center relative"><span class="absolute">2</span></li>
-                                            <li class="flex justify-center relative"><span class="absolute">3</span></li>
-                                            <li class="flex justify-center relative"><span class="absolute">4</span></li>
-                                            <li class="flex justify-center relative"><span class="absolute">5</span></li>
-                                            <li class="flex justify-center relative"><span class="absolute">6</span></li>
-                                            <li class="flex justify-center relative"><span class="absolute">7</span></li>
-                                            <li class="flex justify-center relative"><span class="absolute">8</span></li>
-                                            <li class="flex justify-center relative"><span class="absolute">9</span></li>
-                                            <li class="flex justify-center relative"><span class="absolute">10</span></li>
-                                        </ul>
+                                        <div id="rangeNumber">
+                                            <ul class="flex justify-between text-[15px] w-full px-[5px]">
+                                                <li class="flex justify-center relative"><span class="absolute">1</span></li>
+                                                <li class="flex justify-center relative"><span class="absolute">2</span></li>
+                                                <li class="flex justify-center relative"><span class="absolute">3</span></li>
+                                                <li class="flex justify-center relative"><span class="absolute">4</span></li>
+                                                <li class="flex justify-center relative"><span class="absolute">5</span></li>
+                                                <li class="flex justify-center relative"><span class="absolute">6</span></li>
+                                                <li class="flex justify-center relative"><span class="absolute">7</span></li>
+                                                <li class="flex justify-center relative"><span class="absolute">8</span></li>
+                                                <li class="flex justify-center relative"><span class="absolute">9</span></li>
+                                                <li class="flex justify-center relative"><span class="absolute">10</span></li>
+                                            </ul>
+                                        </div>
                                     </dd>
                                 </dl>
                                 @endforeach
@@ -76,25 +80,35 @@
                             <p class="text-lg mt-5 text-white">General Rate!</p>
                         </div>
                         <input type="hidden" name="candidate_id" value="{{$reviews->interviewees->id}}">
-                        <input type="hidden" name="interview_id" value="{{$reviews->id}}">
+
+                        <input type="hidden" name="interview_id" value="{{$_GET['id']}}">
                                 
                         <div class="rating rating-lg">
-                                    <input type="radio" name="rating_amount_review" id="star0" class="hidden" />
-                                    <input type="radio" value="1" name="rating_amount_review" id="star1" class="bg-green-500 mask mask-star-2 @error('rating_amount') is-invalid @enderror" />
-                                    <input type="radio" value="2" name="rating_amount_review" id="star3" class="bg-green-500 mask mask-star-2 @error('rating_amount') is-invalid @enderror" />
-                                    <input type="radio" value="3" name="rating_amount_review" id="star5" class="bg-green-500 mask mask-star-2 @error('rating_amount') is-invalid @enderror" />
-                                    <input type="radio" value="4" name="rating_amount_review" id="star7" class="bg-green-500 mask mask-star-2 @error('rating_amount') is-invalid @enderror" />
-                                    <input type="radio" value="5" name="rating_amount_review" id="star9" class="bg-green-500 mask mask-star-2 @error('rating_amount') is-invalid @enderror" />
-                                  </div>
+                            <input type="radio" name="rating_amount_review" id="star0" class="hidden" />
+                            <input type="radio" value="1" name="rating_amount_review" id="star1" class="bg-green-500 mask mask-star-2 @error('rating_amount') is-invalid @enderror" />
+                            <input type="radio" value="2" name="rating_amount_review" id="star3" class="bg-green-500 mask mask-star-2 @error('rating_amount') is-invalid @enderror" />
+                            <input type="radio" value="3" name="rating_amount_review" id="star5" class="bg-green-500 mask mask-star-2 @error('rating_amount') is-invalid @enderror" />
+                            <input type="radio" value="4" name="rating_amount_review" id="star7" class="bg-green-500 mask mask-star-2 @error('rating_amount') is-invalid @enderror" />
+                            <input type="radio" value="5" name="rating_amount_review" id="star9" class="bg-green-500 mask mask-star-2 @error('rating_amount') is-invalid @enderror" />
+                        </div>
                   
-                            <div class="h-auto w-[400px] pt-10 rounded-[12px]">
-                                <p class="text-xl font-semibold text-white cursor-pointer transition-all">Add Comment/Questions</p>
-                                <input type="hidden" name="candidate_id" value="{{$reviews->interviewees->id}}">
-                                <input type="hidden" name="interview_id" value="{{$reviews->id}}">
-                                <textarea name="message" class="h-auto px-3 text-sm py-1 mt-5 outline-none border-pink-300 w-full resize-none border dark:text-black rounded-lg placeholder:text-sm" rows="5" placeholder="Add your comments here"></textarea>  
+                        <div class="flex gap-2">
+                            <p class="text-lg pb-3 text-white">Add attributes</p>
+                            <button type="button" class="h-[30px] w-[30px] bg-blue-500 text-md text-white rounded-full transition-all cursor-pointer hover:bg-blue-600" onclick="addReview()">+</button>
+                        </div>
+
+                        <div id="additionalDiv">
+
+                        </div>
+
+                        <div class="h-auto w-[400px] pt-10 rounded-[12px]">
+                            <p class="text-xl font-semibold text-white cursor-pointer transition-all">Add Comment/Questions</p>
+                            <input type="hidden" name="candidate_id" value="{{$reviews->interviewees->id}}">
+                            <input type="hidden" name="interview_id" value="{{$_GET['id']}}">
+                            <textarea name="message" class="h-auto px-3 text-sm py-1 mt-5 outline-none border-pink-300 w-full resize-none border dark:text-black rounded-lg placeholder:text-sm" rows="5" placeholder="Add your comments here"></textarea>  
                                 
                               
-                            </div>  
+                        </div>  
                             <div class="flex justify-between mt-2"> 
                                 <button class="h-12 w-[150px] bg-blue-500 text-md text-white rounded-lg transition-all cursor-pointer hover:bg-blue-600">Submit All</button>
                             </div>
@@ -110,3 +124,48 @@
       </section>
     </div>
 </div>
+
+<script>
+
+  function addReview() {
+
+        // ------------------ Input type text ------------------------------
+        
+        const reviewName = document.createElement("input")
+        reviewName.type = "text";
+        reviewName.setAttribute("name", "name[]");
+        
+        reviewName.setAttribute("class", "w-[100px] h-[25px] text-black rounded-lg p-0");
+
+        // ------------------ Input type range ------------------------------
+
+        const inp = document.createElement("input");
+        inp.type = "range";
+        inp.setAttribute("name", "rating_amount_additional[]");
+        
+        inp.setAttribute("min", "1");
+        inp.setAttribute("max", "10");
+        inp.setAttribute("step", "1");
+        inp.setAttribute("value", "1");
+
+        inp.setAttribute("class", "w-full");
+
+        // ------------------ Ul & Li------------------------------
+
+        // Get the element
+        var elem = document.getElementById("rangeNumber");
+
+        // Create a copy of it
+        var clone = elem.cloneNode(true);
+
+        // Update the ID and add a class
+        clone.id = 'elem2';
+        clone.setAttribute("class", "pb-[25px]");
+
+        // Append to body:
+        document.getElementById("additionalDiv").appendChild(reviewName);
+        document.getElementById("additionalDiv").appendChild(inp);
+        document.getElementById("additionalDiv").appendChild(clone);
+
+    }
+</script>
