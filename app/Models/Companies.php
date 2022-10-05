@@ -51,4 +51,9 @@ class Companies extends Model
     {
         return $this->hasMany(reviews_attributes::class);
     }
+
+    public function additional_reviews()
+    {
+        return $this->hasMany(additional_reviews::class);
+    }
 }

@@ -9,6 +9,7 @@ use App\Models\interview;
 use App\Models\review;
 use App\Models\comment;
 use App\Models\reviews_attributes;
+use App\Models\additional_reviews;
 
 class interviewee extends Model
 {
@@ -34,7 +35,6 @@ class interviewee extends Model
         return $this->belongsTo(Interviewee_Type::class, "interviewee_types_id");
     }
  
-
     public function interview()
     {
         return $this->hasMany(interview::class);
@@ -46,6 +46,10 @@ class interviewee extends Model
     public function review_attributes()
     {
         return $this->hasMany(reviews_attributes::class);
+    }
+    public function additional_reviews()
+    {
+        return $this->hasMany(additional_reviews::class);
     }
     public function comments()
     {

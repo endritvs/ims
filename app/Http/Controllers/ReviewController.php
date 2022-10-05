@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\review;
 use App\Models\comment;
 use App\Models\reviews_attributes;
+use App\Models\additional_reviews;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\interview;
@@ -123,6 +124,18 @@ class ReviewController extends Controller
 
         ]);
 
+        if(!$request['name'] !== null){
+            for ($i = 0; $i < count($request['name']); $i++) {
+
+                additional_reviews::create([
+                    'candidate_id' => $request['candidate_id'],
+                    'name' => $request['name'][$i],
+                    'interview_id' => $request['interview_id'],
+                    'rating_amount' => $request['rating_amount_additional'][$i],
+                    'company_id' => Auth::user()->company_id,
+                ]);
+            }
+        }   
         return redirect('/interview');
     }
 

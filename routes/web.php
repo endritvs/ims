@@ -11,6 +11,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\interviewController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ReviewsAttributesController;
+use App\Http\Controllers\AdditionalReviewsController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -173,5 +174,7 @@ Route::prefix('/typeform')->group(
   
     }
 );
+
+Route::get('/additional_reviews', [AdditionalReviewsController::class, 'index'])->name('additional_reviews.index');
 
 require __DIR__ . '/auth.php';
