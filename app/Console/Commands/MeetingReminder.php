@@ -84,6 +84,7 @@ class MeetingReminder extends Command
             $dateLimit = date("Y-m-d H:i:s", $timeLimit);
 
             if($dateOneHour <= $today && $today <= $dateLimit){
+            // if(true){
                 
                 $mail_data = [
 
