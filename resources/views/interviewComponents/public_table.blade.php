@@ -105,7 +105,7 @@
                         </div>
                         <div class="flow-root sm:grid-cols-2 mt-2 text-center">
                             <h2 class="col-span-2 mb-3 dark:text-white text-indigo-600">Questioners:</h2>
-                            <div class="grid grid-rows-3 grid-cols-2 left-0 items-center">
+                            <div class="grid grid-rows-3 grid-cols-2 text-left items-center">
                                 @if (count($quest) > 1)
                                 @for ($i = 0; $i < count($quest) - 1; $i++) <div class="m-1 inline-flex overflow-hidden relative justify-center items-center w-8 h-8 bg-gray-100 rounded-full dark:bg-gray-600">
                                     <span data-popover-target="popover-default" class="font-medium text-gray-600 dark:text-white">{{ substr($quest[$i], 0, 1) }}</span>
