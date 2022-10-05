@@ -15,14 +15,14 @@
                             <div class="flex justify-center ">
                                 <div class="relative w-full">
                                     <input type="search" id="search-dropdown" name="term" class="rounded block p-2.5 w-[350px] text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Search Mockups, Logos, Design Templates...">
-                                        <a href={{route('public.index')}}>
-                                            <button type="submit" class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-gradient-to-r from-blue-800 to-blue-800 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                                <svg aria-hidden="true" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                                                </svg>
-                                                <span class="sr-only">Search</span>
-                                            </button>
-                                        </a>
+                                    <a href={{route('public.index')}}>
+                                        <button type="submit" class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-gradient-to-r from-blue-800 to-blue-800 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                            <svg aria-hidden="true" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                            </svg>
+                                            <span class="sr-only">Search</span>
+                                        </button>
+                                    </a>
                                 </div>
                             </div>
                         </form>
@@ -39,8 +39,8 @@
                     <div class="flex">
                         <form action="{{ route('public.sortRating') }}" method="GET" role="search">
                             <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 pr-4 mx-2">
-                                Rating  
-                                <i onclick="changeIconA(this)" class="fa-solid fa-arrow-up-long" id="SortNr"></i> 
+                                Rating
+                                <i onclick="changeIconA(this)" class="fa-solid fa-arrow-up-long" id="SortNr"></i>
                             </button>
                         </form>
                         <form action="{{ route('public.sortDate') }}" method="GET" role="search">
@@ -61,7 +61,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
                 @foreach ($interview as $d)
-              
+
                 @php
                 $link = explode('/', $d['interviewees']['img']);
                 $cv = explode('/', $d['interviewees']['cv_path']);
@@ -77,22 +77,22 @@
                             <li>
                                 @if (in_array(Auth::user()->id, $questID))
                                 @if (App\Models\reviews_attributes::where('candidate_id', $d['interviewees']['id'] )->where('questionnaire_id', Auth::user()->id )->where('interview_id', $d['id'] )->exists())
-                                    <a data-modal-toggle="editRateModal{{$d['id']}}" href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"> 
-                                       Edit Rating
-                                    </a>
-                                @else  
-                                    <a data-modal-toggle="rateModal{{ $d['id'] }}" href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Rate</a>
+                                <a data-modal-toggle="editRateModal{{$d['id']}}" href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                    Edit Rating
+                                </a>
+                                @else
+                                <a data-modal-toggle="rateModal{{ $d['id'] }}" href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Rate</a>
                                 @endif
                                 @endif
-                                <li>
-                                    <a href="/review/candidate/{{$d['interviewees']['id']}}?id={{$d['id']}}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Overall Rating</a>
-                                </li>
+                            <li>
+                                <a href="/review/candidate/{{$d['interviewees']['id']}}?id={{$d['id']}}" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Overall Rating</a>
+                            </li>
                             </li>
                         </ul>
                     </div>
 
                     <div class="gap-8 sm:grid sm:grid-cols-2 mb-4">
-                        <div class="mb-2 items-center">
+                        <div class="mt-4 items-center">
                             <div class="text-center items-center mx-auto">
                                 <img class="object-center mx-auto object-cover rounded-full max-w-[100px] min-h-[100px] min-w-[100px] max-h-[100px]" src="/storage/images/{{ $link[2] }}" alt="photo">
                                 <p class="dark:text-white text-md text-indigo-600 font-bold">
@@ -101,27 +101,31 @@
                                 <p class="text-sm dark:text-white text-indigo-600">
                                     {{ $d['interviewees']['interviewee_type']['name'] }}
                                 </p>
-                            </div> 
+                            </div>
                         </div>
-                        <div class="sm:grid-cols-2 mt-2 text-center">
-                            <h2 class="dark:text-white text-indigo-600">Questioners:</h2>
-                            @if (count($quest) > 1)
-                            @for ($i = 0; $i < count($quest) - 1; $i++) <div class="m-1 inline-flex overflow-hidden relative justify-center items-center w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600">
-                                <span data-popover-target="popover-default" class="font-medium text-gray-600 dark:text-white">{{ substr($quest[$i], 0, 1) }}</span>
-                        </div>{{ $quest[$i] }}
+                        <div class="flow-root sm:grid-cols-2 mt-2 text-center">
+                            <h2 class="col-span-2 mb-3 dark:text-white text-indigo-600">Questioners:</h2>
+                            <div class="grid grid-rows-3 grid-cols-2 left-0 items-center">
+                                @if (count($quest) > 1)
+                                @for ($i = 0; $i < count($quest) - 1; $i++) <div class="m-1 inline-flex overflow-hidden relative justify-center items-center w-8 h-8 bg-gray-100 rounded-full dark:bg-gray-600">
+                                    <span data-popover-target="popover-default" class="font-medium text-gray-600 dark:text-white">{{ substr($quest[$i], 0, 1) }}</span>
+                            </div>
+                            <div class="left-0">{{ $quest[$i] }}</div>
                             @endfor
                             @else
-                        <div class="m-1 inline-flex overflow-hidden relative justify-center items-center w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600">
-                            <span data-popover-target="popover-default" class="font-medium text-gray-600 dark:text-white">{{ substr($quest[0], 0, 1) }}</span>
-                        </div>{{ $quest[0] }}
+                            <div class="m-1 inline-flex overflow-hidden relative justify-center items-center w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600">
+                                <span data-popover-target="popover-default" class="font-medium text-gray-600 dark:text-white">{{ substr($quest[0], 0, 1) }}</span>
+                            </div>
+                            <div>{{ $quest[0] }}</div>
                             @endif
+                        </div>
                     </div>
                 </div>
                 <div class="flex items-center w-full">
                     <label class="dark:text-white text-indigo-600 mr-3">Date:</label>
                     <p class="text-base text-gray-400 font-normal dark:text-white"> {{ $d['interview_date'] }}
 
-                    @if($d['status'] === "pending")
+                        @if($d['status'] === "pending")
                     <div class="flex items-center ml-4">
                         <div class="h-2.5 w-2.5 rounded-full bg-yellow-400 mr-2"></div> <span class="capitalize  text-yellow-600 ">{{$d['status']}}</span>
                     </div>
@@ -139,61 +143,61 @@
                 <div class="flex items-center w-full mb-3">
                     @if(count($exec) > 1)
                     @foreach ($exec as $rat => $dd)
-                        @if ($dd->candidate_id === $d['interviewees']['id'])
+                    @if ($dd->candidate_id === $d['interviewees']['id'])
                     <p class="bg-blue-100 text-blue-800 text-sm font-semibold inline-flex items-center p-1 rounded dark:bg-blue-200 dark:text-blue-800">{{ floatval($dd->rating) }}</p>
                     <p class="ml-2 font-medium text-gray-900 dark:text-white">Rating</p>
-                        @break
-                        @endif
+                    @break
+                    @endif
                     @endforeach
-                        @if (!($dd->candidate_id === $d['interviewees']['id']))
+                    @if (!($dd->candidate_id === $d['interviewees']['id']))
                     <p class="bg-blue-100 text-blue-800 text-sm font-semibold inline-flex items-center p-1 rounded dark:bg-blue-200 dark:text-blue-800"></p>
                     <p class="ml-2 font-medium text-gray-900 dark:text-white">Not Yet Rated</p>
                     <span class="mx-2 w-1 h-1 bg-gray-900 rounded-full dark:bg-gray-500"></span>
                     <p class="text-sm font-medium text-gray-500 dark:text-gray-400">0 reviews</p>
-                        @endif
-                        @endif 
+                    @endif
+                    @endif
                 </div>
                 <div class="">
                     @foreach ($d['interviewees']['interviewee_type']['interviewee_attributes'] as $attribute)
                     {{-- <dl>
                         <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
                             {{ $attribute['name'] }}
-                        </dt>
-                        <dd class="flex items-center mb-3">
+                    </dt>
+                    <dd class="flex items-center mb-3">
 
-                            @php
-                            $total = 0;
-                            $index = 0;
-                            $rate = 'No Rating';
+                        @php
+                        $total = 0;
+                        $index = 0;
+                        $rate = 'No Rating';
 
-                            foreach($review_attributes as $review_attribute){
+                        foreach($review_attributes as $review_attribute){
 
-                                if( $review_attribute->candidate_id == $d['interviewees']['id'] && $review_attribute->attribute_id == $attribute['id'] && $review_attribute->interview_id == $d['id']){
+                        if( $review_attribute->candidate_id == $d['interviewees']['id'] && $review_attribute->attribute_id == $attribute['id'] && $review_attribute->interview_id == $d['id']){
 
-                                    $total += $review_attribute->rating_amount;
-                                    $index++;
-                                }
-                            }
+                        $total += $review_attribute->rating_amount;
+                        $index++;
+                        }
+                        }
 
-                            if($index != 0){
+                        if($index != 0){
 
-                                $rate = $total/$index;
-                            }
-                            @endphp
+                        $rate = $total/$index;
+                        }
+                        @endphp
 
-                            <div class="w-full bg-gray-200 rounded h-2.5 dark:bg-gray-700 mr-2">
-                                <div class="bg-blue-600 h-2.5 rounded dark:bg-blue-500" style="width: {{($rate == 'No Rating' ? 0 : $rate) * 10 }}%"></div>
-                            </div>
-                            <span class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ round(floatval($rate), 1) }}</span>
+                        <div class="w-full bg-gray-200 rounded h-2.5 dark:bg-gray-700 mr-2">
+                            <div class="bg-blue-600 h-2.5 rounded dark:bg-blue-500" style="width: {{($rate == 'No Rating' ? 0 : $rate) * 10 }}%"></div>
+                        </div>
+                        <span class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ round(floatval($rate), 1) }}</span>
 
-                        </dd>
+                    </dd>
                     </dl> --}}
                     @endforeach
                 </div>
 
                 <div class="group-hover:flex hidden">
                     <div class="group-hover:flex hidden bg-blue-700 dark:bg-gray-900  flex-col absolute top-0 left-0 right-0 overflow-hidden w-full h-1/3 transition duration-700 ease-in-out rounded-t-lg text-xs text-center">
-                        <div class="flex justify-center pt-[25px]">  
+                        <div class="flex justify-center pt-[25px]">
                             <a data-modal-toggle="editModal{{ $d['id'] }}" href="#" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Comments</a>
                         </div>
                     </div>
@@ -205,22 +209,22 @@
                     </div>
                     <div class="group-hover:flex hidden bg-blue-700 flex-col absolute bottom-0 left-0 right-0 dark:bg-gray-900 overflow-hidden w-full h-1/3 transition duration-700 ease-in-out rounded-b-lg text-xs text-center text-white border-t-[2px] border-white">
                         <div class="flex justify-center mt-5">
-                            <p class="mx-5 text-sm">Set an interview with this candidate?</p>      
-                            @if ($d['status']!=="accepted")          
-                                <button type="submit" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" data-modal-toggle="rate-modal{{ $d['id'] }}">
-                                    Accept
-                                </button>
-                            @endif 
-                            @if ($d['status']!=="declined") 
-                                <button type="submit" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"  data-modal-toggle="declined-modal{{ $d['id'] }}">
-                                    Decline
-                                </button>
+                            <p class="mx-5 text-sm">Set an interview with this candidate?</p>
+                            @if ($d['status']!=="accepted")
+                            <button type="submit" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" data-modal-toggle="rate-modal{{ $d['id'] }}">
+                                Accept
+                            </button>
+                            @endif
+                            @if ($d['status']!=="declined")
+                            <button type="submit" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" data-modal-toggle="declined-modal{{ $d['id'] }}">
+                                Decline
+                            </button>
                             @endif
                         </div>
 
 
                     </div>
-             
+
                 </div>
             </div>
 
@@ -279,9 +283,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                    @if ($c->questionnaires->id===Auth::user()->id)
-                                    <a href="{{route('interview.Commentdestroy',$c->id)}}">Delete</a>
-                                    @endif
+                                @if ($c->questionnaires->id===Auth::user()->id)
+                                <a href="{{route('interview.Commentdestroy',$c->id)}}">Delete</a>
+                                @endif
                             </div>
                         </div>
                         @endif
@@ -326,24 +330,26 @@
                                 Attribute Rating
                             </h3>
                             <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="rateModal{{$d['id']}}">
-                                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                                </svg>
                                 <span class="sr-only">Close modal</span>
                             </button>
                         </div>
                         <!-- Modal body -->
                         <div class="p-6 space-y-6">
                             <form id="rate" action="{{ route('review_attributes.store') }}" method="POST">
-                                @csrf 
-                                    <input type="hidden" name="candidate_id" id="candidate_id" value="{{ $d['interviewees']['id'] }}" class="bg-gray-600 text-white rounded-lg"> <!-- Candidate ID -->
-                                    <input type="hidden" name="questionnaire_id" id="questionnaire_id" value="{{ Auth::user()->id }}" class="bg-gray-600 text-white rounded-lg"> <!-- Questionnaire ID -->
-                                    <input type="hidden" name="interview_id" id="interview_id" value="{{ $d['id'] }}" class="bg-gray-600 text-white rounded-lg"> <!-- Interview ID -->
+                                @csrf
+                                <input type="hidden" name="candidate_id" id="candidate_id" value="{{ $d['interviewees']['id'] }}" class="bg-gray-600 text-white rounded-lg"> <!-- Candidate ID -->
+                                <input type="hidden" name="questionnaire_id" id="questionnaire_id" value="{{ Auth::user()->id }}" class="bg-gray-600 text-white rounded-lg"> <!-- Questionnaire ID -->
+                                <input type="hidden" name="interview_id" id="interview_id" value="{{ $d['id'] }}" class="bg-gray-600 text-white rounded-lg"> <!-- Interview ID -->
                                 @foreach ($d['interviewees']['interviewee_type']['interviewee_attributes'] as $attribute)
                                 <dl>
                                     <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 capitalize">
                                         <input type="hidden" name="attribute_id[]" id="attribute_id" value="{{$attribute['id']}}" class="bg-gray-600 text-white rounded-lg" style="width: 5%"> <!-- Interview ID -->
                                         {{ $attribute['name'] }}
                                     </dt>
-                                    <input type="range" name="rating_amount[]" id="rating_amount"  value="1" min="1" max="10" class="range" step="1" />
+                                    <input type="range" name="rating_amount[]" id="rating_amount" value="1" min="1" max="10" class="range" step="1" />
                                     <dd class="flex items-center mb-3">
                                         <div class="w-full bg-white rounded h-2.5 dark:bg-gray-700 mr-2">
                                             <div class="w-full flex justify-between text-xs px-2">
@@ -371,7 +377,7 @@
                     </div>
                 </div>
             </div>
-                <!-- ------------------ -->
+            <!-- ------------------ -->
             <div id="editRateModal{{$d['id']}}" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
                 <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
                     <!-- Modal content -->
@@ -382,26 +388,28 @@
                                 Attribute Rating
                             </h3>
                             <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="editRateModal{{$d['id']}}">
-                                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                                </svg>
                                 <span class="sr-only">Close modal</span>
                             </button>
                         </div>
                         !-- Modal body -->
-                            @php
-                                $index = 0;
-                                $review_attribute_id;
-                                foreach($review_attributes as $r){
-                                    if($r->interview_id === $d['id'] && $r->questionnaire_id === Auth::user()->id){
-                                        $review_attribute_id[$index++] = $r->id;
-                                    }
-                                }
-                            @endphp
+                        @php
+                        $index = 0;
+                        $review_attribute_id;
+                        foreach($review_attributes as $r){
+                        if($r->interview_id === $d['id'] && $r->questionnaire_id === Auth::user()->id){
+                        $review_attribute_id[$index++] = $r->id;
+                        }
+                        }
+                        @endphp
                         <div class="p-6 space-y-6">
                             <form id="rate" action="{{ route('review_attributes.update', $review_attribute_id ?? '') }}" method="POST">
                                 @csrf
-                                    <input type="hidden" name="candidate_id" id="candidate_id" value="{{ $d['interviewees']['id'] }}" class="bg-gray-600 text-white rounded-lg"> <!-- Candidate ID -->
-                                    <input type="hidden" name="questionnaire_id" id="questionnaire_id" value="{{ Auth::user()->id }}" class="bg-gray-600 text-white rounded-lg"> <!-- Questionnaire ID -->
-                                    <input type="hidden" name="interview_id" id="interview_id" value="{{ $d['id'] }}" class="bg-gray-600 text-white rounded-lg"> <!-- Interview ID -->
+                                <input type="hidden" name="candidate_id" id="candidate_id" value="{{ $d['interviewees']['id'] }}" class="bg-gray-600 text-white rounded-lg"> <!-- Candidate ID -->
+                                <input type="hidden" name="questionnaire_id" id="questionnaire_id" value="{{ Auth::user()->id }}" class="bg-gray-600 text-white rounded-lg"> <!-- Questionnaire ID -->
+                                <input type="hidden" name="interview_id" id="interview_id" value="{{ $d['id'] }}" class="bg-gray-600 text-white rounded-lg"> <!-- Interview ID -->
                                 @foreach ($d['interviewees']['interviewee_type']['interviewee_attributes'] as $attribute)
                                 <dl>
                                     <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 capitalize">
@@ -409,9 +417,9 @@
                                         {{ $attribute['name'] }}
                                     </dt>
                                     @foreach($review_attributes as $r)
-                                        @if($r->attribute_id === $attribute['id'] && $r->interview_id === $d['id'] && $r->questionnaire_id === Auth::user()->id)
-                                            <input type="range" name="rating_amount[]" id="rating_amount" value="{{ $r->rating_amount }}"  min="1" max="10" class="range" step="1" />
-                                        @endif
+                                    @if($r->attribute_id === $attribute['id'] && $r->interview_id === $d['id'] && $r->questionnaire_id === Auth::user()->id)
+                                    <input type="range" name="rating_amount[]" id="rating_amount" value="{{ $r->rating_amount }}" min="1" max="10" class="range" step="1" />
+                                    @endif
                                     @endforeach
                                     <dd class="flex items-center mb-3">
                                         <div class="w-full bg-gray-200 rounded h-2.5 dark:bg-gray-700 mr-2">
@@ -441,58 +449,66 @@
                 </div>
             </div>
 
-            
 
-  
-  <div id="rate-modal{{ $d['id'] }}" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full justify-center items-center" aria-hidden="true">
-      <div class="relative p-4 w-full max-w-md h-full md:h-auto">
-          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-              <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="rate-modal{{ $d['id'] }}">
-                  <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                  <span class="sr-only">Close modal</span>
-              </button>
-              <div class="p-6 text-center">
-                  <svg aria-hidden="true" class="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                  <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this product?</h3>
-                  <form method="POST" id="accept" action={{ route('interview.accept', $d['id']) }}>
-                    @csrf
-                  <button data-modal-toggle="rate-modal{{ $d['id'] }}" type="submit" class="text-white bg-red-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
-                      Yes, I'm sure
-                  </button>
-                  </form>
-                  <button data-modal-toggle="rate-modal{{ $d['id'] }}" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancel</button>
-              </div>
-          </div>
-      </div>
-  </div>
 
-  
 
-  
-  <div id="declined-modal{{ $d['id'] }}" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full justify-center items-center" aria-hidden="true">
-      <div class="relative p-4 w-full max-w-md h-full md:h-auto">
-          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-              <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="declined-modal{{ $d['id'] }}">
-                  <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                  <span class="sr-only">Close modal</span>
-              </button>
-              <div class="p-6 text-center">
-                  <svg aria-hidden="true" class="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                  <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this product?</h3>
-                  <form method="POST" id="decline" action={{ route('interview.decline', $d['id']) }}>
-                    @csrf
-                  <button data-modal-toggle="declined-modal{{ $d['id'] }}" type="submit" class="text-white bg-red-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
-                      Yes, I'm sure
-                  </button>
-                  </form>
-                  <button data-modal-toggle="declined-modal{{ $d['id'] }}" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancel</button>
-              </div>
-          </div>
-      </div>
-  </div>
-  
-  
-                @endforeach
+            <div id="rate-modal{{ $d['id'] }}" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full justify-center items-center" aria-hidden="true">
+                <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                        <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="rate-modal{{ $d['id'] }}">
+                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="sr-only">Close modal</span>
+                        </button>
+                        <div class="p-6 text-center">
+                            <svg aria-hidden="true" class="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this product?</h3>
+                            <form method="POST" id="accept" action={{ route('interview.accept', $d['id']) }}>
+                                @csrf
+                                <button data-modal-toggle="rate-modal{{ $d['id'] }}" type="submit" class="text-white bg-red-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                                    Yes, I'm sure
+                                </button>
+                            </form>
+                            <button data-modal-toggle="rate-modal{{ $d['id'] }}" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div id="declined-modal{{ $d['id'] }}" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full justify-center items-center" aria-hidden="true">
+                <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                        <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white" data-modal-toggle="declined-modal{{ $d['id'] }}">
+                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="sr-only">Close modal</span>
+                        </button>
+                        <div class="p-6 text-center">
+                            <svg aria-hidden="true" class="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this product?</h3>
+                            <form method="POST" id="decline" action={{ route('interview.decline', $d['id']) }}>
+                                @csrf
+                                <button data-modal-toggle="declined-modal{{ $d['id'] }}" type="submit" class="text-white bg-red-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                                    Yes, I'm sure
+                                </button>
+                            </form>
+                            <button data-modal-toggle="declined-modal{{ $d['id'] }}" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">No, cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            @endforeach
         </section>
     </div>
 </div>
