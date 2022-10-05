@@ -275,7 +275,7 @@ $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->where('company_id', Au
                         'interviewType' => $a->interviewees->interviewee_type->name,
                         'interviewer' => implode(", ", $interviewerNames),
                         'intervieweeName' => $a->interviewees->name." ".$a->interviewees->surname,
-                        'linkForReview'=>'review/candidate/'.$a->user->id,
+                        'linkForReview'=>'review/candidate/'.$a->interviewees->id.'/?id='.$a->id,
                         'fromEmail' => 'imsinfoteam@gmail.com',
                         'fromName' => 'IMS Company'
                     ];
