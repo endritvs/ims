@@ -208,6 +208,50 @@
 
                         </dl>
                         @endforeach
+
+
+                        @foreach($additional_reviews as $ar)
+
+                            
+                            @if( $i->id === $ar->candidate_id )
+                            <dl>
+                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">
+                                {{ $ar->name }}
+                            </dt>
+
+                                @php
+
+                                    $total = 0;
+                                    $index = 0;
+                                    $rate = 'No Rating';
+
+                                        $prova = $additional_reviews->toArray();
+
+                                    for($j = 0; $j < count($additional_reviews); $j++){
+
+                                    if( $ar->name == $additional_reviews[$j]->name ){
+
+                                    $total += $ar->rating_amount;
+                                    $index++;
+                                    }
+                                    }
+
+                                    if($index != 0){
+
+                                    $rate = $total/$index;
+                                    floatval($rate);
+                                    }
+                                @endphp
+
+                            <dd class="flex items-center mb-3">
+                                <div class="w-full bg-gray-200 rounded h-2.5 dark:bg-gray-700 mr-2">
+                                    <div class="bg-blue-600 h-2.5 rounded dark:bg-blue-500" style="width: {{($rate == 'No Rating' ? 0 : round(floatval($rate), 1)) * 10 }}%"></div>
+                                </div>
+                                <span class="text-sm font-medium text-gray-500 dark:text-gray-400">{{round(floatval($rate), 1)}}</span>
+                            </dd>
+                        </dl>
+                            @endif
+                        @endforeach
                     </div>
 
                     <div class="flex flex-row">
@@ -557,12 +601,11 @@
                                         <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
                                         @enderror
 
-
-
                                     </div>
                                     <div>
-                                        <label for="name" class="block m-2 text-sm font-medium text-gray-900 dark:text-white">External CV
-                                            Path</label>
+                                        <label for="name" class="block m-2 text-sm font-medium text-gray-900 dark:text-white">
+                                            External Link
+                                        </label>
                                         <input type="text" name="external_cv_path" id="name" autocomplete="given-name" class="@error('external_cv_path') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="External CV Path" required>
                                         @error('external_cv_path')
                                         <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>

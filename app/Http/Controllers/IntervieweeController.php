@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Interviewee_Type;
 use App\Models\Interviewee_Attribute;
+use App\Models\additional_reviews;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Pagination\Paginator;
@@ -30,7 +31,10 @@ class IntervieweeController extends Controller
 
         $interviewss = interview::with('user', 'interviewees')->orderBy('interview_id', 'asc')->where('company_id', Auth::user()->company_id)->get();
         $interviewer = user::where('role', 'interviewer')->orderBy('id', 'asc')->where('company_id', Auth::user()->company_id)->get();
+
+        $additional_reviews = additional_reviews::with('candidates')->where('company_id', Auth::user()->company_id)->get();
         $review_attributes = reviews_attributes::with('candidates', 'questionnaires', 'interviews', 'attributes')->where('company_id', Auth::user()->company_id)->get();
+
         $intervieweesA = interviewee::with('interviewee_type')->where('company_id', Auth::user()->company_id)->where([
             ['name', '!=' , Null],
             ['surname', '!=' , Null],
@@ -58,7 +62,7 @@ class IntervieweeController extends Controller
         $sql1="SELECT candidate_id,AVG(rating_amount) as rating FROM reviews GROUP BY candidate_id";
         $exec1 = DB::select(DB::raw($sql1));
 
-        return view('intervieweesMainComponents/table')->with(['exec'=>$exec,'exec1'=>$exec1,'intervieweesA' => $intervieweesA, 'intervieweesT' => $intervieweesT, 'review_attributes' => $review_attributes, 'interviewss' => $interviewss, 'interviewer' => $interviewer]);
+        return view('intervieweesMainComponents/table')->with(['exec'=>$exec,'exec1'=>$exec1,'intervieweesA' => $intervieweesA, 'intervieweesT' => $intervieweesT, 'review_attributes' => $review_attributes, 'interviewss' => $interviewss, 'interviewer' => $interviewer, 'additional_reviews' => $additional_reviews]);
     }
 
     public function sortByName(){
@@ -186,7 +190,7 @@ class IntervieweeController extends Controller
             $interviewee->save();
         }
 
-        return redirect('interviewees');
+        return back();
     }
 
 
