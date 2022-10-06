@@ -12,6 +12,7 @@ use App\Models\review;
 use App\Models\comment;
 use App\Models\Companies;
 use App\Models\reviews_attributes;
+use App\Models\additional_reviews;
 
 class User extends Authenticatable
 {
@@ -56,6 +57,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(reviews_attributes::class);
     }
+    public function additional_reviews()
+    {
+        return $this->hasMany(additional_reviews::class);
+    }
+
     public function comments()
     {
         return $this->hasMany(comment::class);

@@ -11,6 +11,7 @@ class additional_reviews extends Model
     protected $table = 'additional_reviews';
     protected $fillable = [
         'candidate_id',
+        'questionnaire_id',
         'name',
         'interview_id',
         'rating_amount',
@@ -25,5 +26,10 @@ class additional_reviews extends Model
     public function company()
     {
         return $this->belongsTo(Companies::class, "company_id");
+    }
+
+    public function questionnaires()
+    {
+        return $this->belongsTo(User::class, "questionnaire_id");
     }
 }

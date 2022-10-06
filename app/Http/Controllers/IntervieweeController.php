@@ -32,7 +32,9 @@ class IntervieweeController extends Controller
         $interviewss = interview::with('user', 'interviewees')->orderBy('interview_id', 'asc')->where('company_id', Auth::user()->company_id)->get();
         $interviewer = user::where('role', 'interviewer')->orderBy('id', 'asc')->where('company_id', Auth::user()->company_id)->get();
 
-        $additional_reviews = additional_reviews::with('candidates')->where('company_id', Auth::user()->company_id)->get();
+        $additional_reviews_sql="SELECT DISTINCT candidate_id, name, AVG(rating_amount) as rating_amount FROM additional_reviews GROUP BY ims_database.additional_reviews.name, ims_database.additional_reviews.candidate_id;";
+        $additional_reviews = DB::select(DB::raw($additional_reviews_sql));
+
         $review_attributes = reviews_attributes::with('candidates', 'questionnaires', 'interviews', 'attributes')->where('company_id', Auth::user()->company_id)->get();
 
         $intervieweesA = interviewee::with('interviewee_type')->where('company_id', Auth::user()->company_id)->where([
@@ -146,29 +148,50 @@ class IntervieweeController extends Controller
 
         $interviewee = Interviewee::findOrFail($id);
 
-        if ($file && $img) {
+        if ($file || $img) {
+            if($file){
 
-            $newFile = $request->file('cv_path');
-            $file_path = $newFile->store('/public/cv_path');
+                $newFile = $request->file('cv_path');
+                $file_path = $newFile->store('/public/cv_path');
+            } 
 
-            $newImg = $request->file('img');
-            $img_path = $newImg->store('/public/images');
+            if($img){
+
+                $newImg = $request->file('img');
+                $img_path = $newImg->store('/public/images');
+            }
+
             $request->validate([
                 'name' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
                 'surname' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
                 'interviewee_types_id' => ['required'],
-                'cv_path' => ['required', 'mimes:pdf,docx,jpeg,png,jpg,jpj', 'max:2048'],
+                'cv_path' => ['mimes:pdf,docx,jpeg,png,jpg,jpj', 'max:2048'],
                 'email' => ['required', 'string', 'max:40'],
-                'img' => ['required', 'mimes:jpeg,png,jpg,jpj', 'max:2048'],
+                'img' => ['mimes:jpeg,png,jpg,jpj', 'max:2048'],
             ]);
+
+            if($file){
+
+                $interviewee->cv_path = $file_path;
+
+            } else{
+
+                $interviewee->cv_path = $interviewee->cv_path;
+            }
+
+            if($img){
+            
+                $interviewee->img = $img_path;
+            } else{
+
+                $interviewee->img = $interviewee->img;
+            }
 
             $interviewee->name = $request->name;
             $interviewee->surname = $request->surname;
-            $interviewee->cv_path = $file_path;
             $interviewee->external_cv_path = $request->external_cv_path;
             $interviewee->email = $request->email;
             $interviewee->interviewee_types_id = $request->interviewee_types_id;
-            $interviewee->img = $img_path;
 
             $interviewee->save();
         } else {

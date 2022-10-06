@@ -85,10 +85,10 @@ class MeetingReminder extends Command
 
             if($dateOneHour <= $today && $today <= $dateLimit){
             // if(true){
-                
                 $mail_data = [
 
                     'recipient' => $pAll->user->email,
+                    'interviewee' => $pAll->interviewees->name." ".$pAll->interviewees->surname,
                     'fromEmail' => 'imsinfoteam@gmail.com',
                     'fromName' => 'IMS Company',
                     'linkForReview'=>'http://127.0.0.1:8000/review/candidate/'.$pAll->interviewees->id.'/?id='.$pAll->interview_id
@@ -98,7 +98,7 @@ class MeetingReminder extends Command
 
             $message->to($mail_data['recipient'])
                     ->from($mail_data['fromEmail'], $mail_data['fromName'])
-                    ->subject("Meeting Reminder");
+                    ->subject("Rate Interviewer - ".$mail_data['interviewee']);
 
             }); 
 

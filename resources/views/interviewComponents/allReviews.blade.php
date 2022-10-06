@@ -21,7 +21,6 @@
     $link = explode('/', $r->candidates->img);
 @endphp
                         <div class="w-full lg:w-1/3 px-12 flex flex-col items-center py-10 border border-gray-300">
-                         
                             <div class="w-24 h-24 mb-3 p-2 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
                                 @if ($r->candidates->img!=="public/noProfilePhoto/nofoto.jpg")
                                 <img class="w-full h-full overflow-hidden object-cover rounded-full" src="{{asset('/storage/images/'.$link[2])}}"/>
@@ -43,6 +42,10 @@
                                 @foreach($r->candidates->interviewee_type->interviewee_attributes as $attr)
                                 <a tabindex="0" class="cursor-pointer hover:opacity-75  bg-gray-200 text-gray-600 dark:text-gray-100 dark:bg-gray-700 rounded text-xs leading-3 py-2 px-3 ml-1">{{$attr->name}}</a>
                                
+                                @endforeach
+                                @foreach($additional_reviews as $ar)
+                                <a tabindex="0" class="cursor-pointer hover:opacity-75  bg-gray-200 text-gray-600 dark:text-gray-100 dark:bg-gray-700 rounded text-xs leading-3 py-2 px-3 ml-1">{{$ar->name}}</a>
+
                                 @endforeach
                             </div>
                         </div>
@@ -89,7 +92,30 @@
                                   @endforeach
                             </div> 
                         </div>
-                        
+
+                        @if(count($additional_reviews) > 0)
+                        <div class="w-full lg:w-1/3 px-12 border-t border-b lg:border-t-0 lg:border-b-0 lg:border-l lg:border-r border-gray-300  py-10 flex-col flex">
+                            <h1 class="font-bold ">Additional Attributes</h1> 
+                            <div class="grid grid-cols-3 gap-3"> 
+
+                                @foreach($additional_reviews as $ar)
+                       
+                                <div>
+                                    <h1>{{$ar->questionnaires->name}}</h1>
+                                    <dl>
+                                        <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">{{$ar->name}}</dt>
+                                        <dd class="flex items-center mb-3">
+                                            <div class="w-full bg-gray-200 rounded h-2.5 dark:bg-gray-700 mr-2">
+                                                <div class="bg-blue-600 h-2.5 rounded dark:bg-blue-500" style="width: {{$rw->rating_amount*10}}%"></div>
+                                            </div>
+                                            <span class="text-sm font-medium text-gray-500 dark:text-gray-400">{{$ar->rating_amount}}</span>
+                                        </dd>
+                                    </dl>
+                                </div>
+                                  @endforeach
+                            </div> 
+                        </div>
+                        @endif
                         <div class="w-full lg:w-1/3 flex-col flex lg:justify-center md:justify-start items-center px-12 border border-gray-300">
                             <h1 class="font-bold ">Comments</h1> 
     <div class="grid grid-cols-3 gap-3">
@@ -108,9 +134,10 @@
       <div>
         <div class="bg-gray-100 dark:bg-gray-700 rounded-3xl px-4 pt-2 pb-2.5">
           <div class="font-semibold text-sm leading-relaxed">{{$c->questionnaires->name}}</div>
-          <div class="text-normal leading-snug md:leading-normal"
-          >{{$c->message}}</div>
-        </div>
+          <div class="text-normal leading-snug md:leading-normal">
+            {{$c->message}}
+          </div>
+          </div>
         <div class="text-sm ml-4 mt-0.5 text-gray-500 dark:text-gray-400">{{$c->created_at}}</div>
       
       </div>

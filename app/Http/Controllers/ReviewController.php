@@ -31,12 +31,9 @@ class ReviewController extends Controller
          $review = review::with('candidates', 'questionnaires', 'interviews')->where('interview_id',$id)->get();
          $review_attributes = reviews_attributes::with('candidates', 'questionnaires', 'interviews', 'attributes')->where('interview_id',$id)->get();
          $comment = comment::with('candidates', 'questionnaires')->where('interview_id',$id)->get();
-        //  $grouped = $review->groupBy('questionnaire_id'); 
-        //  $groupedRA = $review_attributes->groupBy('questionnaire_id'); 
-        //  $groupedComment = $comment->groupBy('questionnaire_id'); 
-        // $review,$review_attributes,$comment
-         return view('interviewComponents/allReviews')->with(['review'=>$review,'review_attributes'=>$review_attributes,'comment'=>$comment]);
-        //  return view('interviewComponents/allReviews')->with(['grouped'=>$grouped,'groupedRA'=>$groupedRA,'groupedComment'=>$groupedComment]);
+         $additional_reviews = additional_reviews::with('candidates', 'questionnaires')->where('interview_id',$id)->get();
+        
+         return view('interviewComponents/allReviews')->with(['review'=>$review,'review_attributes'=>$review_attributes,'comment'=>$comment, 'additional_reviews' => $additional_reviews]);
 
         }
     public function overallRating($id)
@@ -124,11 +121,12 @@ class ReviewController extends Controller
 
         ]);
 
-        if(!$request['name'] !== null){
+        if($request['name'] !== null){
             for ($i = 0; $i < count($request['name']); $i++) {
 
                 additional_reviews::create([
                     'candidate_id' => $request['candidate_id'],
+                    'questionnaire_id' => Auth::user()->id,
                     'name' => $request['name'][$i],
                     'interview_id' => $request['interview_id'],
                     'rating_amount' => $request['rating_amount_additional'][$i],
