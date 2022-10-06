@@ -209,7 +209,6 @@
                         </dl>
                         @endforeach
 
-
                         @foreach($additional_reviews as $ar)
 
                             
@@ -219,35 +218,11 @@
                                 {{ $ar->name }}
                             </dt>
 
-                                @php
-
-                                    $total = 0;
-                                    $index = 0;
-                                    $rate = 'No Rating';
-
-                                        $prova = $additional_reviews->toArray();
-
-                                    for($j = 0; $j < count($additional_reviews); $j++){
-
-                                    if( $ar->name == $additional_reviews[$j]->name ){
-
-                                    $total += $ar->rating_amount;
-                                    $index++;
-                                    }
-                                    }
-
-                                    if($index != 0){
-
-                                    $rate = $total/$index;
-                                    floatval($rate);
-                                    }
-                                @endphp
-
                             <dd class="flex items-center mb-3">
                                 <div class="w-full bg-gray-200 rounded h-2.5 dark:bg-gray-700 mr-2">
-                                    <div class="bg-blue-600 h-2.5 rounded dark:bg-blue-500" style="width: {{($rate == 'No Rating' ? 0 : round(floatval($rate), 1)) * 10 }}%"></div>
+                                    <div class="bg-blue-600 h-2.5 rounded dark:bg-blue-500" style="width: {{($rate == 'No Rating' ? 0 : round(floatval($ar->rating_amount), 1)) * 10 }}%"></div>
                                 </div>
-                                <span class="text-sm font-medium text-gray-500 dark:text-gray-400">{{round(floatval($rate), 1)}}</span>
+                                <span class="text-sm font-medium text-gray-500 dark:text-gray-400">{{round(floatval($ar->rating_amount), 1)}}</span>
                             </dd>
                         </dl>
                             @endif
@@ -256,11 +231,15 @@
 
                     <div class="flex flex-row">
                         <div class="mt-5">
-                            <button type="button" data-modal-toggle="defaultModal{{ $i->id }}" class="px-[10px] bg-blue-500 hover:bg-blue-700 text-white  p-1 rounded-lg">Show CV</button>
+                            @if(pathinfo($cv[2])['extension'] === 'pdf')
+                                <a data-modal-toggle="defaultModal{{ $i->id }}" class="px-[10px] bg-blue-500 hover:bg-blue-700 text-white cursor-pointer  p-1 rounded-lg">Show CV</a>
+                            @else
+                            
+                                <a href="/storage/cv_path/{{ $cv[2] }}" class="px-[10px] bg-blue-500 hover:bg-blue-700 text-white cursor-pointer  p-1 rounded-lg" download> Download CV</a>
+                            @endif
                         </div>
-
                         <div class="mt-5 pl-5">
-                            <a href="{{ $i -> external_cv_path }}"><button type="button" class="px-[10px] bg-blue-500 hover:bg-blue-700 text-white p-1 rounded-lg">External Link</button> </a>
+                            <a href="{{ $i -> external_cv_path }}" class="px-[10px] bg-blue-500 hover:bg-blue-700 text-white p-1 rounded-lg">External Link</a>
 
                         </div>
                     </div>
@@ -284,8 +263,10 @@
                             </div>
 
                             <div class="p-6 space-y-6">
+                                @if(pathinfo($cv[2])['extension'] === 'pdf')
                                 <iframe class="w-full" src={{ '/storage/cv_path/' . $cv[2] }} height="600px">
                                 </iframe>
+                                @endif
                             </div>
 
 

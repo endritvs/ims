@@ -19,6 +19,9 @@ return new class extends Migration
             $table->foreignId('candidate_id')
                 ->references('id')->on('interviewees')
                 ->onDelete('cascade');
+            $table->foreignId('questionnaire_id')
+                ->references('id')->on('users')
+                ->onDelete('cascade');
             $table->String('name');
             $table->integer('interview_id');
             $table->integer('rating_amount');
