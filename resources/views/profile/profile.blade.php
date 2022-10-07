@@ -32,6 +32,16 @@
                             @enderror
                         </div>
                         <div class="flex flex-col md:ml-12 md:mt-0 mt-8">
+                            <label class="mb-3 text-sm leading-none text-black dark:text-white">Surname</label>
+                            <input type="name" name="surname" tabindex="0"
+                                class=" @error('surname') is-invalid @enderror focus:outline-none focus:ring-2 focus:ring-indigo-400 w-64 bg-gray-100 text-sm font-medium leading-none text-gray-800 p-2 border rounded border-gray-200"
+                                value="{{ Auth::user()->surname }}" />
+
+                            @error('surname')
+                                <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="flex flex-col md:ml-12 md:mt-0 mt-8">
                             <label class="mb-3 text-sm leading-none text-gray-800 dark:text-white">Email</label>
                             <input type="email" name="email" tabindex="0"
                                 class="@error('email') is-invalid @enderror focus:outline-none focus:ring-2 focus:ring-indigo-400 w-64 bg-gray-100 text-sm font-medium leading-none text-gray-800 p-2 border rounded border-gray-200"
@@ -45,7 +55,7 @@
                     @php
                         
                         $link = explode('/', Auth::user()->img);
-                        
+                        $linkCompany =explode('/',Auth::user()->company->image);
                     @endphp
                     <div class="mt-12 md:flex items-center">
                         <div class="flex flex-col">
@@ -64,6 +74,26 @@
                                     height="50px">
                             @endif
                         </div>
+                        @if (Auth::user()->role==="admin")
+                            
+                       
+                        <div class="flex flex-col flex flex-col md:ml-11 ">
+                            <label class="mb-3 text-sm leading-none text-gray-800 dark:text-white">Image Company</label>
+                            <input type="file" name="image" tabindex="0"
+                                class="@error('image') is-invalid @enderror focus:outline-none focus:ring-2 focus:ring-indigo-400 w-64 bg-gray-100 text-sm font-medium leading-none text-gray-800 border rounded border-gray-200" />
+                            @error('image')
+                                <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
+                            @enderror
+
+                            @if (Auth::user()->company->image === 'public/noProfilePhoto/nofoto.jpg')
+                                <img class="mt-3 rounded object-cover" src="{{ asset('/noProfilePhoto/' . $linkCompany[2]) }}" width="50px"
+                                    height="50px">
+                            @else
+                                <img class="mt-3 rounded " src="/storage/img/{{ $linkCompany[2] }}" width="50px"
+                                    height="50px">
+                            @endif
+                        </div>
+                        
                         <div class="flex flex-col md:ml-11 md:mt-[-60px]">
                             <label class="mb-3 text-sm leading-none text-gray-800 dark:text-white">Company Name</label>
                             <input value="{{ Auth::user()->company->company_name }}" type="text" name="company_name"
@@ -73,6 +103,7 @@
                                 <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
+                         @endif
                     </div>
                     <button role="button" aria-label="Next step"
                         class="flex items-center justify-center py-2 px-4 focus:outline-none bg-blue-900 border rounded border-gray-400 mt-7 md:mt-14 hover:bg-blue-800  focus:ring-2 focus:ring-offset-2 focus:ring-gray-700">
