@@ -14,7 +14,7 @@ class Companies extends Model
 
     protected $fillable = [
         'company_name',
-        
+        'image'
     ];
 
     public function user()

@@ -34,7 +34,7 @@
                 id="user-dropdown">
                 <div class="py-3 px-4">
                     <span
-                        class="block text-sm text-gray-900 dark:text-white">{{ Auth::user()->name . ' ' . Auth::user()->lastname }}</span>
+                        class="block text-sm text-gray-900 dark:text-white capitalize">{{ Auth::user()->name . ' ' . Auth::user()->surname }}</span>
                     <span
                         class="block text-sm font-medium text-gray-900 truncate dark:text-white">{{ Auth::user()->email }}</span>
                 </div>

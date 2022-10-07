@@ -3,27 +3,27 @@
     <div class="overflow-y-auto overflow-x-hidden flex flex-col justify-between flex-grow">
         @php
         $link = explode('/', Auth::user()->img);
-
+        $linkCompany = explode('/', Auth::user()->company->image);
         @endphp
 
         <ul class="flex flex-col py-4 space-y-1">
             <li class="px-5 hidden md:block">
-                @if (Auth::user()->img==="public/noProfilePhoto/nofoto.jpg")
+                @if (Auth::user()->company->image==="public/noProfilePhoto/nofoto.jpg")
                 <div class="inline-flex overflow-hidden relative justify-center items-center w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600">
                     <span class="font-medium text-gray-600 dark:text-white">
-                        <img src="{{asset('/noProfilePhoto/'.$link[2])}}">
+                        <img src="{{asset('/noProfilePhoto/'.$linkCompany[2])}}">
                     </span>
 
                 </div>
-                <span class="font-medium text-white relative bottom-3 capitalize">{{Auth::user()->name}}</span>
+                <span class="font-medium text-white relative bottom-3 capitalize">{{Auth::user()->company->company_name}}</span>
                 @else
                 <div class="inline-flex overflow-hidden relative justify-center items-center w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600">
                     <span class="font-medium text-gray-600 dark:text-white">
-                        <img src="/storage/img/{{$link[2]}}">
+                        <img src="/storage/img/{{$linkCompany[2]}}">
                     </span>
 
                 </div>
-                <span class="font-medium text-white relative pl-3 bottom-4 uppercase">{{Auth::user()->name}}</span>
+                <span class="font-medium text-white relative pl-3 bottom-4 uppercase">{{Auth::user()->company->company_name}}</span>
 
                 @endif
 
