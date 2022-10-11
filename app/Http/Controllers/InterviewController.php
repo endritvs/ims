@@ -256,8 +256,10 @@ $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->where('company_id', Au
 
         $meetingId = $info['data']['id'];
 
-        $startLink = $info['data']['start_url'];             // Interviewer Link (Multiple hosts)
-        $joinLink  = $info['data']['join_url'];              // Interviewee Link 
+        $interview[0]->startLink = $info['data']['start_url'];  // Interviewer Link (Multiple hosts)
+        $interview[0]->joinLink = $info['data']['join_url'];    // Interviewee Link 
+
+        $interview[0]->save();
 
         foreach ($interview as $a) {
 
@@ -271,16 +273,17 @@ $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->where('company_id', Au
                 $mail_data = [
 
                         'recipient' => $a->user->email,
-                        'link' => $startLink,
+                        'link' => $interview[0]->startLink,
                         'interviewType' => $a->interviewees->interviewee_type->name,
                         'interviewer' => implode(", ", $interviewerNames),
                         'intervieweeName' => $a->interviewees->name." ".$a->interviewees->surname,
+                        'interview_date' => $a->interview_date,
                         'linkForReview'=>'review/candidate/'.$a->interviewees->id.'/?id='.$a->id,
                         'fromEmail' => 'imsinfoteam@gmail.com',
                         'fromName' => 'IMS Company'
                     ];
 
-                \Mail::send('/interviewComponents/emailTemplate', $mail_data, function($message) use ($mail_data){
+                \Mail::send('/interviewComponents/meetingEmail', $mail_data, function($message) use ($mail_data){
 
                 $message->to($mail_data['recipient'])
                         ->from($mail_data['fromEmail'], $mail_data['fromName'])
@@ -291,9 +294,9 @@ $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->where('company_id', Au
         }}
 
         $mail_data['recipient'] = $interview[0]->interviewees->email;
-        $mail_data['link'] = $joinLink;
+        $mail_data['link'] = $interview[0]->joinLink;
 
-        \Mail::send('/interviewComponents/emailTemplate', $mail_data, function($message) use ($mail_data){
+        \Mail::send('/interviewComponents/meetingEmail', $mail_data, function($message) use ($mail_data){
 
                 $message->to($mail_data['recipient'])
                         ->from($mail_data['fromEmail'], $mail_data['fromName'])
