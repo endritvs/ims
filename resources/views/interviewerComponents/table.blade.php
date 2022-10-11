@@ -47,7 +47,7 @@
                                     class=" bg-gray-200 dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-white">
 
                                     <td class="px-4 py-3 text-sm capitalize ">
-                                        {{ $i->name }}
+                                        {{ $i->name." ".$i->surname }}
                                     </td>
                                     <td class="px-4 py-3 text-sm ">
                                         {{ $i->email }}
@@ -129,7 +129,7 @@
                                             <div
                                                 class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
                                                 <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                                                    Interviewer:
+                                                    Questionaires:
                                                 </h3>
                                                 <button type="button"
                                                     class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -155,6 +155,19 @@
                                                             required>
                                                        
                                                             @error('name')
+                                                            <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
+                                                        @enderror 
+                                                    </div>
+                                                    <div>
+                                                        <label for="name"
+                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Surname</label>
+                                                        <input type="text" name="surname" id="surname"
+                                                            autocomplete="given-name"
+                                                            class=" @error('surname') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                                            placeholder="Interviewee Type Name" value="{{ $i->surname }}"
+                                                            required>
+                                                       
+                                                            @error('surname')
                                                             <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
                                                         @enderror 
                                                     </div>
@@ -267,6 +280,17 @@
                                     placeholder="Name" required>
                                    
                                     @error('name')
+                                    <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
+                                @enderror 
+                            </div>
+                            <div>
+                                <label for="name"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Surname</label>
+                                <input type="text" name="surname" id="surname" autocomplete="given-name"
+                                    class="@error('surname') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                    placeholder="Surname" required>
+                                   
+                                    @error('surname')
                                     <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
                                 @enderror 
                             </div>

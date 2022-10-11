@@ -19,7 +19,7 @@
                 @else
                 <div class="inline-flex overflow-hidden relative justify-center items-center w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600">
                     <span class="font-medium text-gray-600 dark:text-white">
-                        <img src="/storage/img/{{$linkCompany[2]}}">
+                        <img src="/storage/imgCompanies/{{$linkCompany[2]}}">
                     </span>
 
                 </div>

@@ -115,7 +115,7 @@ class RegisteredUserController extends Controller
             $newImg = $request->file('img');
             $img_path = $newImg->store('/public/img');
             $newImgCompany = $request->file('image');
-            $company_img_path = $newImgCompany->store('/public/img');
+            $company_img_path = $newImgCompany->store('/public/imgCompanies');
 
             $company = Companies::create([
                 'company_name'=>$request['company_name'],
@@ -134,19 +134,41 @@ class RegisteredUserController extends Controller
 
          Auth::login($user);
     }else{
+        if($CompanyImg){
+            $newImgCompany = $request->file('image');
+            $company_img_path = $newImgCompany->store('/public/imgCompanies');
+        $company = Companies::create([
+            'company_name'=>$request['company_name'],
+            'image'=> $company_img_path
+        ]);
+    }else{
         $company = Companies::create([
             'company_name'=>$request['company_name'],
             'image'=>'public/noProfilePhoto/nofoto.jpg'
         ]);
+    }
+
+    if($img){
+        $newImg = $request->file('img');
+        $img_path = $newImg->store('/public/img');
         $user = User::create([
             'name' => $request->name,
             'surname' => $request->surname,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'img'=>"public/noProfilePhoto/nofoto.jpg",
+            'img'=>$img_path,
             'company_id'=>$company['id']
         ]);
-
+}else{
+    $user = User::create([
+        'name' => $request->name,
+        'surname' => $request->surname,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+        'img'=>"public/noProfilePhoto/nofoto.jpg",
+        'company_id'=>$company['id']
+    ]);
+}
         event(new Registered($user));
 
         Auth::login($user);
