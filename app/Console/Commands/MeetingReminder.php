@@ -30,15 +30,16 @@ class MeetingReminder extends Command
     public function handle()
     {
         
-
         date_default_timezone_set("Europe/Belgrade");
         $today = date("Y-m-d H:i:s");
+        $index = 0;
+        $intervieweeID = 0;
 
         $interviewAll = interview::with('user', 'interviewees')->where('interview_date', '>=', $today)->orderBy('interview_date', 'asc')->get();
         $pastInterviewAll = interview::with('user', 'interviewees', 'review')->where('interview_date', '<', $today)->orderBy('interview_date', 'asc')->get();
 
         foreach($interviewAll as $iAll){
-
+            
             echo("Comparing: ".$iAll->interview_date."\n");
 
             $dateThirtyMins = date("Y-m-d H:i:s", strtotime($iAll->interview_date));
@@ -46,22 +47,58 @@ class MeetingReminder extends Command
             $timeThirtyMins = $timeThirtyMins - (30 * 60);
             $dateThirtyMins = date("Y-m-d H:i:s", $timeThirtyMins);    
 
-            if($dateThirtyMins <= $today){
+            $dateLimit = date("Y-m-d H:i:s", strtotime($pAll->interview_date));
+            $timeLimit = strtotime($dateLimit);
+            $timeLimit = $timeLimit - (25*60);
+            $dateLimit = date("Y-m-d H:i:s", $timeLimit);
+
+            if($dateThirtyMins <= $today && $today <= $dateLimit){
+
+            $index = 0;
+
+                $interview = interview::with('user', 'interviewees')->where('interview_id', '=', $iAll->interview_id)->get();
+
+                foreach ($interview as $a) {
+                    
+                    $interviewerNames[$index++] = $a->user->name;
+                }
+
+            foreach ($interview as $a) {
 
                 $mail_data = [
 
-                        'recipient' => $iAll->user->email,
+                        'recipient' => $a->user->email,
+                        'link' => $interview[0]->startLink,
+                        'interviewType' => $a->interviewees->interviewee_type->name,
+                        'interviewer' => implode(", ", $interviewerNames),
+                        'intervieweeName' => $a->interviewees->name." ".$a->interviewees->surname,
+                        'linkForReview'=>'http://127.0.0.1:8000/review/candidate/'.$a->interviewees->id.'/?id='.$a->id,
                         'fromEmail' => 'imsinfoteam@gmail.com',
                         'fromName' => 'IMS Company'
                     ];
 
-                \Mail::send('/interviewComponents/reminderEmail', $mail_data, function($message) use ($mail_data){
+                \Mail::send('/interviewComponents/mainEmailInterviewer', $mail_data, function($message) use ($mail_data){
 
                 $message->to($mail_data['recipient'])
                         ->from($mail_data['fromEmail'], $mail_data['fromName'])
-                        ->subject("Meeting Reminder");
+                        ->subject("Meeting Link - Interviewer");
 
                 }); 
+        }
+
+        $mail_data['recipient'] = $interview[0]->interviewees->email;
+        $mail_data['link'] = $interview[0]->joinLink;
+
+        if($interview[0]->interviewees->id == $intervieweeID){
+            \Mail::send('/interviewComponents/mainEmailInterviewee', $mail_data, function($message) use ($mail_data){
+
+                    $message->to($mail_data['recipient'])
+                            ->from($mail_data['fromEmail'], $mail_data['fromName'])
+                            ->subject("Meeting Link - Interviewee");
+            }); 
+        }
+
+        $intervieweeID = $interview[0]->interviewees->id;
 
                 echo($today." is thirty minutes before ". $iAll->interview_date).".";
                 echo " Mail sent \n";
@@ -69,43 +106,10 @@ class MeetingReminder extends Command
             } 
         }
 
-        foreach($pastInterviewAll as $pAll){
+        $interview[0]->startLink = 'none';  // Interviewer Link (Multiple hosts)
+        $interview[0]->joinLink = 'none';    // Interviewee Link 
 
-            echo("Comparing: ".$pAll->interview_date."\n");
-
-            $dateOneHour = date("Y-m-d H:i:s", strtotime($pAll->interview_date));
-            $timeOneHour = strtotime($dateOneHour);
-            $timeOneHour = $timeOneHour + (60*60);
-            $dateOneHour = date("Y-m-d H:i:s", $timeOneHour);
-
-            $dateLimit = date("Y-m-d H:i:s", strtotime($pAll->interview_date));
-            $timeLimit = strtotime($dateLimit);
-            $timeLimit = $timeLimit + (89*60);
-            $dateLimit = date("Y-m-d H:i:s", $timeLimit);
-
-            if($dateOneHour <= $today && $today <= $dateLimit){
-            // if(true){
-                $mail_data = [
-
-                    'recipient' => $pAll->user->email,
-                    'interviewee' => $pAll->interviewees->name." ".$pAll->interviewees->surname,
-                    'fromEmail' => 'imsinfoteam@gmail.com',
-                    'fromName' => 'IMS Company',
-                    'linkForReview'=>'http://127.0.0.1:8000/review/candidate/'.$pAll->interviewees->id.'/?id='.$pAll->interview_id
-                ];
-
-            \Mail::send('/interviewComponents/reviewEmail', $mail_data, function($message) use ($mail_data){
-
-            $message->to($mail_data['recipient'])
-                    ->from($mail_data['fromEmail'], $mail_data['fromName'])
-                    ->subject("Rate Interviewer - ".$mail_data['interviewee']);
-
-            }); 
-
-                echo($today." is one hour after ". $pAll->interview_date).".";
-                echo " Mail sent \n";
-            }
-        }
+        $interview[0]->save();
 
         echo("\n");
     }

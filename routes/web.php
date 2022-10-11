@@ -178,7 +178,7 @@ Route::prefix('/typeform')->group(
 Route::get('/additional_reviews', [AdditionalReviewsController::class, 'index'])->name('additional_reviews.index');
 
 Route::get('/emailTest', function () {
-    return view('interviewComponents/reviewEmail');
+    return view('interviewComponents/meetingEmail');
 });
 
 require __DIR__ . '/auth.php';
