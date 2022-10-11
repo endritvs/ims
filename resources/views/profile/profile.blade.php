@@ -89,7 +89,7 @@
                                 <img class="mt-3 rounded object-cover" src="{{ asset('/noProfilePhoto/' . $linkCompany[2]) }}" width="50px"
                                     height="50px">
                             @else
-                                <img class="mt-3 rounded " src="/storage/img/{{ $linkCompany[2] }}" width="50px"
+                                <img class="mt-3 rounded " src="/storage/imgCompanies/{{ $linkCompany[2] }}" width="50px"
                                     height="50px">
                             @endif
                         </div>

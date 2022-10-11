@@ -91,6 +91,12 @@ class ReviewController extends Controller
 
     public function rateComment(Request $request)
     {
+        $request->validate([
+            'rating_amount_review' => ['required','max:5'],
+            'rating_amount' => ['required', 'max:10','min:1'],
+            'message'=>['required','max:300']
+
+        ]);
         for ($i = 0; $i < count($request['attribute_id']); $i++) {
 
             reviews_attributes::create([

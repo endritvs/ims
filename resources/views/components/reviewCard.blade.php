@@ -54,7 +54,11 @@
                                 <dl>
                                     <dt class="text-sm font-medium text-white dark:text-gray-200 uppercase">{{$a->name}}</dt>
                                     <dd class="flex flex-col w-full">
-                                        <input type="range" name="rating_amount[]" class="w-full" min="1" max="10" step="1" value="1"/>
+                                        <input type="range" name="rating_amount[]" class="@error('rating_amount') is-invalid @enderror w-full" min="1" max="10" step="1" value="1"/>
+                                        @error('rating_amount')
+                                        <div class="ml-1 text-red-500 text-sm alert alert-danger">{{ $message }}
+                                        </div>
+                                        @enderror
                                         <div id="rangeNumber">
                                             <ul class="flex justify-between text-[15px] w-full px-[5px]">
                                                 <li class="flex justify-center relative"><span class="absolute">1</span></li>
@@ -84,12 +88,18 @@
                         <input type="hidden" name="interview_id" value="{{$_GET['id']}}">
                                 
                         <div class="rating rating-lg">
-                            <input type="radio" name="rating_amount_review" id="star0" class="hidden" />
-                            <input type="radio" value="1" name="rating_amount_review" id="star1" class="bg-green-500 mask mask-star-2 @error('rating_amount') is-invalid @enderror" />
-                            <input type="radio" value="2" name="rating_amount_review" id="star3" class="bg-green-500 mask mask-star-2 @error('rating_amount') is-invalid @enderror" />
-                            <input type="radio" value="3" name="rating_amount_review" id="star5" class="bg-green-500 mask mask-star-2 @error('rating_amount') is-invalid @enderror" />
-                            <input type="radio" value="4" name="rating_amount_review" id="star7" class="bg-green-500 mask mask-star-2 @error('rating_amount') is-invalid @enderror" />
-                            <input type="radio" value="5" name="rating_amount_review" id="star9" class="bg-green-500 mask mask-star-2 @error('rating_amount') is-invalid @enderror" />
+                            <input type="radio" name="rating_amount_review" id="star0" class="@error('rating_amount_review') is-invalid @enderror hidden" />
+                      
+                          
+                            <input type="radio" value="1" name="rating_amount_review" id="star1" class="bg-green-500 mask mask-star-2 @error('rating_amount_review') is-invalid @enderror" />
+                            <input type="radio" value="2" name="rating_amount_review" id="star3" class="bg-green-500 mask mask-star-2 @error('rating_amount_review') is-invalid @enderror" />
+                            <input type="radio" value="3" name="rating_amount_review" id="star5" class="bg-green-500 mask mask-star-2 @error('rating_amount_review') is-invalid @enderror" />
+                            <input type="radio" value="4" name="rating_amount_review" id="star7" class="bg-green-500 mask mask-star-2 @error('rating_amount_review') is-invalid @enderror" />
+                            <input type="radio" value="5" name="rating_amount_review" id="star9" class="bg-green-500 mask mask-star-2 @error('rating_amount_review') is-invalid @enderror" />
+                            @error('rating_amount_review')
+                            <div class="ml-1 text-red-500 text-sm alert alert-danger">{{ $message }}
+                            </div>
+                            @enderror
                         </div>
                   
                         <div class="flex gap-2">
@@ -105,8 +115,11 @@
                             <p class="text-xl font-semibold text-white cursor-pointer transition-all">Add Comment/Questions</p>
                             <input type="hidden" name="candidate_id" value="{{$reviews->interviewees->id}}">
                             <input type="hidden" name="interview_id" value="{{$_GET['id']}}">
-                            <textarea name="message" class="h-auto px-3 text-sm py-1 mt-5 outline-none border-pink-300 w-full resize-none border dark:text-black rounded-lg placeholder:text-sm" rows="5" placeholder="Add your comments here"></textarea>  
-                                
+                            <textarea name="message" class="@error('message') is-invalid @enderror h-auto px-3 text-sm py-1 mt-5 outline-none border-pink-300 w-full resize-none border dark:text-black rounded-lg placeholder:text-sm" rows="5" placeholder="Add your comments here"></textarea>  
+                            @error('message')
+                            <div class="ml-1 text-red-500 text-sm alert alert-danger">{{ $message }}
+                            </div>
+                            @enderror
                               
                         </div>  
                             <div class="flex justify-between mt-2"> 
