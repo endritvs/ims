@@ -1,6 +1,6 @@
-@extends('layouts.layout')
 
-@section('content')
+
+
 <title>Candidates</title>
 <link rel='stylesheet' type='text/css' media='screen' href='css/quick-add.css'>
 
@@ -639,6 +639,3 @@
         spin1.style.transform = "rotate(" + angle + "deg)";
     }
 </script>
-
-
-@endsection('content')

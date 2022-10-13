@@ -11,7 +11,6 @@
 <body>
   <h1 class="text-4xl text-blue-700">My Webpack + Tailwind App</h1>
   <script src="bundle.js"></script>
-  <script src="../path/to/flowbite/dist/flowbite.js"></script>
 </body>
 
 </html>

@@ -40,7 +40,24 @@ Route::get('/interviewee', function () {
 Route::get('/user', function () {
     return view('/components/user');
 });
+// TEST ROUTES START
+Route::get('/dashboardtest', function () {
+    return view('/pages/dashboardtest');
+});
 
+Route::get('/profiletest', function () {
+    return view('/profile/profiletest');
+});
+
+Route::get('/candidatestest', function () {
+    return view('/intervieweesMainComponents/candidatestest');
+});
+
+Route::get('/interviewComp', function () {
+    return view('/intervieweeAttributesComponents/interviewComp');
+});
+
+// TEST ROUTES END
 Route::get('/sidebari', function () {
     return view('/components/sidebari');
 });

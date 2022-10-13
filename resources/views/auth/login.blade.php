@@ -6,7 +6,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Sign In & Sign Up Form</title>
-        <link rel="stylesheet" href="/css/login-signup.css">
+        <link rel="stylesheet" href="../assets/css/login-signup.css">
         <script
             src="https://kit.fontawesome.com/64d58efce2.js"
             crossorigin="anonymous">
