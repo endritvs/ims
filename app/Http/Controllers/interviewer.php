@@ -20,7 +20,8 @@ class interviewer extends Controller
 
         $interviewer = User::orderBy('id', 'asc')->where('company_id', Auth::user()->company_id)->paginate(5);
 
-        return view('interviewerComponents/table')->with(['interviewer' => $interviewer]);
+        return view('interviewerComponents/questioner')->with(['interviewer' => $interviewer]);
+        
     }
 
     public function create()

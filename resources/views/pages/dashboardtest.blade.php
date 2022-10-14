@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="m-0 font-sans text-base antialiased font-normal dark:bg-slate-900 leading-default bg-gray-50 text-slate-500">
-  <div class="absolute w-full bg-blue-500 dark:hidden min-h-75"></div>  
+  <div class="absolute w-full bg-blue-500 dark:hidden min-h-75"></div>
   
     <main class="relative h-full max-h-screen transition-all duration-200 ease-in-out xl:ml-68 rounded-xl">
       @include('layouts.navbars.topnav')
@@ -124,7 +124,7 @@
         <!-- cards row 3 -->
 
         <div class="flex flex-wrap mt-6 -mx-3">
-          <div class="w-full max-w-full px-3 mt-0 mb-6 lg:mb-0 lg:flex-none">
+          <div class="w-full max-w-full px-3 mt-0 mb-6 lg:mb-0 lg:w-7/12 lg:flex-none">
             <div class="relative flex flex-col min-w-0 break-words bg-white border-0 border-solid shadow-xl dark:bg-slate-850 dark:shadow-dark-xl dark:bg-gray-950 border-black-125 rounded-2xl bg-clip-border">
               <div class="p-4 pl-6 pb-0 mb-0 rounded-t-4">
                 <div class="flex justify-between">
@@ -221,6 +221,22 @@
               </div>
             </div>
           </div> 
+          <div class="w-full max-w-full px-3 mt-0 lg:w-5/12 lg:flex-none">
+            <div class="border-black/12.5 dark:bg-slate-850 dark:shadow-dark-xl shadow-xl relative z-20 flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-white bg-clip-border">
+              <div class="border-black/12.5 mb-0 rounded-t-2xl border-b-0 border-solid p-6 pt-4 pb-0">
+                <h6 class="capitalize dark:text-white">Sales overview</h6>
+                <p class="mb-0 text-sm leading-normal dark:text-white dark:opacity-60">
+                  <i class="fa fa-arrow-up text-emerald-500"></i>
+                  <span class="font-semibold">4% more</span> in 2021
+                </p>
+              </div>
+              <div class="flex-auto p-4">
+                <div>
+                  <canvas id="chart-line" height="300"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <footer class="pt-4">

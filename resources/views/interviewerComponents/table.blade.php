@@ -5,7 +5,6 @@
     }
 </style>
 @section('content')
-
     <title>Interviewee</title>
     <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
         <div class="mt-[145px] mx-4">
@@ -15,11 +14,12 @@
                         <caption
                             class="p-5 bg-gray-200 relative text-lg font-semibold text-left  text-gray-500 border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-900">
                             Interviewer
-                            <p class="mt-1 text-sm font-normal text-gray-400 dark:text-white">Browse a list of Interviewee Types products
+                            <p class="mt-1 text-sm font-normal text-gray-400 dark:text-white">Browse a list of Interviewee
+                                Types products
                                 designed to help you work, grow your business, and more. (Fix this text)</p>
                             <a class="absolute top-4 right-6" href="#">
                                 <button type="button" data-modal-toggle="addUserModal"
-                                class="bg-blue-500 hover:bg-blue-700 text-white p-1 rounded">Create</button>
+                                    class="bg-blue-500 hover:bg-blue-700 text-white p-1 rounded">Create</button>
                             </a>
                         </caption>
                         <thead>
@@ -36,14 +36,14 @@
                         </thead>
                         <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                             @foreach ($interviewer as $i)
-                            @php
+                                @php
                                     
-                            $link = explode('/', $i->img);
-                            
-                        @endphp
-                     
-                    
-                            <tr
+                                    $link = explode('/', $i->img);
+                                    
+                                @endphp
+
+
+                                <tr
                                     class=" bg-gray-200 dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-white">
 
                                     <td class="px-4 py-3 text-sm capitalize ">
@@ -56,15 +56,15 @@
                                         {{ $i->role }}
                                     </td>
                                     <td class="px-4 py-3 text-sm capitalize ">
-                                        @if ($i->img==="public/noProfilePhoto/nofoto.jpg")
-                                   
-                                        <img class="rounded" src="{{asset('/noProfilePhoto/'.$link[2])}}" width="50px" height="50px">
-                                    
-                                    @else
-                                    <img class="rounded" src="/storage/img/{{$link[2]}}" width="50px" height="50px">
-                                    @endif
-                                </td>
-                                    <td class="px-4 py-3 text-xs">                                        
+                                        @if ($i->img === 'public/noProfilePhoto/nofoto.jpg')
+                                            <img class="rounded" src="{{ asset('/noProfilePhoto/' . $link[2]) }}"
+                                                width="50px" height="50px">
+                                        @else
+                                            <img class="rounded" src="/storage/img/{{ $link[2] }}" width="50px"
+                                                height="50px">
+                                        @endif
+                                    </td>
+                                    <td class="px-4 py-3 text-xs">
                                         <a href="#" data-modal-toggle="editModal{{ $i->id }}"
                                             class="text-blue-600 font-bold py-2 px-4 rounded">Edit</a>
                                     </td>
@@ -123,7 +123,8 @@
                                         class="relative p-4 w-full max-w-md h-full md:h-auto bg-white rounded dark:bg-gray-700">
 
                                         <form method="POST" action="{{ route('interviewer.update', $i->id) }}"
-                                            class="relative bg-white rounded-lg shadow dark:bg-gray-700" enctype="multipart/form-data">
+                                            class="relative bg-white rounded-lg shadow dark:bg-gray-700"
+                                            enctype="multipart/form-data">
                                             @csrf
 
                                             <div
@@ -151,12 +152,13 @@
                                                         <input type="text" name="name" id="name"
                                                             autocomplete="given-name"
                                                             class=" @error('name') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                                            placeholder="Interviewee Type Name" value="{{ $i->name }}"
-                                                            required>
-                                                       
-                                                            @error('name')
-                                                            <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
-                                                        @enderror 
+                                                            placeholder="Interviewee Type Name"
+                                                            value="{{ $i->name }}" required>
+
+                                                        @error('name')
+                                                            <div class="ml-1 text-red-500 text-xs alert alert-danger">
+                                                                {{ $message }}</div>
+                                                        @enderror
                                                     </div>
                                                     <div>
                                                         <label for="name"
@@ -166,9 +168,10 @@
                                                             class="@error('email') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                                             placeholder="Interviewee Type Name"
                                                             value="{{ $i->email }}" required>
-                                                            @error('email')
-                                                            <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
-                                                        @enderror 
+                                                        @error('email')
+                                                            <div class="ml-1 text-red-500 text-xs alert alert-danger">
+                                                                {{ $message }}</div>
+                                                        @enderror
 
                                                     </div>
                                                     <div>
@@ -187,10 +190,11 @@
 
 
                                                         </select>
-                                                        
+
                                                         @error('role')
-                                                        <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
-                                                    @enderror 
+                                                            <div class="ml-1 text-red-500 text-xs alert alert-danger">
+                                                                {{ $message }}</div>
+                                                        @enderror
                                                     </div>
                                                     <div>
                                                         <label for="name"
@@ -198,19 +202,22 @@
                                                         <input type="file" name="img" id="img"
                                                             autocomplete="given-name"
                                                             class="@error('img') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
-                                                            @error('img')
-                                                            <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
-                                                        @enderror 
-                                                        
+                                                        @error('img')
+                                                            <div class="ml-1 text-red-500 text-xs alert alert-danger">
+                                                                {{ $message }}</div>
+                                                        @enderror
+
                                                     </div>
-                                                    @if ($i->img==="public/noProfilePhoto/nofoto.jpg")
-                                                    Current Image
-                                                    <img class="rounded" src="{{asset('/noProfilePhoto/'.$link[2])}}" width="50px" height="50px">
-                                                
-                                                @else
-                                                Current Image
-                                                <img class="rounded" src="/storage/img/{{$link[2]}}" width="50px" height="50px">
-                                                @endif
+                                                    @if ($i->img === 'public/noProfilePhoto/nofoto.jpg')
+                                                        Current Image
+                                                        <img class="rounded"
+                                                            src="{{ asset('/noProfilePhoto/' . $link[2]) }}" width="50px"
+                                                            height="50px">
+                                                    @else
+                                                        Current Image
+                                                        <img class="rounded" src="/storage/img/{{ $link[2] }}"
+                                                            width="50px" height="50px">
+                                                    @endif
                                                 </div>
                                             </div>
 
@@ -258,17 +265,17 @@
 
                     <div class="p-6 space-y-6">
                         <div class="space-y-6">
-                            
+
                             <div>
                                 <label for="name"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
                                 <input type="text" name="name" id="name" autocomplete="given-name"
                                     class="@error('name') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                     placeholder="Name" required>
-                                   
-                                    @error('name')
+
+                                @error('name')
                                     <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
-                                @enderror 
+                                @enderror
                             </div>
                             <div>
                                 <label for="name"
@@ -276,10 +283,10 @@
                                 <input type="email" name="email" id="email" autocomplete="given-name"
                                     class="@error('email') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                     placeholder="Email" required>
-                                    
-                                    @error('email')
+
+                                @error('email')
                                     <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
-                                @enderror 
+                                @enderror
                             </div>
                             <div>
                                 <label for="name"
@@ -287,32 +294,31 @@
                                 <input type="password" name="password" id="password" autocomplete="given-name"
                                     class="@error('password') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                     placeholder="Password" required>
-                                    
-                                    @error('password')
+
+                                @error('password')
                                     <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
-                                @enderror 
+                                @enderror
                             </div>
                             <div>
 
                                 <input type="hidden" name="role" id="role" autocomplete="given-name"
                                     class="@error('role') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                     placeholder="Role" value="admin" required>
-                                
-                                    @error('role')
+
+                                @error('role')
                                     <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
-                                @enderror 
+                                @enderror
                             </div>
-                           
+
                             <div> <label class="text-center">Optional</label>
                                 <label for="name"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image</label>
                                 <input type="file" name="img" id="img" autocomplete="given-name"
-                                    class="@error('img') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                     >
-                                   
-                                    @error('img')
+                                    class="@error('img') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+
+                                @error('img')
                                     <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
-                                @enderror 
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -325,4 +331,4 @@
             </div>
         </div>
     </div>
-@endsection('content')
+@endsection

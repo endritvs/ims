@@ -15,18 +15,19 @@
                 document.documentElement.classList.remove('dark')
             }
         </script>
+        {{-- CSS TAILWIND --}}
+        <link rel="stylesheet" href="./css/app.css">
         <!--     Fonts and icons     -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
         <!-- Font Awesome Icons -->
         <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-        
+        <!-- Nucleo Icons -->
+        <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+        <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
         {{-- Global styling --}}
         <link href="./assets/css/global.css" rel="stylesheet"  />
-        {{-- CSS TAILWIND --}}
-        <link rel="stylesheet" href="./css/app.css">
-        
         <!-- Main Styling -->
-        <link href="./assets/css/argon-dashboard-tailwind.css?v=1.0.1" rel="stylesheet" />
+        <link href="./assets/css/argon-dashboard-tailwind.min.css" rel="stylesheet" />
         
     </head>
 <body>  
@@ -34,17 +35,15 @@
     @yield('content')
     
     {{-- @include('components.fixed-plugin') --}}
-  
-        <!--   Core JS Files   -->
+       
+    
+    <!--   Core JS Files   -->
     <script src="https://kit.fontawesome.com/5d54a13ffa.js" crossorigin="anonymous"></script>
     <!-- plugin for charts  -->
     <script src="./assets/js/plugins/chartjs.min.js" async></script>
     <!-- plugin for scrollbar  -->
     <script src="./assets/js/plugins/perfect-scrollbar.min.js" async></script>
-    
     <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
-    <script src="https://cdn.tailwindcss.com/%22%3E"></script>
-
     <!-- main script file  -->
     <script src="./assets/js/argon-dashboard-tailwind.js?v=1.0.1" async></script>
 </body>
