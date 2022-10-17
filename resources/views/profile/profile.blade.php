@@ -1,156 +1,246 @@
 @extends('layouts.layout')
-
 @section('content')
-    <title>My Profile</title>
-    <div class="h-[300px] ml-12 mb-12 md:ml-64">
-        <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1">
-
-            <div tabindex="0" aria-label="form" class="focus:outline-none w-full bg-white p-10 dark:bg-gray-800">
-                <h1 tabindex="0" role="heading" aria-label="profile information"
-                    class="focus:outline-none text-3xl font-bold text-gray-800 mt-12 dark:text-white">Profile info</h1>
-                <p tabindex="0"
-                    class=" focus:outline-none text-sm font-light leading-tight text-black mt-4 dark:text-white">Fill in
-                    the data for profile. It will take a couple of minutes. <br />You only need a passport</p>
-                <h2 tabindex="0"
-                    class="focus:outline-none text-xl font-semibold leading-7 text-gray-800 mt-10 dark:text-white">Personal
-                    data</h2>
-                <p tabindex="0"
-                    class="focus:outline-none text-sm font-light leading-none text-black mt-0.5 dark:text-white">Your
-                    details and place of birth</p>
-                <form method="POST" enctype="multipart/form-data"
-                    action="{{ route('interview.updateProfile', Auth::user()->id) }}">
-                    @csrf
-                    <div class="mt-8 md:flex items-center">
-                        <div class="flex flex-col">
-                            <label class="mb-3 text-sm leading-none text-black dark:text-white">Name</label>
-                            <input type="name" name="name" tabindex="0"
-                                class=" @error('name') is-invalid @enderror focus:outline-none focus:ring-2 focus:ring-indigo-400 w-64 bg-gray-100 text-sm font-medium leading-none text-gray-800 p-2 border rounded border-gray-200"
-                                value="{{ Auth::user()->name }}" />
-
-                            @error('name')
-                                <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
-                            @enderror
+    <div class="m-0 font-sans text-base antialiased font-normal dark:bg-slate-900 leading-default bg-gray-50 text-slate-500">
+        <div class="absolute w-full bg-blue-500 dark:hidden min-h-75"></div>
+        <main class="relative h-full max-h-screen transition-all duration-200 ease-in-out xl:ml-68 rounded-xl">
+            @include('layouts.navbars.topnav')
+            <div class="relative w-full mx-auto">
+                <div
+                    class="relative flex flex-col flex-auto min-w-0 p-4 mx-6 overflow-hidden break-words bg-white border-0 dark:bg-slate-850 dark:shadow-dark-xl shadow-3xl rounded-2xl bg-clip-border">
+                    <div class="flex flex-wrap -mx-3">
+                        <div class="flex-none w-auto max-w-full px-3 my-auto">
+                            <div class="h-full">
+                                <h5 class="mb-1 dark:text-white">{{ Auth::user()->name }}</h5>
+                                <p class="mb-0 font-semibold leading-normal dark:text-white dark:opacity-60 text-sm">Public
+                                    Relations</p>
+                            </div>
                         </div>
-                        <div class="flex flex-col md:ml-12 md:mt-0 mt-8">
-                            <label class="mb-3 text-sm leading-none text-gray-800 dark:text-white">Email</label>
-                            <input type="email" name="email" tabindex="0"
-                                class="@error('email') is-invalid @enderror focus:outline-none focus:ring-2 focus:ring-indigo-400 w-64 bg-gray-100 text-sm font-medium leading-none text-gray-800 p-2 border rounded border-gray-200"
-                                value="{{ Auth::user()->email }}" />
-                            @error('email')
-                                <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                    </div>
-                    @php
-                        
-                        $link = explode('/', Auth::user()->img);
-                        
-                    @endphp
-                    <div class="mt-12 md:flex items-center">
-                        <div class="flex flex-col">
-                            <label class="mb-3 text-sm leading-none text-gray-800 dark:text-white">Image</label>
-                            <input type="file" name="img" tabindex="0"
-                                class="@error('img') is-invalid @enderror focus:outline-none focus:ring-2 focus:ring-indigo-400 w-64 bg-gray-100 text-sm font-medium leading-none text-gray-800 border rounded border-gray-200" />
-                            @error('img')
-                                <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
-                            @enderror
-
-                            @if (Auth::user()->img === 'public/noProfilePhoto/nofoto.jpg')
-                                <img class="mt-3 rounded object-cover" src="{{ asset('/noProfilePhoto/' . $link[2]) }}" width="50px"
-                                    height="50px">
-                            @else
-                                <img class="mt-3 rounded " src="/storage/img/{{ $link[2] }}" width="50px"
-                                    height="50px">
-                            @endif
-                        </div>
-                        <div class="flex flex-col md:ml-11 md:mt-[-60px]">
-                            <label class="mb-3 text-sm leading-none text-gray-800 dark:text-white">Company Name</label>
-                            <input value="{{ Auth::user()->company->company_name }}" type="text" name="company_name"
-                                tabindex="0"
-                                class="@error('company_name') is-invalid @enderror focus:outline-none focus:ring-2 focus:ring-indigo-400 w-64 bg-gray-100 text-sm font-medium leading-none text-gray-800 p-2 border rounded border-gray-200" />
-                            @error('company_name')
-                                <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-                    <button role="button" aria-label="Next step"
-                        class="flex items-center justify-center py-2 px-4 focus:outline-none bg-blue-900 border rounded border-gray-400 mt-7 md:mt-14 hover:bg-blue-800  focus:ring-2 focus:ring-offset-2 focus:ring-gray-700">
-                        <span class="text-sm font-medium text-center text-white capitalize">Save</span>
-                    </button>
-            </div>
-            </form>
-            <div tabindex="0" aria-label="form" class="focus:outline-none w-full bg-white p-10 dark:bg-gray-800">
-                <div class="md:flex items-center border-b pb-6 border-gray-200">
-                    <div class="flex items-center md:mt-0 mt-4">
                     </div>
                 </div>
-                <h1 tabindex="0" role="heading" aria-label="profile information"
-                    class="focus:outline-none text-3xl font-bold text-gray-800 mt-12 dark:text-white">Change Password</h1>
-                <p tabindex="0"
-                    class=" focus:outline-none text-sm font-light leading-tight text-black mt-4 dark:text-white">Fill in
-                    the data for profile. It will take a couple of minutes. <br />You only need a passport</p>
-                <h2 tabindex="0"
-                    class="focus:outline-none text-xl font-semibold leading-7 text-black mt-10 dark:text-white">Personal
-                    data</h2>
-                <p tabindex="0"
-                    class="focus:outline-none text-sm font-light leading-none text-gray-600 mt-0.5 dark:text-white">Your
-                    details and place of birth</p>
-
-                <form method="POST" enctype="multipart/form-data" action="{{ route('interview.updatePassword') }}">
-                    @csrf
-                    @if (session('status'))
-                        <div class="mt-3 ml-1 text-green-700 text-md alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @elseif (session('error'))
-                        <div class="mt-3 ml-1 text-red-500 text-md alert alert-danger" role="alert">
-                            {{ session('error') }}
-                        </div>
-                    @endif
-                    <div class="mt-8 md:flex items-center">
-                        <div class="flex flex-col">
-                            <label class="mb-3 text-sm leading-none text-gray-800 dark:text-white">Current Password</label>
-                            <input placeholder="Current-Password" type="password" tabindex="0"
-                                aria-label="Enter current password" name="old_password"
-                                class="@error('old_password') is-invalid @enderror focus:outline-none focus:ring-2 focus:ring-indigo-400 w-64 bg-gray-100 text-sm font-medium leading-none text-gray-800 p-2 border rounded border-gray-200" />
-                            @error('old_password')
-                                <span
-                                    class="ml-1 text-red-500 text-xs alert alert-dangerml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="mt-12 md:flex items-center justify-start">
-                        <div class="flex flex-col md:mb-12 md:mt-0 mt-8">
-                            <label class="mb-3 text-sm leading-none text-gray-800 dark:text-white">New Password</label>
-                            <input placeholder="New-Password" type="password" tabindex="0" name="new_password"
-                                class="@error('new_password') is-invalid @enderror focus:outline-none focus:ring-2 focus:ring-indigo-400 w-64 bg-gray-100 text-sm font-medium leading-none text-gray-800 p-2 border rounded border-gray-200" />
-                            @error('new_password')
-                                <span class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div class="flex flex-col md:mb-12 md:mt-0 mt-8 ml-4">
-                            <label class="mb-3 text-sm leading-none text-gray-800 dark:text-white">Confirm Password</label>
-                            <input placeholder="Confirm New Password" type="password" tabindex="0"
-                                name="new_password_confirmation" aria-label="Confirm New Password"
-                                class="@error('new_password_confirmation') is-invalid @enderror focus:outline-none focus:ring-2 focus:ring-indigo-400 w-64 bg-gray-100 text-sm font-medium leading-none text-gray-800 p-2 border rounded border-gray-200" />
-                            @error('new_password_confirmation')
-                                <span class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-                    <button role="button" aria-label="Next step"
-                        class="flex items-center justify-center py-2 px-4 focus:outline-none bg-blue-900 border rounded border-gray-400 mt-2 md:mt-14 hover:bg-blue-800 focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 ">
-                        <span class="text-sm font-medium text-center text-white capitalize">Save</span>
-                    </button>
-                </form>
             </div>
-        </div>
+            <div class="w-full p-6 mx-auto">
+                <div class="flex flex-wrap -mx-3">
+                    <div class="w-full max-w-full px-3 shrink-0 md:w-8/12 md:flex-0">
+                        <div
+                            class="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
+                            <div class="border-black/12.5 rounded-t-2xl border-b-0 border-solid p-6 pb-0">
+                                <div class="flex items-center">
+                                    <p class="mb-0 dark:text-white/80">Edit Profile</p>
+                                    <button type="button"
+                                        class="inline-block px-8 py-2 mb-4 ml-auto font-bold leading-normal text-center text-white align-middle transition-all ease-in bg-blue-500 border-0 rounded-lg shadow-md cursor-pointer text-xs tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">Settings</button>
+                                </div>
+                            </div>
+                            <div class="flex-auto p-6">
+                                <p class="leading-normal uppercase dark:text-white dark:opacity-60 text-sm">User Information
+                                </p>
+                                <div class="flex flex-wrap -mx-3">
+                                    <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
+                                        <div class="mb-4">
+                                            <label for="name"
+                                                class="inline-block mb-2 ml-1 font-semibold text-sm text-slate-700 dark:text-white/80">Name</label>
+                                            <input type="name" name="name" value="{{ Auth::user()->name }}"
+                                                class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
+                                        </div>
+                                    </div>
+                                    <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
+                                        <div class="mb-4">
+                                            <label for="email"
+                                                class="inline-block mb-2 ml-1 font-semibold text-sm text-slate-700 dark:text-white/80">Email
+                                                address</label>
+                                            <input type="email" name="email" value="{{ Auth::user()->email }}"
+                                                class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
+                                        </div>
+                                    </div>
+                                    @php
+                                        
+                                        $link = explode('/', Auth::user()->img);
+                                        
+                                    @endphp
+                                    <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
+                                        <div class="mb-4">
+                                            <label for="file-upload"
+                                                class="inline-block mb-2 ml-1 font-semibold text-sm text-slate-700 dark:text-white/80">Image</label>
+                                                <input id="file-upload" type="file" class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
+                                                @if (Auth::user()->img === 'public/noProfilePhoto/nofoto.jpg')
+                                                <img class="mt-3 rounded object-cover"
+                                                    src="{{ asset('/noProfilePhoto/' . $link[2]) }}" width="50px"
+                                                    height="50px">
+                                            @else
+                                                <img class="rounded ml-1 m-4" src="/storage/img/{{ $link[2] }}"
+                                                    width="50px" height="50px">
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
+                                        <div class="mb-4">
+                                            <label for="company"
+                                                class="inline-block mb-2 ml-1 font-semibold text-sm text-slate-700 dark:text-white/80">Company
+                                                Name</label>
+                                            <input type="text" name="company"
+                                                value="{{ Auth::user()->company->company_name }}"
+                                                class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <button type="button"
+                                    class="inline-block px-4 py-3 font-bold text-center text-white uppercase align-middle transition-all rounded-lg cursor-pointer bg-blue-500 leading-normal text-xs ease-in tracking-tight-rem shadow-xs bg-150 bg-x-25 hover:-translate-y-px active:opacity-85 hover:shadow-md">Save</button>
+
+                                <hr
+                                    class="h-px mx-0 my-4 bg-transparent border-0 opacity-25 bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent " />
+
+                                <p class="leading-normal uppercase dark:text-white dark:opacity-60 text-sm">Change Password
+                                </p>
+                                <div class="flex flex-wrap -mx-3">
+                                    <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
+                                        <div class="mb-4">
+                                            <label for="username"
+                                                class="inline-block mb-2 ml-1 font-semibold text-sm text-slate-700 dark:text-white/80">Current
+                                                Password</label>
+                                            <input placeholder="Current Password" type="password" tabindex="0"
+                                                aria-label="Enter current password" name="old_password"
+                                                class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
+                                        </div>
+                                    </div>
+                                    <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
+                                        <div class="mb-4">
+                                            <label for="email"
+                                                class="inline-block mb-2 ml-1 font-semibold text-sm text-slate-700 dark:text-white/80">New
+                                                Password</label>
+                                            <input placeholder="New Password" type="password" tabindex="0"
+                                                name="new_password"
+                                                class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
+                                        </div>
+                                    </div>
+                                    <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
+                                        <div class="mb-4">
+                                            <label for="first name"
+                                                class="inline-block mb-2 ml-1 font-semibold text-sm text-slate-700 dark:text-white/80">Confirm
+                                                Password</label>
+                                            <input placeholder="Confirm New Password" type="password" tabindex="0"
+                                                name="new_password_confirmation" aria-label="Confirm New Password"
+                                                class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <button type="button"
+                                    class="inline-block px-4 py-3 font-bold text-center text-white uppercase align-middle transition-all rounded-lg cursor-pointer bg-blue-500 leading-normal text-xs ease-in tracking-tight-rem shadow-xs bg-150 bg-x-25 hover:-translate-y-px active:opacity-85 hover:shadow-md">Save</button>
+
+                                {{-- <hr
+                                    class="h-px mx-0 my-4 bg-transparent border-0 opacity-25 bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent " />
+
+                                <p class="leading-normal uppercase dark:text-white dark:opacity-60 text-sm">About me</p>
+                                <div class="flex flex-wrap -mx-3">
+                                    <div class="w-full max-w-full px-3 shrink-0 md:w-full md:flex-0">
+                                        <div class="mb-4">
+                                            <label for="about me"
+                                                class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">About
+                                                me</label>
+                                            <input type="text" name="about me"
+                                                value="A beautiful Dashboard for Bootstrap 5. It is Free and Open Source."
+                                                class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
+                                        </div>
+                                    </div>
+                                </div> --}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full max-w-full px-3 mt-6 shrink-0 md:w-4/12 md:flex-0 md:mt-0">
+                        <div
+                            class="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
+                            <img class="w-full rounded-t-2xl" src="../assets/img/bg-profile.jpg"
+                                alt="profile cover image">
+                            <div class="flex flex-wrap justify-center -mx-3">
+                                <div class="w-4/12 max-w-full px-3 flex-0 ">
+                                    <div class="mb-6 -mt-6 lg:mb-0 lg:-mt-16">
+                                        <a href="javascript:;">
+                                            @if (Auth::user()->img === 'public/noProfilePhoto/nofoto.jpg')
+                                                <img class="h-auto max-w-full border-2 border-white border-solid rounded-circle"
+                                                    src="{{ asset('/noProfilePhoto/' . $link[2]) }}" alt="profile image">
+                                            @else
+                                                <img class="h-auto max-w-full border-2 border-white border-solid rounded-circle"
+                                                    src="/storage/img/{{ $link[2] }}">
+                                            @endif
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-black/12.5 rounded-t-2xl p-6 text-center pt-0 pb-6 lg:pt-2 lg:pb-4">
+                                <div class="flex justify-between">
+                                    <button type="button"
+                                        class="hidden px-8 py-2 font-bold leading-normal text-center text-white align-middle transition-all ease-in border-0 rounded-lg shadow-md cursor-pointer text-xs bg-cyan-500 lg:block tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">Connect</button>
+                                    <button type="button"
+                                        class="block px-8 py-2 font-bold leading-normal text-center text-white align-middle transition-all ease-in border-0 rounded-lg shadow-md cursor-pointer text-xs bg-cyan-500 lg:hidden tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">
+                                        <i class="ni ni-collection text-2.8"></i>
+                                    </button>
+                                    <button type="button"
+                                        class="hidden px-8 py-2 font-bold leading-normal text-center text-white align-middle transition-all ease-in border-0 rounded-lg shadow-md cursor-pointer text-xs bg-slate-700 lg:block tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">Message</button>
+                                    <button type="button"
+                                        class="block px-8 py-2 font-bold leading-normal text-center text-white align-middle transition-all ease-in border-0 rounded-lg shadow-md cursor-pointer text-xs bg-slate-700 lg:hidden tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">
+                                        <i class="ni ni-email-83 text-2.8"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="flex-auto p-6 pt-0">
+                                <div class="flex flex-wrap -mx-3">
+                                    <div class="w-full max-w-full px-3 flex-1-0">
+                                        <h4 class="text-center">Interviews</h4>
+                                        <div class="flex justify-center">
+                                            <div class="grid text-center">
+                                                <span class="font-bold dark:text-white text-lg">22</span>
+                                                <span class="leading-normal dark:text-white text-sm opacity-80">Held</span>
+                                            </div>
+                                            <div class="grid mx-6 text-center">
+                                                <span class="font-bold dark:text-white text-lg">10</span>
+                                                <span
+                                                    class="leading-normal dark:text-white text-sm opacity-80">Remaining</span>
+                                            </div>
+                                            <div class="grid text-center">
+                                                <span class="font-bold dark:text-white text-lg">89</span>
+                                                <span
+                                                    class="leading-normal dark:text-white text-sm opacity-80">Total</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-6 text-center">
+                                    <h5 class="dark:text-white ">
+                                        {{ Auth::user()->name }}
+                                    </h5>
+                                    <div
+                                        class="mb-2 font-semibold leading-relaxed text-base dark:text-white/80 text-slate-700">
+                                        <i class="mr-2 dark:text-white ni ni-briefcase-24"></i>
+                                        Company Position/Admin/CEO
+                                    </div>
+                                    <div class="dark:text-white/80">
+                                        <i class="mr-2 dark:text-white ni ni-hat-3"></i>
+                                        University of Computer Science
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <footer class="pt-4">
+                    <div class="w-full px-6 mx-auto">
+                        <div class="flex flex-wrap items-center -mx-3 lg:justify-between">
+                            <div class="w-full max-w-full px-3 mt-0 mb-6 shrink-0 lg:mb-0 lg:w-1/2 lg:flex-none">
+                                <div class="leading-normal text-center text-sm text-slate-500 lg:text-left">
+                                    ©
+                                    <script>
+                                        document.write(new Date().getFullYear());
+                                    </script>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </main>
     </div>
-    <style>
-        .checkbox:checked+.check-icon {
-            display: flex;
-        }
-    </style>
-@endsection('content')
+    </div>
+@endsection

@@ -30,7 +30,7 @@
                 </li>
                 <li class="flex items-center px-4">
                     <button id="theme-toggle" type="button"
-                        class="text-white dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1">
+                        class="text-white dark:text-white focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1">
                         <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
@@ -53,20 +53,18 @@
                             $link = explode('/', Auth::user()->img);
                         @endphp
                         @if (Auth::user()->img === 'public/noProfilePhoto/nofoto.jpg')
-                            <div
-                                class="inline-flex overflow-hidden relative justify-center items-center w-10 h-10 bg-gray-100 rounded-full dark:bg-slate-850 dark:text-white">
+                            <div>
                                 <span class="font-medium text-gray-600 dark:text-white">
-                                    <img src="{{ asset('/noProfilePhoto/' . $link[2]) }}">
+                                    <img src="{{ asset('/noProfilePhoto/' . $link[2]) }}" class="inline-flex overflow-hidden relative justify-center items-center w-10 h-10 bg-gray-100 rounded-full dark:bg-slate-850 dark:text-white">
                                 </span>
 
                             </div>
                             <span
                                 class="font-medium text-white relative bottom-3 capitalize">{{ Auth::user()->name }}</span>
                         @else
-                            <div
-                                class="inline-flex overflow-hidden relative justify-center items-center w-10 h-10 bg-gray-100 rounded-full dark:bg-slate-850 dark:text-white">
+                            <div>
                                 <span class="font-medium text-gray-600 dark:text-white">
-                                    <img src="/storage/img/{{ $link[2] }}">
+                                    <img src="/storage/img/{{ $link[2] }}" class="object-cover inline-flex overflow-hidden relative justify-center items-center w-10 h-10 bg-gray-100 rounded-full dark:bg-slate-850 dark:text-white">
                                 </span>
 
                             </div>

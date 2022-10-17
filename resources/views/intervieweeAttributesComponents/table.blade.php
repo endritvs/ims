@@ -43,470 +43,615 @@
     </style>
 
     @if (Auth::user()->role === 'admin')
-        <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
-            <div class="mt-[145px] mx-4">
-                <div class="w-full overflow-hidden rounded-lg shadow-xs">
-                    <div class="w-full overflow-x-auto flex flex-row justify-evenly gap-4">
-                        <table class="w-full mr-20">
-                            <caption
-                                class="p-5 bg-gray-200 relative text-lg  rounded-lg font-semibold text-left  text-black border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-900">
-                                Candidate Types
-                                <p class="mt-1 text-sm rounded-lg font-normal text-black dark:text-white w-[400px]">Browse a
-                                    list of Interviewee Types products
-                                    designed to help you work, grow your business, and more. (Fix this text)</p>
-                                <a class="absolute top-6 right-6" href="#">
-                                    <button type="button" data-modal-toggle="addITypeModal"
-                                        class="bg-blue-500 hover:bg-blue-700 text-white p-1 rounded ">Create</button>
-                                </a>
-                            </caption>
-                            <thead>
-                                <tr
-                                    class="text-xs bg-gray-200 font-semibold tracking-wide text-left text-black uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-900">
-                                    <th class="px-4 py-3">Name</th>
-                                    <th class="px-4 py-3">Edit</th>
-                                    <th class="px-4 py-3">Delete</th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-gray-200 divide-y dark:divide-gray-700 dark:bg-gray-800">
-                                @foreach ($intervieweesT as $i)
-                                    <tr
-                                        class="bg-gray-200 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-black dark:text-white dark:bg-gray-900">
+        <div class="m-0 font-sans text-base antialiased font-normal dark:bg-slate-900 leading-default bg-gray-50 text-slate-500">
+            <div class="absolute w-full bg-blue-500 dark:hidden min-h-75"></div>
+            <main class="relative transition-all duration-200 ease-in-out xl:ml-68 rounded-xl"
+                style="height: 100vh;">
+                @include('layouts.navbars.topnav')
+                <div class="w-full px-6 py-6 mx-auto">
+                    <!-- table 1 -->
 
-                                        <td class="px-4 py-3 text-sm capitalize ">
-                                            {{ $i->name }}
-                                        </td>
-                                        <td class="px-4 py-3 text-xs">
-                                            <a href="#" data-modal-toggle="editModal{{ $i->id }}"
-                                                class="text-blue-600 font-bold py-2 px-4 rounded">Edit</a>
-                                        </td>
-                                        <td class="px-4 py-3 text-xs">
-                                            <a href="#" data-modal-toggle="deleteITypeModal{{ $i->id }}"
-                                                class="text-red-600 pl-2 font-bold py-2 px-4 rounded">Delete</a>
-                                        </td>
-                                    </tr>
-                                    <div id="deleteITypeModal{{ $i->id }}" tabindex="-1"
-                                        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full">
-                                        <div class="relative p-4 w-full max-w-md h-full md:h-auto">
-                                            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                                <button type="button"
-                                                    class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
-                                                    data-modal-toggle="deleteITypeModal{{ $i->id }}">
-                                                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor"
-                                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd"
-                                                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                                            clip-rule="evenodd"></path>
-                                                    </svg>
-                                                    <span class="sr-only">Close modal</span>
-                                                </button>
-                                                <div class="p-6 text-center">
-                                                    <svg aria-hidden="true"
-                                                        class="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200"
-                                                        fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2"
-                                                            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                                    </svg>
-                                                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                                                        Are
-                                                        you sure you want to delete this??</h3>
-                                                    <a href="{{ route('interviewee.destroy', $i->id) }}">
-                                                        <button data-modal-toggle="deleteITypeModal{{ $i->id }}"
-                                                            type="button"
-                                                            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
-                                                            Yes, I'm sure
-                                                        </button>
-                                                    </a>
-                                                    <button data-modal-toggle="deleteITypeModal{{ $i->id }}"
-                                                        type="button"
-                                                        class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
-                                                        data-modal-toggle="deleteITypeModal{{ $i->id }}">No,
-                                                        cancel</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div id="editModal{{ $i->id }}" tabindex="-1" aria-hidden="true"
-                                        class=" hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
-                                        <div
-                                            class="relative p-4 w-full max-w-md h-full md:h-auto bg-white rounded dark:bg-gray-700">
-
-                                            <form method="POST" action="{{ route('interviewee.update', $i->id) }}"
-                                                class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                                @csrf
-
-                                                <input type="hidden" name="company_id" id="company_id"
-                                                    value="{{ Auth::user()->company_id }}">
-
-                                                <div
-                                                    class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
-                                                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                                                        Interviewee Type
-                                                    </h3>
-                                                    <button type="button"
-                                                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                                        data-modal-toggle="editModal{{ $i->id }}">
-                                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd"
-                                                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                                                clip-rule="evenodd"></path>
-                                                        </svg>
-                                                    </button>
-                                                </div>
-
-                                                <div class="p-6 space-y-6">
-                                                    <div class="space-y-6">
-                                                        <div>
-                                                            <label for="name"
-                                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                                                            <input type="text" name="name" id="name"
-                                                                autocomplete="given-name"
-                                                                class="@error('name') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                                                placeholder="Interviewee Type Name"
-                                                                value="{{ $i->name }}" required>
-
-                                                            @error('name')
-                                                                <div class="ml-1 text-red-500 text-xs alert alert-danger">
-                                                                    {{ $message }}</div>
-                                                            @enderror
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div
-                                                    class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-                                                    <button type="submit"
-                                                        data-modal-toggle="editModal{{ $i->id }}"
-                                                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Edit</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        <!-- <div class="bg-gray-100 dark:bg-gray-800 p-3">
-                                        {{ $intervieweesT->appends(['intervieweesA' => $intervieweesA->currentPage()])->links() }}
-                                        </div> -->
-                        <div class="w-full overflow-x-auto bg-gray-100 dark:bg-gray-800  rounded-lg">
-                            <table class="w-full">
-                                <caption
-                                    class="p-5 bg-gray-200 relative text-lg font-semibold rounded-lg text-left  text-black border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-900">
-                                    Candidate Attributes
-                                    <p class="mt-1 text-sm font-normal  text-black dark:text-white w-[400px]">Browse a list
-                                        of Interviewee Types products
-                                        designed to help you work, grow your business, and more. (Fix this text)</p>
-                                    <a class="absolute top-6 right-6" href="#">
-                                        <button type="button" data-modal-toggle="addUserModal"
-                                            class="bg-blue-500 hover:bg-blue-700 text-white p-1 rounded">Create</button>
+                    <div class="flex flex-wrap -mx-3">
+                        <div class="w-full max-w-full px-3 mt-0 lg:w-1/2 lg:flex-none">
+                            <div
+                                class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
+                                <div class="p-6 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
+                                    <h6 class="dark:text-white">Candidate Types</h6>
+                                    <a class="absolute top-4 right-6" href="#">
+                                        <button type="button" data-modal-toggle="addITypeModal"
+                                            class="inline-block px-6 py-3 mr-3 font-bold text-center text-white uppercase align-middle transition-all bg-blue-500 rounded-lg cursor-pointer leading-normal text-xs ease-in tracking-tight-rem shadow-xs hover:-translate-y-px active:opacity-85 hover:shadow-md">Create</button>
                                     </a>
-                                </caption>
-                                <thead>
-                                    <tr
-                                        class="text-xs bg-gray-200 font-semibold tracking-wide text-left text-black uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-900">
-                                        <th class="px-4 py-3">Name</th>
-                                        <th class="px-4 py-3">Interviewee Type Name</th>
-                                        <th class="px-4 py-3">Edit</th>
-                                        <th class="px-4 py-3">Delete</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                                    @foreach ($intervieweesA as $i)
-                                        <tr
-                                            class="bg-gray-200 dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-900 text-black dark:text-white">
-                                            <td class="px-4 py-3 text-sm capitalize ">
-                                                {{ $i->name }}
-                                            </td>
-                                            <td class="px-4 py-3 text-sm capitalize ">
-                                                {{ $i->interviewee_type->name }}
-                                            </td>
-                                            <td class="px-4 py-3 text-xs">
+                                </div>
+                                <div class="flex-auto px-0 pt-0 pb-2">
+                                    <div class="p-0 overflow-x-auto">
+                                        <table
+                                            class="items-center w-full mb-0 align-top border-collapse dark:border-white/40 text-slate-500">
+                                            <thead class="align-bottom">
+                                                <tr>
+                                                    <th
+                                                        class="px-6 py-3 font-semibold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">
+                                                        Name</th>
+                                                    <th
+                                                        class="px-6 py-3 font-semibold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">
+                                                        Edit</th>
+                                                    <th
+                                                        class="px-6 py-3 font-semibold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xs border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">
+                                                        Delete</th>
 
-                                                <a href="#" data-modal-toggle="editModall{{ $i->id }}"
-                                                    class="text-blue-600 font-bold py-2 px-4 rounded">Edit</a>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($intervieweesT as $i)
+                                                    <tr>
+                                                        <td
+                                                            class="p-2 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                                            <div class="flex px-2 py-1">
 
-                                            </td>
-                                            <td class="px-4 py-3 text-xs">
-
-                                                <a href="#" data-modal-toggle="deleteUserModal{{ $i->id }}"
-                                                    class="text-red-600 font-bold py-2 px-4 rounded">Delete</a>
-
-                                            </td>
-
-                                        </tr>
-                                        <div id="deleteUserModal{{ $i->id }}" tabindex="-1"
-                                            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full">
-                                            <div class="relative p-4 w-full max-w-md h-full md:h-auto">
-                                                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                                    <button type="button"
-                                                        class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
-                                                        data-modal-toggle="deleteUserModal{{ $i->id }}">
-                                                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor"
-                                                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                            <path fill-rule="evenodd"
-                                                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                                                clip-rule="evenodd"></path>
-                                                        </svg>
-                                                        <span class="sr-only">Close modal</span>
-                                                    </button>
-                                                    <div class="p-6 text-center">
-                                                        <svg aria-hidden="true"
-                                                            class="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200"
-                                                            fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                stroke-width="2"
-                                                                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
-                                                            </path>
-                                                        </svg>
-                                                        <h3
-                                                            class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                                                            Are
-                                                            you sure you want to delete this candidate attribute?</h3>
-                                                        <a href="{{ route('intervieweeAttributes.destroy', $i->id) }}">
-                                                            <button data-modal-toggle="deleteUserModal{{ $i->id }}"
-                                                                type="button"
-                                                                class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
-                                                                Yes, I'm sure
-                                                            </button>
-                                                        </a>
-                                                        <button data-modal-toggle="deleteUserModal{{ $i->id }}"
-                                                            type="button"
-                                                            class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
-                                                            data-modal-toggle="deleteUserModal{{ $i->id }}">No,
-                                                            cancel</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div id="editModall{{ $i->id }}" tabindex="-1" aria-hidden="true"
-                                            class=" hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
-                                            <div
-                                                class="relative p-4 w-full max-w-md h-full md:h-auto bg-white rounded dark:bg-gray-700">
-
-                                                <form method="POST"
-                                                    action="{{ route('intervieweeAttributes.update', $i->id) }}"
-                                                    class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                                    @csrf
-
-                                                    <input type="hidden" name="company_id" id="company_id"
-                                                        value="{{ Auth::user()->company_id }}">
-
-                                                    <div
-                                                        class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
-                                                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                                                            Candidate Attribute
-                                                        </h3>
-                                                        <button type="button"
-                                                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                                            data-modal-toggle="editModall{{ $i->id }}">
-                                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                                                                xmlns="http://www.w3.org/2000/svg">
-                                                                <path fill-rule="evenodd"
-                                                                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                                                    clip-rule="evenodd"></path>
-                                                            </svg>
-                                                        </button>
-                                                    </div>
-
-                                                    <div class="p-6 space-y-6">
-                                                        <div class="space-y-6">
-                                                            <div>
-                                                                <label for="name"
-                                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                                                                <input type="text" name="name" id="name"
-                                                                    autocomplete="given-name"
-                                                                    class="@error('name') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                                                    placeholder="Candidate attribute name"
-                                                                    value="{{ $i->name }}" required>
-                                                                @error('name')
-                                                                    <div class="ml-1 text-red-500 text-xs alert alert-danger">
-                                                                        {{ $message }}</div>
-                                                                @enderror
-
+                                                                <div class="flex flex-col justify-center">
+                                                                    <h6 class="mb-0 text-sm leading-normal dark:text-white">
+                                                                        {{ $i->name }}</h6>
+                                                                </div>
                                                             </div>
-                                                            <div>
-                                                                <label for="INTERVIEWEE TYPE NAME	"
-                                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Interviewee
-                                                                    Type Name </label>
+                                                        </td>
+                                                        <td
+                                                            class="p-2 text-sm leading-normal text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                                            <a data-modal-toggle="editModal{{ $i->id }}"
+                                                                class="inline-block dark:text-white px-4 py-2.5 mb-0 font-bold transition-all bg-transparent border-0 rounded-lg shadow-none cursor-pointer leading-normal ease-in bg-150 hover:-translate-y-px active:opacity-85 bg-x-25 text-slate-700"
+                                                                href="javascript:;"><i
+                                                                    class="mr-2 fas fa-pencil-alt text-slate-700"
+                                                                    aria-hidden="true"></i>Edit</a>
+                                                        </td>
+                                                        <td
+                                                            class="p-2 text-sm text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                                            <a data-modal-toggle="deleteITypeModal{{ $i->id }}"
+                                                                class="relative z-10 inline-block px-4 py-2.5 mb-0 font-bold text-transparent transition-all border-0 rounded-lg shadow-none cursor-pointer leading-normal ease-in bg-150 bg-gradient-to-tl from-red-600 to-orange-600 hover:-translate-y-px active:opacity-85 bg-x-25 bg-clip-text"
+                                                                href="#"><i
+                                                                    class="mr-2 far fa-trash-alt bg-150 bg-gradient-to-tl from-red-600 to-orange-600 bg-x-25 bg-clip-text"></i>Delete</a>
+                                                        </td>
 
-                                                                <select name="interviewee_type_id"
-                                                                    class="@error('interviewee_type_id') is-invalid @enderror capitalize  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white "
-                                                                    id="interviewee_type_id">
-                                                                    <option value="{{ $i->interviewee_type->id }}">
-                                                                        {{ $i->interviewee_type->name }}</option>
-                                                                    @foreach ($intervieweesT as $a)
-                                                                        @if ($a->id !== $i->interviewee_type->id)
-                                                                            <option value="{{ $a->id }}">
-                                                                                {{ $a->name }}</option>
-                                                                        @endif
-                                                                    @endforeach
-                                                                </select>
-
-                                                                @error('interviewee_type_id')
-                                                                    <div class="ml-1 text-red-500 text-xs alert alert-danger">
-                                                                        {{ $message }}</div>
-                                                                @enderror
+                                                    </tr>
+                                                    <div id="deleteITypeModal{{ $i->id }}" tabindex="-1"
+                                                        class="fixed hidden top-0 left-0 w-full h-full overflow-x-hidden overflow-y-auto z-sticky outline-0">
+                                                        <div
+                                                            class="relative w-auto m-2 sm:m-7 sm:max-w-125 sm:mx-auto lg:mt-48">
+                                                            <div
+                                                                class="relative bg-white rounded-lg shadow dark:bg-slate-850">
+                                                                <button type="button"
+                                                                    class="absolute top-3 right-2.5 text-slate-700 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+                                                                    data-modal-toggle="deleteITypeModal{{ $i->id }}">
+                                                                    <svg aria-hidden="true" class="w-5 h-5"
+                                                                        fill="currentColor" viewBox="0 0 20 20"
+                                                                        xmlns="http://www.w3.org/2000/svg">
+                                                                        <path fill-rule="evenodd"
+                                                                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                                                            clip-rule="evenodd"></path>
+                                                                    </svg>
+                                                                    <span class="sr-only">Close modal</span>
+                                                                </button>
+                                                                <div class="p-6 text-center">
+                                                                    <svg aria-hidden="true"
+                                                                        class="mx-auto mb-4 w-14 h-14 text-slate-700 dark:text-gray-200"
+                                                                        fill="none" stroke="currentColor"
+                                                                        viewBox="0 0 24 24"
+                                                                        xmlns="http://www.w3.org/2000/svg">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                                            stroke-width="2"
+                                                                            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                                                        </path>
+                                                                    </svg>
+                                                                    <h3
+                                                                        class="mb-5 text-lg font-normal text-slate-700 dark:text-gray-400">
+                                                                        Are
+                                                                        you sure you want to delete this??</h3>
+                                                                    <a href="{{ route('interviewee.destroy', $i->id) }}">
+                                                                        <button
+                                                                            data-modal-toggle="deleteITypeModal{{ $i->id }}"
+                                                                            type="button"
+                                                                            class="inline-block px-6 py-3 mr-3 font-bold text-center text-white uppercase align-middle transition-all bg-gradient-to-tl from-red-600 to-orange-600 rounded-lg cursor-pointer leading-normal text-xs ease-in tracking-tight-rem shadow-xs bg-150 bg-x-25 hover:-translate-y-px active:opacity-85 hover:shadow-md">
+                                                                            Yes, I'm sure
+                                                                        </button>
+                                                                    </a>
+                                                                    <button
+                                                                        data-modal-toggle="deleteITypeModal{{ $i->id }}"
+                                                                        type="button"
+                                                                        class="inline-block px-6 py-3 mr-3 font-bold text-center text-white uppercase align-middle transition-all bg-blue-500 rounded-lg cursor-pointer leading-normal text-xs ease-in tracking-tight-rem shadow-xs bg-150 bg-x-25 hover:-translate-y-px active:opacity-85 hover:shadow-md"
+                                                                        data-modal-toggle="deleteITypeModal{{ $i->id }}">No,
+                                                                        cancel</button>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
 
-                                                    <div
-                                                        class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-                                                        <button type="submit"
-                                                            data-modal-toggle="editModall{{ $i->id }}"
-                                                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
+
+                                                    <div id="editModal{{ $i->id }}" tabindex="-1" aria-hidden="true"
+                                                        class=" hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+                                                        <div
+                                                            class="relative w-full xl:w-4/12 lg:w-1/2 mx-6 sm:m-7 sm:max-w-125 sm:mx-auto lg:mt-48 rounded-lg bg-white dark:bg-slate-850">
+
+                                                            <form method="POST"
+                                                                action="{{ route('interviewee.update', $i->id) }}"
+                                                                class="relative shadow">
+                                                                @csrf
+
+                                                                <input type="hidden" name="company_id" id="company_id"
+                                                                    value="{{ Auth::user()->company_id }}">
+
+                                                                <div
+                                                                    class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
+                                                                    <h3
+                                                                        class="text-xl font-semibold text-gray-900 dark:text-white">
+                                                                        Interviewee Type
+                                                                    </h3>
+                                                                    <button type="button"
+                                                                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                                                        data-modal-toggle="editModal{{ $i->id }}">
+                                                                        <svg class="w-5 h-5" fill="currentColor"
+                                                                            viewBox="0 0 20 20"
+                                                                            xmlns="http://www.w3.org/2000/svg">
+                                                                            <path fill-rule="evenodd"
+                                                                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                                                                clip-rule="evenodd"></path>
+                                                                        </svg>
+                                                                    </button>
+                                                                </div>
+
+                                                                <div class="p-6 space-y-6">
+                                                                    <div class="space-y-6">
+                                                                        <div>
+                                                                            <label for="name"
+                                                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                                                                            <input type="text" name="name"
+                                                                                id="name" autocomplete="given-name"
+                                                                                class="@error('name') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-white dark:border-gray-300 dark:placeholder-gray-300 dark:text-black"
+                                                                                placeholder="Interviewee Type Name"
+                                                                                value="{{ $i->name }}" required>
+
+                                                                            @error('name')
+                                                                                <div
+                                                                                    class="ml-1 text-red-500 text-xs alert alert-danger">
+                                                                                    {{ $message }}</div>
+                                                                            @enderror
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div
+                                                                    class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+                                                                    <button type="submit"
+                                                                        data-modal-toggle="editModal{{ $i->id }}"
+                                                                        class="inline-block px-6 py-3 mr-3 font-bold text-center text-white uppercase align-middle transition-all bg-blue-500 rounded-lg cursor-pointer leading-normal text-xs ease-in tracking-tight-rem shadow-xs bg-150 bg-x-25 hover:-translate-y-px active:opacity-85 hover:shadow-md">Edit</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
                                                     </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- <div class="bg-gray-100 dark:bg-gray-800 p-3">
-                                        {{ $intervieweesA->appends(['intervieweesT' => $intervieweesT->currentPage()])->links() }}
-                                        </div> -->
-
-                    </div>
-                    <div class="flex flex-row">
-                        <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-3 w-full mr-20">
-                            {{ $intervieweesT->appends(['intervieweesA' => $intervieweesA->currentPage()])->links() }}
-                        </div>
-                        <div class="bg-gray-100 dark:bg-gray-900 rounded-lg p-3 w-full">
-                            {{ $intervieweesA->appends(['intervieweesT' => $intervieweesT->currentPage()])->links() }}
-                        </div>
-
-                    </div>
-                </div>
-                <div id="addITypeModal" tabindex="-1" aria-hidden="true"
-                    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
-                    <div class="relative p-4 w-full max-w-md h-full md:h-auto">
-
-                        <form method="POST" action="{{ route('interviewee.store') }}"
-                            class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                            @csrf
-                            <input type="hidden" name="company_id" id="company_id"
-                                value="{{ Auth::user()->company_id }}">
-
-                            <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
-                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                                    Interviewee Type
-                                </h3>
-                                <button type="button"
-                                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                    data-modal-toggle="addITypeModal">
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                            clip-rule="evenodd"></path>
-                                    </svg>
-                                </button>
-                            </div>
-
-                            <div class="p-6 space-y-6">
-                                <div class="space-y-6">
-                                    <div>
-                                        <label for="name"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                                        <input type="text" name="name" id="name" autocomplete="given-name"
-                                            class="@error('name') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                            placeholder="Interviewee Type Name" required>
-                                        @error('name')
-                                            <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}
-                                            </div>
-                                        @enderror
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="p-3">
+                                        {{ $intervieweesT->appends(['intervieweesA' => $intervieweesA->currentPage()])->links() }}
                                     </div>
                                 </div>
                             </div>
+                            <div id="addITypeModal" tabindex="-1" aria-hidden="true"
+                                class="fixed hidden top-0 left-0 w-full h-full overflow-x-hidden overflow-y-auto z-sticky outline-0">
+                                <div
+                                    class="relative w-full xl:w-4/12 lg:w-1/2 mx-6 sm:m-7 sm:max-w-125 sm:mx-auto lg:mt-48 rounded-lg bg-white dark:bg-slate-850">
 
-                            <div
-                                class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-                                <button type="submit" data-modal-toggle="addITypeModal"
-                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div id="addUserModal" tabindex="-1" aria-hidden="true"
-                    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
-                    <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+                                    <form method="POST" action="{{ route('interviewee.store') }}"
+                                        class="relative shadow">
+                                        @csrf
+                                        <input type="hidden" name="company_id" id="company_id"
+                                            value="{{ Auth::user()->company_id }}">
 
-                        <form method="POST" autocomplete="off" action="{{ route('intervieweeAttributes.store') }}"
-                            class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                            @csrf
-                            <input type="hidden" name="company_id" id="company_id"
-                                value="{{ Auth::user()->company_id }}">
-
-                            <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
-                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                                    Candidate Attribute
-                                </h3>
-                                <button type="button"
-                                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                    data-modal-toggle="addUserModal">
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                            clip-rule="evenodd"></path>
-                                    </svg>
-                                </button>
-                            </div>
-
-                            <div class="p-6 space-y-6">
-                                <div class="space-y-6">
-                                    <div>
-                                        <label for="name"
-                                            class="block mb-4 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                                        <div class="autocomplete" style="width:300px;">
-                                            <input id="myInput" type="text" name="name"
-                                                placeholder="Candidate Attribute Name"
-                                                class="@error('name') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block dark:text-white w-[368px] p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                                placeholder="Candidate attribute name" required>
+                                        <div
+                                            class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
+                                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                                Interviewee Type
+                                            </h3>
+                                            <button type="button"
+                                                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                                data-modal-toggle="addITypeModal">
+                                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd"
+                                                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                                        clip-rule="evenodd"></path>
+                                                </svg>
+                                            </button>
                                         </div>
 
-                                        @error('name')
-                                            <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}
+                                        <div class="p-6 space-y-6">
+                                            <div class="space-y-6">
+                                                <div>
+                                                    <label for="name"
+                                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                                                    <input type="text" name="name" id="name"
+                                                        autocomplete="given-name"
+                                                        class="@error('name') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                                        placeholder="Interviewee Type Name" required>
+                                                    @error('name')
+                                                        <div class="ml-1 text-red-500 text-xs alert alert-danger">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
                                             </div>
-                                        @enderror
+                                        </div>
+
+                                        <div
+                                            class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+                                            <button type="submit" data-modal-toggle="addITypeModal"
+                                                class="inline-block px-6 py-3 mr-3 font-bold text-center text-white uppercase align-middle transition-all bg-blue-500 rounded-lg cursor-pointer leading-normal text-xs ease-in tracking-tight-rem shadow-xs bg-150 bg-x-25 hover:-translate-y-px active:opacity-85 hover:shadow-md">Create</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full max-w-full px-3 mt-0 lg:w-1/2 lg:flex-none">
+                            <div
+                                class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
+                                <div class="p-6 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
+                                    <h6 class="dark:text-white">Candidate Attributes</h6>
+                                    <a class="absolute top-4 right-6" href="#">
+                                        <button type="button" data-modal-toggle="addUserModal"
+                                            class="inline-block px-6 py-3 mr-3 font-bold text-center text-white uppercase align-middle transition-all bg-blue-500 rounded-lg cursor-pointer leading-normal text-xs ease-in tracking-tight-rem shadow-xs hover:-translate-y-px active:opacity-85 hover:shadow-md">Create</button>
+                                    </a>
+                                </div>
+                                <div class="flex-auto px-0 pt-0 pb-2">
+                                    <div class="p-0 overflow-x-auto">
+                                        <table
+                                            class="items-center w-full mb-0 align-top border-collapse dark:border-white/40 text-slate-500">
+                                            <thead class="align-bottom">
+                                                <tr>
+                                                    <th
+                                                        class="px-6 py-3 font-semibold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">
+                                                        Name</th>
+                                                    <th
+                                                        class="px-6 py-3 font-semibold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">
+                                                        Interview Type</th>
+                                                    <th
+                                                        class="px-6 py-3 font-semibold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">
+                                                        Edit</th>
+                                                    <th
+                                                        class="px-6 py-3 font-semibold text-center uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-xs border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">
+                                                        Delete</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($intervieweesA as $i)
+                                                    <tr>
+                                                        <td
+                                                            class="p-2 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                                            <div class="flex px-2 py-1">
+
+                                                                <div class="flex flex-col justify-center">
+                                                                    <h6
+                                                                        class="mb-0 text-sm leading-normal dark:text-white">
+                                                                        {{ $i->name }}</h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td
+                                                            class="p-2 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                                            <div class="flex px-2 py-1">
+
+                                                                <div class="flex flex-col justify-center">
+                                                                    <h6
+                                                                        class="mb-0 text-sm leading-normal dark:text-white">
+                                                                        {{ $i->interviewee_type->name }}</h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td
+                                                            class="p-2 text-sm leading-normal text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                                            <a data-modal-toggle="editModall{{ $i->id }}"
+                                                                class="inline-block dark:text-white px-4 py-2.5 mb-0 font-bold transition-all bg-transparent border-0 rounded-lg shadow-none cursor-pointer leading-normal ease-in bg-150 hover:-translate-y-px active:opacity-85 bg-x-25 text-slate-700"
+                                                                href="javascript:;">
+                                                                <i class="mr-2 fas fa-pencil-alt text-slate-700"
+                                                                    aria-hidden="true"></i>Edit</a>
+                                                        </td>
+                                                        <td
+                                                            class="p-2 text-sm text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                                                            <a data-modal-toggle="deleteUserModal{{ $i->id }}"
+                                                                class="relative z-10 inline-block px-4 py-2.5 mb-0 font-bold text-transparent transition-all border-0 rounded-lg shadow-none cursor-pointer leading-normal ease-in bg-150 bg-gradient-to-tl from-red-600 to-orange-600 hover:-translate-y-px active:opacity-85 bg-x-25 bg-clip-text"
+                                                                href="#">
+                                                                <i
+                                                                    class="mr-2 far fa-trash-alt bg-150 bg-gradient-to-tl from-red-600 to-orange-600 bg-x-25 bg-clip-text"></i>Delete</a>
+                                                        </td>
+
+                                                    </tr>
+                                                    <div id="deleteUserModal{{ $i->id }}" tabindex="-1"
+                                                        class="fixed hidden top-0 left-0 w-full h-full overflow-x-hidden overflow-y-auto z-sticky outline-0">
+                                                        <div
+                                                            class="relative w-auto m-2 sm:m-7 sm:max-w-125 sm:mx-auto lg:mt-48">
+                                                            <div
+                                                                class="relative bg-white rounded-lg shadow dark:bg-slate-850">
+                                                                <button type="button"
+                                                                    class="absolute top-3 right-2.5 text-slate-700 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+                                                                    data-modal-toggle="deleteUserModal{{ $i->id }}">
+                                                                    <svg aria-hidden="true" class="w-5 h-5"
+                                                                        fill="currentColor" viewBox="0 0 20 20"
+                                                                        xmlns="http://www.w3.org/2000/svg">
+                                                                        <path fill-rule="evenodd"
+                                                                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                                                            clip-rule="evenodd"></path>
+                                                                    </svg>
+                                                                    <span class="sr-only">Close modal</span>
+                                                                </button>
+                                                                <div class="p-6 text-center">
+                                                                    <svg aria-hidden="true"
+                                                                        class="mx-auto mb-4 w-14 h-14 text-slate-700 dark:text-gray-200"
+                                                                        fill="none" stroke="currentColor"
+                                                                        viewBox="0 0 24 24"
+                                                                        xmlns="http://www.w3.org/2000/svg">
+                                                                        <path stroke-linecap="round"
+                                                                            stroke-linejoin="round" stroke-width="2"
+                                                                            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                                                        </path>
+                                                                    </svg>
+                                                                    <h3
+                                                                        class="mb-5 text-lg font-normal text-slate-700 dark:text-gray-400">
+                                                                        Are
+                                                                        you sure you want to delete this??</h3>
+                                                                    <a
+                                                                        href="{{ route('intervieweeAttributes.destroy', $i->id) }}">
+                                                                        <button
+                                                                            data-modal-toggle="deleteUserModal{{ $i->id }}"
+                                                                            type="button"
+                                                                            class="inline-block px-6 py-3 mr-3 font-bold text-center text-white uppercase align-middle transition-all bg-gradient-to-tl from-red-600 to-orange-600 rounded-lg cursor-pointer leading-normal text-xs ease-in tracking-tight-rem shadow-xs bg-150 bg-x-25 hover:-translate-y-px active:opacity-85 hover:shadow-md">
+                                                                            Yes, I'm sure
+                                                                        </button>
+                                                                    </a>
+                                                                    <button
+                                                                        data-modal-toggle="deleteUserModal{{ $i->id }}"
+                                                                        type="button"
+                                                                        class="inline-block px-6 py-3 mr-3 font-bold text-center text-white uppercase align-middle transition-all bg-blue-500 rounded-lg cursor-pointer leading-normal text-xs ease-in tracking-tight-rem shadow-xs bg-150 bg-x-25 hover:-translate-y-px active:opacity-85 hover:shadow-md"
+                                                                        data-modal-toggle="deleteUserModal{{ $i->id }}">No,
+                                                                        cancel
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div id="editModall{{ $i->id }}" tabindex="-1"
+                                                        aria-hidden="true"
+                                                        class=" hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+                                                        <div
+                                                            class="relative w-full xl:w-4/12 lg:w-1/2 mx-6 sm:m-7 sm:max-w-125 sm:mx-auto lg:mt-48 rounded-lg bg-white dark:bg-slate-850">
+
+                                                            <form method="POST"
+                                                                action="{{ route('intervieweeAttributes.update', $i->id) }}"
+                                                                class="relative shadow">
+                                                                @csrf
+
+                                                                <input type="hidden" name="company_id" id="company_id"
+                                                                    value="{{ Auth::user()->company_id }}">
+
+                                                                <div
+                                                                    class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
+                                                                    <h3
+                                                                        class="text-xl font-semibold text-gray-900 dark:text-white">
+                                                                        Candidate Attribute
+                                                                    </h3>
+                                                                    <button type="button"
+                                                                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                                                        data-modal-toggle="editModall{{ $i->id }}">
+                                                                        <svg class="w-5 h-5" fill="currentColor"
+                                                                            viewBox="0 0 20 20"
+                                                                            xmlns="http://www.w3.org/2000/svg">
+                                                                            <path fill-rule="evenodd"
+                                                                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                                                                clip-rule="evenodd"></path>
+                                                                        </svg>
+                                                                    </button>
+                                                                </div>
+
+                                                                <div class="p-6 space-y-6">
+                                                                    <div class="space-y-6">
+                                                                        <div>
+                                                                            <label for="name"
+                                                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                                                                            <input type="text" name="name"
+                                                                                id="name" autocomplete="given-name"
+                                                                                class="@error('name') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-white dark:border-gray-300 dark:placeholder-gray-300 dark:text-black"
+                                                                                placeholder="Candidate attribute name"
+                                                                                value="{{ $i->name }}" required>
+
+                                                                            @error('name')
+                                                                                <div
+                                                                                    class="ml-1 text-red-500 text-xs alert alert-danger">
+                                                                                    {{ $message }}</div>
+                                                                            @enderror
+
+                                                                        </div>
+                                                                        <div>
+                                                                            <label for="INTERVIEWEE TYPE NAME"
+                                                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Interview
+                                                                                Type</label>
+                                                                            <select name="interviewee_type_id"
+                                                                                class="@error('interviewee_type_id') is-invalid @enderror capitalize  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white "
+                                                                                id="interviewee_type_id">
+                                                                                <option
+                                                                                    value="{{ $i->interviewee_type->id }}">
+                                                                                    {{ $i->interviewee_type->name }}
+                                                                                </option>
+                                                                                @foreach ($intervieweesT as $a)
+                                                                                    @if ($a->id !== $i->interviewee_type->id)
+                                                                                        <option
+                                                                                            value="{{ $a->id }}">
+                                                                                            {{ $a->name }}</option>
+                                                                                    @endif
+                                                                                @endforeach
+                                                                            </select>
+
+                                                                            @error('interviewee_type_id')
+                                                                                <div
+                                                                                    class="ml-1 text-red-500 text-xs alert alert-danger">
+                                                                                    {{ $message }}</div>
+                                                                            @enderror
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div
+                                                                    class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+                                                                    <button type="submit"
+                                                                        data-modal-toggle="editModal{{ $i->id }}"
+                                                                        class="inline-block px-6 py-3 mr-3 font-bold text-center text-white uppercase align-middle transition-all bg-blue-500 rounded-lg cursor-pointer leading-normal text-xs ease-in tracking-tight-rem shadow-xs bg-150 bg-x-25 hover:-translate-y-px active:opacity-85 hover:shadow-md">Edit</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
                                     </div>
-                                    <div>
-                                        <label for="INTERVIEWEE TYPE NAME"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Interviewee
-                                            Type Name </label>
-                                        <select name="interviewee_type_id"
-                                            class="@error('interviewee_type_id') is-invalid @enderror capitalize  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white "
-                                            id="interviewee_type_id">
-                                            @foreach ($intervieweesT as $i)
-                                                <option value="{{ $i->id }}">{{ $i->name }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('interviewee_type_id')
-                                            <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}
-                                            </div>
-                                        @enderror
+                                    <div class="p-3">
+                                        {{ $intervieweesT->appends(['intervieweesA' => $intervieweesA->currentPage()])->links() }}
                                     </div>
                                 </div>
                             </div>
+                            <div id="addITypeModal" tabindex="-1" aria-hidden="true"
+                                class="fixed hidden top-0 left-0 w-full h-full overflow-x-hidden overflow-y-auto z-sticky outline-0">
+                                <div
+                                    class="relative w-full xl:w-4/12 lg:w-1/2 mx-6 sm:m-7 sm:max-w-125 sm:mx-auto lg:mt-48 rounded-lg bg-white dark:bg-slate-850">
 
-                            <div
-                                class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-                                <button type="submit" data-modal-toggle="addUserModal"
-                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create</button>
+                                    <form method="POST" action="{{ route('interviewee.store') }}"
+                                        class="relative shadow">
+                                        @csrf
+                                        <input type="hidden" name="company_id" id="company_id"
+                                            value="{{ Auth::user()->company_id }}">
+
+                                        <div
+                                            class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
+                                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                                Interviewee Type
+                                            </h3>
+                                            <button type="button"
+                                                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                                data-modal-toggle="addITypeModal">
+                                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd"
+                                                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                                        clip-rule="evenodd"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+
+                                        <div class="p-6 space-y-6">
+                                            <div class="space-y-6">
+                                                <div>
+                                                    <label for="name"
+                                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                                                    <input type="text" name="name" id="name"
+                                                        autocomplete="given-name"
+                                                        class="@error('name') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                                        placeholder="Interviewee Type Name" required>
+                                                    @error('name')
+                                                        <div class="ml-1 text-red-500 text-xs alert alert-danger">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+                                            <button type="submit" data-modal-toggle="addITypeModal"
+                                                class="inline-block px-6 py-3 mr-3 font-bold text-center text-white uppercase align-middle transition-all bg-blue-500 rounded-lg cursor-pointer leading-normal text-xs ease-in tracking-tight-rem shadow-xs bg-150 bg-x-25 hover:-translate-y-px active:opacity-85 hover:shadow-md">Create</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                        </form>
+                            <div id="addUserModal" tabindex="-1" aria-hidden="true"
+                                class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+                                <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+
+                                    <form method="POST" autocomplete="off"
+                                        action="{{ route('intervieweeAttributes.store') }}"
+                                        class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                        @csrf
+                                        <input type="hidden" name="company_id" id="company_id"
+                                            value="{{ Auth::user()->company_id }}">
+
+                                        <div
+                                            class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
+                                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                                                Candidate Attribute
+                                            </h3>
+                                            <button type="button"
+                                                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                                data-modal-toggle="addUserModal">
+                                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd"
+                                                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                                        clip-rule="evenodd"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+
+                                        <div class="p-6 space-y-6">
+                                            <div class="space-y-6">
+                                                <div>
+                                                    <label for="name"
+                                                        class="block mb-4 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                                                    <div class="autocomplete" style="width:300px;">
+                                                        <input id="myInput" type="text" name="name"
+                                                            placeholder="Candidate Attribute Name"
+                                                            class="@error('name') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block dark:text-white w-[368px] p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                                            placeholder="Candidate attribute name" required>
+                                                    </div>
+
+                                                    @error('name')
+                                                        <div class="ml-1 text-red-500 text-xs alert alert-danger">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
+                                                <div>
+                                                    <label for="INTERVIEWEE TYPE NAME"
+                                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Interviewee
+                                                        Type Name </label>
+                                                    <select name="interviewee_type_id"
+                                                        class="@error('interviewee_type_id') is-invalid @enderror capitalize  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white "
+                                                        id="interviewee_type_id">
+                                                        @foreach ($intervieweesT as $i)
+                                                            <option value="{{ $i->id }}">{{ $i->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('interviewee_type_id')
+                                                        <div class="ml-1 text-red-500 text-xs alert alert-danger">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div
+                                            class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+                                            <button type="submit" data-modal-toggle="addUserModal"
+                                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
 
                 </div>
-            </div>
-
+            </main>
         </div>
     @else
         <!-- <script>
