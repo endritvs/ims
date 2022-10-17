@@ -54,7 +54,7 @@
             </tr>
             <tr>
               <td style="padding:30px;background-color:#ffffff;">
-                <h1 style="font-size:26px;line-height:32px;font-weight:bold;letter-spacing:-0.02em;">Interview with {{$intervieweeName}} @ {{$interview_date}}</h1>
+                <h1 style="font-size:26px;line-height:32px;font-weight:bold;letter-spacing:-0.02em;">Interview with {{$my_mail_data['intervieweeName']}} @ {{$my_mail_data['interview_date']}}</h1>
               </td>
             </tr>
 
@@ -69,8 +69,8 @@
                 <td style="width:395px;padding-bottom:20px;" valign="top">
                 <![endif]-->
                 <div class="col-lge" style="display:inline-block;width:100%;max-width:395px;vertical-align:top;padding-bottom:20px;font-family:Arial,sans-serif;font-size:16px;line-height:22px;color:#363636;">
-                  <p style="margin-top:0;margin-bottom:12px;">Interviewers: {{$interviewer}}</p>
-                  <p style="margin-top:0;margin-bottom:12px;">Interviewee: {{$intervieweeName}}</p>
+                  <p style="margin-top:0;margin-bottom:12px;">Interviewers: {{$my_mail_data['interviewer']}}</p>
+                  <p style="margin-top:0;margin-bottom:12px;">Interviewee: {{$my_mail_data['intervieweeName']}}</p>
                   <p style="margin-top:0;margin-bottom:12px;">Meeting link shall be provided when near the time of interview.</p>
 
                   <p style="margin-top:0;margin-bottom:18px;">Thank you, <br>
