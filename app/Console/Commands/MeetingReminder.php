@@ -47,7 +47,7 @@ class MeetingReminder extends Command
             $timeThirtyMins = $timeThirtyMins - (30 * 60);
             $dateThirtyMins = date("Y-m-d H:i:s", $timeThirtyMins);    
 
-            $dateLimit = date("Y-m-d H:i:s", strtotime($pAll->interview_date));
+            $dateLimit = date("Y-m-d H:i:s", strtotime($iAll->interview_date));
             $timeLimit = strtotime($dateLimit);
             $timeLimit = $timeLimit - (25*60);
             $dateLimit = date("Y-m-d H:i:s", $timeLimit);

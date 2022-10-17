@@ -36,6 +36,7 @@
   </style>
 </head>
 <body style="margin:0;padding:0;word-spacing:normal;background-color:#939297;">
+
   <div role="article" aria-roledescription="email" lang="en" style="text-size-adjust:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;background-color:#939297;">
     <table role="presentation" style="width:100%;border:none;border-spacing:0;">
       <tr>
@@ -68,7 +69,7 @@
                 <td style="width:395px;padding-bottom:20px;" valign="top">
                 <![endif]-->
                 <div class="col-lge" style="display:inline-block;width:100%;max-width:395px;vertical-align:top;padding-bottom:20px;font-family:Arial,sans-serif;font-size:16px;line-height:22px;color:#363636;">
-                  <p style="margin-top:0;margin-bottom:12px;">You seem like a great addition {{$intervieweeName}}! Our team welcomes you to our company. Good luck on your {{$interviewType}} position.</p>
+                  <p style="margin-top:0;margin-bottom:12px;">You seem like a great addition {{$my_mail_data['intervieweeName']}}! Our team welcomes you to our company. Good luck on your {{$my_mail_data['interviewType']}} position.</p>
                   <p style="margin-top:0;margin-bottom:18px;">Thank you, <br>
                                                               IMS Team.</p>
                    

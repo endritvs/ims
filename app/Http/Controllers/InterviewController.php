@@ -18,9 +18,11 @@ use Illuminate\Support\Facades\DB;
 use GuzzleHttp\Client;
 use Log;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AcceptMail;
+use App\Mail\InterviewMail;
 use App\Traits\ZoomMeetingTrait;
-
-
+  
 class InterviewController extends Controller
 {
     use ZoomMeetingTrait;
@@ -239,9 +241,10 @@ $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->where('company_id', Au
 
         $interview = interview::with('user', 'interviewees')->where('interview_id', $request['interview_id'])->get();
 
-        $id = 8574484059;
+        $id = '8574484059';
               
         $meeting = $this->get($id);
+
 
         $data = [
 
@@ -283,25 +286,16 @@ $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->where('company_id', Au
                         'fromName' => 'IMS Company'
                     ];
 
-                \Mail::send('/interviewComponents/meetingEmail', $mail_data, function($message) use ($mail_data){
-
-                $message->to($mail_data['recipient'])
-                        ->from($mail_data['fromEmail'], $mail_data['fromName'])
-                        ->subject("Interview Info - Interviewer");
-
-                }); 
+                Mail::to($mail_data['recipient'])
+                    ->queue(new InterviewMail($mail_data));
             }
         }}
 
         $mail_data['recipient'] = $interview[0]->interviewees->email;
         $mail_data['link'] = $interview[0]->joinLink;
 
-        \Mail::send('/interviewComponents/meetingEmail', $mail_data, function($message) use ($mail_data){
-
-                $message->to($mail_data['recipient'])
-                        ->from($mail_data['fromEmail'], $mail_data['fromName'])
-                        ->subject("Interview Info - Interviewee");
-        }); 
+        Mail::to($mail_data['recipient'])
+            ->queue(new InterviewMail($mail_data));
 
         return back()->with(['admin' => $admin]);
     }
@@ -363,13 +357,8 @@ $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->where('company_id', Au
             'fromName' => 'IMS Company'
         ];
 
-            \Mail::send('/interviewComponents/acceptEmail', $mail_data, function($message) use ($mail_data){
-
-            $message->to($mail_data['recipient'])
-                    ->from($mail_data['fromEmail'], $mail_data['fromName'])
-                    ->subject("Interview Info - You have been accepted!");
-
-        }); 
+        Mail::to($mail_data['recipient'])
+            ->queue(new AcceptMail($mail_data));
 
         $interview->status = "accepted";
         $interview->save();
@@ -391,13 +380,8 @@ $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->where('company_id', Au
             'fromName' => 'IMS Company'
         ];
 
-            \Mail::send('/interviewComponents/declineEmail', $mail_data, function($message) use ($mail_data){
-
-            $message->to($mail_data['recipient'])
-                    ->from($mail_data['fromEmail'], $mail_data['fromName'])
-                    ->subject("Interview Info - You have been declined");
-
-        }); 
+            Mail::to($mail_data['recipient'])
+            ->queue(new AcceptMail($mail_data));
 
         $interview->status = 'declined';
         $interview->save();
