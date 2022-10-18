@@ -81,7 +81,6 @@ class IntervieweeController extends Controller
         return view('intervieweesMainComponents/table')->with(['interviewer'=>$interviewer,'interviewss'=>$interviewss,'review_attributes'=>$review_attributes,'exec'=>$exec,'exec1'=>$exec1,'intervieweesA'=>$intervieweesA,'intervieweesT'=>$intervieweesT]);
     }
 
- 
     public function paginate($items, $perPage = 6, $page = null, $options = [])
     {
         $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
