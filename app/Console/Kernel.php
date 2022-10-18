@@ -16,7 +16,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('meeting:reminder')
-        ->everyThirtyMinutes()
+        ->weekdays()
+        ->everyFiveMinutes()
+        ->between('8:00', '20:00')
         ->appendOutputTo('scheduler.log');
     }
 

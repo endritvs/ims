@@ -26,8 +26,8 @@ trait ZoomMeetingTrait
     }
     public function generateZoomToken()
     {
-        $key = env('ZOOM_API_KEY', '');
-        $secret = env('ZOOM_API_SECRET', '');
+        $key = env('ZOOM_API_KEY');
+        $secret = env('ZOOM_API_SECRET');
         $payload = [
             'iss' => $key,
             'exp' => strtotime('+1 minute'),
@@ -38,7 +38,7 @@ trait ZoomMeetingTrait
 
     private function retrieveZoomUrl()
     {
-        return env('ZOOM_API_URL', '');
+        return env('ZOOM_API_URL');
     }
 
     public function toZoomTimeFormat(string $dateTime)

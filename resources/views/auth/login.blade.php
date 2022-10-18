@@ -71,6 +71,15 @@
                      @error('company_name')
                         <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
                         @enderror
+                    
+                        <div class="input-field">
+                            <i class="fas fa-image"></i>
+                            <input  class="@error('image') is-invalid @enderror" style="line-height:3 !important;" type="file" name="image" >
+                          
+                        </div> 
+                         @error('image')
+                            <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
+                            @enderror
                     <div class="input-field">
                         <i class="fas fa-user"></i>
                         <input  class="@error('name') is-invalid @enderror" type="text" name="name" placeholder="Name">
@@ -79,6 +88,14 @@
                      @error('name')
                         <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
                         @enderror
+                        <div class="input-field">
+                            <i class="fas fa-user"></i>
+                            <input  class="@error('surname') is-invalid @enderror" type="text" name="surname" placeholder="Surname">
+                          
+                        </div> 
+                         @error('surname')
+                            <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
+                            @enderror
                     <div class="input-field">
                         <i class="fas fa-envelope"></i>
                         <input class="@error('email') is-invalid @enderror" type="email" name="email" placeholder="Email">
@@ -116,21 +133,6 @@
                         @enderror
                     <input type="submit" value="Sign up" class="btn solid">
 
-                    <p class="social-text">Or Sign up with social platforms</p>
-                    <div class="social-media">
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-google"></i>
-                        </a>
-                        <a href="#" class="social-icon">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                    </div>
                 </form>
             </div>
         </div>

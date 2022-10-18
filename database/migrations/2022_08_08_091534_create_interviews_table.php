@@ -23,6 +23,8 @@ return new class extends Migration
                 ->references('id')->on('companies')
                 ->onDelete('cascade');
             $table->String('status')->default('pending');
+            $table->longText('startLink')->default('none');
+            $table->longText('joinLink')->default('none');
             $table->timestamps();
         });
     }

@@ -14,7 +14,7 @@ class Companies extends Model
 
     protected $fillable = [
         'company_name',
-        
+        'image'
     ];
 
     public function user()
@@ -50,5 +50,10 @@ class Companies extends Model
     public function reviews_attributes()
     {
         return $this->hasMany(reviews_attributes::class);
+    }
+
+    public function additional_reviews()
+    {
+        return $this->hasMany(additional_reviews::class);
     }
 }

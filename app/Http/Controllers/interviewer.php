@@ -40,6 +40,7 @@ class interviewer extends Controller
                 $img_path = $newImg->store('/public/img');
                 $request->validate([
                     'name' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
+                    'surname' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
                     'email' => ['required', 'string', 'max:40'],
                     'password' => ['required', 'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$.%^&*-]).{8,}$/ ', 'string', 'max:25'],
                     'role' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
@@ -48,6 +49,7 @@ class interviewer extends Controller
 
              User::create([
                 'name' => $request['name'],
+                'surname' => $request['surname'],
                 'email' => $request['email'],
                 'password' => Hash::make($request['password']),
                 'img' => $img_path,
@@ -56,6 +58,7 @@ class interviewer extends Controller
         }else{
             $request->validate([
                 'name' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
+                'surname' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
                 'email' => ['required', 'string', 'max:40'],
                 'password' => ['required', 'regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$.%^&*-]).{8,}$/ ', 'string', 'max:25'],
                 'role' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
@@ -64,6 +67,7 @@ class interviewer extends Controller
 
             User::create([
                         'name' => $request->name,
+                        'surname' => $request->surname,
                         'email' => $request->email,
                         'password' => Hash::make($request->password),
                         'img'=>"public/noProfilePhoto/nofoto.jpg",
@@ -97,11 +101,13 @@ class interviewer extends Controller
             $img_path = $newImg->store('/public/img');
         $request->validate([
             'name' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
+            'surname' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
             'email' => ['required', 'string', 'max:40'],
             'role' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
             'img' => ['required', 'mimes:jpeg,png,jpg,jpj', 'max:2048'],
         ]);
         $interviewer->name = $request->name;
+        $interviewer->surname = $request->surname;
         $interviewer->email = $request->email;
         $interviewer->role = $request->role;
         $interviewer->img = $img_path;
@@ -112,11 +118,13 @@ class interviewer extends Controller
     }else{
         $request->validate([
             'name' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
+            'surname' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
             'email' => ['required', 'string', 'max:40'],
             'role' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
          
         ]);
         $interviewer->name = $request->name;
+        $interviewer->surname = $request->surname;
         $interviewer->email = $request->email;
         $interviewer->role = $request->role;
         $interviewer->img = $interviewer->img;
@@ -137,20 +145,41 @@ class interviewer extends Controller
     public function updateProfile(Request $request, $id)
     {
         $img =  $request->hasFile('img');
+        $company_img =  $request->hasFile('image');
         $interviewer = User::findOrFail($id);
         $company = Companies::findOrFail(Auth::user()->company_id);
-        if ($img) {
-            $newImg = $request->file('img');
-            $img_path = $newImg->store('/public/img');
+        if ($img || $company_img) {
+            if($img){
+                $newImg = $request->file('img');
+                $img_path = $newImg->store('/public/img');
+            }
+            if($company_img){
+                $newImgComp = $request->file('image');
+                $company_img_path = $newImgComp->store('/public/img');
+            }
+
         $request->validate([
             'name' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
+            'surname' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
             'email' => ['required', 'string', 'max:40'],
-            'img' => ['required', 'mimes:jpeg,png,jpg,jpj', 'max:2048'],
+            'img' => ['mimes:jpeg,png,jpg,jpj', 'max:2048'],
+            'image' => ['mimes:jpeg,png,jpg,jpj', 'max:2048'],
             'company_name' => ['required', 'regex:/^[a-z A-Z]+$/u', 'string', 'max:25'],
         ]);
+
+        if($img){
+            $interviewer->img = $img_path;
+        }else{
+            $interviewer->img = $interviewer->img;
+        }
+        if($company_img && Auth::user()->role==="admin"){
+            $company->image = $company_img_path;
+        }else{
+            $company->image =  $company->image;
+        }
         $interviewer->name = $request->name;
+        $interviewer->surname = $request->surname;
         $interviewer->email = $request->email;
-        $interviewer->img = $img_path;
         $company->company_name=$request->company_name;
         $interviewer->save();
         $company->save();
@@ -159,10 +188,12 @@ class interviewer extends Controller
         }else{
             $request->validate([
                 'name' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
+                'surname' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
                 'email' => ['required', 'string', 'max:40'],
                 'company_name' => ['required', 'regex:/^[a-z A-Z]+$/u', 'string', 'max:25'],
             ]);
             $interviewer->name = $request->name;
+            $interviewer->surname = $request->surname;
             $interviewer->email = $request->email;
             $company->company_name=$request->company_name;
             $interviewer->save();
