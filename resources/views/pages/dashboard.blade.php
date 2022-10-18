@@ -283,14 +283,27 @@ $sot = date('Y-m-d');
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    const labels = ["January", "February", "March", "April", "May", "June"];
+    var January={{ App\Models\interviewee::whereMonth('created_at', '=', 1)->where('company_id',Auth::user()->company_id)->get()->count() }};
+    var February={{ App\Models\interviewee::whereMonth('created_at', '=', 2)->where('company_id',Auth::user()->company_id)->get()->count() }};
+    var March={{ App\Models\interviewee::whereMonth('created_at', '=', 3)->where('company_id',Auth::user()->company_id)->get()->count() }};
+    var April={{ App\Models\interviewee::whereMonth('created_at', '=', 4)->where('company_id',Auth::user()->company_id)->get()->count() }};
+    var May={{ App\Models\interviewee::whereMonth('created_at', '=', 5)->where('company_id',Auth::user()->company_id)->get()->count() }};
+    var June={{ App\Models\interviewee::whereMonth('created_at', '=', 6)->where('company_id',Auth::user()->company_id)->get()->count() }};
+    var July={{ App\Models\interviewee::whereMonth('created_at', '=', 7)->where('company_id',Auth::user()->company_id)->get()->count() }};
+    var August={{ App\Models\interviewee::whereMonth('created_at', '=', 8)->where('company_id',Auth::user()->company_id)->get()->count() }};
+    var September={{ App\Models\interviewee::whereMonth('created_at', '=', 9)->where('company_id',Auth::user()->company_id)->get()->count() }};
+    var October={{ App\Models\interviewee::whereMonth('created_at', '=', 10)->where('company_id',Auth::user()->company_id)->get()->count() }};
+    var November={{ App\Models\interviewee::whereMonth('created_at', '=', 11)->where('company_id',Auth::user()->company_id)->get()->count() }};
+    var December={{ App\Models\interviewee::whereMonth('created_at', '=', 12)->where('company_id',Auth::user()->company_id)->get()->count() }};
+    
+    const labels = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
     const data = {
         labels: labels,
         datasets: [{
-            label: "My First dataset",
-            backgroundColor: "hsl(252, 82.9%, 67.8%)",
-            borderColor: "hsl(252, 82.9%, 67.8%)",
-            data: [0, 10, 5, 2, 20, 30, 45],
+            label: "Interviews per month",
+            backgroundColor: "black",
+            borderColor: "black",
+            data: [January, February, March, April, May, June, July, August, September, October, November, December ],
         }, ],
     };
     const configLineChart = {

@@ -2,7 +2,7 @@
     <div class="w-full">
         <section class="px-4 sm:px-6 lg:px-4 py-12">
             <div class="shadow-lg rounded-lg overflow-hidden">
-                <div class="py-3 px-5 bg-gray-50">Chart Candidates</div>
+                <div class="py-3 px-5 bg-gray-50 " >Interviews status stats</div>
                 <canvas class="p-20" id="chartBar"></canvas>
             </div>
         </section>
@@ -14,20 +14,21 @@
 
 <!-- Chart bar -->
 <script>
+    var Pending={{ App\Models\interview::where('status', '=', 'pending')->where('company_id',Auth::user()->company_id)->get()->count() }};
+    var Declined={{ App\Models\interview::where('status', '=', 'declined')->where('company_id',Auth::user()->company_id)->get()->count() }};
+    var Accepted={{ App\Models\interview::where('status', '=', 'accepted')->where('company_id',Auth::user()->company_id)->get()->count() }};
     const labelsBarChart = [
-        "January",
-        "February",
-        "March",
-        "April",
-
+        "Pending",
+        "Declined",
+        "Accepted",
     ];
     const dataBarChart = {
         labels: labelsBarChart,
         datasets: [{
-            label: "Chart Review",
-            backgroundColor: "hsl(224, 54%, 30%)",
-            borderColor: "hsl(252, 82.9%, 67.8%)",
-            data: [0, 1, 5, 3, 10],
+            label: "Interview status amount",
+            backgroundColor: ["#FACC15", "#FF5C5C", "green"],
+            barThickness: 100,
+            data: [Pending, Declined, Accepted],
         }, ],
     };
 
