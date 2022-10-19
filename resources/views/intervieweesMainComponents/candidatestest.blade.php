@@ -38,14 +38,7 @@
                             </div>
                             <h5 class="dark:text-white text-center">Mark Davis</h5>
                         </div>
-                        <div class="border-black/12.5 rounded-t-2xl p-6 text-center pt-0 pb-6 lg:pt-2 lg:pb-4">
-                            <div class="flex justify-between">
-                                <button type="button"
-                                    class="hidden px-8 py-2 font-bold leading-normal text-center text-white align-middle transition-all ease-in border-0 rounded-lg shadow-md cursor-pointer text-xs bg-cyan-500 lg:block tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">Accept</button>
-                                <button type="button"
-                                    class="hidden px-8 py-2 font-bold leading-normal text-center text-white align-middle transition-all ease-in border-0 rounded-lg shadow-md cursor-pointer text-xs bg-slate-700 lg:block tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">Decline</button>
-                            </div>
-                        </div>
+                        
 
                         <div class="flex-auto p-6 pt-0">
                             <div class="text-center">
@@ -61,6 +54,14 @@
                                     <i class="mr-2 dark:text-white ni ni-hat-3"></i>
                                     DATE OF INTERVIEW
                                 </div>
+                            </div>
+                        </div>
+                        <div class="border-black/12.5 rounded-t-2xl p-6 text-center pt-0 pb-6 lg:pt-2 lg:pb-4">
+                            <div class="flex justify-between">
+                                <button type="button"
+                                    class="hidden px-8 py-2 font-bold leading-normal text-center text-white align-middle transition-all ease-in border-0 rounded-lg shadow-md cursor-pointer text-xs bg-cyan-500 lg:block tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">Accept</button>
+                                <button type="button"
+                                    class="hidden px-8 py-2 font-bold leading-normal text-center text-white align-middle transition-all ease-in border-0 rounded-lg shadow-md cursor-pointer text-xs bg-slate-700 lg:block tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">Decline</button>
                             </div>
                         </div>
                     </div>

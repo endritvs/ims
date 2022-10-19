@@ -2,7 +2,39 @@
 @php
     $link = explode('/', Auth::user()->img);
     $linkCompany = explode('/', Auth::user()->company->image);
+    $menu = array();
+    $menu[] = array(
+        'name' => 'Dashboard',
+        'route' => 'dashboard',
+        'icon' => 'ni ni-tv-2',
+        'iconColor' => 'text-blue-500'
+    );
+    $menu[] = array(
+        'name' => 'Candidates Options',
+        'route' => 'candidate-options',
+        'icon' => 'fa-solid fa-user-plus',
+        'iconColor' => 'text-orange-500'
+    );
+    $menu[] = array(
+        'name' => 'Candidates',
+        'route' => 'candidates',
+        'icon' => 'fa-solid fa-users',
+        'iconColor' => 'text-emerald-500'
+    );
+    $menu[] = array(
+        'name' => 'Interview',
+        'route' => 'interview',
+        'icon' => 'ni ni-app',
+        'iconColor' => 'text-cyan-500'
+    );
+    $menu[] = array(
+        'name' => 'Questioner',
+        'route' => 'questioners',
+        'icon' => 'fa-solid fa-user',
+        'iconColor' => 'text-red-600'
+    );
 @endphp
+
 <aside class="fixed inset-y-0 flex-wrap items-center justify-between block w-full p-0 my-4 overflow-y-auto antialiased transition-transform duration-200 -translate-x-full bg-white border-0 shadow-xl dark:shadow-none dark:bg-slate-850 max-w-64 ease-nav-brand z-990 xl:ml-6 rounded-2xl xl:left-0 xl:translate-x-0"
     aria-expanded="false">
     <div class="h-19">
@@ -27,60 +59,18 @@
 
     <div class="items-center block w-auto max-h-screen overflow-auto h-sidenav grow basis-full">
         <ul class="flex flex-col pl-0 mb-0">
+            @foreach($menu as $item)
             <li class="mt-0.5 w-full">
-                <a class="py-2.7 bg-blue-500/13 dark:text-white dark:opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg px-4 font-semibold text-slate-700 transition-colors"
-                    href="/dashboardtest">
+                <a class="py-2.7 {{Request::is($item['route']) ? 'bg-blue-500/13' : '' }} dark:text-white dark:opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg px-4 font-semibold text-slate-700 transition-colors"
+                    href="/{{$item['route']}}">
                     <div
                         class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                        <i class="relative top-0 text-sm leading-normal text-blue-500 ni ni-tv-2"></i>
+                        <i class="relative top-0 text-sm leading-normal {{$item['icon']}} {{$item['iconColor']}}"></i>
                     </div>
-                    <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Dashboard</span>
+                    <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">{{$item['name']}}</span>
                 </a>
             </li>
-            @if (Auth::user()->role === 'admin')
-                <li class="mt-0.5 w-full">
-                    <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
-                        href="{{ route('intervieweeAttributes.index') }}">
-                        <div
-                            class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                            <i class="relative top-0 text-sm leading-normal text-orange-500 fa-solid fa-user-plus"></i>
-                        </div>
-                        <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Candidates Options</span>
-                    </a>
-                </li>
-            @endif
-            <li class="mt-0.5 w-full">
-                <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
-                    href="{{ route('interviewees.index') }}">
-                    <div
-                        class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center fill-current stroke-0 text-center xl:p-2.5">
-                        <i class="relative top-0 text-sm leading-normal text-emerald-500 fa-solid fa-users"></i>
-                    </div>
-                    <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Candidates</span>
-                </a>
-            </li>
-
-            <li class="mt-0.5 w-full">
-                <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
-                    href="{{ route('public.index') }}">
-                    <div
-                        class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                        <i class="relative top-0 text-sm leading-normal text-cyan-500 ni ni-app"></i>
-                    </div>
-                    <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Interview</span>
-                </a>
-            </li>
-
-            <li class="mt-0.5 w-full">
-                <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
-                    href="{{ route('interviewer.index') }}">
-                    <div
-                        class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                        <i class="relative top-0 text-sm leading-normal text-red-600 fa-solid fa-user"></i>
-                    </div>
-                    <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Questioner</span>
-                </a>
-            </li>
+            @endforeach
 
             <li class="w-full mt-4">
                 <h6 class="pl-6 ml-2 text-xs font-bold leading-tight uppercase dark:text-white opacity-60">Account pages
@@ -97,24 +87,6 @@
                     <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Profile</span>
                 </a>
             </li>
-
-            {{-- <li class="mt-0.5 w-full">
-          <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="../pages/sign-in.html">
-            <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-              <i class="relative top-0 text-sm leading-normal text-orange-500 ni ni-single-copy-04"></i>
-            </div>
-            <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Sign In</span>
-          </a>
-        </li> --}}
-
-            {{-- <li class="mt-0.5 w-full">
-          <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors" href="../pages/sign-up.html">
-            <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-              <i class="relative top-0 text-sm leading-normal text-cyan-500 ni ni-collection"></i>
-            </div>
-            <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Sign Up</span>
-          </a>
-        </li> --}}
         </ul>
     </div>
 </aside>
