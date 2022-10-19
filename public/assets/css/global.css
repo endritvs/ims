@@ -3,3 +3,27 @@
     grid-template-columns: repeat(3,minmax(0,1fr));
     gap: 20px;
 }
+
+.h_100 {
+    height: 100vh;
+}
+
+.profile_image img {
+    width: 100px;
+    height: 100px;
+    background: #000;
+    border-radius: 50%;
+    overflow: none;
+    margin: auto;
+}
+
+.app_overflow {
+    overflow: scroll;
+}
+.app_timeline {
+    gap: 20px;
+}
+
+.gap_5 {
+    gap: 5px;
+}

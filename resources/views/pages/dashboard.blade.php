@@ -125,7 +125,7 @@
                 </div>
 
                 <!-- cards row 2 -->
-                <div class="mt-6">
+                <div class="mt-6 lg:flex md:flex block app_timeline app_overflow">
                     @include('components.timelinev2')
                 </div>
 
@@ -144,6 +144,36 @@
                                 <table
                                     class="items-center w-full mb-4 align-top border-collapse border-gray-200 dark:border-white/40">
                                     <tbody>
+                                        <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                            <div class="text-center">
+                                                <p class="mb-2 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Interviewer:</p>
+                                            </div>
+                                        </td>
+                                        <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                            <div class="text-center">
+                                                <p class="mb-2 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Candidate:</p>
+                                            </div>
+                                        </td>
+                                        <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                            <div class="text-center">
+                                                <p class="mb-2 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Date:</p>
+                                            </div>
+                                        </td>
+                                        <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                            <div class="text-center">
+                                                <p class="mb-2 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Candidate Type:</p>
+                                            </div>
+                                        </td>
+                                        <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                            <div class="text-center">
+                                                <p class="mb-2 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">Candidate Attribut:</p>
+                                            </div>
+                                        </td>
+                                        <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
+                                            <div class="text-center">
+                                                <p class="mb-2 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">CV:</p>
+                                            </div>
+                                        </td>
                                         @foreach ($pastInterviewAll as $i)
                                             @php
                                                 
@@ -153,8 +183,6 @@
                                             <tr>
                                                 <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                                                     <div class="text-center">
-                                                        <p class="mb-2 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">
-                                                            Interviewer:</p>
                                                         <h6 class="mb-0 text-sm leading-normal dark:text-white">
                                                           {{ $i->user->name }}
                                                         </h6>
@@ -162,9 +190,6 @@
                                                 </td>
                                                 <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                                                     <div class="text-center">
-                                                        <p
-                                                            class="mb-2 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">
-                                                            Candidate:</p>
                                                         <h6 class="mb-0 text-sm leading-normal dark:text-white">
                                                           {{ $i->interviewees->name . ' ' . $i->interviewees->surname }}
                                                         </h6>
@@ -172,9 +197,6 @@
                                                 </td>
                                                 <td class="p-2 align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                                                     <div class="text-center">
-                                                        <p
-                                                            class="mb-2 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">
-                                                            Date:</p>
                                                         <h6 class="mb-0 text-sm leading-normal dark:text-white">
                                                           {{ $i->interview_date }}
                                                         </h6>
@@ -182,8 +204,6 @@
                                                 </td>
                                                 <td class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                                                     <div class="flex-1 text-center">
-                                                        <p class="mb-2 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">
-                                                            Candidate Type:</p>
                                                         <h6 class="mb-0 text-sm leading-normal dark:text-white">
                                                           {{ $i->interviewees->interviewee_type->name }}
                                                         </h6>
@@ -191,8 +211,6 @@
                                                 </td>
                                                 <td class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                                                     <div class="flex-1 text-center">
-                                                        <p class="mb-2 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">
-                                                            Candidate Attribute:</p>
                                                         <h6 class="mb-0 text-sm leading-normal dark:text-white">
                                                           @foreach ($i->interviewees->interviewee_type->interviewee_attributes as $a)
                                                             {{ $a->name }}
@@ -202,8 +220,6 @@
                                                 </td>
                                                 <td class="p-2 text-sm leading-normal align-middle bg-transparent border-b whitespace-nowrap dark:border-white/40">
                                                     <div class="flex-1 text-center">
-                                                        <p class="mb-2 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">
-                                                            CV:</p>
                                                         <a href="/storage/cv_path/{{ $cv[2] }}" download>
                                                           <button type="button"
                                                               class="inline-block px-3 py-1 font-bold text-center text-white uppercase align-middle transition-all bg-blue-500 rounded-lg cursor-pointer leading-normal text-xs ease-in tracking-tight-rem shadow-xs bg-150 bg-x-25 hover:-translate-y-px active:opacity-85 hover:shadow-md">Download

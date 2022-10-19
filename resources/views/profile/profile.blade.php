@@ -1,8 +1,8 @@
 @extends('layouts.layout')
 @section('content')
-    <div class="m-0 font-sans text-base antialiased font-normal dark:bg-slate-900 leading-default bg-gray-50 text-slate-500">
+    <div class="m-0 font-sans text-base antialiased font-normal dark:bg-slate-900 leading-default bg-gray-50 text-slate-500 h_100">
         <div class="absolute w-full bg-blue-500 dark:hidden min-h-75"></div>
-        <main class="relative h-full max-h-screen transition-all duration-200 ease-in-out xl:ml-68 rounded-xl">
+            <main class="relative h-full max-h-screen transition-all duration-200 ease-in-out xl:ml-68 rounded-xl">
             @include('layouts.navbars.topnav')
             <div class="relative w-full mx-auto">
                 <div
@@ -18,7 +18,7 @@
                     </div>
                 </div>
                 @php
-                        
+                    
                     $link = explode('/', Auth::user()->img);
                     $linkCompany = explode('/', Auth::user()->company->image);
                 @endphp
@@ -79,19 +79,20 @@
                                                 </div>
                                             </div>
                                             @if (Auth::user()->role === 'admin')
-                                            <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
-                                                <div class="mb-4">
-                                                    <label for="company"
-                                                        class="inline-block mb-2 ml-1 font-semibold text-sm text-slate-700 dark:text-white/80">Company
-                                                        Name</label>
-                                                    <input type="text" name="company_name" tabindex="0"
-                                                        value="{{ Auth::user()->company->company_name }}"
-                                                        class="@error('company_name') is-invalid @enderror focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
-                                                    @error('company_name')
-                                                        <div class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</div>
-                                                    @enderror
+                                                <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
+                                                    <div class="mb-4">
+                                                        <label for="company"
+                                                            class="inline-block mb-2 ml-1 font-semibold text-sm text-slate-700 dark:text-white/80">Company
+                                                            Name</label>
+                                                        <input type="text" name="company_name" tabindex="0"
+                                                            value="{{ Auth::user()->company->company_name }}"
+                                                            class="@error('company_name') is-invalid @enderror focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
+                                                        @error('company_name')
+                                                            <div class="ml-1 text-red-500 text-xs alert alert-danger">
+                                                                {{ $message }}</div>
+                                                        @enderror
+                                                    </div>
                                                 </div>
-                                            </div>
                                             @endif
                                             <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
                                                 <div class="mb-4">
@@ -105,8 +106,8 @@
                                                     @enderror
                                                     @if (Auth::user()->img === 'public/noProfilePhoto/nofoto.jpg')
                                                         <img class="mt-3 rounded object-cover"
-                                                            src="{{ asset('/noProfilePhoto/' . $link[2]) }}"
-                                                            width="50px" height="50px">
+                                                            src="{{ asset('/noProfilePhoto/' . $link[2]) }}" width="50px"
+                                                            height="50px">
                                                     @else
                                                         <img class="rounded ml-1 m-4"
                                                             src="/storage/img/{{ $link[2] }}" width="50px"
@@ -128,18 +129,18 @@
                                                                 width="50px" height="50px">
                                                         @else
                                                             <img class="rounded ml-1 m-4"
-                                                                src="/storage/imgCompanies/{{ $linkCompany[2] }}" width="50px"
-                                                                height="50px">
+                                                                src="/storage/imgCompanies/{{ $linkCompany[2] }}"
+                                                                width="50px" height="50px">
                                                         @endif
                                                     </div>
                                                 </div>
                                             @endif
                                             <button role="button" aria-label="Next step"
-                                            class="inline-block ml-3 px-4 py-3 font-bold text-center text-white uppercase align-middle transition-all rounded-lg cursor-pointer bg-blue-500 leading-normal text-xs ease-in tracking-tight-rem shadow-xs bg-150 bg-x-25 hover:-translate-y-px active:opacity-85 hover:shadow-md">Save</button>
+                                                class="inline-block ml-3 px-4 py-3 font-bold text-center text-white uppercase align-middle transition-all rounded-lg cursor-pointer bg-blue-500 leading-normal text-xs ease-in tracking-tight-rem shadow-xs bg-150 bg-x-25 hover:-translate-y-px active:opacity-85 hover:shadow-md">Save</button>
 
                                         </div>
 
-                                        
+
                                     </form>
                                     <hr
                                         class="h-px mx-0 my-4 bg-transparent border-0 opacity-25 bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent " />
@@ -223,7 +224,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
 
                                 <div class="flex-auto p-6 pt-0">
                                     <div class="flex flex-wrap -mx-3">

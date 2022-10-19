@@ -10,12 +10,6 @@
         'iconColor' => 'text-blue-500'
     );
     $menu[] = array(
-        'name' => 'Candidates Options',
-        'route' => 'candidate-options',
-        'icon' => 'fa-solid fa-user-plus',
-        'iconColor' => 'text-orange-500'
-    );
-    $menu[] = array(
         'name' => 'Candidates',
         'route' => 'candidates',
         'icon' => 'fa-solid fa-users',
@@ -71,14 +65,29 @@
                 </a>
             </li>
             @endforeach
+            @if (Auth::user()->role === 'admin')
+                <li class="w-full mt-4">
+                    <h6 class="pl-6 ml-2 text-xs font-bold leading-tight uppercase dark:text-white opacity-60">Admin
+                    </h6>
+                </li>
+                <li class="mt-0.5 w-full">
+                    <a class=" dark:text-white {{Request::is('candidate-options') ? 'bg-blue-500/13' : '' }} rounded-lg dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
+                        href="{{ route('intervieweeAttributes.index') }}">
+                        <div
+                            class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
+                            <i class="relative top-0 text-sm leading-normal text-orange-500 fa-solid fa-user-plus"></i>
+                        </div>
+                        <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Candidates Options</span>
+                    </a>
+                </li>
+            @endif
 
             <li class="w-full mt-4">
                 <h6 class="pl-6 ml-2 text-xs font-bold leading-tight uppercase dark:text-white opacity-60">Account pages
                 </h6>
             </li>
-
             <li class="mt-0.5 w-full">
-                <a class=" dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
+                <a class=" dark:text-white {{Request::is('edit-profile/*') ? 'bg-blue-500/13' : '' }} rounded-lg dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
                     href="{{ route('interview.editProfile', Auth::user()->id) }}">
                     <div
                         class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
