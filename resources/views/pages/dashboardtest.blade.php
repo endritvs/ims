@@ -24,10 +24,6 @@
                         $today = date('Y-m-d H:i:s');
                         @endphp {{ App\Models\interview::where('interview_date', '>', $today)->where('company_id',Auth::user()->company_id)->get()->count() }}
                         </h5>
-                      <p class="mb-0 dark:text-white dark:opacity-60">
-                        <span class="text-sm font-bold leading-normal text-emerald-500">+55%</span>
-                        since yesterday
-                      </p>
                     </div>
                   </div>
                   <div class="px-3 text-right basis-1/3">
@@ -49,10 +45,6 @@
                     <div>
                       <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Interviews held</p>
                       <h5 class="mb-2 font-bold dark:text-white">{{ App\Models\interview::where('interview_date', '<', $today)->where('company_id',Auth::user()->company_id)->get()->count() }}</h5>
-                      <p class="mb-0 dark:text-white dark:opacity-60">
-                        <span class="text-sm font-bold leading-normal text-emerald-500">+3%</span>
-                        since last week
-                      </p>
                     </div>
                   </div>
                   <div class="px-3 text-right basis-1/3">
@@ -74,10 +66,6 @@
                     <div>
                       <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Reviews Made</p>
                       <h5 class="mb-2 font-bold dark:text-white">{{ App\Models\review::where('company_id',Auth::user()->company_id)->get()->count() }}</h5>
-                      <p class="mb-0 dark:text-white dark:opacity-60">
-                        <span class="text-sm font-bold leading-normal text-red-600">-2%</span>
-                        since last quarter
-                      </p>
                     </div>
                   </div>
                   <div class="px-3 text-right basis-1/3">
@@ -99,10 +87,6 @@
                     <div>
                       <p class="mb-0 font-sans text-sm font-semibold leading-normal uppercase dark:text-white dark:opacity-60">Total Candidates</p>
                       <h5 class="mb-2 font-bold dark:text-white">{{ App\Models\interviewee::where('company_id',Auth::user()->company_id)->get()->count() }}</h5>
-                      <p class="mb-0 dark:text-white dark:opacity-60">
-                        <span class="text-sm font-bold leading-normal text-emerald-500">+5%</span>
-                        than last month
-                      </p>
                     </div>
                   </div>
                   <div class="px-3 text-right basis-1/3">
@@ -124,7 +108,7 @@
         <!-- cards row 3 -->
 
         <div class="flex flex-wrap mt-6 -mx-3">
-          <div class="w-full max-w-full px-3 mt-0 mb-6 lg:mb-0 lg:w-7/12 lg:flex-none">
+          <div class="w-full max-w-full px-3 mt-0 lg:mb-0">
             <div class="relative flex flex-col min-w-0 break-words bg-white border-0 border-solid shadow-xl dark:bg-slate-850 dark:shadow-dark-xl dark:bg-gray-950 border-black-125 rounded-2xl bg-clip-border">
               <div class="p-4 pl-6 pb-0 mb-0 rounded-t-4">
                 <div class="flex justify-between">
@@ -221,7 +205,7 @@
               </div>
             </div>
           </div> 
-          <div class="w-full max-w-full px-3 mt-0 lg:w-5/12 lg:flex-none">
+          <div class="w-full mt-6 max-w-full px-3 lg:flex-none">
             <div class="border-black/12.5 dark:bg-slate-850 dark:shadow-dark-xl shadow-xl relative z-20 flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-white bg-clip-border">
               <div class="border-black/12.5 mb-0 rounded-t-2xl border-b-0 border-solid p-6 pt-4 pb-0">
                 <h6 class="capitalize dark:text-white">Sales overview</h6>

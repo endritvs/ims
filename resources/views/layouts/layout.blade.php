@@ -16,35 +16,33 @@
             }
         </script>
         {{-- CSS TAILWIND --}}
-        <link rel="stylesheet" href="./css/app.css">
+        <link rel="stylesheet" href="../css/app.css">
         <!--     Fonts and icons     -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
         <!-- Font Awesome Icons -->
         <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
         <!-- Nucleo Icons -->
-        <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-        <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+        <link href="/assets/css/nucleo-icons.css" rel="stylesheet" />
+        <link href="/assets/css/nucleo-svg.css" rel="stylesheet" />
         {{-- Global styling --}}
-        <link href="./assets/css/global.css" rel="stylesheet"  />
+        <link href="/assets/css/global.css" rel="stylesheet"  />
         <!-- Main Styling -->
-        <link href="./assets/css/argon-dashboard-tailwind.min.css" rel="stylesheet" />
+        <link href="/assets/css/argon-dashboard-tailwind.min.css" rel="stylesheet" />
         
     </head>
 <body>  
     @include('layouts.navbars.sidenav')
     @yield('content')
     
-    {{-- @include('components.fixed-plugin') --}}
-       
-    
+
     <!--   Core JS Files   -->
     <script src="https://kit.fontawesome.com/5d54a13ffa.js" crossorigin="anonymous"></script>
     <!-- plugin for charts  -->
-    <script src="./assets/js/plugins/chartjs.min.js" async></script>
+    <script src="/assets/js/plugins/chartjs.min.js" async></script>
     <!-- plugin for scrollbar  -->
-    <script src="./assets/js/plugins/perfect-scrollbar.min.js" async></script>
+    <script src="/assets/js/plugins/perfect-scrollbar.min.js" async></script>
     <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
     <!-- main script file  -->
-    <script src="./assets/js/argon-dashboard-tailwind.js?v=1.0.1" async></script>
+    <script src="/assets/js/argon-dashboard-tailwind.js?v=1.0.1" async></script>
 </body>
 </html>

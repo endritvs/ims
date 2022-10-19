@@ -155,17 +155,17 @@ class interviewer extends Controller
             }
             if($company_img){
                 $newImgComp = $request->file('image');
-                $company_img_path = $newImgComp->store('/public/img');
+                $company_img_path = $newImgComp->store('/public/imgCompanies');
             }
 
-        $request->validate([
-            'name' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
-            'surname' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
-            'email' => ['required', 'string', 'max:40'],
-            'img' => ['mimes:jpeg,png,jpg,jpj', 'max:2048'],
-            'image' => ['mimes:jpeg,png,jpg,jpj', 'max:2048'],
-            'company_name' => ['required', 'regex:/^[a-z A-Z]+$/u', 'string', 'max:25'],
-        ]);
+        // $request->validate([
+        //     'name' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
+        //     'surname' => ['required', 'regex:/^[a-zA-Z]+$/u', 'string', 'max:25'],
+        //     'email' => ['required', 'string', 'max:40'],
+        //     'img' => ['mimes:jpeg,png,jpg,jpj', 'max:2048'],
+        //     'image' => ['mimes:jpeg,png,jpg,jpj', 'max:2048'],
+        //     'company_name' => ['required', 'regex:/^[a-z A-Z]+$/u', 'string', 'max:25'],
+        // ]);
 
         if($img){
             $interviewer->img = $img_path;

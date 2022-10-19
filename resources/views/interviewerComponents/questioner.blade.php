@@ -186,6 +186,21 @@
                                                                         @enderror
                                                                     </div>
                                                                     <div>
+                                                                        <label for="surname"
+                                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                                                                        <input type="text" name="surname"
+                                                                            id="surname" autocomplete="given-name"
+                                                                            class=" @error('surname') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-white dark:border-gray-300 dark:placeholder-gray-300 dark:text-black"
+                                                                            placeholder="Interviewee Type Name"
+                                                                            value="{{ $i->surname }}" required>
+
+                                                                        @error('surname')
+                                                                            <div
+                                                                                class="ml-1 text-red-500 text-xs alert alert-danger">
+                                                                                {{ $message }}</div>
+                                                                        @enderror
+                                                                    </div>
+                                                                    <div>
                                                                         <label for="name"
                                                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
                                                                         <input type="text" name="email"
@@ -310,6 +325,19 @@
                                                     placeholder="Name" required>
 
                                                 @error('name')
+                                                    <div class="ml-1 text-red-500 text-xs alert alert-danger">
+                                                        {{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                            <div>
+                                                <label for="surname"
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Surname</label>
+                                                <input type="text" name="surname" id="surname"
+                                                    autocomplete="given-name"
+                                                    class="@error('surname') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-white dark:border-gray-300 dark:placeholder-gray-300 dark:text-black"
+                                                    placeholder="Surname" required>
+
+                                                @error('surname')
                                                     <div class="ml-1 text-red-500 text-xs alert alert-danger">
                                                         {{ $message }}</div>
                                                 @enderror
