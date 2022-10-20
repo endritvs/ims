@@ -154,7 +154,7 @@ class interviewer extends Controller
             }
             if($company_img){
                 $newImgComp = $request->file('image');
-                $company_img_path = $newImgComp->store('/public/img');
+                $company_img_path = $newImgComp->store('/public/imgCompanies');
             }
 
         $request->validate([
