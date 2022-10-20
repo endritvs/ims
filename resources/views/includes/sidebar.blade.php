@@ -10,22 +10,16 @@
             <li class="px-5 hidden md:block">
                 @if (Auth::user()->company->image==="public/noProfilePhoto/nofoto.jpg")
                 <div class="inline-flex overflow-hidden relative justify-center items-center w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600">
-                    <span class="font-medium text-gray-600 dark:text-white">
-                        <img src="{{asset('/noProfilePhoto/'.$linkCompany[2])}}">
-                    </span>
-
+                        <img src="{{asset('/noProfilePhoto/'.$linkCompany[2])}}"> <!-- No Company IMG -->
                 </div>
-                <span class="font-medium text-white relative bottom-3 capitalize">{{Auth::user()->company->company_name}}</span>
                 @else
                 <div class="inline-flex overflow-hidden relative justify-center items-center w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600">
-                    <span class="font-medium text-gray-600 dark:text-white">
-                        <img src="/storage/imgCompanies/{{$linkCompany[2]}}">
-                    </span>
+                        <img src="/storage/imgCompanies/{{$linkCompany[2]}}"> <!-- Has Company IMG -->
 
                 </div>
-                <span class="font-medium text-white relative pl-3 bottom-4 uppercase">{{Auth::user()->company->company_name}}</span>
-
                 @endif
+
+                <span class="font-medium text-white relative pl-3 bottom-4 uppercase">{{Auth::user()->company->company_name}}</span> <!-- Company Name -->
 
                 <div class="flex flex-row items-center h-8 mt-5">
                     <div class="text-sm font-light tracking-wide text-gray-400 uppercase">Main</div>

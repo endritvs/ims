@@ -158,7 +158,7 @@
 @endphp
     <div class="bg-white dark:bg-gray-800 text-black dark:text-gray-200 p-4 antialiased flex max-w-lg">
         @if ($c->questionnaires->img!=="public/noProfilePhoto/nofoto.jpg")
-      <img class="rounded-full h-8 w-8 mr-2 mt-1 " src="{{asset('/storage/images/'.$link[2])}}"/>
+      <img class="rounded-full h-8 w-8 mr-2 mt-1 " src="{{'/storage/img/'.$link[2]}}"/>
       @else
       <img class="rounded-full h-8 w-8 mr-2 mt-1 " src="{{asset('/noProfilePhoto/'.$link[2])}}"/>
       @endif

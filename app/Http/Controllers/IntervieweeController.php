@@ -55,7 +55,7 @@ class IntervieweeController extends Controller
         ])
         ->orderBy('id', 'asc')->get();
         $intervieweesA = $this->paginate($intervieweesA);
-        $intervieweesA->withPath('/interviewees');
+        $intervieweesA->withPath('/candidates');
         $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->where('company_id', Auth::user()->company_id)->get();
 
         $sql="SELECT t.name, GROUP_CONCAT( i.name ) as 'Attributes' FROM interviewee_attributes i inner join interviewee_types t on i.interviewee_type_id=t.id group by i.interviewee_type_id, ims_database.t.name";
