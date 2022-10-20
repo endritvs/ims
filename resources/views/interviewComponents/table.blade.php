@@ -292,7 +292,7 @@
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-900 dark:text-white">Choose candidate</label>
+                        <label class="block text-sm font-medium text-gray-900 dark:text-white">Choose candidate1</label>
 
                         <select name="interviewees_id"
                             class="@error('interviewees_id') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
@@ -320,11 +320,55 @@
 
 
           
-                <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-                    <button type="submit" data-modal-toggle="addUserModal"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create</button>
-                </div>
+                <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600" id="create-btn">
+                    <button type="submit"  data-modal-toggle="defaultModal"
+                        class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 w-[150px] h-[50px] save-btn">Create</button>
+  
+</div>
             </form>
+          
+ <script>
+    save_btn = document.querySelector(".save-btn");
+save_btn.onclick = function() {
+  this.innerHTML="<div class='flex mb-4 w-auto'><div class='loader'></div><p class='mb-10 text-xs'>Creating Interview...</p></div>";
+
+setTimeout(() => {
+    this.innerHTML = "<div class='flex items-center justify-center gap-2'><svg class='w-6 h-6 ' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'><p>Interview Created</p></path></svg></div>";
+  
+  
+this.style = "padding-top: 0.625rem;padding-bottom: 0.625rem; width:auto; padding-left: 1.25rem;padding-right: 1.25rem; margin-right: 0.5rem; margin-bottom: 0.5rem; background-color: linear-gradient(to right, var(--tw-gradient-stops)); background-color: #34D399; background-color: #10B981; background-color: #059669; color: #ffffff; font-size: 0.875rem;line-height: 1.25rem; font-weight: 500; text-align: center; border-radius: 0.5rem;";
+},7000);
+}
+    </script>
+           <style>
+        
+  .loader{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    pointer-events: none;
+    width: 30px;
+    height: 30px;
+    border-radius:50% ;
+    border: 3px solid transparent;
+    border-top-color:#fff ;
+    animation: an1 1s ease infinite;
+  }
+
+  @keyframes an1 {
+    0%{
+      transform:rotate(0turn);
+    }
+    100%{
+      transform: rotate(1turn);
+    }
+  }
+            </style>
+        </div>
+    </div>
+</div>
+
+
         </div>
 </div>
 @endsection('content')
