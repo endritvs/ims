@@ -19,10 +19,10 @@
 
                 <div class="flex justify-evenly items-center absolute inset-x-0 bottom-0 h-16 ">
                     <a class="mr-4" href="#">
-                        <button type="button" data-modal-toggle="addUserModal" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Create</button>
+                        <button type="button" data-modal-toggle="addUserModal" class="inline-block px-6 py-3 mr-3 font-bold text-center text-white uppercase align-middle transition-all bg-blue-500 rounded-lg cursor-pointer leading-normal text-xs ease-in tracking-tight-rem shadow-xs hover:-translate-y-px active:opacity-85 hover:shadow-md">Create</button>
                     </a>
                     <a class="mr-1" href="#">
-                        <button type="button" data-modal-toggle="quick-add" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Quick Add</button>
+                        <button type="button" data-modal-toggle="quick-add" class="inline-block px-6 py-3 mr-3 font-bold text-center text-white uppercase align-middle transition-all bg-blue-500 rounded-lg cursor-pointer leading-normal text-xs ease-in tracking-tight-rem shadow-xs hover:-translate-y-px active:opacity-85 hover:shadow-md">Quick Add</button>
                     </a>
                     <form action="{{ route('interviewees.index') }}" method="GET" role="search" class="sticky top-0 mr-1 mb-[8px] ml-auto w-[700px]">
                     <div class="flex justify-center">
@@ -35,7 +35,7 @@
                         <div class="relative w-full">
                             <input type="search" id="search-dropdown" name="term" class=" block mr-30 p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Search Mockups, Logos, Design Templates...">
                             <a href={{route('interviewees.index')}}>
-                                <button type="submit" class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                <button type="submit" class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-blue-500 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                     <svg aria-hidden="true" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                     </svg>
@@ -49,7 +49,7 @@
                     <a class="justify-center items-center mb-[8px]">Sort:
                  
                         <form action="{{ route('interviewees.sortName') }}" method="GET" role="search" class="my-3 ">
-                        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 pr-4 mx-2 mb-[8px]">
+                        <button type="submit" class="inline-block px-6 py-3 mr-3 font-bold text-center text-white uppercase align-middle transition-all bg-blue-500 rounded-lg cursor-pointer leading-normal text-xs ease-in tracking-tight-rem shadow-xs hover:-translate-y-px active:opacity-85 hover:shadow-md pr-4 mx-2 mb-[8px]">
                             <a class="pl-5 py-2.5 p-0 mr-2 mb-2" >A-Z
                                 <i onclick="changeIconC(this)" class="fa-solid fa-arrow-up-long" id="AandZ"></i>
                             </a>
@@ -268,7 +268,7 @@
                                 <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are
                                     you sure you want to delete this?</h3>
                                 <a href="{{ route('interviewees.destroy', $i->id) }}">
-                                    <button data-modal-toggle="deleteUserModal{{ $i->id }}" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                                    <button data-modal-toggle="deleteUserModal{{ $i->id }}" type="button" class="inline-block px-6 py-3 mr-3 font-bold text-center text-white uppercase align-middle transition-all bg-gradient-to-tl from-red-600 to-orange-600 rounded-lg cursor-pointer leading-normal text-xs ease-in tracking-tight-rem shadow-xs bg-150 bg-x-25 hover:-translate-y-px active:opacity-85 hover:shadow-md">
                                         Yes, I'm sure
                                     </button>
                                 </a>
@@ -501,7 +501,7 @@
                             </div>
 
                             <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-                                <button type="submit" data-modal-toggle="AddToInterviewModal{{ $i->id }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create</button>
+                                <button type="submit" data-modal-toggle="AddToInterviewModal{{ $i->id }}" class="inline-block px-6 py-3 mr-3 font-bold text-center text-white uppercase align-middle transition-all bg-blue-500 rounded-lg cursor-pointer leading-normal text-xs ease-in tracking-tight-rem shadow-xs hover:-translate-y-px active:opacity-85 hover:shadow-md">Create</button>
                             </div>
                         </form>
                     </div>

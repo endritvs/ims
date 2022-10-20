@@ -30,7 +30,7 @@
                        
                         <thead>
                             <tr
-                                class="text-xs font-semibold tracking-wide text-left text-black uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-900">
+                                class="text-xs font-semibold tracking-wide text-left text-black uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-slate-850">
 
                                 <th class="px-6 py-3 font-semibold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">Interviewer</th>
                                 <th class="px-6 py-3 font-semibold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">Candidate</th>
@@ -42,7 +42,7 @@
                                 <th class="px-6 py-3 font-semibold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">Delete</th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                        <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-slate-850">
                             @foreach ($interview as $i)
                                 @php
                                     
@@ -50,7 +50,7 @@
                                     $cv = explode('/', $i->interviewees->cv_path);
                                 @endphp
                                 <tr
-                                    class="bg-white dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-900 text-black dark:text-white">
+                                    class="bg-white dark:bg-slate-850 hover:bg-gray-100 dark:hover:bg-gray-900 text-black dark:text-white">
 
 
                                     <td class="px-4 py-3 text-sm ">
@@ -73,14 +73,14 @@
                                     <td class="px-4 py-3 text-sm capitalize">
                                         @foreach ($exec as $a)
                                             @if ($i->interviewees->interviewee_type->name === $a->name)
-                                                {{ $a->Attributes }}
+                                              {{ $a->Attributes  }} 
                                             @endif
                                         @endforeach
                                     </td>
                                     <td class="px-4 py-3 text-sm capitalize ">
                                         <a href="/storage/cv_path/{{ $cv[2] }}" download>
                                             <button
-                                                class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+                                                class="bg-gray-300 h-[30px] w-[30px] hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-full inline-flex items-center">
                                                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAAC1ElEQVRoge2ZPU8UURSGH9DALpWs0UKMNVE6qMTYrJVG/QmKVv4BolAoJPgDrMTS3qA1pSKoIYZEIwlUKpilcUWLxWwyFvdOdrI7c7/mzG5M9k1OWDiHc95377lfM9BHH324YARYBHaBJhAVZE1dYwEoS5JfL5B0lq1JiVjsAfnYHkoI2E0kfAAMSSTNwBAwl6i3I5E02fNFko8xnKjXtAUPOCSMPOMl4FxzsCACo8AzYB/YA5aBEwXVsiI5qVxwHNigc0JuAMcKqima7BrZq8pV6ZpFtNB4oC8IRQjYDvQVBt8WGgRe09k+6/wncwDUirOMWoH2gKf4rULONfv7QK8hKeAxcIT9gHYELAnWtcK1H13Ix9YQqik6Aj7zQ2wuSQpYFYy9AjwCPoXTacF1OE8Db7G3zxpwSoKYK3z2gQGgCjwHtoC6ti39tyqt9qkAd4CXqB36j7ZtYAWYQZ1quyrABWVgHviFfbTqqBtarruxpIAzwHvsxNvtI3AutKiUgLPAdwPJi8C0wf8NGAspbBJg27zeoHq+DGwa4pK5TTEfgJKkgN+Wgpd13LwlzlVABNyXFLBE9gh81jEV3Casq4A6nqtT3jlw14GUj4AIuB0Hd+M0er2AnDfiD90QcKGAnOd9gkNXoWEdc5jhz9NCh1ICTKvQiEHANDAJ1AwCajrmkklA3hZ6AvzN8J3UP3+k+BqofaEKHKT4D7Rvk/S7w74Pybyr0Aqd32ANmND+Cf17jDRf+/+/8CGQV8BMCoE0EbR9ziIfAbd8COR9vF5BbT42EUmYyP/E80Fx8gXHXKCI5EsLmwgT+QiY9S2+YEhms/gwV0IdxEwiprSZyL8j4DBXRl0DQ0Xc03nGUEfi0DxfUfeJIJRRL9x28H/N2kCt5bEI00iYvvlg8tIooY7EWRO7fcLO0trVO9CtZ51pGAVuahtH3dhA3dq+AK+01XvCrg9H/AOXDl39y78EnwAAAABJRU5ErkJggg==">
                                                
                                             </button>
@@ -104,7 +104,7 @@
                                 <div id="deleteUserModal{{ $i->id }}" tabindex="-1"
                                     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full">
                                     <div class="relative p-4 w-full max-w-md h-full md:h-auto">
-                                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                        <div class="relative bg-white rounded-lg shadow dark:bg-slate-850">
                                             <button type="button"
                                                 class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
                                                 data-modal-toggle="deleteUserModal{{ $i->id }}">
@@ -129,13 +129,13 @@
                                                 <a href="{{ route('interview.destroy', $i->id) }}">
                                                     <button data-modal-toggle="deleteUserModal{{ $i->id }}"
                                                         type="button"
-                                                        class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                                                        class="inline-block px-6 py-3 mr-3 font-bold text-center text-white uppercase align-middle transition-all bg-gradient-to-tl from-red-600 to-orange-600 rounded-lg cursor-pointer leading-normal text-xs ease-in tracking-tight-rem shadow-xs bg-150 bg-x-25 hover:-translate-y-px active:opacity-85 hover:shadow-md">
                                                         Yes, I'm sure
                                                     </button>
                                                 </a>
                                                 <button data-modal-toggle="deleteUserModal{{ $i->id }}"
                                                     type="button"
-                                                    class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                                                    class="inline-block px-6 py-3 mr-3 font-bold text-center text-white uppercase align-middle transition-all bg-blue-500 rounded-lg cursor-pointer leading-normal text-xs ease-in tracking-tight-rem shadow-xs bg-150 bg-x-25 hover:-translate-y-px active:opacity-85 hover:shadow-md"
                                                     data-modal-toggle="deleteUserModal{{ $i->id }}">No,
                                                     cancel</button>
                                             </div>
@@ -144,16 +144,16 @@
                                 </div>
 
                                 <div id="editModal{{ $i->id }}" tabindex="-1" aria-hidden="true"
-                                    class=" hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+                                    class=" hidden overflow-y-auto rounded-2xl overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
                                     <div
-                                        class="relative p-4 w-full max-w-md h-full md:h-auto bg-white rounded dark:bg-gray-700">
+                                        class="relative p-4 w-full max-w-md  md:h-auto bg-white rounded-2xl dark:bg-slate-850">
 
                                         <form method="POST" action="{{ route('interview.update', $i->id) }}"
-                                            class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                            class="relative bg-white rounded-2xl shadow dark:bg-gray-700">
                                             @csrf
 
                                             <div
-                                                class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
+                                                class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600 dark:bg-slate-850">
                                                 <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                                                     Interviewer:
                                                 </h3>
@@ -250,7 +250,7 @@
                                             <div
                                                 class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
                                                 <button type="submit" data-modal-toggle="editModal{{ $i->id }}"
-                                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
+                                                    class="inline-block px-6 py-3 mr-3 font-bold text-center text-white uppercase align-middle transition-all bg-blue-500 rounded-lg cursor-pointer leading-normal text-xs ease-in tracking-tight-rem shadow-xs hover:-translate-y-px active:opacity-85 hover:shadow-md">Save</button>
                                             </div>
                                         </form>
                                     </div>
@@ -273,10 +273,10 @@
             <div class="relative p-4 w-full max-w-md h-full md:h-auto">
 
                 <form method="POST" action="{{ route('interview.store') }}"
-                    class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    class="relative bg-white rounded-2xl shadow dark:bg-gray-700">
                     @csrf
 
-                    <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
+                    <div class="flex justify-between items-start p-4 rounded-t border-b dark:bg-slate-850">
                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                             Interview
                         </h3>
@@ -292,7 +292,7 @@
                         </button>
                     </div>
 
-                    <div class="p-6 space-y-6">
+                    <div class="p-6 space-y-6 dark:bg-slate-850">
                         <div class="space-y-6">
                             <div>
 
@@ -302,7 +302,7 @@
                                     required>
 
                             </div>
-                            <div>
+                            <div >
                                 <label class="block text-sm font-medium text-gray-900 dark:text-white">Choose
                                     interviewers</label>
 
@@ -351,11 +351,50 @@
 
 
 
-                    <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
-                        <button type="submit" data-modal-toggle="addUserModal"
-                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create</button>
-                    </div>
-                </form>
+                    <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:bg-slate-850">
+                    <button type="submit"  data-modal-toggle="defaultModal"
+                        class="text-white bg-blue-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 w-[150px] h-[50px] save-btn">Create</button>
+  
+</div>
+            </form>
+          
+ <script>
+    save_btn = document.querySelector(".save-btn");
+save_btn.onclick = function() {
+  this.innerHTML="<div class='flex mb-4 w-auto'><div class='loader'></div><p class='mb-10 text-xs'>Creating Interview...</p></div>";
+
+setTimeout(() => {
+    this.innerHTML = "<div class='flex items-center justify-center gap-2'><svg class='w-6 h-6 ' fill='none' stroke='currentColor' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'><p class='mt-2'>Interview Created</p></path></svg></div>";
+  
+  
+this.style = "padding-top: 0.625rem;padding-bottom: 0.625rem; width:auto; padding-left: 1.25rem;padding-right: 1.25rem; margin-right: 0.5rem; margin-bottom: 0.5rem; background-color: linear-gradient(to right, var(--tw-gradient-stops)); background-color: #34D399; background-color: #10B981; background-color: #059669; color: #ffffff; font-size: 0.875rem;line-height: 1.25rem; font-weight: 500; text-align: center; border-radius: 0.5rem;";
+},infinite);
+}
+    </script>
+           <style>
+        
+  .loader{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    pointer-events: none;
+    width: 30px;
+    height: 30px;
+    border-radius:50% ;
+    border: 3px solid transparent;
+    border-top-color:#fff ;
+    animation: an1 1s ease infinite;
+  }
+
+  @keyframes an1 {
+    0%{
+      transform:rotate(0turn);
+    }
+    100%{
+      transform: rotate(1turn);
+    }
+  }
+            </style>
             </div>
         </div>
     @endsection
