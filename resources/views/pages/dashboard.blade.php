@@ -126,7 +126,11 @@
 
                 <!-- cards row 2 -->
                 <div class="mt-6 lg:flex md:flex block app_timeline app_overflow">
-                    @include('components.timelinev2')
+                    @if (Auth::user()->role === 'interviewer')
+                        @include('components.timelinev2')
+                    @else
+                        @include('components.timelineAdmin')
+                    @endif
                 </div>
 
                 <!-- cards row 3 -->
