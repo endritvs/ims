@@ -1,34 +1,45 @@
 @extends('layouts.layout')
 @section('content')
+<div class="m-0 font-sans text-base antialiased font-normal dark:bg-slate-900 leading-default bg-gray-50 text-slate-500">
+        <div class="absolute w-full bg-blue-500 dark:hidden min-h-75"></div>
+        <main class="relative h-[100vh] transition-all duration-200 ease-in-out xl:ml-68 rounded-xl" style="height: 100vh;">
+            @include('layouts.navbars.topnav')
+            <div class="w-full px-6 py-6 mx-auto">
     <title>Interview</title>
-    <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
-        <div class="mt-[145px] mx-4">
-            <div class="w-full overflow-hidden rounded-lg shadow-xs">
-                <div class="w-full overflow-x-auto">
-                    <table class="w-full rounded">
-                        <caption
-                            class="p-5 relative text-lg font-semibold text-left  text-black border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-900">
+   
+    <div class="flex flex-wrap -mx-3">
+                    <div class="flex-none w-full max-w-full px-3">
+                        <div
+                            class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
+                            <div class="p-6 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
+
+                            <caption
+                            class="p-5 relative text-lg font-semibold text-left  text-black border-b dark:border-gray-700 bg-white dark:text-white dark:bg-gray-900">
                             Interview
                             <p class="mt-1 text-sm font-normal text-black dark:text-white ">Browse a list of Interviewee
                                 Types products
                                 designed to help you work, grow your business, and more. (Fix this text)</p>
                             <a class="absolute top-4 right-6" href="#">
                                 <button type="button" data-modal-toggle="addUserModal"
-                                    class="bg-blue-500 hover:bg-blue-700 text-white p-1 rounded">Create</button>
+                                    class="inline-block px-6 py-3 mr-3 font-bold text-center text-white uppercase align-middle transition-all bg-blue-500 rounded-lg cursor-pointer leading-normal text-xs ease-in tracking-tight-rem shadow-xs hover:-translate-y-px active:opacity-85 hover:shadow-md">Create</button>
                             </a>
                         </caption>
+                            <div class="flex-auto px-0 pt-0 pb-2">
+                                <div class="p-0 overflow-x-auto">
+                    <table class="items-center w-full mb-0 align-top border-collapse dark:border-white/40 text-slate-500">
+                       
                         <thead>
                             <tr
                                 class="text-xs font-semibold tracking-wide text-left text-black uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-900">
 
-                                <th class="px-4 py-3">Interviewer</th>
-                                <th class="px-4 py-3">Candidate</th>
-                                <th class="px-4 py-3">Date</th>
-                                <th class="px-4 py-3">Candidate Types</th>
-                                <th class="px-4 py-3">Candidate Attribute</th>
-                                <th class="px-4 py-3">CV</th>
-                                <th class="px-4 py-3">Edit</th>
-                                <th class="px-4 py-3">Delete</th>
+                                <th class="px-6 py-3 font-semibold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">Interviewer</th>
+                                <th class="px-6 py-3 font-semibold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">Candidate</th>
+                                <th class="px-6 py-3 font-semibold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">Date</th>
+                                <th class="px-6 py-3 font-semibold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">Candidate Types</th>
+                                <th class="px-6 py-3 font-semibold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">Candidate Attribute</th>
+                                <th class="px-6 py-3 font-semibold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">CV</th>
+                                <th class="px-6 py-3 font-semibold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">Edit</th>
+                                <th class="px-6 py-3 font-semibold text-left uppercase align-middle bg-transparent border-b border-collapse shadow-none dark:border-white/40 dark:text-white text-sm border-b-solid tracking-none whitespace-nowrap text-slate-700 opacity-70">Delete</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
@@ -39,15 +50,18 @@
                                     $cv = explode('/', $i->interviewees->cv_path);
                                 @endphp
                                 <tr
-                                    class="bg-gray-50 dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-900 text-black dark:text-white">
+                                    class="bg-white dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-900 text-black dark:text-white">
 
 
                                     <td class="px-4 py-3 text-sm ">
-                                        {{ $i->user->name }}
+                                    <h6 class="mb-0 text-sm leading-normal dark:text-white">
+                                          {{ $i->user->name }}</h6>
                                     </td>
 
                                     <td class="px-4 py-3 text-sm capitalize">
+                                    <h6 class="mb-0 text-sm leading-normal dark:text-white">
                                         {{ $i->interviewees->name . ' ' . $i->interviewees->surname }}
+</h6>
                                     </td>
                                     <td class="px-4 py-3 text-sm capitalize">
                                         {{ $i->interview_date }}
@@ -67,23 +81,23 @@
                                         <a href="/storage/cv_path/{{ $cv[2] }}" download>
                                             <button
                                                 class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-                                                <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 20 20">
-                                                    <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
-                                                </svg>
-                                                <span> Download CV</span>
+                                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAAC1ElEQVRoge2ZPU8UURSGH9DALpWs0UKMNVE6qMTYrJVG/QmKVv4BolAoJPgDrMTS3qA1pSKoIYZEIwlUKpilcUWLxWwyFvdOdrI7c7/mzG5M9k1OWDiHc95377lfM9BHH324YARYBHaBJhAVZE1dYwEoS5JfL5B0lq1JiVjsAfnYHkoI2E0kfAAMSSTNwBAwl6i3I5E02fNFko8xnKjXtAUPOCSMPOMl4FxzsCACo8AzYB/YA5aBEwXVsiI5qVxwHNigc0JuAMcKqima7BrZq8pV6ZpFtNB4oC8IRQjYDvQVBt8WGgRe09k+6/wncwDUirOMWoH2gKf4rULONfv7QK8hKeAxcIT9gHYELAnWtcK1H13Ix9YQqik6Aj7zQ2wuSQpYFYy9AjwCPoXTacF1OE8Db7G3zxpwSoKYK3z2gQGgCjwHtoC6ti39tyqt9qkAd4CXqB36j7ZtYAWYQZ1quyrABWVgHviFfbTqqBtarruxpIAzwHvsxNvtI3AutKiUgLPAdwPJi8C0wf8NGAspbBJg27zeoHq+DGwa4pK5TTEfgJKkgN+Wgpd13LwlzlVABNyXFLBE9gh81jEV3Casq4A6nqtT3jlw14GUj4AIuB0Hd+M0er2AnDfiD90QcKGAnOd9gkNXoWEdc5jhz9NCh1ICTKvQiEHANDAJ1AwCajrmkklA3hZ6AvzN8J3UP3+k+BqofaEKHKT4D7Rvk/S7w74Pybyr0Aqd32ANmND+Cf17jDRf+/+/8CGQV8BMCoE0EbR9ziIfAbd8COR9vF5BbT42EUmYyP/E80Fx8gXHXKCI5EsLmwgT+QiY9S2+YEhms/gwV0IdxEwiprSZyL8j4DBXRl0DQ0Xc03nGUEfi0DxfUfeJIJRRL9x28H/N2kCt5bEI00iYvvlg8tIooY7EWRO7fcLO0trVO9CtZ51pGAVuahtH3dhA3dq+AK+01XvCrg9H/AOXDl39y78EnwAAAABJRU5ErkJggg==">
+                                               
                                             </button>
                                         </a>
                                     </td>
                                     <td class="px-4 py-3 text-xs">
 
                                         <a href="#" data-modal-toggle="editModal{{ $i->id }}"
-                                            class="text-blue-600 font-bold rounded">Edit</a>
+                                            class="text-blue-600 font-bold rounded"><i
+                                                                class="mr-2 fas fa-pencil-alt text-slate-700"
+                                                                aria-hidden="true"></i>Edit</a>
 
                                     </td>
                                     <td class="px-4 py-3 text-xs">
                                         <a href="#" data-modal-toggle="deleteUserModal{{ $i->id }}"
-                                            class="text-red-600 font-bold rounded">Delete</a>
+                                            class="text-red-600 font-bold rounded"><i
+                                                                class="mr-2 far fa-trash-alt bg-150 bg-gradient-to-tl from-red-600 to-orange-600 bg-x-25 bg-clip-text"></i>Delete</a>
                                     </td>
 
                                 </tr>
@@ -248,7 +262,7 @@
                 </div>
 
 
-                <div class=" bg-gray-100 dark:bg-gray-800 p-3 ">
+                <div class=" bg-transparent dark:bg-slate-850 p-3 ">
                     <a class="underline" href="{{ route('public.index') }}">See all interviews</a>
                     {{ $interview->links() }}
                 </div>
