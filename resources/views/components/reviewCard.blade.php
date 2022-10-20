@@ -10,7 +10,7 @@
 
              @php 
           
-    $link = explode('/', $reviews->interviewees->img);
+                $link = explode('/', $reviews->interviewees->img);
 
    
              @endphp

@@ -17,9 +17,9 @@
     margin: auto;
 }
 
-.app_overflow {
+/* .app_overflow {
     overflow: scroll;
-}
+} */
 .app_timeline {
     gap: 20px;
 }

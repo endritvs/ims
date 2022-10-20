@@ -125,12 +125,10 @@
                 </div>
 
                 <!-- cards row 2 -->
-                <div class="mt-6 lg:flex md:flex block app_timeline app_overflow">
-                    @if (Auth::user()->role === 'interviewer')
-                        @include('components.timelinev2')
-                    @else
-                        @include('components.timelineAdmin')
-                    @endif
+                <div class="mt-6 lg:flex md:flex block app_timeline overflow-x-auto overflow-y-hidden app_overflow">
+            
+                    @include('components.timelinev2')
+                    
                 </div>
 
                 <!-- cards row 3 -->
@@ -243,10 +241,8 @@
                         <div
                             class="border-black/12.5 dark:bg-slate-850 dark:shadow-dark-xl shadow-xl relative z-20 flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-white bg-clip-border">
                             <div class="border-black/12.5 mb-0 rounded-t-2xl border-b-0 border-solid p-6 pt-4 pb-0">
-                                <h6 class="capitalize dark:text-white">Sales overview</h6>
+                                <h6 class="capitalize dark:text-white">Interviews held by Months:</h6>
                                 <p class="mb-0 text-sm leading-normal dark:text-white dark:opacity-60">
-                                    <i class="fa fa-arrow-up text-emerald-500"></i>
-                                    <span class="font-semibold">4% more</span> in 2021
                                 </p>
                             </div>
                             <div class="flex-auto p-4">
