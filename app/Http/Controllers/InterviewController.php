@@ -64,9 +64,14 @@ class InterviewController extends Controller
         foreach ($interviewAll as $a => $i) {
             if (count($i) > 1) {
                 $names = "";
+                $icons = "";
                 $id = "";
                 foreach ($i as $x) {
-                    $names .= $x['user']['name'] . ",";
+
+                    $iconLink = explode("/", $x['user']['img']);
+
+                    $names .= $x['user']['name'] . " " . $x['user']['surname']. ",";
+                    $icons .= $iconLink[2] . " || ";
                     $id .= $x['user']['id'] . ",";
 
                 }
@@ -76,6 +81,7 @@ class InterviewController extends Controller
                 array_splice($test, 0, -1);
 
                 $test[0]['user']['name'] = $names;
+                $test[0]['user']['img'] = $icons;
                 $test[0]['user']['id'] = $id;
                 
                 $interviewAll[$a] = $test;
@@ -221,6 +227,13 @@ $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->where('company_id', Au
         $interviewer = $request['interviewer'];
         $interviewee = interviewee::orderBy('id', 'desc')->where('id', $request['interviewees_id'])->get();
         $index = 0;
+
+        $request->validate([
+                'interview_id' => ['required'],
+                'interviewer' => ['required'],
+                'interview_date' => ['required', 'after:yesterday'],
+                'interviewees_id' => ['required'],
+        ]);
 
         for ($i = 0; $i < count($interviewer); $i++) {
 

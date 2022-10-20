@@ -42,15 +42,17 @@ class IntervieweeController extends Controller
             ['surname', '!=' , Null],
             ['interviewee_types_id', '!=' , Null],
             [function ($query) use ($request){
+                if($request->term !== null){
                 if(($term=$request->term)){
                     $query->where('name', 'LIKE', '%'.$term.'%')
                     ->orWhere(DB::raw('CONCAT(name," ",surname)'), 'LIKE', '%' . $term . '%');
                 }
-            
+            }
+            if($request->termT !== "Choose a category"){
                 if(($termT=$request->termT)){
                     $query->orWhere('interviewee_types_id','LIKE','%'.$termT.'%');
                 }
-                
+            }
             }]
         ])
         ->orderBy('id', 'asc')->get();
@@ -75,10 +77,12 @@ class IntervieweeController extends Controller
         $sql="SELECT t.name, GROUP_CONCAT( i.name ) as 'Attributes' FROM interviewee_attributes i inner join interviewee_types t on i.interviewee_type_id=t.id group by i.interviewee_type_id, ims_database.t.name";
         $exec=DB::select(DB::raw($sql));
         $review_attributes = reviews_attributes::with('candidates', 'questionnaires', 'interviews', 'attributes')->get();
+        $additional_reviews_sql="SELECT DISTINCT candidate_id, name, AVG(rating_amount) as rating_amount FROM additional_reviews GROUP BY ims_database.additional_reviews.name, ims_database.additional_reviews.candidate_id;";
+        $additional_reviews = DB::select(DB::raw($additional_reviews_sql));
 
         $sql1="SELECT candidate_id,AVG(rating_amount) as rating FROM reviews GROUP BY candidate_id";
         $exec1 = DB::select(DB::raw($sql1));
-        return view('intervieweesMainComponents/table')->with(['interviewer'=>$interviewer,'interviewss'=>$interviewss,'review_attributes'=>$review_attributes,'exec'=>$exec,'exec1'=>$exec1,'intervieweesA'=>$intervieweesA,'intervieweesT'=>$intervieweesT]);
+        return view('intervieweesMainComponents/table')->with(['interviewer'=>$interviewer,'interviewss'=>$interviewss,'review_attributes'=>$review_attributes,'exec'=>$exec,'exec1'=>$exec1,'intervieweesA'=>$intervieweesA,'intervieweesT'=>$intervieweesT, 'additional_reviews' => $additional_reviews]);
     }
 
     public function paginate($items, $perPage = 6, $page = null, $options = [])
