@@ -87,25 +87,7 @@ class InterviewController extends Controller
                 $interviewAll[$a] = $test;
             }
         }
-        foreach ($interview as $a => $i) {
-            if (count($i) > 1) {
-                $names = "";
-                foreach ($i as $x) {
 
-                    $names .= $x['user']['name'] . " " . $x['user']['surname']. ",";
-                }
-
-                $test = $i;
-
-                array_splice($test, 0, -1);
-
-                $test[0]['user']['name'] = $names;
-
-                $interview[$a] = $test;
-            }
-        } 
-
-        dd($interview[0]['user']['name']);
         $sql="SELECT candidate_id,AVG(rating_amount) as rating FROM reviews GROUP BY candidate_id";
         
         $exec = DB::select(DB::raw($sql));
@@ -175,7 +157,6 @@ $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->where('company_id', Au
             ->orWhere(DB::raw('CONCAT(name," ",surname)'), 'LIKE', '%' . $searchString . '%')->where('company_id', Auth::user()->company_id);
         }])->with('user')
         ->get();
-//   dd($categories);
         $interview = $interview->groupBy('interview_id')->toArray();
             
         foreach ($interview as $a => $i) {

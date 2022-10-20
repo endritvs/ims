@@ -125,7 +125,7 @@
                 </div>
 
                 <!-- cards row 2 -->
-                <div class="mt-6 lg:flex md:flex block app_timeline overflow-x-auto overflow-y-hidden app_overflow">
+                <div class="mt-6 lg:flex md:flex sm:block app_timeline overflow-y-hidden app_overflow">
             
                     @include('components.timelinev2')
                     
@@ -142,7 +142,7 @@
                                     <h6 class="mb-2 ml-4 dark:text-white">Your Past Interviews</h6>
                                 </div>
                             </div>
-                            <div class="overflow-x-auto">
+                            <div class="app_overflow">
                                 <table
                                     class="items-center w-full mb-4 align-top border-collapse border-gray-200 dark:border-white/40">
                                     <tbody>
@@ -237,7 +237,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="w-full mt-6 max-w-full px-3 lg:flex-none">
+                    <div class="w-full lg:w-1/2 mt-6 max-w-full px-3">
                         <div
                             class="border-black/12.5 dark:bg-slate-850 dark:shadow-dark-xl shadow-xl relative z-20 flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-white bg-clip-border">
                             <div class="border-black/12.5 mb-0 rounded-t-2xl border-b-0 border-solid p-6 pt-4 pb-0">
@@ -247,7 +247,21 @@
                             </div>
                             <div class="flex-auto p-4">
                                 <div>
-                                    <canvas id="chart-line" height="300"></canvas>
+                                    <canvas id="chart-linee" height="300"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full lg:w-1/2 mt-6 max-w-full px-3">
+                        <div class="border-black/12.5 dark:bg-slate-850 dark:shadow-dark-xl shadow-xl relative z-20 flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-white bg-clip-border">
+                            <div class="border-black/12.5 mb-0 rounded-t-2xl border-b-0 border-solid p-6 pt-4 pb-0">
+                                <h6 class="capitalize dark:text-white">Interviews Status:</h6>
+                                <p class="mb-0 text-sm leading-normal dark:text-white dark:opacity-60">
+                                </p>
+                            </div>
+                            <div class="flex-auto p-4">
+                                <div>
+                                    <canvas id="chartBar" height="120"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -272,4 +286,142 @@
             <!-- end cards -->
         </main>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script type="text/javascript" src="jscript/graph.js"></script>
+    <script>
+
+    var ctx1 = document.getElementById("chart-linee").getContext("2d");
+
+    var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
+
+    var January   = {{ App\Models\interview::whereMonth('created_at', '=', 1 )->where('company_id',Auth::user()->company_id)->get()->count() }};
+    var February  = {{ App\Models\interview::whereMonth('created_at', '=', 2 )->where('company_id',Auth::user()->company_id)->get()->count() }};
+    var March     = {{ App\Models\interview::whereMonth('created_at', '=', 3 )->where('company_id',Auth::user()->company_id)->get()->count() }};
+    var April     = {{ App\Models\interview::whereMonth('created_at', '=', 4 )->where('company_id',Auth::user()->company_id)->get()->count() }};
+    var May       = {{ App\Models\interview::whereMonth('created_at', '=', 5 )->where('company_id',Auth::user()->company_id)->get()->count() }};
+    var June      = {{ App\Models\interview::whereMonth('created_at', '=', 6 )->where('company_id',Auth::user()->company_id)->get()->count() }};
+    var July      = {{ App\Models\interview::whereMonth('created_at', '=', 7 )->where('company_id',Auth::user()->company_id)->get()->count() }};
+    var August    = {{ App\Models\interview::whereMonth('created_at', '=', 8 )->where('company_id',Auth::user()->company_id)->get()->count() }};
+    var September = {{ App\Models\interview::whereMonth('created_at', '=', 9 )->where('company_id',Auth::user()->company_id)->get()->count() }};
+    var October   = {{ App\Models\interview::whereMonth('created_at', '=', 10)->where('company_id',Auth::user()->company_id)->get()->count() }};
+    var November  = {{ App\Models\interview::whereMonth('created_at', '=', 11)->where('company_id',Auth::user()->company_id)->get()->count() }};
+    var December  = {{ App\Models\interview::whereMonth('created_at', '=', 12)->where('company_id',Auth::user()->company_id)->get()->count() }};
+
+  gradientStroke1.addColorStop(1, 'rgba(94, 114, 228, 0.2)');
+  gradientStroke1.addColorStop(0.2, 'rgba(94, 114, 228, 0.0)');
+  gradientStroke1.addColorStop(0, 'rgba(94, 114, 228, 0)');
+  new Chart(ctx1, {
+    type: "line",
+    data: {
+      labels: ["Jan", "Feb" , "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      datasets: [{
+        label: "Interviews per month",
+        tension: 0.4,
+        borderWidth: 0,
+        pointRadius: 0,
+        borderColor: "#5e72e4",
+        backgroundColor: gradientStroke1,
+        borderWidth: 3,
+        fill: true,
+        data: [January, February, March, April, May, June, July, August, September, October, November, December],
+        maxBarThickness: 6
+
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false,
+        }
+      },
+      interaction: {
+        intersect: false,
+        mode: 'index',
+      },
+      scales: {
+        y: {
+          grid: {
+            drawBorder: false,
+            display: true,
+            drawOnChartArea: true,
+            drawTicks: false,
+            borderDash: [5, 5]
+          },
+          ticks: {
+            display: true,
+            padding: 10,
+            color: '#fbfbfb',
+            font: {
+              size: 11,
+              family: "Open Sans",
+              style: 'normal',
+              lineHeight: 2
+            },
+          }
+        },
+        x: {
+          grid: {
+            drawBorder: false,
+            display: false,
+            drawOnChartArea: false,
+            drawTicks: false,
+            borderDash: [5, 5]
+          },
+          ticks: {
+            display: true,
+            color: '#ccc',
+            padding: 20,
+            font: {
+              size: 11,
+              family: "Open Sans",
+              style: 'normal',
+              lineHeight: 2
+            },
+          }
+        },
+      },
+    },
+  });
+  var Pending  ={{ App\Models\interview::where('status', '=', 'pending')->where('company_id',Auth::user()->company_id)->get()->count() }};
+    var Declined ={{ App\Models\interview::where('status', '=', 'declined')->where('company_id',Auth::user()->company_id)->get()->count() }};
+    var Accepted ={{ App\Models\interview::where('status', '=', 'accepted')->where('company_id',Auth::user()->company_id)->get()->count() }};
+    const labelsBarChart = [
+        "Pending",
+        "Declined",
+        "Accepted",
+    ];
+    const dataBarChart = {
+    labels: labelsBarChart,
+    datasets: [{
+        label: 'Interview Status',
+        data: [Pending, Declined, Accepted],
+        backgroundColor: [
+        'rgba(255, 205, 86, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        
+        ],
+        borderColor: [
+        'rgb(255, 159, 64)',
+        'rgb(255, 99, 132)',
+        'rgb(20, 205, 86)',
+
+        ],
+        borderWidth: 2
+    }]
+    };
+
+    const configBarChart = {
+        type: "bar",
+        data: dataBarChart,
+        options: {},
+    };
+
+    var chartBar = new Chart(
+        document.getElementById("chartBar"),
+        configBarChart
+    );
+</script>
 @endsection

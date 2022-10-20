@@ -28,6 +28,7 @@
         <link href="/assets/css/global.css" rel="stylesheet"  />
         <!-- Main Styling -->
         <link href="/assets/css/argon-dashboard-tailwind.min.css" rel="stylesheet" />
+        <link rel='stylesheet' type='text/css' media='screen' href='css/quick-add.css'>
         
     </head>
 <body>  
