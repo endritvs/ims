@@ -20,6 +20,7 @@ use Log;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AcceptMail;
+use App\Mail\DeclineMail;
 use App\Mail\InterviewMail;
 use App\Traits\ZoomMeetingTrait;
   
@@ -386,7 +387,7 @@ $intervieweesT = Interviewee_Type::orderBy('id', 'desc')->where('company_id', Au
         ];
 
             Mail::to($mail_data['recipient'])
-            ->queue(new AcceptMail($mail_data));
+            ->queue(new DeclineMail($mail_data));
 
         $interview->status = 'declined';
         $interview->save();

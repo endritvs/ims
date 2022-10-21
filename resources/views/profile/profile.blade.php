@@ -146,61 +146,68 @@
                                     <hr
                                         class="h-px mx-0 my-4 bg-transparent border-0 opacity-25 bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent " />
 
-                                    <p class="leading-normal uppercase dark:text-white dark:opacity-60 text-sm">Change
-                                        Password
+                                    <form method="POST" enctype="multipart/form-data" action="{{ route('interview.updatePassword') }}">
+                                    @csrf
+                                     @if (session('status'))
+                                    <div class="mt-3 ml-1 text-green-700 text-md alert alert-success" role="alert">
+                                        {{ session('status') }}
+                                    </div>
+                                    @elseif (session('error'))
+                                    <div class="mt-3 ml-1 text-red-500 text-md alert alert-danger" role="alert">
+                                        {{ session('error') }}
+                                    </div>
+                                    @endif
+                                        <p class="leading-normal uppercase dark:text-white dark:opacity-60 text-sm">
+                                        Change Password
                                     </p>
                                     <div class="flex flex-wrap -mx-3">
                                         <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
                                             <div class="mb-4">
                                                 <label for="username"
-                                                    class="inline-block mb-2 ml-1 font-semibold text-sm text-slate-700 dark:text-white/80">Current
-                                                    Password</label>
+                                                    class="inline-block mb-2 ml-1 font-semibold text-sm text-slate-700 dark:text-white/80">
+                                                    Current Password
+                                                </label>
                                                 <input placeholder="Current Password" type="password" tabindex="0"
                                                     aria-label="Enter current password" name="old_password"
-                                                    class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
+                                                    class="@error('old_password') is-invalid @enderror focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
+                                                     @error('old_password')
+                                                <span
+                                                        class="ml-1 text-red-500 text-xs alert alert-dangerml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</span>
+                                                     @enderror
                                             </div>
                                         </div>
                                         <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
                                             <div class="mb-4">
                                                 <label for="email"
-                                                    class="inline-block mb-2 ml-1 font-semibold text-sm text-slate-700 dark:text-white/80">New
-                                                    Password</label>
+                                                    class="inline-block mb-2 ml-1 font-semibold text-sm text-slate-700 dark:text-white/80">
+                                                    New Password</label>
                                                 <input placeholder="New Password" type="password" tabindex="0"
                                                     name="new_password"
-                                                    class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
-                                            </div>
+                                                    class="@error('new_password') is-invalid @enderror focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
+                                                    @error('new_password')
+                                <span class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</span>
+                            @enderror
+                                                </div>
                                         </div>
                                         <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
                                             <div class="mb-4">
                                                 <label for="first name"
-                                                    class="inline-block mb-2 ml-1 font-semibold text-sm text-slate-700 dark:text-white/80">Confirm
-                                                    Password</label>
+                                                    class="inline-block mb-2 ml-1 font-semibold text-sm text-slate-700 dark:text-white/80">
+                                                    Confirm New Password
+                                                </label>
                                                 <input placeholder="Confirm New Password" type="password" tabindex="0"
                                                     name="new_password_confirmation" aria-label="Confirm New Password"
-                                                    class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
-                                            </div>
+                                                    class="@error('new_password_confirmation') is-invalid @enderror focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
+                                                    @error('new_password_confirmation')
+                                <span class="ml-1 text-red-500 text-xs alert alert-danger">{{ $message }}</span>
+                            @enderror
+                                                </div>
                                         </div>
 
                                     </div>
-                                    <button type="button"
+                                    <button role="button" aria-label="Next step"
                                         class="inline-block px-4 py-3 font-bold text-center text-white uppercase align-middle transition-all rounded-lg cursor-pointer bg-blue-500 leading-normal text-xs ease-in tracking-tight-rem shadow-xs bg-150 bg-x-25 hover:-translate-y-px active:opacity-85 hover:shadow-md">Save</button>
-
-                                    {{-- <hr
-                                    class="h-px mx-0 my-4 bg-transparent border-0 opacity-25 bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent " />
-
-                                <p class="leading-normal uppercase dark:text-white dark:opacity-60 text-sm">About me</p>
-                                <div class="flex flex-wrap -mx-3">
-                                    <div class="w-full max-w-full px-3 shrink-0 md:w-full md:flex-0">
-                                        <div class="mb-4">
-                                            <label for="about me"
-                                                class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">About
-                                                me</label>
-                                            <input type="text" name="about me"
-                                                value="A beautiful Dashboard for Bootstrap 5. It is Free and Open Source."
-                                                class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
-                                        </div>
-                                    </div>
-                                </div> --}}
+</form>
                                 </div>
                             </div>
                         </div>

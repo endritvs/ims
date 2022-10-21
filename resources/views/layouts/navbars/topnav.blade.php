@@ -2,16 +2,57 @@
 <nav class="relative flex flex-wrap items-center justify-between px-0 py-2 mx-6 transition-all mt-2 ease-in shadow-none duration-250 rounded-2xl lg:flex-nowrap lg:justify-start"
     navbar-main navbar-scroll="false">
     <div class="flex items-center justify-between w-full px-4 py-1 mx-auto flex-wrap-inherit">
+
+@php
+    $item = array();
+    $item[] = array(
+            'name' => 'Dashboard',
+            'route' => 'dashboard.index',
+            );
+
+    $item[] = array(
+            'name' => 'Candidates',
+            'route' => 'interviewees.index',
+            );
+
+    $item[] = array(
+            'name' => 'Interviews',
+            'route' => 'public.index',
+            );
+
+    $item[] = array(
+            'name' => 'Questioners',
+            'route' => 'interviewer.index',
+            );
+    $item[] = array(
+            'name' => 'Candidate Options',
+            'route' => 'intervieweeAttributes.index',
+            );
+    $item[] = array(
+            'name' => 'Profile',
+            'route' => 'interview.editProfile',
+            );
+    $item[] = array(
+            'name' => 'Interview Table',
+            'route' => 'interview.index',
+            );
+@endphp
+
         <nav>
             <!-- breadcrumb -->
+            @foreach($item as $i)
+
+                @if(Route::currentRouteName() === $i['route'])
             <ol class="flex flex-wrap pt-1 mr-12 bg-transparent rounded-lg sm:mr-16">
                 <li class="text-sm leading-normal">
                     <a class="text-white opacity-50" href="javascript:;">Pages</a>
                 </li>
                 <li class="text-sm pl-2 capitalize leading-normal text-white before:float-left before:pr-2 before:text-white before:content-['/']"
-                    aria-current="page">Dashboard</li>
+                    aria-current="page">{{ $i['name'] }} </li>
             </ol>
-            <h6 class="mb-0 font-bold text-white capitalize">Dashboard</h6>
+            <h6 class="mb-0 font-bold text-white capitalize">{{ $i['name'] }}</h6>
+                @endif
+            @endforeach
         </nav>
 
         <div class="flex items-center justify-end mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
