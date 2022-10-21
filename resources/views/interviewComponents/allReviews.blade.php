@@ -221,18 +221,16 @@
     };
     // counting variables
     var a = 0;
-    var b = aName.length;
     var c = 0;
     // color variables
     var r = 255;
     var g = 0;
-    var g = 0;
+    var b = 0;
     for (let i = 0; i < aRating.length / aName.length; i++) {
-        var data = aRating.slice(a, b);
+        var data = aRating.slice(a, (a + aName.length));
         var label = aQuest.slice(a, (a + 1));
 
         a += aName.length;
-        b += aName.length;
 
         // ----------------------------------------------------------------------------
         dataRadar['datasets'][c++] = { // graph dataset

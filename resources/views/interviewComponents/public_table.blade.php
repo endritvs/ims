@@ -200,7 +200,7 @@
                         <div class="flex justify-center pt-[25px]">
                             <a data-modal-toggle="editModal{{ $d['id'] }}" href="#" class="text-white border border-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Comments  <i class="fa-solid fa-comment"></i></a>
                             
-                            <a href="/interview/{{$d['interview_id']}}" class="text-white border border-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">All reviews <i class="fa-regular fa-file"></i></a>
+                            <a href="/interview/{{$d['interview_id']}}" class="text-white border border-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">All reviews <i class="fa-solid fa-star"></i></a>
                         </div>
                     </div>
                     <div class="group-hover:flex hidden bg-blue-700 flex-col absolute top-1/3 left-0 right-0 dark:bg-gray-900 overflow-hidden w-full h-1/3 transition duration-700 ease-in-out text-xs text-center border-t-[1px] border-white">
