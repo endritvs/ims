@@ -17,9 +17,8 @@
         <div class="w-full max-w-full mt-6 shrink-0 md:w-1/2 md:flex-row md:mt-0 xl:w-1/4">
             <div
                 class="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
-                {{-- <img class="w-full rounded-t-2xl" src="../assets/img/starlabs.jpg" alt="profile cover image"> --}}
 
-                <div class="flex flex-col items-center -mx-3">
+                <div class="flex flex-col items-center -mx-3 ">
                     <div class="w-4/12 max-w-full px-3 flex-0 ">
                         <div class="my-4 profile_image">
                             <a href="javascript:;">
@@ -76,7 +75,12 @@
 
                         </div>
                     @endforeach
+                </div>
+            </div>
 
+            <div style="margin-top: 20px; margin-left: 10px; padding-bottom: 15px">
+                <div class="text-white px-10 flex z-10 justify-center items-center h-10 bg-cyan-500 rounded-full shrink-0">
+                            {{ date('M jS, Y', strtotime($iAll[0]['interview_date'])) }}
                 </div>
             </div>
         </div>
@@ -112,6 +116,9 @@
 
                 </div>
             </div>
+            
         </div>
+        
     @endif
+    
 @endforeach
