@@ -51,8 +51,7 @@
                     </div>
                 </div>
 
-                <hr
-                    class="h-px mx-0 my-1 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent" />
+                <hr class="h-px mx-0 my-1 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent" />
 
                 <div class="border-black/12.5 rounded-t-2xl p-6 text-center pt-0 pb-6 lg:pb-4">
                     <div class="p-[10px] sm:block">

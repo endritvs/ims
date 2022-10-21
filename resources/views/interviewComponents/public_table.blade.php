@@ -12,7 +12,7 @@
     
 
     <div class="w-full bg-transparent ">
-        <section class="max-w-6xl mx-auto pb-4 px-4 sm:px-6 lg:px-4 py-12">
+        <section class="max-w-6xl mx-auto pb-4 px-4 sm:px-6 lg:px-4 py-6">
             <div class="text-center">
                 <div class="flex justify-between items-end">
                     <div class="flex">
@@ -32,22 +32,17 @@
                             </div>
                         </form>
                     </div>
-                    <div class="flex flex-col">
-                        <h2 class="text-base font-bold text-white">
-                            {{Auth::user()->company->company_name}}
-                        </h2>
-                        <h1 class="dark:text-white text-white font-bold text-3xl md:text-4xl lg:text-5xl font-heading  ">
-                            Interview
-                        </h1>
-                        <a class="underline text-white" href="{{ route('interview.index') }}">See all interviews</a>
-                    </div>
-                    <div class="flex">
-                        <form action="{{ route('public.sortRating') }}" method="GET" role="search">
+                        <label class="px-6 py-3 font-bold leading-normal text-center text-white align-middle transition-all ease-in border-0 rounded-lg shadow-md cursor-pointer text-md bg-cyan-500 lg:block tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">
+                            <a  href="{{ route('interview.index') }}">See all interviews</a>
+                        </label>
+                    
+                    {{-- <div class="flex">
+                        {{-- <form action="{{ route('public.sortRating') }}" method="GET" role="search">
                             <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 pr-4 mx-2">
                                 Rating
                                 <i onclick="changeIconA(this)" class="fa-solid fa-arrow-up-long" id="SortNr"></i>
                             </button>
-                        </form>
+                        </form> 
                         <form action="{{ route('public.sortDate') }}" method="GET" role="search">
                             <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 pr-4 mx-2">
                                 Date
@@ -60,7 +55,7 @@
                                 <i onclick="changeIconC(this)" class="fa-solid fa-arrow-up-long" id="AandZ"></i>
                             </button>
                         </form>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -74,7 +69,7 @@
                 $questID = explode(',', $d['user']['id']);
                 @endphp
 
-                <div class="group relative w-full bg-gray-200 dark:bg-slate-850 rounded-lg shadow-lg p-5 mt-4 flex flex-col justify-center items-center transition duration-700 ease-in-out">
+                <div class="group relative w-full bg-white dark:bg-slate-850 rounded-lg shadow-lg p-5 mt-4 flex flex-col justify-center items-center transition duration-700 ease-in-out">
                     <div id="dropdownDots{{ $d['id'] }}" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
                         <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconButton">
                             <li>
@@ -103,9 +98,9 @@
                                 <p class="dark:text-white text-md text-indigo-600 font-bold">
                                     {{ $d['interviewees']['name'] . ' ' . $d['interviewees']['surname'] }}
                                 </p>
-                                <p class="text-sm dark:text-white text-indigo-600">
+                                <label class="w-1/2 mx-auto px-4 py-2 font-bold leading-normal text-center text-white align-middle transition-all ease-in border-0 rounded-lg shadow-md cursor-pointer text-xs bg-cyan-500 lg:block tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">
                                     {{ $d['interviewees']['interviewee_type']['name'] }}
-                                </p>
+                                </label>
                             </div>
                         </div>
                         <div class="flow-root sm:grid-cols-2 mt-2 text-center">
@@ -200,17 +195,17 @@
                     @endforeach
                 </div>
 
-                <div class="group-hover:flex hidden">
+                <div class="group-hover:flex hidden ">
                     <div class="group-hover:flex hidden bg-blue-700 dark:bg-gray-900  flex-col absolute top-0 left-0 right-0 overflow-hidden w-full h-1/3 transition duration-700 ease-in-out rounded-t-lg text-xs text-center">
                         <div class="flex justify-center pt-[25px]">
-                            <a data-modal-toggle="editModal{{ $d['id'] }}" href="#" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Comments  <i class="fa-solid fa-comment"></i></a>
+                            <a data-modal-toggle="editModal{{ $d['id'] }}" href="#" class="text-white border border-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Comments  <i class="fa-solid fa-comment"></i></a>
                             
-                            <a href="/interview/{{$d['interview_id']}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">All reviews <i class="fa-regular fa-file"></i></a>
+                            <a href="/interview/{{$d['interview_id']}}" class="text-white border border-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">All reviews <i class="fa-regular fa-file"></i></a>
                         </div>
                     </div>
                     <div class="group-hover:flex hidden bg-blue-700 flex-col absolute top-1/3 left-0 right-0 dark:bg-gray-900 overflow-hidden w-full h-1/3 transition duration-700 ease-in-out text-xs text-center border-t-[1px] border-white">
                         <div class="flex justify-center mt-5">
-                            <a href="/storage/cv_path/{{ $cv[2] }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" download> Download CV
+                            <a href="/storage/cv_path/{{ $cv[2] }}" class="text-white border border-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" download> Download CV
                             <i class="fa-solid fa-file-arrow-down"></i>  </a>
                         </div>
                     </div>
@@ -504,8 +499,9 @@
             @endforeach
         </section>
     </div>
+    <div class="flex my-6 justify-center">
+        <div>{{ $interview->links() }}</div>
+    </div>
 </div>
-<div class="flex float-right ml-4 mt-4 justify-center">
-    <div>{{ $interview->links() }}</div>
-</div>
+
 @endsection('content')

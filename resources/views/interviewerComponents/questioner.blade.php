@@ -141,8 +141,7 @@
 
                                                 <div id="editModal{{ $i->id }}" tabindex="-1" aria-hidden="true"
                                                     class="fixed hidden top-0 left-0 w-full h-full overflow-x-hidden overflow-y-auto z-sticky outline-0">
-                                                    <div
-                                                        class="relative w-full xl:w-4/12 lg:w-1/2 mx-6 sm:m-7 sm:max-w-125 sm:mx-auto lg:mt-48 rounded-lg bg-white dark:bg-slate-850">
+                                                    <div class="relative w-full xl:w-4/12 lg:w-1/2 mx-6 sm:m-7 sm:max-w-125 sm:mx-auto lg:mt-48 rounded-lg bg-white dark:bg-slate-850">
 
                                                         <form method="POST"
                                                             action="{{ route('interviewer.update', $i->id) }}"
@@ -343,7 +342,7 @@
                                                 @enderror
                                             </div>
                                             <div>
-                                                <label for="name"
+                                                <label for="email"
                                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
                                                 <input type="email" name="email" id="email"
                                                     autocomplete="given-name"

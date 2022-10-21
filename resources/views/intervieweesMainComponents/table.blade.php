@@ -7,34 +7,36 @@
             @include('layouts.navbars.topnav')
             <div class="w-full px-6 py-6 mx-auto">
                 <div class="text-center pb-16  top-[-50px] sticky z-10">
-                    <div class="flex justify-evenly items-center absolute inset-x-0 bottom-0 h-16 ">
-                        <a class="mr-4" href="#">
-                            <button type="button" data-modal-toggle="addUserModal"
-                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Create</button>
-                        </a>
-                        <a class="mr-1" href="#">
-                            <button type="button" data-modal-toggle="quick-add"
-                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Quick
-                                Add</button>
-                        </a>
+                    <div class="flex justify-between items-center absolute inset-x-0 bottom-0 h-16 ">
+                        <div class="flex">
+                            <a class="mr-4" href="#">
+                                <button type="button" data-modal-toggle="addUserModal"
+                                    class="hidden px-8 py-3 w-full font-bold leading-normal text-center text-white align-middle transition-all ease-in border-0 rounded-lg shadow-md cursor-pointer text-xs bg-slate-700 lg:block tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">Create</button>
+                            </a>
+                            <a href="#">
+                                <button type="button" data-modal-toggle="quick-add"
+                                    class="hidden px-8 py-3 w-full font-bold leading-normal text-center text-white align-middle transition-all ease-in border-0 rounded-lg shadow-md cursor-pointer text-xs bg-slate-700 lg:block tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">Quick
+                                    Add</button>
+                            </a>
+                        </div>
                         <form action="{{ route('interviewees.index') }}" method="GET" role="search"
-                            class="sticky top-0 mr-1 mb-[8px] ml-auto w-[700px]">
+                            class="sticky top-0 mr-1 w-[700px]">
                             <div class="flex justify-center">
                                 <select
-                                    class="flex-shrink-0 inline-flex items-center px-7 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
+                                    class="flex-shrink-0 inline-flex items-center px-7 text-sm font-medium text-center text-gray-900 bg-gray-100 border rounded-l-lg hover:bg-gray-200 focus:outline-none  dark:bg-gray-700 dark:hover:bg-gray-600  dark:text-white"
                                     name="termT" id="termT">
                                     <option>Choose a category</option>
                                     @foreach ($intervieweesT as $t)
-                                        <option value="{{ $t->id }}">{{ $t->name }}</option>
+                                        <option class="mx-auto" value="{{ $t->id }}">{{ $t->name }}</option>
                                     @endforeach
                                 </select>
                                 <div class="relative w-full">
                                     <input type="search" id="search-dropdown" name="term"
-                                        class=" block mr-30 p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+                                        class=" block mr-30 p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-white dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
                                         placeholder="Search Mockups, Logos, Design Templates...">
                                     <a href={{ route('interviewees.index') }}>
                                         <button type="submit"
-                                            class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                            class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-slate-700 rounded-r-lg border border-slate-700 hover:bg-slate-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                             <svg aria-hidden="true" class="w-5 h-5" fill="none" stroke="currentColor"
                                                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -46,19 +48,20 @@
                                 </div>
                             </div>
                         </form>
-
-                        <a class="justify-center items-center mb-[8px]">Sort:
+                        <div class="flex items-center">
+                        <a class="text-center justify-center font-bold text-white dark:text-white">Sort:
 
                             <form action="{{ route('interviewees.sortName') }}" method="GET" role="search"
                                 class="my-3 ">
                                 <button type="submit"
-                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 pr-4 mx-2 mb-[8px]">
+                                class="hidden px-4 py-3 w-full font-bold leading-normal text-center text-white align-middle transition-all ease-in border-0 rounded-lg shadow-md cursor-pointer text-xs bg-slate-700 lg:block tracking-tight-rem hover:shadow-xs hover:-translate-y-px active:opacity-85">
                                     <a class="pl-5 py-2.5 p-0 mr-2 mb-2">A-Z
                                         <i onclick="changeIconC(this)" class="fa-solid fa-arrow-up-long" id="AandZ"></i>
                                     </a>
                                 </button>
                             </form>
                         </a>
+                        </div>
                     </div>
                 </div>
 
@@ -80,7 +83,7 @@
                                     <div>
                                         <button id="dropdownMenuIconButton"
                                             data-dropdown-toggle="dropdownDots{{ $i->id }}"
-                                            class="candidate_dropdown inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                                            class="candidate_dropdown inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-slate-850 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                                             type="button">
                                             <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -92,7 +95,7 @@
 
 
                                         <div id="dropdownDots{{ $i->id }}"
-                                            class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                                            class="hidden z-10 w-44 bg-white rounded-lg divide-y divide-gray-100 shadow dark:bg-slate-900 dark:divide-gray-600">
                                             <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
                                                 aria-labelledby="dropdownMenuIconButton">
                                                 <li>
@@ -204,7 +207,7 @@
                                                     }
                                                 @endphp
 
-                                                <dd class="flex items-center mb-3">
+                                                <dd class="flex items-center">
                                                     <div
                                                         class="w-full bg-gray-200 rounded h-2.5 dark:bg-gray-700 mr-2">
                                                         <div class="bg-blue-600 h-2.5 rounded dark:bg-blue-500"
@@ -226,7 +229,7 @@
                                                         {{ $ar->name }}
                                                     </dt>
 
-                                                    <dd class="flex items-center mb-3">
+                                                    <dd class="flex items-center">
                                                         <div
                                                             class="w-full bg-gray-200 rounded h-2.5 dark:bg-gray-700 mr-2">
                                                             <div class="bg-blue-600 h-2.5 rounded dark:bg-blue-500"
@@ -305,11 +308,11 @@
                         </div>
                     </div>
                     <div id="deleteUserModal{{ $i->id }}" tabindex="-1"
-                        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full">
-                        <div class="relative p-4 w-full max-w-md h-full md:h-auto">
-                            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                        class="fixed hidden top-0 left-0 w-full h-full overflow-x-hidden overflow-y-auto z-sticky outline-0">
+                        <div class="relative w-auto m-2 sm:m-7 sm:max-w-125 sm:mx-auto lg:mt-48">
+                            <div class="relative bg-white rounded-lg shadow dark:bg-slate-850">
                                 <button type="button"
-                                    class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+                                    class="absolute top-3 right-2.5 text-slate-700 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
                                     data-modal-toggle="deleteUserModal{{ $i->id }}">
                                     <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                                         xmlns="http://www.w3.org/2000/svg">
@@ -321,21 +324,21 @@
                                 </button>
                                 <div class="p-6 text-center">
                                     <svg aria-hidden="true"
-                                        class="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200" fill="none"
+                                        class="mx-auto mb-4 w-14 h-14 text-slate-700 dark:text-gray-200" fill="none"
                                         stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                     </svg>
-                                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are
+                                    <h3 class="mb-5 text-lg font-normal text-slate-700 dark:text-gray-400">Are
                                         you sure you want to delete this?</h3>
                                     <a href="{{ route('interviewees.destroy', $i->id) }}">
                                         <button data-modal-toggle="deleteUserModal{{ $i->id }}" type="button"
-                                            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                                            class="inline-block px-6 py-3 mr-3 font-bold text-center text-white uppercase align-middle transition-all bg-gradient-to-tl from-red-600 to-orange-600 rounded-lg cursor-pointer leading-normal text-xs ease-in tracking-tight-rem shadow-xs bg-150 bg-x-25 hover:-translate-y-px active:opacity-85 hover:shadow-md">
                                             Yes, I'm sure
                                         </button>
                                     </a>
                                     <button data-modal-toggle="deleteUserModal{{ $i->id }}" type="button"
-                                        class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                                        class="inline-block px-6 py-3 mr-3 font-bold text-center text-white uppercase align-middle transition-all bg-blue-500 rounded-lg cursor-pointer leading-normal text-xs ease-in tracking-tight-rem shadow-xs bg-150 bg-x-25 hover:-translate-y-px active:opacity-85 hover:shadow-md"
                                         data-modal-toggle="deleteUserModal{{ $i->id }}">No,
                                         cancel</button>
                                 </div>
@@ -343,15 +346,11 @@
                         </div>
                     </div>
                     <div id="editModal{{ $i->id }}" tabindex="-1"
-                        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full">
-                        <div class="relative p-4 w-full max-w-md h-full md:h-auto">
-
-                            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-
-
+                        class="fixed hidden top-0 left-0 w-full h-full overflow-x-hidden overflow-y-auto z-sticky outline-0">
+                        <div class="relative w-full xl:w-4/12 lg:w-1/2 mx-6 sm:m-7 sm:max-w-125 sm:mx-auto lg:mt-48 rounded-lg bg-white dark:bg-slate-850">
                                 <form method="POST" action="{{ route('interviewees.update', $i->id) }}"
                                     enctype="multipart/form-data"
-                                    class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                    class="relative shadow">
                                     @csrf
                                     <button type="button"
                                         class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
@@ -364,14 +363,14 @@
                                         </svg>
                                         <span class="sr-only">Close modal</span>
                                     </button>
-                                    <div class="p-6 text-center">
-                                        <div class="flex">
-                                            <div class="m-1">
+                                    <div class="p-6">
+                                        <div>
+                                            <div>
                                                 <label for="name"
-                                                    class="float-left block m-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
                                                 <input type="text" name="name" id="name"
                                                     autocomplete="given-name"
-                                                    class="@error('name') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                                    class="@error('name') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-white dark:border-gray-300 dark:placeholder-gray-300 dark:text-black"
                                                     value="{{ $i->name }}" required>
 
                                                 @error('name')
@@ -381,11 +380,11 @@
                                                 @enderror
                                             </div>
                                             <div class="m-1">
-                                                <label for="name"
-                                                    class="float-left block m-2 text-sm font-medium text-gray-900 dark:text-white">Surname</label>
-                                                <input type="text" name="surname" id="name"
+                                                <label for="surname"
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Surname</label>
+                                                <input type="text" name="surname" id="surname"
                                                     autocomplete="given-name"
-                                                    class="@error('surname') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                                    class="@error('surname') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-white dark:border-gray-300 dark:placeholder-gray-300 dark:text-black"
                                                     value="{{ $i->surname }}" required>
                                                 @error('surname')
                                                     <div class="ml-1 text-red-500 text-xs alert alert-danger">
@@ -396,10 +395,10 @@
                                         </div>
                                         <div>
                                             <label for="name"
-                                                class="float-left block m-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
                                             <input type="email" name="email" id="email"
                                                 autocomplete="given-name"
-                                                class="@error('email') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                                class="@error('email') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-white dark:border-gray-300 dark:placeholder-gray-300 dark:text-black"
                                                 value="{{ $i->email }}" required>
                                             @error('surname')
                                                 <div class="ml-1 text-red-500 text-xs alert alert-danger">
@@ -409,11 +408,11 @@
                                         </div>
                                         <div>
                                             <label for="file_input"
-                                                class="float-left block m-2 text-sm font-medium text-gray-900 dark:text-white">Insert
+                                                class="block m-2 text-sm font-medium text-gray-900 dark:text-white">Insert
                                                 CV</label>
                                             <input type="file" name="cv_path" id="file_input"
                                                 autocomplete="given-name"
-                                                class="@error('cv_path') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                                class="@error('cv_path') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-white dark:border-gray-300 dark:placeholder-gray-300 dark:text-black"
                                                 placeholder="cv_path">
                                             <a href="/storage/cv_path/{{ $cv[2] }}" download
                                                 class="underline">Download the Current CV</a>
@@ -425,11 +424,11 @@
                                         </div>
                                         <div>
                                             <label for="name"
-                                                class="float-left block m-2 text-sm font-medium text-gray-900 dark:text-white">External
+                                                class="block m-2 text-sm font-medium text-gray-900 dark:text-white">External
                                                 CV</label>
                                             <input type="text" name="external_cv_path" id="name"
                                                 autocomplete="given-name"
-                                                class="@error('external_cv_path') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                                class="@error('external_cv_path') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg p-2 focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-white dark:border-gray-300 dark:placeholder-gray-300 dark:text-black"
                                                 placeholder="Interviewee Type Name"
                                                 value="{{ $i->external_cv_path }}" required>
                                             @error('external_cv_path')
@@ -440,10 +439,10 @@
                                         </div>
                                         <div>
                                             <label for="name"
-                                                class="float-left block m-2 text-sm font-medium text-gray-900 dark:text-white">Interviewee
+                                                class="block m-2 text-sm font-medium text-gray-900 dark:text-white">Interviewee
                                                 Attributes</label>
                                             <select
-                                                class="@error('interviewee_types_id') is-invalid @enderror  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                                class="@error('interviewee_types_id') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg p-2 focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-white dark:border-gray-300 dark:placeholder-gray-300 dark:text-black"
                                                 name="interviewee_types_id" id="interviewee_types_id">
                                                 <option value="{{ $i->interviewee_type->id }}">
                                                     {{ $i->interviewee_type->name }}
@@ -464,7 +463,7 @@
                                         </div>
                                         <div>
                                             <label for="name"
-                                                class="float-left block m-2 text-sm font-medium text-gray-900 dark:text-white">Insert
+                                                class="block m-2 text-sm font-medium text-gray-900 dark:text-white">Insert
                                                 Image</label>
                                             <input type="file" name="img" id="img"
                                                 autocomplete="given-name"
@@ -476,7 +475,7 @@
                                                 </div>
                                             @enderror
                                         </div>
-                                        <p class="float-left m-1 text-sm font-medium text-gray-900 dark:text-white">
+                                        <p class="m-1 text-sm font-medium text-gray-900 dark:text-white">
                                             Current Image:</p>
                                         <img class="rounded-lg mt-2" src="/storage/images/{{ $link[2] }}"
                                             width="70px" height="70px">
@@ -485,10 +484,10 @@
                                     <div
                                         class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
                                         <button type="submit" data-modal-toggle="editModal{{ $i->id }}"
-                                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
+                                            class="inline-block px-6 py-3 mr-3 font-bold text-center text-white uppercase align-middle transition-all bg-blue-500 rounded-lg cursor-pointer leading-normal text-xs ease-in tracking-tight-rem shadow-xs bg-150 bg-x-25 hover:-translate-y-px active:opacity-85 hover:shadow-md">Save</button>
                                     </div>
                                 </form>
-                            </div>
+                            
                         </div>
                     </div>
 
@@ -680,12 +679,12 @@
                 @endforeach
 
                 <div id="addUserModal" tabindex="-1" aria-hidden="true"
-                    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
-                    <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+                    class="fixed hidden top-0 left-0 w-full h-full overflow-x-hidden overflow-y-auto z-sticky outline-0">
+                    <div class="relative w-full xl:w-4/12 lg:w-1/2 mx-6 sm:m-7 sm:max-w-125 sm:mx-auto lg:mt-48 rounded-lg bg-white dark:bg-slate-850">
 
                         <form method="POST" action="{{ route('interviewees.store') }}"
                             enctype="multipart/form-data"
-                            class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                            class="relative shadow">
                             @csrf
 
                             <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
@@ -706,13 +705,13 @@
 
                             <div class="p-5 space-y-6">
                                 <div class="space-y-6">
-                                    <div class="flex">
-                                        <div class="m-1">
+                                    
+                                        <div>
                                             <label for="name"
-                                                class="block text-sm m-2 font-medium text-gray-900 dark:text-white">Name</label>
+                                                class="block m-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
                                             <input type="text" name="name" id="name"
                                                 autocomplete="given-name"
-                                                class="@error('name') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                                class="@error('name') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-white dark:border-gray-300 dark:placeholder-gray-300 dark:text-black"
                                                 placeholder="Name" required>
                                             @error('name')
                                                 <div class="ml-1 text-red-500 text-xs alert alert-danger">
@@ -720,11 +719,11 @@
                                             @enderror
                                         </div>
                                         <div class="m-1">
-                                            <label for="name"
+                                            <label for="surname"
                                                 class="block m-2 text-sm font-medium text-gray-900 dark:text-white">Surname</label>
                                             <input type="text" name="surname" id="surname"
                                                 autocomplete="given-name"
-                                                class="@error('surname') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                                class="@error('surname') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-white dark:border-gray-300 dark:placeholder-gray-300 dark:text-black"
                                                 placeholder="Surname" required>
 
                                             @error('surname')
@@ -732,13 +731,13 @@
                                                     {{ $message }}</div>
                                             @enderror
                                         </div>
-                                    </div>
+                                   
                                     <div>
                                         <label for="email"
                                             class="block m-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
                                         <input type="email" name="email" id="email"
                                             autocomplete="given-email"
-                                            class="@error('email') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                            class="@error('email') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-white dark:border-gray-300 dark:placeholder-gray-300 dark:text-black"
                                             placeholder="Email" required>
 
                                         @error('surname')
@@ -753,7 +752,7 @@
                                             CV</label>
                                         <input type="file" name="cv_path" id="cv_path"
                                             autocomplete="given-name"
-                                            class="@error('cv_path') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                            class="@error('cv_path') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-white dark:border-gray-300 dark:placeholder-gray-300 dark:text-black"
                                             placeholder="cv_path" required>
                                         @error('cv_path')
                                             <div class="ml-1 text-red-500 text-xs alert alert-danger">
@@ -768,7 +767,7 @@
                                         </label>
                                         <input type="text" name="external_cv_path" id="name"
                                             autocomplete="given-name"
-                                            class="@error('external_cv_path') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                            class="@error('external_cv_path') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-white dark:border-gray-300 dark:placeholder-gray-300 dark:text-black"
                                             placeholder="External CV Path" required>
                                         @error('external_cv_path')
                                             <div class="ml-1 text-red-500 text-xs alert alert-danger">
@@ -781,7 +780,7 @@
                                             Types</label>
 
                                         <select
-                                            class="@error('interviewee_types_id') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                            class="@error('interviewee_types_id') is-invalid @enderror py-2 pl-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-white dark:border-gray-300 dark:placeholder-gray-300 dark:text-black"
                                             name="interviewee_types_id" id="interviewee_types_id">
                                             @foreach ($intervieweesT as $i)
                                                 <option value="{{ $i->id }}">{{ $i->name }}
@@ -800,7 +799,7 @@
                                             Image</label>
                                         <input type="file" name="img" id="img"
                                             autocomplete="given-name"
-                                            class="@error('img') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                            class="@error('img') is-invalid @enderror bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-white dark:border-gray-300 dark:placeholder-gray-300 dark:text-black"
                                             required>
                                         @error('img')
                                             <div class="ml-1 text-red-500 text-xs alert alert-danger">
@@ -810,10 +809,9 @@
                                     </div>
                                 </div>
 
-                                <div
-                                    class=" flex items-center space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+                                <div class=" flex items-center space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
                                     <button type="submit" data-modal-toggle="addUserModal"
-                                        class="mt-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create</button>
+                                        class="text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-500 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create</button>
                                 </div>
                             </div>
                         </form>
